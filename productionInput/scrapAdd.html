@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <link href="/css/css.css" rel="stylesheet" type="text/css" media="print">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+<title>无标题文档</title>
+
+</head>
+<body>
+
+<div class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+        <div title="常规产品" style="padding:10px;">
+            <form id="saveForm">
+            <input type="hidden" name="id">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftgyk_table" style="margin-top:10px;">
+             <tr>
+               <td width="17%">不良产品编号：</td>
+               <td width="25%"><input name="number" readonly type="text" class="dfinput"  style="width: 120px;" /></td>
+               <td width="10%" align="right">部门：</td>
+               <td colspan="2"><input name="department" type="text" class="dfinput"  style="width: 200px;" /></td>
+             </tr>
+             <tr>
+               <td>指令号：</td>
+               <td><input name="code" id="code" type="text" class="dfinput" onblur="setSpecification()" style="width: 120px;" /></td>
+               <td align="right">发现地：</td>
+               <td width="17%"><input name="address" type="text" class="dfinput"  style="width: 200px;" /></td>
+               <td width="33%"></td>
+             </tr>
+             <tr>
+               <td>材质：</td>
+               <td colspan="2"><input name="material" readonly type="text" class="dfinput"  style="width: 250px;" /></td>
+               <td align="right"></td>
+               <td></td>
+             </tr>
+             <tr>
+               <td>形状：</td>
+               <td><input name="shape" readonly type="text" class="dfinput"  style="width: 120px;" /></td>
+               <td align="right">直径：</td>
+               <td><input name="diameter" readonly type="text" class="dfinput"  style="width: 120px;" /></td>
+               <td>壁厚：
+                 <input name="thickness" readonly type="text" class="dfinput"  style="width: 120px;" /></td>
+             </tr>
+             <tr>
+               <td>来源：</td>
+               <td><select name="source" class="easyui-combobox" style="height: 25px; width: 121px;">
+               </select></td>
+               <td align="right">炉批号：</td>
+               <td colspan="2"><input name="lpNumber" type="text" class="dfinput"  style="width: 200px;" /></td>
+             </tr>
+             <tr>
+               <td>工序名：</td>
+               <td><select name="process" class="easyui-combobox" style="height: 25px; width: 121px;">
+               </select></td>
+               <td align="right">报废数量：</td>
+               <td><input name="count" type="text" class="dfinput"  style="width: 120px;" /></td>
+               <td>
+                 <input type="checkbox" name="dp" id="checkbox" value="1"><label for="checkbox">代品</label>
+               </td>
+             </tr>
+             <tr>
+               <td>制作人：</td>
+               <td><input name="createName" type="text" readonly class="dfinput"  style="width: 120px;" /></td>
+               <td align="right">制作日：</td>
+               <td align="right"><input type="text" readonly class="easyui-datebox" name="createTime" style="height:23px; width:193px;line-height:23px;" /></td>
+               <td>&nbsp;</td>
+             </tr>
+          </table>
+
+            </form>
+        </div>
+        
+        
+        <div title="不良状况" style="padding:10px;">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftgyk_table" >
+              <tr>
+                <td width="15%" valign="top">现象：</td>
+                <td width="85%"><textarea id="badPhenomenon" name="badPhenomenon" class="dfinput" style="width:680px; height:100px"></textarea></td>
+              </tr>
+              <tr>
+                <td height="163" valign="top">处置：</td>
+                <td valign="top"><input id="badManagement" name="badManagement" type="text" class="dfinput"  style="width: 680px;" /></td>
+              </tr>
+          </table>
+        </div>
+        
+        
+        <div title="原因分析" style="padding:10px;">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftgyk_table" >
+            <tr>
+              <td width="15%" valign="top">原因：</td>
+              <td width="85%"><textarea id="reason" name="reason" class="dfinput" style="width:680px; height:100px"></textarea></td>
+            </tr>
+            <tr>
+              <td height="163" valign="top">对策：</td>
+              <td valign="top"><textarea id="countermeasure" name="countermeasure" class="dfinput" style="width:680px; height:100px"></textarea></td>
+            </tr>
+          </table>
+        </div>
+</div>
+
+    <script type="text/javascript">
+	$('.ftgyk_table tbody tr:odd').addClass('odd');
+	
+	function initData(data) {
+        $("#saveForm").form("load", data);
+        $("#countermeasure").val(data.countermeasure);
+        $("#reason").val(data.reason);
+        $("#badManagement").val(data.badManagement);
+        $("#badPhenomenon").val(data.badPhenomenon);
+    }
+    
+    function getFormData() {
+        let param = $("#saveForm").getData();
+        param.countermeasure = $("#countermeasure").val();
+        param.reason = $("#reason").val();
+        param.badManagement = $("#badManagement").val();
+        param.badPhenomenon = $("#badPhenomenon").val();
+        return param;
+    }
+    
+    function setSpecification() {
+        ajaxPostInvoke("/processCard/ftCard/findByCode", {code: $("#code").val()}, function(res){
+            let data = {};
+            if(res && res != null)
+            data.shape = res.shape;
+            data.diameter = res.diameter;
+            data.thickness = res.thickness;
+            data.material = res.material;
+            $("#saveForm").form("load", data)
+        })
+    }
+	</script>
+
+</body>
+</html>

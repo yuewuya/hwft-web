@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<body>
+<div class="place">
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">参考材质设置窗口</a></li>
+    </ul>
+</div>
+<div class="mainbox">
+    <form id="searchForm">
+        <div class="tools">
+            <ul class="cyda_cx">
+                <li>
+                    材料类型:
+                    <select class="easyui-combobox"
+                            name="materialType"
+                            style="height:25px; width:150px;"
+                            id="materialType"
+                            editable="false"
+                            data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                    </select>
+                </li>
+                <li>
+                    操作类型:
+                    <select class="easyui-combobox"
+                            name="operationType"
+                            style="height:25px; width:150px;"
+                            id="operationType"
+                            editable="false"
+                            data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                    </select>
+                </li>
+                <li>
+                    <label>材质:</label>
+                    <input name="materialName" id="materialName" type="text" class="scinput"
+                           style="height:23px; width:80px; line-height:23px;"/>
+                    <img src="/assembly/images/ck.png"
+                         style="display: inline-block;border: none; vertical-align: middle;"
+                         onclick="selectOtherPage('选择材质','/base/materialSetting.html',null,selectUnitMaterial)"/>
+                </li>
+                <li>
+                    <label>长度:</label>
+                    <input name="length1" type="text" class="scinput"
+                           style="height:23px; width:80px; line-height:23px;"/>
+                    <label>-</label>
+                    <input name="length2" type="text" class="scinput"
+                           style="height:23px; width:80px; line-height:23px;"/>
+                </li>
+                <li>
+                    <label>宽度:</label>
+                    <input name="width1" type="text" class="scinput"
+                           style="height:23px; width:80px; line-height:23px;"/>
+                    <label>-</label>
+                    <input name="width2" type="text" class="scinput"
+                           style="height:23px; width:80px; line-height:23px;"/>
+                </li>
+                <li>
+                    <label>厚度:</label>
+                    <input name="thickness1" type="text" class="scinput"
+                           style="height:23px; width:80px; line-height:23px;"/>
+                    <label>-</label>
+                    <input name="thickness2" type="text" class="scinput"
+                           style="height:23px; width:80px; line-height:23px;"/>
+                </li>
+                <li>
+                    <label>操作日期：</label>
+                    <input name="opertorTime1" type="text" class="easyui-datebox"
+                           style="width:193px;height:23px"/>
+                    <label>-</label>
+                    <input name="opertorTime2" type="text" class="easyui-datebox"
+                           style="width:193px;;height:23px"/>
+                </li>
+                <li>
+                    <a href="javascript:"><img src="/assembly/images/bl.png" onclick="search()"/></a>
+                </li>
+            </ul>
+        </div>
+    </form>
+
+    <div class="cyda">
+        <table id="dg" style="width:80%"></table>
+        <div id="toolbar">
+            <a href="#" class="easyui-linkbutton" onclick="delBtn('/warehouse/material/outPer')"
+               data-options="plain:true,iconCls:'icon-add'">出库</a>
+            <a href="#" class="easyui-linkbutton" onclick="delBtn('/warehouse/material/outPerBack')"
+               data-options="plain:true,iconCls:'icon-remove'">退回</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script src="/assembly/layer/layer.js"></script>
+<script src="/js/warehouse/warehouseOutPer.js"></script>
+<script>
+    /**
+     * 选择材料
+     * @param data
+     */
+    function selectUnitMaterial(data) {
+        $("#materialName").val(data.material);
+    }
+</script>
+
+
+
+

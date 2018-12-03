@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <script src="../plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.edatagrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="../../plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<style>
+    p {
+        margin: 10px;
+    }
+
+    .showLine {
+        background: ghostwhite;
+        padding: 10px 0 0 50px;
+        width: 899px;
+        margin-bottom: 10px;
+    }
+
+    .showLine p {
+        display: inline-block;
+        width: 30%;
+    }
+
+    p label {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+    }
+
+    .showV {
+        float: left;
+        padding: 10px;
+        background: ghostwhite;
+        margin-right: 22px;
+    }
+
+    #savePage div {
+    }
+</style>
+<body>
+<div id="tabs" class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <!-- form 工艺数据-->
+    <div id="tabs1" title="工艺数据/器材及参数" style="padding:10px;">
+        <form id="form">
+            <input name="id" id="id" type="hidden"/>
+            <input name="parameterId" id="parameterId" type="hidden"/>
+            <div class="datagrid-toolbar">工艺数据</div>
+            <p style="width:22%; display: inline-block">
+                <label>报告编号:</label>
+                <input name="no" id="no" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:36%; display: inline-block">
+                <label>指令号:</label>
+                <input name="processId" type="hidden">
+                <input name="code" id="code" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+                <input name="number" id="number" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:30px;"/>
+                <a href="javascript:void(0)"><img src="/assembly/images/ck.png"
+                                                  style="display: inline-block;border: none; vertical-align: middle;"
+                                                  onclick="selectOtherPage('工艺卡','/processCard/ftCard.html',null,selectCode)"/></a>
+            </p>
+            <p style="width:20%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block">
+                <label>形状:</label>
+                <input name="shape" id="shape" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>直径:</label>
+                <input name="diameter" id="diameter" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>厚度:</label>
+                <input name="thickness" id="thickness" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:90px;"/>
+                <a href="#" onclick="addParameter()"><span style="color: red">(新增)</span></a>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>材质:</label>
+                <input name="material" id="material" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>检测标准:</label>
+                <input name="rtReport" id="rtReport" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>合格级别:</label>
+                <input name="rtLevel" id="rtLevel" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>比例:</label>
+                <input name="rtPer" id="rtPer" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+
+            <!-- 器材及参数(Equipment and Parameter) -->
+            <div class="datagrid-toolbar">器材及参数(Equipment and Parameter)</div>
+            <p style="width:22%; display: inline-block">
+                <label>设备型号:</label>
+                <select name="equipment" id="equipment" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="360×80">360×80</option>
+                    <option value="360×120">360×120</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>焦距:</label>
+                <select name="focal" id="focal" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="700">700</option>
+                    <option value="800">800</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block">
+                <label>焦点尺寸:</label>
+                <input name="focus" id="focus" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>透照方式:</label>
+                <select name="photo" id="photo" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="源在内单壁透照">源在内单壁透照</option>
+                    <option value="源在外单壁透照">源在外单壁透照</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block">
+                <label>胶片规格:</label>
+                <select name="film" id="film" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="360×80">360×80</option>
+                    <option value="360×100">360×100</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>管电压:</label>
+                <input name="voltage" id="voltage" type="text" required="true"
+                       class="easyui-validatebox textbox" readonly
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>黑度:</label>
+                <select name="black" id="black" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="2.0-4.5">2.0-4.5</option>
+                    <option value="2.3-4.5">2.3-4.5</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block">
+                <label>胶片牌号:</label>
+                <select name="brandName" id="brandName" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="AGFAC7">AGFAC7</option>
+                    <option value="kodAKaAA400">kodAKaAA400</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>曝光量:</label>
+                <input name="exposure" id="exposure" type="text" required="true"
+                       class="easyui-validatebox textbox" readonly
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block"></p>
+
+            <p style="width:22%; display: inline-block">
+                <label>增感方式:</label>
+                <select name="sensitizationMode" id="sensitizationMode" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="Pb0.03×2">Pb0.03×2</option>
+                    <option value="Pb">Pb</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>象质计型号:</label>
+                <input name="imageQuality" id="imageQuality" type="text" required="true"
+                       class="easyui-validatebox textbox" readonly
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block"></p>
+
+            <p style="width:22%; display: inline-block">
+                <label>射线技术:</label>
+                <select name="radial" id="radial" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="AB">AB</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>要求丝号:</label>
+                <input name="silkNumber" id="silkNumber" type="text" required="true"
+                       class="easyui-validatebox textbox" readonly
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>冲洗条件:</label>
+                <select name="rinse" id="rinse" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="自动">自动</option>
+                    <option value="手工">手工</option>
+                </select>
+            </p>
+
+            <!-- 技术条件(Technic) -->
+            <div class="datagrid-toolbar">技术条件(Technic)</div>
+            <p style="width:22%; display: inline-block">
+                <label>探伤时机:</label>
+                <select name="flaw" id="flaw" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="成型前">成型前</option>
+                    <option value="成型后">成型后</option>
+                </select>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>焊接长度:</label>
+                <input name="weldingLength" id="weldingLength" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:22%; display: inline-block"></p>
+            <p style="width:44%; display: inline-block">
+                <label>共计(张):</label>
+                Ⅰ级:<input name="total1" id="total1" type="text" required="true" readonly
+                          class="easyui-validatebox textbox"
+                          style="width:40px;"/>
+                Ⅱ级:<input name="total1" id="total2" type="text" required="true" readonly
+                          class="easyui-validatebox textbox"
+                          style="width:40px;"/>
+                Ⅲ级:<input name="total1" id="total3" type="text" required="true" readonly
+                          class="easyui-validatebox textbox"
+                          style="width:40px;"/>
+                Ⅳ级:<input name="total1" id="total4" type="text" required="true" readonly
+                          class="easyui-validatebox textbox"
+                          style="width:40px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>一次合格率:</label>
+                <input name="passRate" id="passRate" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:60px;"/>%&nbsp;&nbsp;
+                一次:<input name="frequency1" id="frequency1" type="text" required="true"
+                          class="easyui-validatebox textbox"
+                          style="width:40px;"/>
+                二次:<input name="frequency2" id="frequency2" type="text" required="true"
+                          class="easyui-validatebox textbox"
+                          style="width:40px;"/>
+                三次:<input name="frequency3" id="frequency3" type="text" required="true"
+                          class="easyui-validatebox textbox"
+                          style="width:40px;"/>
+            </p>
+            <div class="datagrid-toolbar">审核信息</div>
+            <p style="width:22%; display: inline-block">
+                <label>填表:</label>
+                <input name="applyId" id="applyId" type="hidden">
+                <input name="applyUser" id="applyUser" readonly type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>制作日:</label>
+                <input name="applyTime" id="applyTime" readonly type="text" class="easyui-datebox"
+                       style="height:30px; width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>审核人:</label>
+                <input name="examineId" id="examineId" type="hidden">
+                <input name="examineUser" id="examineUser" readonly type="text"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>审核日:</label>
+                <input name="examineTime" id="examineTime" readonly type="text" class="easyui-datebox"
+                       style="height:30px; width:140px;"/>
+            </p>
+            <div class="datagrid-toolbar">说明</div>
+            <p>
+                <label>备注:</label>
+                <input name="remarks" id="remarks" class="easyui-textbox" data-options="multiline:true"
+                       style="width:500px;height:200px">
+            </p>
+        </form>
+    </div>
+
+    <div id="tabs3" title="底片评定表" style="padding:10px;">
+        <table id="dg" style="width:80%"></table>
+        <div id="toolbar">
+            <label>1A</label>
+            <input name="a1" id="a1" type="text"
+                   class="easyui-validatebox textbox"
+                   style="width:40px;"/>
+            <label>2A</label>
+            <input name="a2" id="a2" type="text"
+                   class="easyui-validatebox textbox"
+                   style="width:40px;"/>
+            <label>3A</label>
+            <input name="a3" id="a3" type="text"
+                   class="easyui-validatebox textbox"
+                   style="width:40px;"/>
+            选择:
+            <select name="ax" id="ax" class="easyui-combobox" style="width:80px;"
+                    data-options="panelHeight:'auto'">
+                <option value="4A">4A</option>
+                <option value="5A">5A</option>
+                <option value="6A">6A</option>
+                <option value="7A">7A</option>
+                <option value="8A">8A</option>
+                <option value="9A">9A</option>
+                <option value="10A">10A</option>
+                <option value="11A">11A</option>
+                <option value="12A">12A</option>
+            </select>
+            <input name="axvalue" id="axvalue" type="text"
+                   class="easyui-validatebox textbox"
+                   style="width:40px;"/>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+               onclick="add()">添加</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="$('#dg').edatagrid('destroyRow')">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+               onclick="save()">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+               onclick="$('#dg').edatagrid('cancelRow')">取消</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-back" plain="true"
+               onclick="repaire()">返修</a>
+        </div>
+    </div>
+    <script>
+        function addParameter() {
+            layer.open({
+                type: 2,
+                title: "新增",
+                fix: false,
+                shadeClose: true,
+                area: ['50%', '90%'],//width,height
+                content: getRootPath() + '/quality/radialParameterSettingAdd.html',
+                btn: ['提交', '关闭'],
+                yes: function (index, layero) {
+                    let obj = window[layero.find('iframe')[0]['name']].getFormData();
+                    if (obj) {
+                        ajaxSubmit('/radial/report/parameterUpdate', obj);
+                    }
+                },
+                btn2: function () {
+                    layer.closeAll();
+                }
+            });
+        }
+
+        function search(obj) {
+            changeParameter(obj.thickness);
+        }
+
+
+        //a1
+        $(function () {
+            $('#a1').textbox({
+                onChange: function (value) {
+                    let oldLevel = $("#rtLevel").val();
+                    if (!oldLevel) {
+                        layer.alert("合格级别没有填写", {icon: 2});
+                        $('#a1').textbox('setValue', '');
+                        return;
+                    }
+                    newRow('1A', value);
+                    save();
+                }
+            });
+        });
+        //a2
+        $(function () {
+            $('#a2').textbox({
+                onChange: function (value) {
+                    let oldLevel = $("#rtLevel").val();
+                    if (!oldLevel) {
+                        layer.alert("合格级别没有填写", {icon: 2});
+                        $('#a2').textbox('setValue', '');
+                        return;
+                    }
+                    newRow('2A', value);
+                    save();
+                }
+            });
+        });
+        //a3
+        $(function () {
+            $('#a3').textbox({
+                onChange: function (value) {
+                    let oldLevel = $("#rtLevel").val();
+                    if (!oldLevel) {
+                        layer.alert("合格级别没有填写", {icon: 2});
+                        $('#a3').textbox('setValue', '');
+                        return;
+                    }
+                    newRow('3A', value);
+                    save();
+                }
+            });
+        });
+
+        function add() {
+            let oldLevel = $("#rtLevel").val();
+            if (!oldLevel) {
+                layer.alert("合格级别没有填写", {icon: 2});
+                return;
+            }
+            let negativeNoPre = $("#ax").textbox('getValue');
+            let number = $("#axvalue").val();
+            if (!(negativeNoPre && number)) {
+                return;
+            }
+            let index = checkIndex(negativeNoPre);
+            for (let i = 1; i <= number - index; i++) {
+                let row = {negativeNo: negativeNoPre + (1 * i + index), negativeLevel: '一级', transmissionLength: '280'};
+                $('#dg').edatagrid('addRow', {
+                    index: i * 1 + index - 1,
+                    row: row
+                });
+            }
+            $('#dg').edatagrid('saveRow')
+        }
+
+        /**
+         * @param negativeNoPre 编号前缀
+         * @param length 数量
+         * @param index  从哪里开始添加
+         */
+        function newRow(negativeNoPre, length) {
+            let index = checkIndex(negativeNoPre);
+            //如果新增的数量少于已有的数量，那就不再新增
+            if (index <= length)
+                for (let i = 1; i <= length - index; i++) {
+                    let row = {
+                        negativeNo: negativeNoPre + (1 * i + index),
+                        negativeLevel: '一级',
+                        transmissionLength: '280'
+                    };
+                    $('#dg').edatagrid('addRow', {
+                        index: i * 1 + index - 1,
+                        row: row
+                    });
+                }
+            $('#dg').edatagrid('saveRow')
+        }
+
+        /**
+         * 计算添加数据的下标
+         * @param negativeNoPre
+         * @returns {number}
+         */
+        function checkIndex(negativeNoPre) {
+            let detail = $("#dg").datagrid("getData").rows.filter(item => item.negativeNo.indexOf('R') == -1);
+            let count = 0;
+            for (let i = 0; i < detail.length; i++) {
+                if (detail[i].negativeNo.indexOf(negativeNoPre) != -1) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        /**
+         * 计算
+         */
+        function count() {
+            let detail = $("#dg").datagrid("getData").rows;
+            let allLength = detail.length;
+            //删选出没有R1的row
+            let newRow = detail.filter(item => item.negativeNo.indexOf('R') == -1);
+            let level1 = newRow.filter(item => item.negativeLevel == '一级');
+            let level2 = newRow.filter(item => item.negativeLevel == '二级');
+            let level3 = newRow.filter(item => item.negativeLevel == '三级');
+            let level4 = newRow.filter(item => item.negativeLevel == '四级');
+            $('#total1').val(level1.length);
+            $('#total2').val(level2.length);
+            $('#total3').val(level3.length);
+            $('#total4').val(level4.length);
+            //计算合格率
+            if (newRow.length > 0) {
+                let level = getMatchRome();
+                let aaa = 0;
+                if (level == 1) {
+                    aaa = 100 * level1.length / newRow.length;
+                }
+                if (level == 2) {
+                    aaa = 100 * (level1.length + level2.length) / newRow.length;
+                }
+                if (level == 3) {
+                    aaa = 100 * (level1.length + level2.length + level3.length) / newRow.length;
+                }
+                if (level == 4) {
+                    aaa = 100;
+                }
+
+                $("#passRate").val((aaa).toFixed(2));
+            }
+        }
+
+        function getMatchRome() {
+            let oldLevel = $("#rtLevel").val();
+            if (oldLevel == 'Ⅰ') {
+                return 1;
+            } else if (oldLevel == 'Ⅱ') {
+                return 2;
+            } else if (oldLevel == 'Ⅲ') {
+                return 3;
+            } else if (oldLevel == 'Ⅳ') {
+                return 4;
+            } else {
+                layer.alert("合格级别有误，请检查", {icon: 2});
+                return 0;
+            }
+        }
+
+        function save() {
+            $('#dg').edatagrid('saveRow');
+            count();
+        }
+
+        /**
+         * 返修
+         */
+        function repaire() {
+            let row = $('#dg').datagrid('getSelected');
+            row.negativeNo = row.negativeNo;
+            let index = $('#dg').datagrid('getRowIndex', row);
+            $('#dg').edatagrid('addRow', {
+                index: 1 * index + 1,
+                row: {negativeNo: row.negativeNo + 'R1', negativeLevel: '一级', transmissionLength: '280'}
+            });
+        }
+    </script>
+</div>
+
+</body>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+
+    let maxNumber;
+
+    function selectCode(data) {
+        $("#processId").val(data.processCardId);
+        $("#shape").val(data.shape);
+        $("#code").val(data.code);
+        $("#material").val(data.material);
+        $("#diameter").val(data.diameter);
+        $("#thickness").val(data.thickness);
+        $("#rtReport").val(data.rtReport);
+        $("#rtLevel").val(data.rtLevel);
+        $("#rtPer").val(data.rtPer);
+        maxNumber = data.count;
+        changeParameter(data.thickness);
+    }
+
+    function changeParameter(thickness) {
+        ajaxPostInvoke('/radial/report/queryOneParameter', {thickness: thickness}, function (data) {
+            if (data) {
+                $("#thickness").val(data.thickness);
+                $("#parameterId").val(data.parameterId);
+                $("#equipment").val(data.equipment);
+                $("#focus").val(data.focus);
+                $("#voltage").val(data.voltage);
+                $("#exposure").val(data.exposure);
+                $("#imageQuality").val(data.imageQuality);
+                $("#silkNumber").val(data.silkNumber);
+            } else {
+                layer.alert("没有此工艺卡厚度对应的数据，请点击厚度右侧新增数据。", {icon: 2});
+            }
+        });
+    }
+
+    /**
+     * 初始化
+     *
+     * */
+    function init(id) {
+        if (id) {
+            ajaxPostInvoke('/radial/report/queryOne', {id: id}, function (data) {
+                let examine = data.examine;
+                let parameter = data.parameter;
+                data = mergeJsonObject(data, mergeJsonObject(examine, parameter));
+                $('#form').form('load', data);
+            });
+        } else {
+            ajaxPostInvoke('/radial/report/getNumbering', {id: id}, function (data) {
+                let obj = {};
+                obj.applyTime = data.applyTime;
+                obj.no = data.no;
+                obj.applyUser = data.applyUser;
+                $('#form').form('load', obj);
+            });
+        }
+
+        $('#number').textbox({
+            stopFirstChangeEvent: true,
+            onChange: function (value) {
+                let options = $(this).textbox('options');
+                if (options.stopFirstChangeEvent) {
+                    options.stopFirstChangeEvent = false;
+                    return;
+                }
+                if ($("#code").val() == '') {
+                    layer.alert("请先选择工艺卡", {icon: 2});
+                    $('#number').textbox('setValue', '');
+                    return;
+                }
+                if (maxNumber < value) {
+                    layer.alert("此工艺卡最多只有" + maxNumber + "个", {icon: 2});
+                    $('#number').textbox('setValue', '');
+                }
+            }
+        });
+        initTable(id);
+    }
+
+    /**
+     * 获取数据
+     */
+    function getFormData() {
+        if (!$("#form").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return;
+        }
+        let obj = $("#form").getData();
+        obj.detail = $("#dg").datagrid("getData").rows;
+        return obj;
+    }
+
+    /**
+     * 初始化 表
+     *
+     * */
+    function initTable(id) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#dg").edatagrid({
+            queryParams: {
+                id: id
+            },
+            width: '70%',
+            height: mContentHeight,
+            singleSelect: true,
+            autoRowHeight: false,
+            toolbar: '#toolbar',
+            idField: 'id',
+            url: getRootPath() + '/radial/report/detailList',
+            columns: [[{
+                field: 'negativeNo',
+                title: '底片编号',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'negativeLevel',
+                title: '底片等级',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'combobox',
+                    options: {
+                        valueField: 'id',
+                        textField: 'text',
+                        panelHeight: 'auto',
+                        data: [{id: '一级', text: '一级', select: 'true'}, {id: '二级', text: '二级'}, {
+                            id: '三级',
+                            text: '三级'
+                        }, {id: '四级', text: '四级'}],
+                        required: true
+                    }
+                }
+            }, {
+                field: 'defectProperty',
+                title: '缺陷性质',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'transmissionLength',
+                title: '透照长度',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'remark',
+                title: '备注',
+                width: 200,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }
+            ]]
+        });
+    }
+</script>
+</html>
+
+

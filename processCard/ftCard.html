@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/processCard/ftCard.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <link href="./print/css.css" rel="stylesheet" type="text/css" media="print">
+    <script language="javascript" src="/js/jquery.jqprint-0.3.js"></script>
+    <script language="javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/js/formula.js"></script>
+</head>
+
+<style>
+    #searchForm p{
+        width: 225px;
+    }
+    #searchForm p label{
+        display: inline-block;
+        width: 70px;
+    }
+</style>
+<body>
+
+<div class="mainbox">
+
+    <div>
+        <form id="searchForm">
+            <p>
+                <label>指令号：</label>
+                <input name="code" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p>
+                <label>通知单号：</label>
+                <input name="noticeNumber" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p>
+                <label>客户号：</label>
+                <input name="customerId" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p>
+                <label>操作员：</label>
+                <input name="createName" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p>
+                <label>审核人：</label>
+                <input name="approveName" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p>
+                <label>状态：</label>
+                <select name="status" class="scinput" style="width: 150px">
+                    <option value="">请选择</option>
+                    <option value="0">未审核</option>
+                    <option value="1">已审核</option>
+                </select>
+            </p>
+            <p>
+                <label>形状：</label>
+                <input name="shape" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p>
+                <label>直径：</label>
+                <input name="diameter" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p>
+                <label>壁厚：</label>
+                <input name="thickness" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p>
+                <label>材质：</label>
+                <input name="material" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+            </p>
+            <p style="width: 340px">
+                <label>日期：</label>
+                <input type="text" editable="false" name="startTime" class="easyui-datebox" style="height:23px; width:120px;line-height:23px;" />
+                <span>-</span>
+                <input type="text" editable="false" name="endimeTime" class="easyui-datebox" style="height:23px; width:120px;line-height:23px;" />
+            </p>
+        </form>
+    </div>
+
+    <div style="margin-bottom:20px; margin-top:5px;">
+        <!---获取数据--->
+
+        <table id="dg" style="width:80%"></table>
+        <div id="toolbar">
+
+        </div>
+    </div>
+
+
+</div>
+<script>
+    createTooBar();
+
+    function ownPrint(){
+        let size = ['98%', '98%'];
+        let rows = $('#dg').datagrid('getSelections');
+        if (rows.length != 1) {
+            layer.alert("请选择一条需要查看的数据！", {
+                icon: 2
+            });
+
+        } else {
+            let data = rows[0];
+            let url = "/processCard/print/ftCard.html";
+            if(pdzt(data.shape)){
+                url = "/processCard/print/zt1.html";
+            }
+            layer.open({
+                type: 2,
+                title: "工艺卡打印",
+                fix: false,
+                shadeClose: true,
+                maxmin: false,
+                area: size,
+                content: getRootPath() + url
+                , btn: ['打印', '关闭']
+                , success: function (layero, index) {
+                    let sonFrame = window['layui-layer-iframe' + index];
+                    sonFrame.initData(data)
+                }
+                , yes: function (index, layero) {
+                    var body = layer.getChildFrame('body', index);
+                    body.find('#print1').jqprint({
+                        debug: false, //如果是true则可以显示iframe查看效果（iframe默认高和宽都很小，可以再源码中调大），默认是false
+                        // importCSS: true, //true表示引进原来的页面的css，默认是true。（如果是true，先会找$("link[media=print]")，若没有会去找$("link")中的css文件）
+                        printContainer: true, //表示如果原来选择的对象必须被纳入打印（注意：设置为false可能会打破你的CSS规则）。
+                        operaSupport: true
+                    });
+                }
+                , btn2: function () {
+                    layer.closeAll();
+                }
+            });
+
+        }
+    }
+</script>
+
+
+</body>
+
+</html>
+
+

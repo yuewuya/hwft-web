@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+
+    <style>
+        #savePageForm div{
+            margin: 10px;
+            text-align: center;
+            display: inline-block;
+            width: 30%;
+        }
+        #savePageForm div label{
+            display: inline-block;
+            width: 70px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="mainbox">
+
+    <div style="margin: 10px">
+        <p>
+            <input type="radio" id="choose1" name="category" value="1" checked><label for="choose1"> 工艺卡</label> &nbsp;&nbsp;
+            <input type="radio" id="choose2" name="category" value="2"><label for="choose2"> 母材试板</label>&nbsp;&nbsp;
+            <input type="radio" id="choose3" name="category" value="3"><label for="choose3"> 焊接试板</label>
+        </p>
+    </div>
+
+    <div class="cyda">
+        <table id="dg" style="width:80%">
+        </table>
+        <div id="toolbar">
+
+        </div>
+    </div>
+</div>
+<script src="/assembly/layer/layer.js"></script>
+<script src="/js/base/processingSetting.js"></script>
+</body>
+
+<div id="savePage" title="工序" style="padding:50px 10px 10px 10px;display:none">
+    <form id="savePageForm">
+        <input name="id" type="hidden" class="easyui-validatebox textbox"/>
+        <div>
+            <label>类别: &nbsp;</label>
+            <select id="choose4" name="category" required="true" class="scinput" style="width:200px;">
+                <option value="1">工艺卡</option>
+                <option value="2">母材试板</option>
+                <option value="3">焊接试板</option>
+            </select>
+        </div>
+        <div>
+            <label>工序: &nbsp;</label>
+            <input name="process" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>人数: &nbsp;</label>
+            <input name="peoples" type="text" class="easyui-numberbox" style="width:200px;"/>
+        </div>
+        <div style="width: 45%;">
+            <label>说明1: &nbsp;</label>
+            <input name="description1" type="text" class="scinput" style="width:375px;"/>
+        </div>
+        <div style="width: 45%;">
+            <label>说明2: &nbsp;</label>
+            <input name="description2" type="text" class="scinput" style="width:422px;"/>
+        </div>
+        <div style="width: 45%;">
+            <label>说明3: &nbsp;</label>
+            <input name="description3" type="text" class="scinput" style="width:375px;"/>
+        </div>
+        <div style="width: 45%;">
+            <label>说明4: &nbsp;</label>
+            <input name="description4" type="text" class="scinput" style="width:422px;"/>
+        </div>
+        <div>
+            <label>机器1: &nbsp;</label>
+            <input name="machine1" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>机器2: &nbsp;</label>
+            <input name="machine2" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>机器3: &nbsp;</label>
+            <input name="machine3" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>机器4: &nbsp;</label>
+            <input name="machine4" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>机器5: &nbsp;</label>
+            <input name="machine5" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>机器6: &nbsp;</label>
+            <input name="machine6" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>机器7: &nbsp;</label>
+            <input name="machine7" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>机器8: &nbsp;</label>
+            <input name="machine8" type="text" class="scinput" style="width:200px;"/>
+        </div>
+        <div>
+            <label>机器9: &nbsp;</label>
+            <input name="machine9" type="text" class="scinput" style="width:200px;"/>
+        </div>
+
+        <div>
+            <label>加工数量: &nbsp;</label>
+            <input name="processingNum" type="text" class="easyui-numberbox" style="width:200px;"/>
+        </div>
+        <div>
+            <label>加工重量: &nbsp;</label>
+            <input name="processingWeight" type="text" class="easyui-numberbox" style="width:200px;"/>
+        </div>
+        <div>
+            <label>加工长度: &nbsp;</label>
+            <input name="processingLength" type="text" class="easyui-numberbox" style="width:200px;"/>
+        </div>
+
+
+    </form>
+</div>
+
+<script>
+    createTooBar()
+</script>
+</html>

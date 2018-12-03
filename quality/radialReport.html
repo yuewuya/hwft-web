@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <link href="print/qualityPrintPart.css" rel="stylesheet" type="text/css" media="print">
+    <script language="javascript" src="/js/jquery.jqprint-0.3.js"></script>
+    <script language="javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+</head>
+<body>
+<div class="mainbox">
+    <form id="searchForm">
+        <p>
+            <label>报告编号：</label>
+            <input name="no" type="text" class="scinput" style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+        <p>
+            <label>指令号：</label>
+            <input name="code" type="text" class="scinput" style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+        <p>
+            <label>审核：</label>
+            <select name="examineUser" id="examineUser" class="easyui-combobox" style="width:160px;height:35px"
+                    data-options="panelHeight:'auto'">
+                <option value="全部">全部</option>
+                <option value="审核">审核</option>
+                <option value="未审核">未审核</option>
+            </select>
+        </p>
+        <p>
+            <label>形状：</label>
+            <input name="shape" id="shape" type="text" class="scinput"
+                   style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+        <p>
+            <label>材质：</label>
+            <input name="material" id="material" type="text" class="scinput"
+                   style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+        <p>
+            <label>厚度：</label>
+            <input name="thickness" id="thickness" type="text" class="scinput"
+                   style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+        <p>
+            <label>直径：</label>
+            <input name="diameter" id="diameter" type="text" class="scinput"
+                   style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+    </form>
+    <div class="cyda">
+        <table id="dg" style="width:80%">
+        </table>
+        <div id="toolbar">
+        </div>
+    </div>
+</div>
+<script>
+    createTooBar();
+
+    function examine(title, url) {
+        let row = $('#dg').datagrid('getSelections');
+        if (row.length != 1) {
+            layer.alert("请选择一条需要审核的数据！", {
+                icon: 2
+            });
+            return;
+        }
+        let obj = {};
+        obj.businessTable = 'quality_radial_report';
+        obj.businessId = row[0].id;
+        ajaxPostInvoke(url, obj, function (data) {
+           if(!data){
+               layer.alert("审核成功");
+               search();
+           }
+        })
+    }
+
+    /**
+     *
+     */
+    function settingBtn(title, url) {
+        layer.open({
+            type: 2,
+            title: title,
+            fix: false,
+            shadeClose: true,
+            area: ['90%', '90%'],//width,height
+            content: getRootPath() + url,
+            btn: ['提交', '关闭'],
+            success: function (layero, index) {
+            },
+            yes: function (index, layero) {
+            },
+            btn2: function () {
+                layer.closeAll();
+            }
+        });
+    }
+</script>
+<script src="../../assembly/layer/layer.js"></script>
+<script src="../../js/quality/radialReport.js"></script>
+</body>
+</html>
+
+

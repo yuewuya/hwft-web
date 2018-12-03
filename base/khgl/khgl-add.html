@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/base/khgl/khgl-add.js"></script>
+
+    <style>
+        #savePageForm div{
+            margin: 10px;
+            text-align: center;
+            display: inline-block;
+            width: 30%;
+        }
+        #savePageForm div label{
+            display: inline-block;
+            width: 70px;
+        }
+
+    </style>
+<title>无标题文档</title>
+
+</head>
+<body>
+
+<div class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    
+        <div title="基本情况" style="padding:10px;">
+            <form id="baseInfo">
+                <table width="100%"   align="center"  class="tablelist3">
+                    <tbody>
+                    <tr>
+                        <td align="right">公示名称: &nbsp;&nbsp;</td>
+                        <td align="left">
+                            <input name="company" type="text" class="easyui-validatebox textbox" required="true" style="width:193px; background:url(//assembly/images/itabbg2.png);"/>
+                            <input id="customerId" name="id" type="hidden" >
+                        </td>
+                        <td align="right">联系地址: &nbsp;&nbsp;</td>
+                        <td width="30%" align="left"><input name="address" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">联系人: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="contact" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">电话: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="mobile" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td width="20%" align="right">传真: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="fax" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">邮编: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="zipCode" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">移动电话: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="telephone" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">电子邮件: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="email" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">部门: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="department" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">客户关系: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="relax" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">行业性质: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="industryNature" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">收信人: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="recipient" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">管理人: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="admin" type="text"class="dfinput" id="duty"  style="width:136px;" />
+                            <a href="javascript:void(0)"><img src="/assembly/images/ck.png" style="display: inline-block;border: none; vertical-align: middle;" onclick="selectOtherPage('选择管理人', '/sys/sysUser.html', {username:$('#duty').val()},setAdmin)"/></a>
+                        </td>
+                        <td align="right">英文名: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="enName" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/><input name="isSupplier" type="hidden" value="1"/></td>
+                    </tr>
+                    <!--<tr>
+                        <td align="right">&nbsp;</td>
+                        <td colspan="3" align="left"><font style="color: #09F">已经有销售业绩</font></td>
+                    </tr>-->
+                    <!--<tr>
+                        <td align="right"><input type="checkbox" name="checkbox2" id="checkbox2">
+                            &nbsp;&nbsp;</td>
+                        <td align="left">客户 供应商</td>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+        
+        
+        <div title="补充情况" style="padding:10px;">
+            <form id="supplementInfo">
+                <table width="100%"   align="center"  class="tablelist3">
+                    <tbody>
+                    <tr>
+                        <td align="right">企业性质: &nbsp;&nbsp;</td>
+                        <td align="left">
+                            <input name="nature" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/>
+                            <input name="id" type="hidden" >
+                        </td>
+                        <td align="right">注册资金: &nbsp;&nbsp;</td>
+                        <td width="30%" align="left"><input name="registeredCapital" type="text" class="easyui-numberbox" style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">行业属性: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="attribute" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">容器级别: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="containerLevel" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td width="20%" align="right">主要产品: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="products" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">资格类别: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="qualification" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">所属省份: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="province" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">所属市县: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="city" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">车辆排头: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="vehicle" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="right">曾用名一: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="usedName1" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="right">曾用名二: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="usedName2" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">地址二: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="address2" type="text" class="scinput"  style="width: 193px; background: url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">销售形式: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="salesSituation" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">分公司: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="branchOffice" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">代理店: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="proxy" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">客户编号: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="customerNumber" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <!--<tr>
+                        <td align="right">&nbsp;</td>
+                        <td colspan="3" align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="right"><input type="checkbox" name="checkbox" id="checkbox">
+                            &nbsp;&nbsp;</td>
+                        <td align="left">客户 供应商</td>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+        
+        
+        <div title="财务情况" style="padding:10px;">
+            <form id="financeInfo">
+                <table width="100%"   align="center"  class="tablelist3">
+                    <tbody>
+                    <tr>
+                        <td align="right">税号: &nbsp;&nbsp;</td>
+                        <td align="left">
+                            <input name="taxNumber" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/>
+                            <input name="id" type="hidden" >
+                        </td>
+                        <td align="right">资金状况: &nbsp;&nbsp;</td>
+                        <td width="30%" align="left"><input name="funds" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">开户行一: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="bank1" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">付款条件: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="payment" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td width="20%" align="right">账号一: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="cardNo1" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">付款方式: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="paymentMethod" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">开户行二: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="bank2" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">结算时间: &nbsp;&nbsp;</td>
+                        <td align="left"><input id="jssj" type="text" class="easyui-datebox"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">账号二: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="cardNo2" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">付款态度: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="attitude" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <!--<tr>
+                        <td align="right"><input type="checkbox" name="checkbox" id="checkbox">
+                            &nbsp;&nbsp;</td>
+                        <td align="left">客户 供应商</td>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+        
+        
+        
+  <div title="保全关系" style="padding:10px;">
+    <form id="relationshipInfo">
+        <div class="di"><span style="background-color:#FFF; padding-right:10px; font-size:15px; font-weight:600">财务担保</span></div>
+        <table width="100%"   align="center"  class="tablelist3">
+            <tbody>
+            <tr>
+                <td align="right">名称: &nbsp;&nbsp;</td>
+                <td align="left">
+                    <input name="financeName" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/>
+                    <input name="id" type="hidden" >
+                </td>
+                <td align="right">所有人: &nbsp;&nbsp;</td>
+                <td width="30%" align="left"><input name="owner" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+            </tr>
+            <tr>
+                <td align="right">记事: &nbsp;&nbsp;</td>
+                <td align="left"><input name="note" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                <td align="right">登记价格: &nbsp;&nbsp;</td>
+                <td align="left"><input name="registrationPrice" class="easyui-numberbox" type="text" style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+            </tr>
+            <tr>
+                <td width="20%" align="right">实际价格: &nbsp;&nbsp;</td>
+                <td align="left"><input name="realPrice" type="text" class="easyui-numberbox"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                <td align="right">抵押手续: &nbsp;&nbsp;</td>
+                <td align="left"><input name="mortgage" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="di"><span style="background-color:#FFF; padding-right:10px; font-size:15px; font-weight:600">企业担保</span></div>
+        <table width="100%"   align="center"  class="tablelist3">
+            <tbody>
+            <tr>
+                <td align="right">商号: &nbsp;&nbsp;</td>
+                <td align="left"><input name="trade" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                <td align="right">法人名: &nbsp;&nbsp;</td>
+                <td width="30%" align="left"><input name="legalPerson" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+            </tr>
+            <tr>
+                <td align="right">地址: &nbsp;&nbsp;</td>
+                <td align="left"><input name="address" type="text" class="scinput"  style="width:193px; background:url(images/itabbg2.png);"/></td>
+                <td align="right">注册资金: &nbsp;&nbsp;</td>
+                <td align="left"><input name="registeredCapital" type="text" class="easyui-numberbox"  style="width:193px; background:url(images/itabbg2.png);"/></td>
+            </tr>
+            <tr>
+                <td width="20%" align="right">身份证号: &nbsp;&nbsp;</td>
+                <td align="left"><input name="idCard" type="text" class="scinput"  style="width:193px; background:url(images/itabbg2.png);"/></td>
+                <td align="right">担保手续: &nbsp;&nbsp;</td>
+                <td align="left"><input name="guarantee" type="text" class="scinput"  style="width:193px; background:url(images/itabbg2.png);"/></td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <div class="di"><span style="background-color:#FFF; padding-right:10px; font-size:15px; font-weight:600">个人担保</span></div>
+        <table width="100%"   align="center"  class="tablelist3">
+            <tbody>
+            <tr>
+                <td align="right">姓名: &nbsp;&nbsp;</td>
+                <td align="left">
+                    <input name="personalName" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/>
+                    <input name="id" type="hidden" >
+                </td>
+                <td align="right">地址: &nbsp;&nbsp;</td>
+                <td width="30%" align="left"><input name="personalAddress" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+            </tr>
+            <tr>
+                <td align="right">身份证号: &nbsp;&nbsp;</td>
+                <td align="left"><input name="personalIdCard" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                <td align="right">担保手续: &nbsp;&nbsp;</td>
+                <td align="left"><input name="personalGuarantee" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+            </tr>
+            <tr>
+                <td width="20%" align="right">记事: &nbsp;&nbsp;</td>
+                <td colspan="3" align="left"><input name="personalNote" type="text" class="scinput"  style="width: 300px; background: url(//assembly/images/itabbg2.png);"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <!--<table width="100%"   align="center" style="margin-top:10px;">
+      <tbody>
+        <tr>
+          <td align="right">&nbsp;</td>
+          <td align="left">&nbsp;</td>
+          <td align="right">&nbsp;</td>
+          <td align="left">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="20%" align="right"><input type="checkbox" name="checkbox3" id="checkbox3">
+            &nbsp;&nbsp;</td>
+          <td align="left">客户 供应商</td>
+          <td align="right">&nbsp;</td>
+          <td width="30%" align="left">&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>-->
+ </div>
+    
+    
+        <div title="资信情况" style="padding:10px;">
+            <form id="trustInfo">
+                <table width="100%"   align="center"  class="tablelist3">
+                    <tbody>
+                    <tr>
+                        <td align="right">资信类别: &nbsp;&nbsp;</td>
+                        <td align="left">
+                            <input name="level" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/>
+                            <input name="id" type="hidden" >
+                        </td>
+                        <td align="right">信用额度: &nbsp;&nbsp;</td>
+                        <td width="30%" align="left"><input name="credits" type="text" class="easyui-numberbox"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">曾诉讼否: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="litigation" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">曾倒闭或改制: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="collapse" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                    </tr>
+                    <tr>
+                        <td width="20%" align="right">以往信誉: &nbsp;&nbsp;</td>
+                        <td align="left"><input name="reputation" type="text" class="scinput"  style="width:193px; background:url(//assembly/images/itabbg2.png);"/></td>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="di"><span style="background-color:#FFF; padding-right:10px; font-size:15px; font-weight:600">前年欠款情况</span></div>
+                <table width="100%"   align="center"  class="tablelist3">
+                    <tbody>
+                    <tr>
+                        <td align="right">A: &nbsp;&nbsp;</td>
+                        <td align="left"><input id="intA" name="arrearsA" type="text" class="easyui-numberbox"  style="width:193px; background:url(//assembly/images/itabbg2.png);" data-options="onChange: function (a, b) { setxj (); }"/></td>
+                        <td align="right">B: &nbsp;&nbsp;</td>
+                        <td width="30%" align="left"><input id="intB" name="arrearsB" type="text" class="easyui-numberbox"  style="width:193px; background:url(//assembly/images/itabbg2.png);" data-options="onChange: function (a, b) { setxj (); }"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right">C: &nbsp;&nbsp;</td>
+                        <td align="left"><input id="intC" name="arrearsC" type="text" class="easyui-numberbox"  style="width:193px; background:url(//assembly/images/itabbg2.png);" data-options="onChange: function (a, b) { setxj (); }"/></td>
+                        <td align="right">D: &nbsp;&nbsp;</td>
+                        <td align="left"><input id="intD" name="arrearsD" type="text" class="easyui-numberbox"  style="width:193px; background:url(//assembly/images/itabbg2.png);" data-options="onChange: function (a, b) { setxj (); }"/></td>
+                    </tr>
+                    <tr>
+                        <td width="20%" align="right">小计: &nbsp;&nbsp;</td>
+                        <td align="left"><span id="xj"></span></td>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!--<table width="100%"   align="center" style="margin-top:10px;">
+                    <tbody>
+                    <tr>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                        <td align="right">&nbsp;</td>
+                        <td align="left">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td width="20%" align="right"><input type="checkbox" name="checkbox4" id="checkbox4">
+                            &nbsp;&nbsp;</td>
+                        <td align="left">客户 供应商</td>
+                        <td align="right">&nbsp;</td>
+                        <td width="30%" align="left">&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>-->
+            </form>
+
+        </div>
+        
+    
+<div title="联系人" style="padding:10px;">
+          <div class="cyda">
+
+            <table id="dg" style="width:80%">
+            </table>
+            <div id="toolbar">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addBtn('新增联系人', 'savePage')"
+                   data-options="plain:true,iconCls:'icon-add'">新增</a>
+                <a href="#" class="easyui-linkbutton" onclick="editBtn('修改联系人', 'savePage')"
+                   data-options="plain:true,iconCls:'icon-edit'">修改</a>
+                <a href="#" class="easyui-linkbutton" onclick="delBtn('/khgl/deleteContact')"
+                   data-options="plain:true,iconCls:'icon-remove'" id="yesDel">删除</a>
+          </div>
+
+</div>
+</div>  
+
+
+ </div>
+
+
+
+
+<div id="savePage" title="联系人" style="padding:50px 10px 10px 10px;display:none">
+    <form id="savePageForm">
+        <input name="id" type="hidden" />
+        <div>
+            <label>姓名: &nbsp;</label>
+            <input name="name" type="text" class="easyui-validatebox textbox" required="true" style="width:150px;"/>
+        </div>
+        <div>
+            <label>性别: &nbsp;</label>
+            <div style="width: 133px;display: inline-block">
+                <input type="radio" id="sex1" name="sex" value="0" checked><label for="sex1" style="width: 35px"> 男</label> &nbsp;&nbsp;
+                <input type="radio" id="sex2" name="sex" value="1"><label for="sex2" style="width: 35px"> 女</label>
+            </div>
+
+        </div>
+        <div>
+            <label>年龄: &nbsp;</label>
+            <input name="age" type="text" class="easyui-numberbox" style="width:150px;"/>
+        </div>
+        <div>
+            <label>文化程度: &nbsp;</label>
+            <input name="culture" type="text" class="scinput" style="width:150px;"/>
+        </div>
+        <div>
+            <label>职务: &nbsp;</label>
+            <input name="duty" type="text" class="scinput" style="width:150px;"/>
+        </div>
+        <div>
+            <label>手机号码: &nbsp;</label>
+            <input name="telephone" type="text" class="scinput" style="width:150px;"/>
+        </div>
+        <div>
+            <label>传真: &nbsp;</label>
+            <input name="fax" type="text" class="scinput" style="width:150px;"/>
+        </div>
+        <div>
+            <label>性格: &nbsp;</label>
+            <input name="character" type="text" class="scinput" style="width:150px;"/>
+        </div>
+        <div>
+            <label>公司地址: &nbsp;</label>
+            <input name="address" type="text" class="scinput" style="width:150px;"/>
+        </div>
+        <div>
+            <label>邮箱: &nbsp;</label>
+            <input name="email" type="text" class="scinput" style="width:150px;"/>
+        </div>
+
+    </form>
+</div>
+<script>
+    function setAdmin(row) {
+        $("#duty").val(row.username)
+    }
+</script>
+
+</body>
+</html>

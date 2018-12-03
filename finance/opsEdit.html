@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <style>
+        table tr td{
+            padding: 5px;
+        }
+    </style>
+
+</head>
+<body>
+<form id="form">
+<table id="ops">
+    <tr>
+        <td>业务单位：</td>
+        <td colspan="3"><input name="company" type="text" class="easyui-validatebox textbox" readonly style="width: 300px;"></td>
+    </tr>
+    <tr>
+        <td>开票时间：</td>
+        <td><input name="kpsj" type="text" class="easyui-datebox" readonly style="width: 300px;"/></td>
+        <td>发票金额：</td>
+        <td><input name="fpje" type="text" class="easyui-numberbox" readonly style="width: 300px"/></td>
+    </tr>
+</table>
+    <div style="margin-left: 30%;margin-top: 10px">
+        <input type="button" class="scbtn" onclick="delectBack();" value="删除"/>
+        <input type="button" class="scbtn" onclick="saveBack();" value="保存"/>
+    </div>
+    <input type="hidden" name="id" id="id">
+</form>
+<script>
+    let html = '';
+    let number = GetRequestParam().number;
+    for (let i=0;i<number;i++){
+        html +='<tr >';
+        html +='<td>收回时间：<input type="hidden" name="id'+i+'"></td>'
+        html +='<td><input type="text" name="shsj'+i+'" class="easyui-datebox" required="required" style="width: 300px;"' +
+            'data-options="onShowPanel:function(){$(this).combobox(\'panel\').panel(\'panel\').css(\'z-index\',layerZ); }"></td>';
+        html +='<td>收回金额：</td>'
+        html +='<td><input type="text" name="hsje'+i+'" class="easyui-numberbox" data-options="min:0,precision:2" style="width: 300px" required="true"/>'
+            +'<input type="checkbox"/></td>';
+        html +='</tr>';
+    }
+    $('#ops').append(html);
+    let type = 0;
+    function initData(row) {
+        $('#form').form('load', row);
+    }
+    function delectBack() {
+        type=1;
+        let ids = new Array();
+        $("input").each(function(){
+            if ($(this).prop('checked')){
+                let op = new Object();
+                op.id = $(this).parent().parent().find("input[type='hidden']").val();
+                op.financeId = $('#id').val();
+                ids.push(op);
+            }
+        });
+        console.log(ids);
+        if(ids.length==0){
+            layer.alert("请选择要删除的业务", {icon : 2});
+        }else{
+            layer.confirm('确认要删除吗？',function(index){
+                ajaxSubmit('/finance/deleteFinanceOp',ids);
+            });
+        }
+    }
+    
+    function saveBack() {
+        type=0;
+        let ops =new Array();
+        if(!$("#form").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return ;
+        }
+        $("tr").each(function(i,item){
+            if(i>=2&&$(this).attr('hidden')==null){
+                let tdArr = $(this).children();
+                let op = new Object();
+                op.shsj = moment(tdArr.eq(1).find("input").val()).format("YYYY-MM-DD HH:mm:ss");
+                op.hsje = tdArr.eq(3).find("input").val();
+                op.financeId = $('#id').val();
+                ops.push(op);
+            }
+        });
+        layer.confirm('确认保存所有数据吗？',function(index){
+            ajaxSubmit('/finance/batchEditOp',ops);
+        });
+    }
+
+    function search() {
+        if(type==1){
+            $("input[type='checkbox']:checked").each(function() {
+                $(this).parent().parent().hide();
+            });
+        }
+    }
+</script>
+</body>
+<script src="/assembly/layer/layer.js"></script>
+
+<script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+<script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+</html>

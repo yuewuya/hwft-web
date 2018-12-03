@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>询价详情</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <style type="text/css">
+        td {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+<div class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <div title="询价信息" style="padding:10px;">
+        <form id="askMoney">
+            <input name="id" type="hidden">
+            <input name="rfqId" type="hidden">
+            <table width="100%" align="center" class="tablelist3">
+                <tbody>
+                <tr>
+                    <td width="10%" align="right">询价编号: &nbsp;</td>
+                    <td width="15%" align="left"><input name="numbering" id="numbering" type="text" class="dfinput"
+                                                        readonly="readonly"
+                                                        style="width:130px;"/></td>
+                    <td width="10%" align="right">单件号: &nbsp;</td>
+                    <td width="15%" align="left"><input name="singleNum" type="text" class="dfinput" readonly="readonly"
+                                                        style="width:130px;"></td>
+                    <td width="10%" align="right">售价: &nbsp;</td>
+                    <td width="15%" align="left"><input name="price" type="text" class="dfinput"
+                                                        style="width:130px;"/></td>
+                    <td width="10%" align="right">报价: &nbsp;</td>
+                    <td width="15%" align="left"><input name="quote" type="text" class="dfinput"
+                                                        style="width:130px;"/></td>
+                </tr>
+                <tr>
+                    <td align="right">材料来源: &nbsp;</td>
+                    <td align="left">
+                        <select class="easyui-combobox"
+                                name="materialSource"
+                                style="height:35px; width:130px;"
+                                id="materialSource"
+                                editable="false"
+                                data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                        </select>
+                    </td>
+                    <td align="right">形状: &nbsp;</td>
+                    <td align="left">
+                        <input type="hidden" id="shape" name="shape">
+                        <input name="shapeName" id="shapeName" type="text" readonly=”readonly” class="dfinput"
+                               style="width:130px; margin-right:5px;"/>
+                        <a href="javascript:void(0)"><img src="/assembly/images/ck.png"
+                                                          style="display:inline; vertical-align: middle;"
+                                                          onclick="selectOtherPageRow('选择形状','/base/shapeSetting.html',null,'shape')"/></a>
+                    </td>
+                    <td align="right">材质: &nbsp;</td>
+                    <td colspan="3" align="left">
+                        <input type="hidden" id="material" name="material">
+                        <input name="materialName" id="materialName" type="text" readonly=”readonly” class="dfinput"
+                               style="width:130px; margin-right:5px;"/>
+                        <a href="javascript:void(0)"><img src="/assembly/images/ck.png"
+                                                          style="display: inline-block;border: none; vertical-align: middle;"
+                                                          onclick="
+                                                          selectOtherPageRow('选择材质','/base/materialSetting.html',null,'material')"/></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="checkbox" name="diameterType" id="diameterType">
+                        <span id="diameter_type">内</span>直径: &nbsp;&nbsp;
+                    </td>
+                    <td colspan="6" align="left"><input name="diameter" type="text" class="dfinput"
+                                                        style="width:130px;"/></td>
+                    <td align="left"><input type="checkbox" name="materialRetest" id="materialRetest">
+                        材料复验
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">壁厚: &nbsp;&nbsp;</td>
+                    <td align="left"><input name="thickness" type="text" class="dfinput" style="width:130px;"/></td>
+                    <td align="right">要求壁厚: &nbsp;&nbsp;</td>
+                    <td align="left"><input name="claimThickness" type="text" class="dfinput" style="width:130px;"/>
+                    </td>
+                    <td align="right">最小壁厚: &nbsp;&nbsp;</td>
+                    <td align="left"><input name="minThickness" type="text" class="dfinput" style="width:130px;"/></td>
+                    <td align="left">&nbsp;</td>
+                    <td align="left"><input type="checkbox" name="supervision" id="supervision">
+                        要监检
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">大R: &nbsp;&nbsp;</td>
+                    <td align="left"><input name="bigR" type="text" class="dfinput" style="width:130px;"/></td>
+                    <td align="right">直边: &nbsp;&nbsp;</td>
+                    <td align="left"><input name="straightEdge" type="text" class="dfinput" style="width:130px;"/></td>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td align="left">&nbsp;</td>
+                    <td align="left"><input type="checkbox" name="testBord" id="testBord">
+                        要试板
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">小r: &nbsp;&nbsp;</td>
+                    <td align="left"><input name="minR" type="text" class="dfinput" style="width:130px;"/></td>
+                    <td align="right"><input type="checkbox" id="heightType" name="heightType">
+                        <span id="height_type">内</span>总高: &nbsp;&nbsp;
+                    </td>
+                    <td align="left"><input name="height" type="text" class="dfinput" style="width:130px;"/></td>
+                    <td align="right">数量: &nbsp;&nbsp;</td>
+                    <td align="left"><input name="num" type="text" class="dfinput" style="width:130px;"/></td>
+                    <td align="left">&nbsp;</td>
+                    <td align="left"><input type="checkbox" name="stamp" id="stamp">
+                        要钢印
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">制造标准: &nbsp;&nbsp;</td>
+                    <td colspan="2" align="left">
+                        <select class="easyui-combobox"
+                                name="standards"
+                                style="height:35px; width:130px;"
+                                id="standards"
+                                editable="false"
+                                data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                        </select>
+                    </td>
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+                    <td align="center">&nbsp;</td>
+                    <td><input type="checkbox" name="heatTreatment" id="heatTreatment">
+                        热处理
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">其他要求: &nbsp;&nbsp;</td>
+                    <td colspan="7" align="left"><textarea name="otherClaim" class="dfinput"
+                                                           style="width:680px; height:100px"></textarea></td>
+                </tr>
+                <tr>
+                    <td align="right"><input type="checkbox" id="isFlaw" name="isFlaw">
+                        探伤 &nbsp;
+                    </td>
+                    <td colspan="7" align="left">&nbsp;</td>
+                </tr>
+                <tr id="flawTR">
+                    <td align="right">探伤: &nbsp;&nbsp; </td>
+                    <td align="left">
+                        <select class="easyui-combobox"
+                                name="flawDetection"
+                                style="height:35px; width:130px;"
+                                id="flawDetection"
+                                editable="false"
+                                data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                        </select>
+                    </td>
+                    <td align="right">探伤要求: &nbsp;&nbsp;</td>
+                    <td align="left">
+                        <select class="easyui-combobox"
+                                name="flawClaim"
+                                style="height:35px; width:140px;"
+                                id="flawClaim"
+                                editable="false"
+                                data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                        </select>
+                    </td>
+                    <td align="right"></td>
+                    <td align="left"></td>
+                    <td align="left"></td>
+                    <td align="left"></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div title="报价信息" style="padding:10px;">
+        <form id="reMoney">
+            <table width="100%" align="center" class="tablelist3">
+                <tr>
+                    <td align="right">期限: &nbsp;</td>
+                    <td colspan="7" align="left">
+                        <input name="deadline" type="text" class="easyui-datebox" style="width:193px;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">报价日: &nbsp;</td>
+                    <td align="left">
+                        <input name="pricingDate" type="text" class="easyui-datebox" style="width:193px;"/>
+                    </td>
+                    <td align="right">
+                    <td colspan="5" align="left"></td>
+                </tr>
+                <tbody>
+                <tr>
+                    <td align="right">加工方法: &nbsp;&nbsp;</td>
+                    <td colspan="7" align="left"><input name="processingMethod" type="text" class="dfinput"
+                                                        style="width: 120px;"/></td>
+                </tr>
+                <tr>
+                    <td align="right">报价说明: &nbsp;&nbsp;</td>
+                    <td colspan="7" align="left"><textarea name="quoteDescription" class="dfinput"
+                                                           style="width:680px; height:100px"></textarea></td>
+                </tr>
+                <tr>
+                    <td width="11%" align="right">材料单价: &nbsp;</td>
+                    <td width="12%" align="left"><input name="unitPrice" type="text" class="dfinput"
+                                                        style="width:130px;"/></td>
+                    <td width="12%" align="right">重量: &nbsp;</td>
+                    <td width="15%" align="left"><input name="cuttingWeight" type="text" class="dfinput"
+                                                        style="width:130px;"/></td>
+                    <td width="10%" align="right">利用率: &nbsp;</td>
+                    <td width="15%" align="left"><input name="utilizationRate" type="text" class="dfinput"
+                                                        style="width:130px;"/></td>
+                    <td width="10%" align="right">下料: &nbsp;</td>
+                    <td width="15%" align="left"><input name="cutting" type="text" class="dfinput"
+                                                        style="width:130px;"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+    let allDict = {};
+    $(function () {
+        ajaxDictQuery([{typeCode: 'SALE_MATERIAL_SOURCE'}, {typeCode: 'SALE_STANDARDS'}
+        ,{typeCode: 'FLAW_CLAIM'},{typeCode: 'RT_REPORT'}], function (data) {
+            allDict = data;
+            setDictOptionKey(['materialSource'], 'SALE_MATERIAL_SOURCE');
+            setDictOptionKey(['standards'], 'SALE_STANDARDS');
+            setDictOptionKey(['flawClaim'], 'FLAW_CLAIM');
+            setDictOptionKey(['flawDetection'], 'RT_REPORT');
+        });
+    });
+
+    function getFormData() {
+        //询价信息
+        let obj = $('#askMoney').getData();
+        obj.heatTreatment = $('#heatTreatment').is(":checked") ? 1 : 0;
+        obj.stamp = $('#stamp').is(":checked") ? 1 : 0;
+        obj.testBord = $('#testBord').is(":checked") ? 1 : 0;
+        obj.supervision = $('#supervision').is(":checked") ? 1 : 0;
+        obj.materialRetest = $('#materialRetest').is(":checked") ? 1 : 0;
+        obj.isFlaw = $('#isFlaw').is(":checked") ? 1 : 0;
+        obj.diameterType = $('#diameterType').is(":checked") ? 1 : 0;
+        obj.heightType = $('#heightType').is(":checked") ? 1 : 0;
+        //报价信息
+        let data = $('#reMoney').getData();
+        let object = {};
+        object.rfq = obj;
+        object.quotation = data;
+        console.log(object);
+        return object;
+    }
+
+    function initData(data) {
+        if (data.business == 'rfq') {
+            $('#reMoney').find('input,textarea').attr('disabled', true);
+        } else {
+            $('#askMoney').find('input,textarea').attr('disabled', true);
+        }
+        $('#askMoney').form('load', data);
+        if (data.rfqId != null) {
+            let arr = [{key: 'heatTreatment', value: data.heatTreatment}, {
+                key: 'stamp',
+                value: data.stamp
+            }, {key: 'testBord', value: data.testBord}
+                , {key: 'supervision', value: data.supervision}, {key: 'materialRetest', value: data.materialRetest},
+                {key: 'isFlaw', value: data.isFlaw}, {
+                    key: 'diameterType',
+                    value: data.diameterType
+                }, {key: 'heightType', value: data.heightType}];
+            initCheckBox(arr);
+            changeV();
+        }
+        console.log(data);
+        $("#reMoney").form('load',data.quotationBean);
+    }
+
+
+    $("#diameterType").change(function () {
+        changeV();
+    });
+
+    $("#heightType").change(function () {
+        changeV();
+    });
+
+    $("#isFlaw").change(function () {
+        changeV();
+    });
+
+    function changeV() {
+        if ($('#heightType').is(":checked")) {
+            $("#height_type").html("外");
+        } else {
+            $("#height_type").html("内");
+        }
+        if ($('#diameterType').is(":checked")) {
+            $("#diameter_type").html("外");
+        } else {
+            $("#diameter_type").html("内");
+        }
+        if ($('#isFlaw').is(":checked")) {
+            $("#flawTR").show();
+        } else {
+            $("#flawTR").hide();
+        }
+    }
+
+    function initCheckBox(arr) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].value == 1) {
+                $("#" + arr[i].key).prop("checked", true);
+            }
+        }
+    }
+</script>
+</html>
+
+

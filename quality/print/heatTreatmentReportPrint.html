@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="qualityPrint.css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <title>新热处理报告退火</title>
+</head>
+<body>
+<div style="padding:0px; height:100%;" id="print1">
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center"><span style="font-size:25px; font-weight:600; letter-spacing:5px; font-family:'宋体'">宜兴华威封头有限公司</span>
+            </td>
+        </tr>
+        <tr>
+            <td align="center"><span
+                    style="font-size:20px; font-weight:600; letter-spacing:5px; font-family:'宋体'">热处理报告</span></td>
+        </tr>
+        <tr>
+            <td align="right"><span style="font-size:15px; font-weight:600; font-family:'宋体'">表G-10</span></td>
+        </tr>
+    </table>
+
+
+    <table border="0" cellspacing="0" cellpadding="0" class="table_yl6">
+        <tr>
+            <td width="15%" valign="top"><p>热处理炉次顺序号</p></td>
+            <td colspan="9" valign="top"><p id="no"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>产品名称</p></td>
+            <td colspan="3" align="left"><p id="productionName"></p></td>
+            <td colspan="3" valign="top"><p>产品图号</p></td>
+            <td colspan="3" valign="top"><p id="picNo"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>控温仪表名称</p></td>
+            <td colspan="3" align="left"><p id="machine"></p></td>
+            <td colspan="3" valign="top"><p>零部件代号</p></td>
+            <td colspan="3" valign="top"><p id="partNo"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>热处理类型</p></td>
+            <td colspan="9" align="left"><p id="type"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>热处理规程编号</p></td>
+            <td colspan="3" align="left"><p id="ruleNo"></p></td>
+            <td colspan="3" valign="top"><p>热处理工艺</p></td>
+            <td colspan="3" valign="top"><p id="process"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>热处理炉名称</p></td>
+            <td colspan="3" align="left"><p id="furnace"></p></td>
+            <td colspan="3" valign="top"><p>热处理炉编号</p></td>
+            <td colspan="3" valign="top"><p id="furnaceNo"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>热电偶名称</p></td>
+            <td colspan="3" align="left"><p id="electric"></p></td>
+            <td colspan="3" valign="top"><p>热电偶型号</p></td>
+            <td colspan="3" valign="top"><p id="electricType"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>绝热材料名称</p></td>
+            <td colspan="3" align="left"><p id="insulation"></p></td>
+            <td colspan="3" valign="top"><p>绝热材料厚度</p></td>
+            <td colspan="3" valign="top"><p id="materialThickness"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>测温方式</p></td>
+            <td colspan="3" align="left"><p id="test"></p></td>
+            <td colspan="3" valign="top"><p>加热装置及辅助装置</p></td>
+            <td colspan="3" valign="top"><p id="device"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" rowspan="2" valign="top"><p>热处理工艺要求</p></td>
+            <td width="11%" valign="top"><p>入炉温度℃</p></td>
+            <td width="11%" valign="top"><p>升温速度℃/h</p></td>
+            <td width="11%" valign="top"><p>保温温度℃</p></td>
+            <td width="128" colspan="3" valign="top"><p>保温时间min</p></td>
+            <td width="11%" valign="top"><p>降温速度℃/h</p></td>
+            <td width="11%" valign="top"><p>冷却方式</p></td>
+            <td width="11%" valign="top"><p>出炉温度℃</p></td>
+        </tr>
+        <tr>
+            <td width="11%" valign="top"><p id="temperatureTr"></p></td>
+            <td width="11%" valign="top"><p id="speedTr"></p></td>
+            <td width="11%" valign="top"><p id="preservationTr"></p></td>
+            <td width="11%" valign="top"><p id="timeTr"></p></td>
+            <td colspan="3" valign="top"><p id="lowerSpeedTr"></p></td>
+            <td width="11%" valign="top"><p id="coolingTr"></p></td>
+            <td width="11%" valign="top"><p id="outTemperatureTr"></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>实际操作</p></td>
+            <td width="11%" valign="top"><p id="temperature"></p></td>
+            <td width="11%" valign="top"><p id="speed"></p></td>
+            <td width="11%" valign="top"><p id="preservation"></p></td>
+            <td colspan="3" valign="top"><p id="time"></p></td>
+            <td width="11%" valign="top"><p id="lowerSpeed"></p></td>
+            <td width="11%" valign="top"><p id="cooling"></p></td>
+            <td width="11%" valign="top"><p id="outTemperature"></p></td>
+        </tr>
+        <tr>
+            <td colspan="2" valign="top"><p>升温开始时间</p></td>
+            <td colspan="2" valign="top"><p>保温开始时间</p></td>
+            <td colspan="4" valign="top"><p>降温开始时间</p></td>
+            <td colspan="2" valign="top"><p>出炉时间</p></td>
+        </tr>
+        <tr>
+            <td colspan="2" valign="top"><p id="riseTime"></p></td>
+            <td colspan="2" valign="top"><p id="keepTime"></p></td>
+            <td colspan="4" valign="top"><p id="lowerTime"></p></td>
+            <td colspan="2" valign="top"><p id="outTime"></p></td>
+        </tr>
+        <tr id="after">
+            <td colspan="2" valign="top"><p>产品编号</p></td>
+            <td colspan="2" valign="top"><p>直径(mm)</p></td>
+            <td colspan="2" valign="top"><p>厚度(mm)</p></td>
+            <td colspan="2" valign="top"><p>材料牌号</p></td>
+            <td colspan="2" valign="top"><p>工件形状</p></td>
+        </tr>
+        <tr>
+            <td colspan="4" valign="top"><p>热处理时间——温度连续自动记录曲线</p></td>
+            <td colspan="6" valign="top"><p>见附件</p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>热处理时间</p></td>
+            <td colspan="3" valign="top"><p id="createTime"></p></td>
+            <td colspan="3" valign="top"><p>环境温度</p></td>
+            <td colspan="3" valign="top"><p id="environmental">p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>风力及防护</p></td>
+            <td colspan="3" valign="top"><p id="windPower"></p></td>
+            <td colspan="3" valign="top"><p>雨雪等级及防护</p></td>
+            <td colspan="3" valign="top"><p id="snow"></p></td>
+        </tr>
+        <tr>
+            <td colspan="10" valign="top"><p>结论：<span id="conclusion"></span></p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>操作者</p></td>
+            <td colspan="4" valign="top"><p>何运良</p></td>
+            <td width="15%" colspan="2" valign="top"><p>检验员</p></td>
+            <td colspan="3" valign="top"><p>张小芳</p></td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top"><p>责任人</p></td>
+            <td colspan="4" valign="top"><p>&nbsp;</p></td>
+            <td width="15%" colspan="2" valign="top"><p>备注</p></td>
+            <td colspan="3" valign="top"><p id="remark"></p></td>
+        </tr>
+    </table>
+</div>
+<script>
+    function initData(object) {
+        ajaxPostInvoke('/quality/heatTreatmentReport/queryOne', {id: object.id}, function (obj) {
+            for (let key in obj) {
+                $("#" + key).text(obj[key]);
+                change(obj.type);
+                $("#createTime").text(moment(obj.createTime).format("YYYY年MM月DD日"));
+                $("#riseTime").text(moment(obj.riseTime).format("mm:ss"));
+                $("#keepTime").text(moment(obj.keepTime).format("mm:ss"));
+                $("#lowerTime").text(moment(obj.lowerTime).format("mm:ss"));
+                $("#outTime").text(moment(obj.outTime).format("mm:ss"));
+            }
+            let str = '';
+            if (obj.detailList.length <= 14) {
+                for (let i = 0; i < 14; i++) {
+                    if (i + 1 > obj.detailList.length) {
+                        str = str + '<tr><td colspan="2" valign="top"><p>&nbsp;</p></td>' +
+                            '<td colspan="2" valign="top"><p>&nbsp;</p></td>' +
+                            '<td colspan="2" valign="top"><p>&nbsp;</p></td>' +
+                            '<td colspan="2" valign="top"><p>&nbsp;</p></td>' +
+                            '<td colspan="2" valign="top"><p>&nbsp;</p></td></tr>';
+                    }else{
+                        str = str + '<tr><td colspan="2" valign="top"><p>' + obj.detailList[i].number + '</p></td>' +
+                            '<td colspan="2" valign="top"><p>' + obj.detailList[i].diameter + '</p></td>' +
+                            '<td colspan="2" valign="top"><p>' + obj.detailList[i].thickness + '</p></td>' +
+                            '<td colspan="2" valign="top"><p>' + obj.detailList[i].material + '</p></td>' +
+                            '<td colspan="2" valign="top"><p>' + obj.detailList[i].shape + '</p></td></tr>';
+                    }
+                }
+            } else {
+                for (let i = 0; i < obj.detailList.length; i++) {
+                    str = str + '<tr><td colspan="2" valign="top"><p>' + obj.detailList[i].number + '</p></td>' +
+                        '<td colspan="2" valign="top"><p>' + obj.detailList[i].diameter + '</p></td>' +
+                        '<td colspan="2" valign="top"><p>' + obj.detailList[i].thickness + '</p></td>' +
+                        '<td colspan="2" valign="top"><p>' + obj.detailList[i].material + '</p></td>' +
+                        '<td colspan="2" valign="top"><p>' + obj.detailList[i].shape + '</p></td></tr>';
+                }
+            }
+            $("#after").after(str);
+        });
+    }
+
+    function change(newValue) {
+        if (newValue == '固溶') {
+            $("#temperatureTr").text('≤300');
+            $("#speedTr").text('≤300');
+            $("#preservationTr").text('900±25');
+            $("#timeTr").text('30');
+            $("#lowerSpeedTr").text('/');
+            $("#coolingTr").text('空冷');
+            $("#outTemperatureTr").text('900±25');
+        } else if (newValue == '正火') {
+            $("#temperatureTr").text('≤300');
+            $("#speedTr").text('≤300');
+            $("#preservationTr").text('900±25');
+            $("#timeTr").text('30');
+            $("#lowerSpeedTr").text('/');
+            $("#coolingTr").text('空冷');
+            $("#outTemperatureTr").text('900±25');
+        } else if (newValue == '退火') {
+            $("#temperatureTr").text('≤300');
+            $("#speedTr").text('≤200');
+            $("#preservationTr").text('625±25');
+            $("#timeTr").text('60');
+            $("#lowerSpeedTr").text('≤260');
+            $("#coolingTr").text('炉冷');
+            $("#outTemperatureTr").text('≤400');
+        }
+    }
+</script>
+
+</body>
+</html>

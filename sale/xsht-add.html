@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/sale/orderAdd.js"></script>
+
+<style>
+    #saveForm div{
+        margin: 10px;
+        text-align: center;
+        display: inline-block;
+        width: 22%;
+    }
+    #saveForm div label{
+        display: inline-block;
+        width: 70px;
+    }
+    #saveForm div img{
+        position: relative;
+        top: 9px;
+        left: -2px
+    }
+
+</style>
+
+</head>
+<body>
+
+   
+
+<div class="mainbox" style="height:600px; overflow:auto">
+
+
+        <div style="height: 550px;overflow: auto">
+
+
+            <div class="dicc"><span style="background-color:#FFF; padding-right:10px; font-size:15px; font-weight:600">询价单信息</span></div>
+            <div class="tools">
+            <form id="saveForm">
+                    <div>
+
+                        <label>订单编号：</label>
+                        <input name="orderNum" id="orderNum" type="text" readonly class="scinput"  style="height:23px; width:120px; line-height:23px;"/>
+                        <input name="id" id="orderId" type="hidden" />
+                        <input name="state" id="state" type="hidden" />
+                    </div>
+                    <div>
+                      <label>订货日期：</label>
+                         <input type="text" name="orderDate" class="easyui-datebox" id="orderTime" style="height:23px; width:130px;line-height:23px;" />
+
+                    </div>
+
+                     <div>
+                         <label>销售形式：</label>
+                         <select name="saleForm" class="easyui-combobox" style="height:25px; width:120px;" id="xsxs" editable="false"
+                                 data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                       </select>
+                    </div>
+
+                <div>
+                    <label>客户：</label>
+                    <input name="customer" id="companyName" readonly type="text" class="scinput"  style="height: 23px; width: 120px; line-height: 23px;" onclick="selectOtherPageRow('客户资料管理','/base/khgl/khgl.html', {contact:$('#companyName').val()}, 'company')"/>
+                    <!--<a href="javascript:void(0)"><img src="/assembly/images/ck.png"  onclick="selectOtherPageRow('客户资料管理','/base/khgl/khgl.html', {contact:$('#companyName').val()}, 'company')"/></a>-->
+                </div>
+
+                <div>
+
+                    <label>付款方式：</label>
+                    <input name="paymentWay" readonly onclick="openWindowht('付款详情','htqk.html')" type="text" class="scinput"  style="height:23px; width:120px; line-height:23px;"/>
+                    <!--<a href="javascript:void(0)"><img src="/assembly/images/ck.png"  onclick="openWindowht('合同情况','htqk.html')"/></a>-->
+
+                </div>
+
+                <div>
+                    <label>付款条件：</label>
+                    <input name="paymentTerms" readonly onclick="openWindowht('付款详情','htqk.html')" type="text" class="scinput"  style="height: 23px; width: 130px; line-height: 23px;"/>
+                </div>
+
+                <div>
+                    <label>交货情况：</label>
+                    <input name="deliverySituation" readonly onclick="openWindowht('付款详情','htqk.html')" type="text" class="scinput"  style="height: 23px; width: 120px; line-height: 23px;"/>
+                </div>
+
+                <div>
+                    <label>运输方法：</label>
+                    <input name="transportWay" readonly onclick="openWindowht('付款详情','htqk.html')" type="text" class="scinput"  style="height: 23px; width: 120px; line-height: 23px;"/>
+                </div>
+
+                <div>
+                    <label>担当：</label>
+                    <input name="responsibility" readonly onclick="selectOtherPage('选择担当','/sys/sysUser.html', {username:$('#ddName').val(), departmentName:$('#departName').val()}, function(row) {
+                      $('#ddName').val(row.username);
+                      $('#departName').val(row.departmentName)
+                    })" type="text" class="scinput" id="ddName" style="height:23px; width:120px; line-height:23px;"/>
+                    <!--<a href="javascript:void(0)"><img src="/assembly/images/ck.png"  onclick="selectOtherPage('选择担当','/sys/sysUser.html', {username:$('#ddName').val(), departmentName:$('#departName').val()}, function(row) {
+                      $('#ddName').val(row.username);
+                      $('#departName').val(row.departmentName)
+                    })"/></a>-->
+
+                </div>
+
+                <div>
+                         <label>部门：</label>
+                         <input name="department" readonly type="text" class="scinput" id="departName" style="height:23px; width:130px; line-height:23px;"/>
+                    </div>
+
+                    <div>
+
+                         <label>资料发放：</label>
+                         <select name="dataDistribution" class="easyui-combobox" id="sourceSend" style="height:25px; width:120px;" editable="false"
+                                 data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                        </select>
+                    </div>
+                <div>
+                    <label>材料来源：</label>
+                    <select name="materialSource" class="easyui-combobox" style="height:25px; width:122px;">
+                        <option value=""></option>
+                        <option value="自料">自料</option>
+                        <option value="来料">来料</option>
+                    </select>
+                </div>
+
+                <ul class="cyda_cx2">
+                  <Li>
+                    <label>补充事项：</label>
+                    <textarea name="matters" class="dfinput2" style="width: 400px; height: 70px;"></textarea>
+
+                  </Li>
+                  <li></li>
+
+
+                </ul>
+                <ul class="cyda_cx2">
+                  <Li>
+                    <label>备注：</label>
+                    <textarea name="remarks" class="dfinput2" style="width: 400px; height: 70px;"></textarea>
+
+                  </Li>
+                  <li></li>
+
+
+                </ul>
+
+
+            </form>
+            </div>
+
+            <div class="cyda">
+
+
+         <div style="margin-top:5px;">
+
+                            <table id="dg" style="width:100%; height:300px; overflow:auto">
+							</table>
+                            <div id="toolbar">
+                                <a href="javascript:void(0)" class="easyui-linkbutton"
+                                   onclick="addBtn('新增订单', '/sale/ddmxsz.html')"
+                                   data-options="plain:true,iconCls:'icon-add'">新增</a>
+                                <a href="#" class="easyui-linkbutton" onclick="editBtn('修改订单', '/sale/ddmxsz.html')"
+                                   data-options="plain:true,iconCls:'icon-edit'">修改</a>
+                                <a href="#" class="easyui-linkbutton" onclick="delBtn('/sale/order/deleteDetail')"
+                                   data-options="plain:true,iconCls:'icon-remove'">删除</a>
+						    </div>
+
+           </div>
+
+
+        </div>
+
+        </div>
+
+
+
+        <div class="cyda">
+            <form id="ex">
+           <ul class="cyda_cx">
+             <li>
+               <label>填表</label>
+               <input name="createName" readonly type="text" class="scinput"  style="height:23px; width:80px; line-height:23px; background:url(/assembly/images/itabbg2.png);"/>
+             </li>
+             <li>
+               <label>制作日期</label>
+               <input type="text" readonly class="easyui-datebox" name="createTime" style="height:23px; width:150px;line-height:23px; background:url(/assembly/images/itabbg2.png);" />
+             </li>
+             <li>
+               <label>审核</label>
+               <input name="approveName" readonly type="text" class="scinput"  style="height:23px; width:80px; line-height:23px; background-color:#9CF; background:url(/assembly/images/itabbg2.png);" />
+             </li>
+             <li>
+               <label>审核日</label>
+               <input type="text" readonly class="easyui-datebox" name="approveTime" style="height:23px; width:150px;line-height:23px; background:url(/assembly/images/itabbg2.png);" />
+             </li>
+               <li>
+                   <a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-xj" plain="true" onclick="hj()">核价</a>
+               </li>
+               <li>
+                   <a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-xj" plain="true" onclick="sh()">审核</a>
+               </li>
+           </ul>
+            </form>
+         </div>
+
+</div>
+<script>
+    function hj() {
+        let orderId = $("#orderId").val();
+        let state = $("#state").val();
+        if(orderId && orderId != ''){
+            if (state == 1){
+                layer.confirm('确认核价？', {
+                    icon: 3,
+                    title: '提示'
+                }, function (index) {
+                    ajaxPostInvoke("/sale/order/approve", {id: orderId, state: 2}, function () {
+                        parent.search();
+                        parent.layer.closeAll()
+                    })
+                })
+            }else {
+                layer.confirm('取消核价？', {
+                    icon: 3,
+                    title: '提示'
+                }, function (index) {
+                    ajaxPostInvoke("/sale/order/approve", {id: orderId, state: 1}, function () {
+                        parent.search();
+                        parent.layer.closeAll()
+                    })
+                })
+            }
+        }else {
+            layer.msg("请先创建合同！")
+        }
+    }
+
+    function sh() {
+        let orderId = $("#orderId").val();
+        let state = $("#state").val();
+        if(orderId && orderId != ''){
+            if (state == 2){
+                layer.confirm('确认审核？', {
+                    icon: 3,
+                    title: '提示'
+                }, function (index) {
+                    ajaxPostInvoke("/sale/order/approve", {id: orderId, state: 3}, function () {
+                        parent.search();
+                        parent.layer.closeAll()
+                    })
+                })
+            }else if(state == 3){
+                layer.confirm('取消审核？', {
+                    icon: 3,
+                    title: '提示'
+                }, function (index) {
+                    ajaxPostInvoke("/sale/order/approve", {id: orderId, state: 2}, function () {
+                        parent.search();
+                        parent.layer.closeAll()
+                    })
+                })
+            }else if(state == 1){
+                layer.msg("请先核价！")
+            }
+        }else {
+            layer.msg("请先创建合同！")
+        }
+    }
+
+
+
+function openWindowht(title, url) {
+	layer.open({
+            type: 2,
+            //skin: 'layui-layer-lan',
+            title: title,
+            fix: false,
+            shadeClose: true,
+            maxmin: true,
+            area: ['1000px', '400px'],
+            content: url
+            ,btn: ['确定','取消']
+            ,success: function (layero, index) {
+                let sonFrame = window['layui-layer-iframe' + index];
+                let param = {};
+                let paymentWay = $("[name=paymentWay]").val();
+                let paymentTerms = $("[name=paymentTerms]").val();
+                let deliverySituation = $("[name=deliverySituation]").val();
+                let transportWay = $("[name=transportWay]").val();
+                if(paymentWay != '' || paymentTerms != '' || deliverySituation != '' || transportWay != ''){
+                    console.log("xx",paymentWay == "银行承兑" )
+                    param.paymentWay = paymentWay == "现款" ? "现款" : (paymentWay == "银行承兑" ? "银行承兑" : "other");
+                    param.paymentWayOther = param.paymentWay == "other" ? paymentWay : "";
+
+                    let tempStr = paymentTerms.slice(2).substr(0,paymentTerms.length-6);
+                    param.paymentTerms = paymentTerms == "款到发货" ? "款到发货" : (paymentTerms.match("日内付款") ? "time" : "other");
+                    param.paymentTermsOther = param.paymentTerms == "other" ? paymentTerms : "";
+                    param.paymentTermsTime = param.paymentTerms == "time" ? tempStr : "";
+
+                    param.deliverySituation = deliverySituation == "完工翌日发货" ? "完工翌日发货" : (deliverySituation == "完工当日发货" ? "完工当日发货" : "other");
+                    param.deliverySituationOther = param.deliverySituation == "other" ? deliverySituation : "";
+
+                    param.transportWay = transportWay == "代办运输" ? "代办运输" : (transportWay == "客户自提" ? "客户自提" : "other");
+                    param.transportWayOther = param.transportWay == "other" ? transportWay : "";
+                }
+                sonFrame.initData(param);
+            
+            }
+            ,yes: function (index, layero) {
+                let son = window[layero.find('iframe')[0]['name']];
+                let param = son.getFormData();
+                $("[name=paymentWay]").val(param.paymentWay);
+                $("[name=paymentTerms]").val(param.paymentTerms);
+                $("[name=deliverySituation]").val(param.deliverySituation);
+                $("[name=transportWay]").val(param.transportWay);
+                layer.close(index);
+            }
+            , btn2: function () {
+                layer.closeAll();
+            }
+        });
+	}
+    layer.ready(function() {
+        //官网欢迎页
+    });
+</script>
+
+
+</body>
+
+
+</html>
+ 
+ 
+ 

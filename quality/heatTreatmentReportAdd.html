@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <script src="../plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.edatagrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="../../plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<style>
+    p {
+        margin: 10px;
+    }
+
+    .showLine {
+        background: ghostwhite;
+        padding: 10px 0 0 50px;
+        width: 899px;
+        margin-bottom: 10px;
+    }
+
+    .showLine p {
+        display: inline-block;
+        width: 30%;
+    }
+
+    p label {
+        display: inline-block;
+        width: 120px;
+        text-align: right;
+    }
+
+    .showV {
+        float: left;
+        padding: 10px;
+        background: ghostwhite;
+        margin-right: 20px;
+    }
+
+    #savePage div {
+    }
+</style>
+<body>
+<div id="tabs" class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <!-- form 热处理数据-->
+    <div id="tabs1" title="热处理数据" style="padding:10px;">
+        <form id="form">
+            <input name="id" id="id" type="hidden"/>
+            <p>
+                <label>热处理炉次顺序号:</label>
+                <input name="no" id="no" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>产品名称:</label>
+                <input name="productionName" id="productionName" type="text" required="true"
+                       class="easyui-validatebox textbox" value="封头"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>产品图号:</label>
+                <input name="picNo" id="picNo" type="text" required="true"
+                       class="easyui-validatebox textbox" value="/"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>温控仪器名称:</label>
+                <input name="machine" id="machine" type="text" required="true"
+                       class="easyui-validatebox textbox" value="数字温度指示控制仪"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>零部件代号:</label>
+                <input name="partNo" id="partNo" type="text" required="true"
+                       class="easyui-validatebox textbox" value="/"
+                       style="width:193px;"/>
+            </p>
+            <p>
+                <label>热处理类型:</label>
+                <select name="type" id="type" class="easyui-combobox" style="height:35px; height:35px; width:193px;"
+                        data-options="panelHeight:'auto'">
+                    <option value="固溶">固溶</option>
+                    <option value="退火">退火</option>
+                    <option value="正火">正火</option>
+                </select>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>规程编号:</label>
+                <input name="ruleNo" id="ruleNo" type="text" required="true"
+                       class="easyui-validatebox textbox" value="HW "
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>热处理工艺:</label>
+                <input name="process" id="process" type="text" required="true"
+                       class="easyui-validatebox textbox" value="热处理通用工艺卡"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>热处理炉名称:</label>
+                <input name="furnace" id="furnace" type="text" required="true"
+                       class="easyui-validatebox textbox" value="天然气炉"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>热处理炉编号:</label>
+                <input name="furnaceNo" id="furnaceNo" type="text" required="true"
+                       class="easyui-validatebox textbox" value="DN5000"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>热电偶名称:</label>
+                <input name="electric" id="electric" type="text" required="true"
+                       class="easyui-validatebox textbox" value="廉金属热电偶"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>热电偶型号:</label>
+                <input name="electricType" id="electricType" type="text" required="true"
+                       class="easyui-validatebox textbox" value="WRN-133K"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>绝缘材料名称:</label>
+                <input name="insulation" id="insulation" type="text" required="true"
+                       class="easyui-validatebox textbox" value="石棉"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>绝缘材料厚度(mm):</label>
+                <input name="materialThickness" id="materialThickness" type="text" required="true"
+                       class="easyui-validatebox textbox" value="500"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>测温方式:</label>
+                <input name="test" id="test" type="text" required="true"
+                       class="easyui-validatebox textbox" value="工件"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>加热装置以及辅助装置:</label>
+                <input name="device" id="device" type="text" required="true"
+                       class="easyui-validatebox textbox" value="/"
+                       style="width:193px;"/>
+            </p>
+        </form>
+    </div>
+
+    <div id="tabs2" title="热处工艺要求" style="padding:10px;">
+        <form id="detailForm">
+            <p style="width:40%; display: inline-block">
+                <label>入炉温度:</label>
+                <span id="temperatureTr">不限</span>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>实际操作:</label>
+                <input name="temperature" id="temperature" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>升温速度:</label>
+                <span id="speedTr">尽量快</span>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>实际操作:</label>
+                <input name="speed" id="speed" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>保温温度:</label>
+                <span id="preservationTr">1080±20</span>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>实际操作:</label>
+                <input name="preservation" id="preservation" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>保温时间(min):</label>
+                <span id="timeTr">30</span>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>实际操作:</label>
+                <input name="time" id="time" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>降温速度(℃/h):</label>
+                <span id="lowerSpeedTr">尽量快</span>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>实际操作:</label>
+                <input name="lowerSpeed" id="lowerSpeed" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>冷却方式:</label>
+                <span id="coolingTr">水冷</span>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>实际操作:</label>
+                <input name="cooling" id="cooling" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>出炉温度(℃):</label>
+                <span id="outTemperatureTr">1080±20</span>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>实际操作:</label>
+                <input name="outTemperature" id="outTemperature" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:40%; display: inline-block">
+                <label>升温开始时间:</label>
+                <input name="riseTime" type="text" required="true" class="easyui-datetimebox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>保温开始时间:</label>
+                <input name="keepTime" type="text" required="true" class="easyui-datetimebox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>降温开始时间:</label>
+                <input name="lowerTime" type="text" required="true" class="easyui-datetimebox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>出炉时间:</label>
+                <input name="outTime" type="text" required="true" class="easyui-datetimebox"
+                       style="width:193px;"/>
+            </p>
+            <p>
+                <label></label>
+                热处理时间-温度连续自动记录曲线:见附件
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>热处理时间:</label>
+                <input name="createTime" type="text" required="true" class="easyui-datebox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>环境温度:</label>
+                <input name="environmental" id="environmental" type="text" required="true"
+                       class="easyui-validatebox textbox" value="常温"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>风力防护:</label>
+                <input name="windPower" type="text" required="true"  class="easyui-validatebox textbox" value="/"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>雨雪等级防护:</label>
+                <input name="snow" id="snow" type="text" required="true"
+                       class="easyui-validatebox textbox" value="/"
+                       style="width:193px;"/>
+            </p>
+            <p>
+                <label>结论:</label>
+                <input name="remark" class="easyui-textbox" data-options="multiline:true"
+                       value="经检测,该批(只)热处理效果符合热处理通用工艺卡要求,合格。"
+                       style="width:450px;height:120px">
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>操作者:</label>
+                何运良
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>检验员:</label>
+                张小芳
+            </p>
+            <p>
+                <label>备注:</label>
+                <input name="remark" class="easyui-textbox" data-options="multiline:true"
+                       style="width:450px;height:120px">
+            </p>
+        </form>
+    </div>
+
+    <div id="tabs3" title="热处理表格" style="padding:10px;">
+        <table id="dg" style="width:80%"></table>
+        <div id="toolbar">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+               onclick="$('#dg').edatagrid('addRow')">新增</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="$('#dg').edatagrid('destroyRow')">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+               onclick="$('#dg').edatagrid('saveRow')">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+               onclick="$('#dg').edatagrid('cancelRow')">取消</a>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+    let allDict = {};
+    let dictArr = [{typeCode: 'PHYSICOCHEMICAL_TYPE'}];
+
+    /**
+     * 初始化
+     *
+     * */
+    function init(id) {
+        if (id) {
+            ajaxPostInvoke('/quality/heatTreatmentReport/queryOne', {id: id}, function (data) {
+                $('#form').form('load', data);
+                $('#detailForm').form('load', data);
+            });
+        } else {
+            change('固溶');
+            $('#type').combobox({
+                onChange: function (newValue, oldValue) {
+                    change(newValue);
+                }
+            });
+        }
+        initTable(id);
+    }
+
+    function change(newValue){
+        let date = new Date();
+        if (newValue == '固溶') {
+            $("#temperatureTr").text('≤300');
+            $("#speedTr").text('≤300');
+            $("#preservationTr").text('900±25');
+            $("#timeTr").text('30');
+            $("#lowerSpeedTr").text('/');
+            $("#coolingTr").text('空冷');
+            $("#outTemperatureTr").text('900±25');
+            $("#furnace").val('天然气炉');
+            $("#no").val('SHT'+date.getFullYear()+'-');
+            $("#furnaceNo").val('DN5000');
+            $("#electric").val('廉金属电偶');
+            $("#electricType").val('WRN-133k');
+        } else if (newValue == '正火') {
+            $("#furnaceNo").val('DN5000');
+            $("#electricType").val('WRN-133k');
+            $("#no").val('N'+date.getFullYear()+'-');
+            $("#temperatureTr").text('≤300');
+            $("#speedTr").text('≤300');
+            $("#preservationTr").text('900±25');
+            $("#timeTr").text('30');
+            $("#lowerSpeedTr").text('/');
+            $("#coolingTr").text('空冷');
+            $("#outTemperatureTr").text('900±25');
+            $("#furnace").val('天然气炉');
+            $("#electric").val('廉金属电偶');
+        } else if (newValue == '退火') {
+            $("#no").val(''+date.getFullYear()+'-');
+            $("#temperatureTr").text('≤300');
+            $("#speedTr").text('≤200');
+            $("#preservationTr").text('625±25');
+            $("#timeTr").text('60');
+            $("#lowerSpeedTr").text('≤260');
+            $("#coolingTr").text('炉冷');
+            $("#outTemperatureTr").text('≤400');
+            $("#furnace").val('电炉');
+            $("#furnaceNo").val('DN9000');
+            $("#electric").val('工业热电偶');
+            $("#electricType").val('WRN-130');
+        }
+    }
+
+    /**
+     * 获取数据
+     */
+    function getFormData() {
+        if (!$("#form").form('validate') || !$("#detailForm").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return;
+        }
+        let obj = $("#form").getData();
+        obj.detailList = $("#dg").datagrid("getData").rows;
+        return mergeJsonObject(obj, $("#detailForm").getData());
+    }
+
+    /**
+     * 初始化 表
+     *
+     * */
+    function initTable(id) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#dg").edatagrid({
+            queryParams: {
+                id: id
+            },
+            width: '98%',
+            height: mContentHeight,
+            singleSelect: true,
+            autoRowHeight: false,
+            toolbar: '#toolbar',
+            idField: 'id',
+            url: getRootPath() + '/quality/heatTreatmentReport/detailList',
+            columns: [[{
+                field: 'number',
+                title: '产品编号',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'diameter',
+                title: '直径',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'thickness',
+                title: '厚度',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'material',
+                title: '材质',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'shape',
+                title: '形状',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }
+            ]]
+        });
+    }
+</script>
+</html>
+
+

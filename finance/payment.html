@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <link href="/css/print.css" rel="stylesheet" type="text/css" media="print">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script language="javascript" src="/js/jquery.jqprint-0.3.js"></script>
+    <script language="javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+
+    <style>
+        table tr td{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div class="tools">
+        <ul class="cyda_cx">
+            <li>
+                <select id="searchName" class="easyui-combobox" style="height:25px; width:100px;">
+                    <option value="1">收款单位</option>
+                    <option value="2">申请人</option>
+                </select>
+                <input id="searchTitle" type="text" class="scinput" style="height:23px; width:120px; line-height:23px;"/>
+            </li>
+            <li>
+                <a href="javascript:"><img src="/assembly/images/bl.png" onclick="search()"/></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="cyda">
+        <table id="dg" style="width:80%">
+        </table>
+        <div id="toolbar">
+            <!--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="addBtn('新增 付款申请单', 'savePage')"
+               data-options="plain:true,iconCls:'icon-add'" id="modal-add">新增</a>
+            <a href="#" class="easyui-linkbutton" onclick="editBtn('修改付款申请单', 'savePage')"
+               data-options="plain:true,iconCls:'icon-edit'">修改</a>
+            <a href="#" class="easyui-linkbutton" onclick="delBtn('/payment/delete')"
+               data-options="plain:true,iconCls:'icon-remove'">删除</a>
+            &lt;!&ndash;总经理批准&ndash;&gt;
+            <a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-xj" plain="true" onclick="audit('savePage','批准')">批准</a>
+            &lt;!&ndash;采购部转发&ndash;&gt;
+            <a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-xj" plain="true" onclick="audit('savePage','转发')">转发</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true"
+               onclick="printBtn('打印','/finance/print/payment.html', {load:true}, ['1350px', '600px'])">打印</a>-->
+        </div>
+    </div>
+</div>
+<script src="/assembly/layer/layer.js"></script>
+<script src="/js/finance/payment.js"></script>
+<script>
+    createTooBar();
+</script>
+</body>
+<div id="savePage" title="付款申请单" style="padding:50px 10px 10px 10px;display:none">
+    <form id="savePageForm">
+        <input name="id" id="id" type="hidden" class="easyui-validatebox textbox"/>
+        <table width="100%" align="center">
+            <tr>
+                <td align="right">发送对象:</td>
+                <td colspan="3">
+                    <input id="switch" class="easyui-switchbutton" data-options="onText:'  部 门  ',offText:'  用 户  ', width:70">
+                    <input id="names" class="scinput" name="names" readonly onclick="getNames()" style="width: 475px">
+                </td>
+            </tr>
+            <tr>
+                <td align="right">时间:</td>
+                <td><input name="dateTime" type="text" class="easyui-datebox" required="required" style="width: 200px;"
+                    data-options="onShowPanel:function(){$(this).combobox('panel').panel('panel').css('z-index',layerZ);}"/></td>
+                <td align="right">申请人:</td>
+                <td><input name="applicant" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+            </tr>
+            <tr>
+                <td align="right">付款单位:</td>
+                <td><input name="paymentUnit" type="text" class="easyui-validatebox textbox" readonly style="width:200px;" value="宜兴华威封头有限公司"/></td>
+                <td align="right">付款:</td>
+                <td>
+                    <input type="radio" name="paymentMethod" value="电汇" />电汇
+                    <input type="radio" name="paymentMethod" value="汇票" />汇票
+                    <input type="radio" name="paymentMethod" value="本票" />本票
+                    <input type="radio" name="paymentMethod" value="承兑汇票" />承兑汇票
+                    <input type="radio" name="paymentMethod" value="转账支票" />转账支票
+                </td>
+            </tr>
+            <tr>
+                <td align="right">收款单位名称:</td>
+                <td><input name="collectionUnit" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+                <td align="right">收款单位开户行:</td>
+                <td><input name="collectionBank" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+            </tr>
+            <tr>
+                <td align="right">帐号:</td>
+                <td><input name="collectionAccounts" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+                <td align="right">付款用途:</td>
+                <td><input name="paymentPurpose" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+            </tr>
+            <tr>
+                <td align="right">货到情况:</td>
+                <td><input name="goodsSituation" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+                <td align="right">发票情况:</td>
+                <td><input name="invoiceStatus" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+            </tr>
+            <tr>
+                <td align="right">付款金额（大写）:</td>
+                <td><input name="paymentAmoutc" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+                <td align="right">小写:</td>
+                <td><input name="paymentAmouts" type="text" class="easyui-validatebox textbox" required style="width:200px;"/></td>
+            </tr>
+            <tr>
+                <td align="right">付款事项:</td>
+                <td colspan="3"><textarea name="paymentItems" id="paymentItems" class="easyui-textbox " required style="width:550px;height:70px;"> </textarea></td>
+            </tr>
+        </table>
+        <input type="hidden" id="ids">
+    </form>
+</div>
+
+<script>
+    var departIds = '';
+    var userIds = '';
+    function getNames() {
+        let status =  $("#switch").switchbutton("options").checked;
+        if (status){
+            selectPage("选择发送部门", "/sys/department.html", {}, function (res) {
+                let ids = [];
+                let names=[];
+                for(let i in res){
+                    names.push(res[i].depName);
+                    ids.push(res[i].id);
+                }
+                departIds = ids.join(",");
+                $("#ids").val(departIds);
+                $("#names").val(names.join(","));
+            })
+        }else {
+            selectPage("选择发送人员", "/sys/sysUser.html", {}, function (res) {
+                let ids = [];
+                let names=[];
+                for(let i in res){
+                    names.push(res[i].username);
+                    ids.push(res[i].userId);
+                }
+                userIds = ids.join(",");
+                $("#ids").val(userIds);
+                $("#names").val(names.join(","));
+            })
+        }
+    }
+
+    $('#switch').switchbutton({
+        onChange: function(checked){
+            checked ? $("#names").val(departIds) : $("#names").val(userIds);
+        }
+    })
+
+    function initData(data) {
+        $('#savePageForm').form('load', data);
+        if(data.departIds && data.departIds != ''){
+            $('#switch').switchbutton('check');
+            $("#names").val(data.departNames);
+            $("#ids").val(data.departIds);
+            departIds = data.departIds;
+        }else {
+            userIds = data.userIds;
+            $("#names").val(data.userNames);
+            $("#ids").val(data.userIds);
+        }
+    }
+
+    function selectPage(title, url, searchData, successFuc) {
+        layer.open({
+            type: 2,
+            title: title,
+            fix: false,
+            shadeClose: true,
+            area: ['80%', '80%'],//width,height
+            content: getRootPath() + url,
+            btn: ['确定', '关闭'],
+            success: function (layero, index) {
+                let sonFrame = window['layui-layer-iframe' + index];
+                if (searchData != null) {
+                    sonFrame.search(searchData);
+                }
+            },
+            yes: function (index, layero) {
+                let obj = window[layero.find('iframe')[0]['name']].getSelectionsRows();
+                if (obj) {
+                    successFuc(obj);
+                }
+                console.log(obj);
+                layer.close(index);
+            },
+            btn2: function (index) {
+                layer.close(index);
+            }
+        });
+    }
+
+</script>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<style>
+    p {
+        margin: 10px;
+    }
+
+    .showLine {
+        background: ghostwhite;
+        padding: 10px 0 0 50px;
+        width: 899px;
+        margin-bottom: 10px;
+    }
+
+    .showLine p {
+        display: inline-block;
+        width: 30%;
+    }
+
+    p label {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+    }
+
+    .showV {
+        float: left;
+        padding: 10px;
+        background: ghostwhite;
+        margin-right: 20px;
+    }
+
+    #savePage div {
+    }
+</style>
+<body>
+<div id="tabs" class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+
+    <!-- form 要求设置-->
+    <div id="tabs1" title="要求设置" style="padding:10px;">
+        <form id="form">
+            <input name="heatTreatmentId" id="heatTreatmentId" type="hidden"/>
+            <input name="processCardId" id="processCardId" type="hidden"/>
+            <input name="customerId" id="customerId" type="hidden"/>
+            <p style="width:50%; display: inline-block">
+                <label>热处理编号:</label>
+                <input name="heatTreatmentNo" id="heatTreatmentNo" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>指令号:</label>
+                <input name="code" id="code" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+                <a href="javascript:void(0)"><img src="/assembly/images/ck.png"
+                                                  style="display: inline-block;border: none; vertical-align: middle;"
+                                                  onclick="selectOtherPage('工艺卡','/processCard/ftCard.html',null,selectCode)"/></a>
+            </p>
+
+            <p style="width:50%; display: inline-block">
+                <label>预定日期:</label>
+                <input name="orderTime" id="orderTime" type="text" required="true"
+                       class="easyui-datebox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>客户名称:</label>
+                <input name="customerName" id="customerName" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       readonly="readonly"
+                       style="width:193px;"/>
+                <a href="javascript:void(0)"><img src="/assembly/images/ck.png"
+                                                  style="display: inline-block;border: none; vertical-align: middle;"
+                                                  onclick="selectOtherPage('客户选择','/base/gysgl/khgl.html',null,selectCustomer)"/></a>
+            </p>
+
+            <p style="width:50%; display: inline-block">
+                <label>温度测量:</label>
+                <input name="temperatureMeasure" id="temperatureMeasure" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>送到地点:</label>
+                <input name="address" id="address" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:50%; display: inline-block">
+                <label>状态:</label>
+                <input name="status" id="status" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>类别:</label>
+                <input name="treatmentType" id="treatmentType" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:50%; display: inline-block">
+                <label>炉种类:</label>
+                <input name="furnaceType" id="furnaceType" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>温度曲线:</label>
+                <input name="temperatureCurve" id="temperatureCurve" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:15%; display: inline-block">
+                <label>客户要求:</label>
+                <input name="requirement" id="requirement" class="easyui-switchbutton" value="1"
+                       data-options="onText:'有要求',offText:'无要求', width:80">
+            </p>
+            <p style="width:15%; display: inline-block">
+                <label>要母材试板:</label>
+                <input name="baseMetal" id="baseMetal" class="easyui-switchbutton" value="1"
+                       data-options="onText:'需要',offText:'不要', width:80">
+            </p>
+            <p style="width:15%; display: inline-block">
+                <label>要焊材试板:</label>
+                <input name="weldingMaterial" id="weldingMaterial" class="easyui-switchbutton" value="1"
+                       data-options="onText:'需要',offText:'不要', width:80">
+            </p>
+            <p style="width:15%; display: inline-block">
+                <label>是复合钢:</label>
+                <input name="reexamination" id="reexamination" class="easyui-switchbutton" value="1"
+                       data-options="onText:'是',offText:'否', width:80">
+            </p>
+            <p style="width:15%; display: inline-block">
+                <label>有钢印:</label>
+                <input name="embossedStamp" id="embossedStamp" class="easyui-switchbutton" value="1"
+                       data-options="onText:'有',offText:'无', width:80">
+            </p>
+        </form>
+    </div>
+
+    <!-- codeForm 指令号数据 -->
+    <div id="tabs2" title="指令号数据" style="padding:10px;">
+        <form id="codeForm">
+            <p style="width:50%; display: inline-block">
+                <label>规格:</label><!-- 形状 直径*壁厚-->
+                <input name="specifications" id="specifications" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>材质:</label>
+                <input name="material" id="material" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:50%; display: inline-block">
+                <label>单重:</label>
+                <input name="weight" id="weight" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>数量:</label>
+                <input name="count" id="count" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+
+            <p style="width:50%; display: inline-block">
+                <label>总重:</label>
+                <input name="allWeight" id="allWeight" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>下料:</label>
+                <input name="cutting1" id="cutting1" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p>
+                <label>下达日期:</label>
+                <input name="createTime" id="createTime" type="text" required="true"
+                       readonly="readonly"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+        </form>
+    </div>
+
+    <!-- heartForm 热处理图数据-->
+    <div id="tabs3" title="热处理图数据" style="padding:10px;">
+        <form id="heartForm">
+            <table width="405" height="288" align="center" title="热处理图数据" style="border:#cbcbcb 1px solid ">
+                <tbody>
+                <tr>
+                    <td height="280" colspan="2" valign="top"
+                        style=" background:url(/img/heatTreatment/heatTreatment.jpg) no-repeat">
+
+                        <table width="405" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2" align="right">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2" align="right">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td width="49">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2" rowspan="2" align="right">
+                                    <input name="hour" id="hour" type="text" required="true"
+                                           class="easyui-validatebox textbox"
+                                           style="height: 20px; width: 40px; line-height: 20px;"/>
+                                </td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td width="63">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2" align="right">
+                                    <input name="minute" id="minute" type="text" required="true"
+                                           class="easyui-validatebox textbox"
+                                           style="height: 20px; width: 40px; line-height: 20px;"/>
+                                </td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="right">
+                                    <input name="temperatureMin" id="temperatureMin" type="text" required="true"
+                                           class="easyui-validatebox textbox"
+                                           style="height: 20px; width: 39px; line-height: 20px;"/>
+                                </td>
+                                <td align="right">
+                                    <input name="temperatureMax" id="temperatureMax" type="text" required="true"
+                                           class="easyui-validatebox textbox"
+                                           style="height: 20px; width: 39px; line-height: 20px;"/>
+                                </td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="44">&nbsp;</td>
+                                <td colspan="2">
+                                    <input name="t1" id="t1" type="text" required="true"
+                                           class="easyui-validatebox textbox"
+                                           style="height: 20px; width: 40px; line-height: 20px;"/>
+                                </td>
+                                <td width="25">&nbsp;</td>
+                                <td colspan="2" align="right">
+                                    <input name="t2" id="t2" type="text" required="true"
+                                           class="easyui-validatebox textbox"
+                                           style="height: 20px; width: 40px; line-height: 20px;"/>
+                                </td>
+                                <td width="56">&nbsp;</td>
+                                <td width="13">&nbsp;</td>
+                                <td colspan="2" align="right">
+                                    <input name="t3" id="t3" type="text" required="true"
+                                           class="easyui-validatebox textbox"
+                                           style="height: 20px; width: 40px; line-height: 20px;"/>
+                                </td>
+                                <td width="38">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>
+                                    <input name="t4" id="t4" type="text" required="true"
+                                           class="easyui-validatebox textbox"
+                                           style="height: 20px; width: 40px; line-height: 20px;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">&nbsp;<
+                                <td>&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td colspan="2">&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+
+    /**
+     * 获取工艺卡数据
+     * */
+    function selectCode(data) {
+        $("#specifications").val(data.shape + ' ' + data.diameter + '*' + data.thickness);
+        $("#allWeight").val(data.weight * data.count);
+        $("#processCardId").val(data.id);
+        $("#code").val(data.code);
+        $('#codeForm').form('load', data);
+    }
+
+    function selectCustomer(data){
+        $("#customerName").val(data.company);
+        $("#customerId").val(data.id);
+    }
+
+    /**
+     * 获取数据
+     */
+    function getFormData() {
+        if (!$("#form").form('validate') && !$("#heartForm").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return;
+        }
+        return mergeJsonObject($("#form").getData(), $("#heartForm").getData());
+    }
+
+    /**
+     * 初始化
+     */
+    function initData(data) {
+        if (data) {
+            $('#form').form('load', data);
+        }
+    }
+
+    /**
+     * 加载数据
+     * @param heatTreatmentId
+     */
+    function initMethod(heatTreatmentId) {
+        ajaxPostInvoke('/process/heatTreatment/queryOne', {heatTreatmentId: heatTreatmentId}, function (data) {
+            $('#heartForm').form('load', data);
+            $('#form').form('load', data);
+            if (data.processCardEntity) {
+                selectCode(data.processCardEntity);
+            }
+        })
+    }
+</script>
+</html>
+
+

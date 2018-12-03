@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <link rel="stylesheet" href="css.css"/>
+  <script src="/js/utils.js"></script>
+  <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <script src="/plugins/jquery/jquery.json.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+  <script src="/plugins/moment.min.js"></script>
+  <script src="/js/easy_common.js"></script>
+  <script src="/js/formula.js"></script>
+
+<title>无标题文档</title>
+
+</head>
+<body>
+<div id="print1">
+  <div style="padding:5px" id="zt1">
+<table width="100%" border="0">
+      <tr>
+        <td width="40" rowspan="2" style=" border:0"><img src="images/zbs-print_clip_image021.jpg" width="40" height="32"></td>
+        <td align="left" style=" border-bottom:0; text-align:left; padding:0"><strong>宜兴华威封头有限公司</strong></td>
+        <td width="328" rowspan="2" align="center" valign="top"  style=" border:0"><span style="font-size:20px; font-weight:600">锥体制作规格书</span><br/>
+          <span style="font-size:14px">表G-01&nbsp;&nbsp;共1联&nbsp;&nbsp;修订号&nbsp;&nbsp;REV4.0</span></td>
+      </tr>
+      <tr>
+        <td align="left"  style=" border-bottom:0; text-align:left; padding:0"><strong>YIXING HUAWEI HEAD PLATE CO., LTD</strong></td>
+      </tr>
+    </table>
+<table width="100%" align="center" cellpadding="0" cellspacing="0" class="table_yl8">
+        <tr>
+          <td colspan="2" align="center">指令号</td>
+          <td field="code"></td>
+          <td align="center">下达日期</td>
+          <td colspan="3" field="createTime"></td>
+          <td width="4%" rowspan="2" align="center"><p>制</p>
+            <p>作</p></td>
+          <td colspan="3" rowspan="2">&nbsp;</td>
+          <td width="3%" rowspan="2" align="center"><p>审</p>
+            <p>核</p></td>
+          <td width="7%" rowspan="2">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">材料</td>
+          <td colspan="5" field="materialSource"></td>
+          </tr>
+        <tr>
+          <td width="4%" rowspan="4" align="center"><p>用</p>
+            <p>户</p>
+            <p>要</p>
+            <p>求</p></td>
+          <td width="12%" align="center" class="sknwj">上口内径</td>
+          <td width="16%" field="diameter"></td>
+          <td width="12%" align="center">上口直边</td>
+          <td width="8%" field="straightEdge"></td>
+          <td width="10%" align="center">上口R</td>
+          <td width="10%" field="littleR"></td>
+          <td colspan="2" align="center">上坡口</td>
+          <td colspan="4" field="groove"></td>
+          </tr>
+        <tr>
+          <td align="center" class="xknwj">下口内径</td>
+          <td field="downDiameter"></td>
+          <td align="center">下口直边</td>
+          <td field="downStraight"></td>
+          <td align="center">下口R</td>
+          <td field="bigR"></td>
+          <td colspan="2" align="center">下坡口</td>
+          <td colspan="4" field="downGroove"></td>
+          </tr>
+        <tr>
+          <td align="center">形状</td>
+          <td field="shape"></td>
+          <td align="center">壁厚</td>
+          <td field="thickness"></td>
+          <td align="center">锥角</td>
+          <td colspan="4" field="coneAngle"></td>
+          <td colspan="2" align="center">数量</td>
+          <td field="count"></td>
+        </tr>
+        <tr>
+          <td width="12%" align="center">制造标准</td>
+          <td field="manufacture"></td>
+          <td align="center" class="nwzg">外总高</td>
+          <td field="height"></td>
+          <td align="center">材质</td>
+          <td colspan="4" field="material"></td>
+          <td colspan="2" align="center">重量</td>
+          <td field="weight"></td>
+        </tr>
+        <tr>
+          <td rowspan="2" align="center"><p>锥</p>
+            <p>体</p>
+            <p>制</p>
+            <p>作</p>
+            <p>图</p></td>
+          <td colspan="6" rowspan="2">
+
+<form id="ztForm1">
+            <div id="sxzb" style="display:none;position: relative">
+              <img src="/img/ztt/sxzb-nj1.png" style="width:530px;height:280px">
+              <input name="straightEdge" style="top: 27px;left: 67px;">
+              <input name="diameter" style="top: 10px;left: 188px;">
+              <input name="jsDiameter" style="top: 20px;left: 324px;">
+              <input name="bigR" style="top: 50px;left: 148px;">
+              <input name="height" style="top: 140px; left: 25px;">
+              <input name="coneAngle" style="top: 110px; left: 259px;">
+              <input name="jsHeight" style="top: 140px;left: 475px;">
+              <input name="littleR" style=" top: 214px;left: 157px;">
+              <input name="downStraight" style="top: 249px;left: 70px;">
+              <input name="downDiameter" style="top: 255px;left: 229px;">
+              <input name="jsDownDiameter" style="top: 250px;left: 284px;">
+            </div>
+
+
+            <div id="szb" style="display:none;position: relative">
+              <input name="straightEdge" style="top: 20px; left: 30px;">
+              <input name="diameter" style="top: 20px;left: 170px;">
+              <input name="jsDiameter" style="top: 26px;left: 344px;">
+              <input name="bigR" style="top: 60px;left: 119px;">
+              <input name="height" style="top: 140px;left: 28px;">
+              <input name="coneAngle" style="top: 132px;left: 260px;">
+              <input name="jsHeight" style="top: 140px;left: 515px;">
+              <input name="downDiameter" style="top: 258px;left: 218px;">
+              <input name="jsDownDiameter" style="top: 258px;left: 299px;">
+              <img src="/img/ztt/szb-nj1.png" style="width:530px;height:280px">
+            </div>
+
+
+            <div id="xzb" style="display:none;position: relative">
+            <input name="diameter" style="top: 15px;left: 151px;">
+            <input name="jsDiameter" style="top: 15px;left: 326px;">
+            <input name="height" style="top: 140px;left: 34px;">
+            <input name="coneAngle" style="top: 135px;left: 253px;">
+            <input name="jsHeight" style="top: 140px;left: 501px;">
+            <input name="littleR" style="top: 207px;left: 106px;">
+            <input name="downStraight" style="top: 250px;left: 57px;">
+            <input name="downDiameter" style="top: 260px;left: 198px;">
+            <input name="jsDownDiameter" style="top: 251px;left: 293px;">
+            <img src="/img/ztt/xzb-nj1.png" style="width:530px;height:280px">
+  </div>
+
+
+  <div id="wzb" style="display:none;position: relative">
+    <input name="diameter" style="top: 10px;left: 144px;">
+    <input name="jsDiameter" style="top: 10px; left: 350px;">
+    <input name="height" style="top: 140px; left: 30px;">
+    <input name="coneAngle" style="top: 125px;left: 257px;">
+    <input name="jsHeight" style="top: 140px;left: 515px;">
+    <input name="downDiameter" style="top: 255px;left: 205px;">
+    <input name="jsDownDiameter" style="top: 255px;left: 308px;">
+    <img src="/img/ztt/wzb1.png" style="width:530px;height:280px">
+  </div>
+
+</form>
+
+
+
+
+
+
+
+          </td>
+          <td height="126" align="center"><p>上</p>
+            <p>口</p>
+            <p>坡</p>
+            <p>口</p>
+          <p>图</p></td>
+          <td colspan="5" align="center"><img id="grooveImgId" class="backImg" width="152" height="122"></td>
+          </tr>
+        <tr>
+          <td align="center"><p>下</p>
+            <p>口</p>
+            <p>坡</p>
+            <p>口</p>
+            <p>图</p>
+            <p>&nbsp;</p></td>
+          <td colspan="5" align="center"><img id="downGrooveImgId" class="backImg" width="152" height="122"></td>
+          </tr>
+        <tr>
+          <td rowspan="2" align="center"><p>锥</p>
+            <p>体</p>
+            <p>展</p>
+            <p>开</p>
+            <p>及</p>
+            <p>拼</p>
+            <p>接</p>
+            <p>位</p>
+            <p>置</p></td>
+          <td colspan="6" rowspan="2">
+
+<form id="ztForm2">
+            <div id="sb" style="display:none;position: relative;margin-right: 20px">
+              <input name="jsBjd" style="top: 53px;left: 212px;">
+              <input name="jsBbigR" style="top: 100px;left: 100px;">
+              <input name="jsBheight2" style="top: 92px;left: 443px;">
+              <input name="jsBheight1" style="top: 113px;left: 515px;">
+              <input name="jsBlittleR" style="top: 180px;left: 170px;">
+              <input name="jsBdiameter" style="top: 222px;left: 204px;">
+              <input name="jsBdownDiameter" style="top: 254px;left: 206px;">
+              <img src="/img/ztt/szb-nj6.png" style="width:530px;height:280px">
+            </div>
+
+
+            <div id="mb" style="display:none;position: relative;margin-right: 20px">
+              <input name="jsBjd" style="top: 30px;left: 226px;">
+              <input name="jsBbigR" style="top: 97px;left: 150px;">
+              <input name="jsBheight1" style="top: 100px;left: 506px;">
+              <input name="jsBlittleR" style="top: 180px;left: 174px;">
+              <input name="jsBdiameter" style="top: 220px;left: 218px;">
+              <input name="jsBdownDiameter" style="top: 260px;left: 221px;">
+              <img src="/img/ztt/szb-nj4.png" style="width:530px;height:280px">
+            </div>
+
+
+            <div id="lb" style="display:none;position: relative;margin-right: 20px">
+              <input name="jsBjd" style="top: 36px;left: 213px;">
+              <input name="jsBbigR" style="top: 90px;left: 133px;">
+              <input name="jsBheight1" style="top: 106px;left: 439px;">
+              <input name="jsBheight2" style="top: 116px;left: 507px;">
+              <input name="jsBlittleR" style="top: 158px;left: 163px;">
+              <input name="jsBdiameter" style="top: 220px;left: 202px;">
+              <input name="jsBdownDiameter" style="top: 258px;left: 204px;">
+              <img src="/img/ztt/szb-nj2.png" style="width:530px;height:280px">
+            </div>
+</form>
+
+
+          </td>
+          <td height="122" align="center"><p>平</p>
+            <p>板</p>
+            <p>拼</p>
+            <p>接</p>
+            <p>坡</p>
+            <p>口</p></td>
+          <td colspan="5">&nbsp;</td>
+          </tr>
+        <tr>
+          <td height="122" align="center"><p>压</p>
+            <p>制</p>
+            <p>后</p>
+            <p>焊</p>
+            <p>接</p>
+            <p>坡</p>
+            <p>口</p></td>
+          <td colspan="5">&nbsp;</td>
+          </tr>
+        <tr>
+          <td colspan="13" align="center" style="padding:0; border:0"><table width="100%" cellspacing="0" cellpadding="0" class="print-notable">
+            <tr>
+                <td width="4%" rowspan="4" align="center"><p>尺</p>
+                  <p>寸</p>
+                  <p>公</p>
+                <p>差</p></td>
+                <td width="12" colspan="2" align="center" class="nwzcgc1">上口外周公差</td>
+                <td width="12%" colspan="2" align="center" field="circumference1"></td>
+                <td width="12" colspan="2" align="center" class="zjzcgc1">上口直径公差</td>
+              <td width="12%" colspan="2" align="center"><span field="toleranceMin1"></span>~<span field="toleranceMax1"></span> </td>
+                <td width="12%">&nbsp;</td>
+                <td width="12%">&nbsp;</td>
+                <td width="12%">&nbsp;</td>
+                <td width="12%">&nbsp;</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center" class="nwzcgc2">下口外周公差</td>
+                <td colspan="2" align="center" field="circumference2"></td>
+                <td colspan="2" align="center" class="zjzcgc2">下口直径公差</td>
+                <td colspan="2" align="center" ><span field="toleranceMin2"></span>~<span field="toleranceMax2"></span></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td width="12%">&nbsp;</td>
+                <td width="12%">&nbsp;</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">断面形状</td>
+                <td colspan="2" align="center"><span field="sectionShape1"></span>~<span field="sectionShape2"></span></td>
+                <td colspan="2" align="center">总高公差</td>
+                <td colspan="2" align="center"><span field="totalHeight1"></span>~<span field="totalHeight2"></span></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td width="12%">&nbsp;</td>
+                <td width="12%">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="12%" align="center">失圆度</td>
+                <td colspan="2" align="center" field="roundness"></td>
+                <td width="8%" align="center">最小厚度</td>
+                <td width="12%" align="center" field="min"></td>
+                <td colspan="2" align="center">同心度</td>
+                <td width="8%" align="center" field="concentric"></td>
+                <td align="center">更改标记</td>
+                <td align="center">处数</td>
+                <td align="center">更改人</td>
+                <td align="center">更改日期</td>
+              </tr>
+              <tr>
+                <td rowspan="6" align="center"><p>制</p>
+                <p>作</p>
+                <p>要</p>
+                <p>求</p></td>
+                <td colspan="8" align="center">压制前</td>
+                <td colspan="4" align="center">压制后</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">材料检查</td>
+                <td colspan="6" contenteditable>板厚符合要求或T≥&nbsp;&nbsp;&nbsp;&nbsp;mm。</td>
+                <td align="center">点 焊</td>
+                <td colspan="3" align="left" contenteditable>符合焊接坡口图要求。</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">下料检查</td>
+                <td colspan="6" contenteditable>半径R公差≤1mm，弦长公差≤1.5mm。</td>
+                <td align="center">去除余高</td>
+                <td colspan="3" align="left" contenteditable>R部及直边部去除余高。</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">焊接坡口</td>
+                <td colspan="6" contenteditable>符合焊接坡口图要求，开口方向正确。</td>
+                <td align="center">圆度修正</td>
+                <td colspan="3" align="left" contenteditable>旋压前：不圆度≤1%D。</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">对接点焊</td>
+                <td colspan="6" contenteditable>保证扇形开口尺寸，其要求≤1mm</td>
+                <td align="center">旋压成形</td>
+                <td colspan="3" align="left" contenteditable>按《公差》表要求检查。</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">去除余高</td>
+                <td colspan="6" contenteditable>全部去除。</td>
+                <td align="center">坡口检查</td>
+                <td colspan="3" align="left" contenteditable>符合坡口图要求。</td>
+              </tr>
+            </table></td>
+        </tr>
+      </table>
+<table width="100%" cellpadding="0" cellspacing="0" class="table_yl8"  style="margin-bottom:15px;">
+  <tr>
+    <td align="center">更改标记</td>
+    <td align="center">更改处数</td>
+    <td align="center">更改人</td>
+    <td align="center">更改标记</td>
+    <td align="center">更改处数</td>
+    <td align="center">更改人</td>
+    <td align="center">更改标记</td>
+    <td align="center">更改处数</td>
+    <td align="center">更改人</td>
+    <td align="center">更改标记</td>
+    <td align="center">更改处数</td>
+    <td align="center">更改人</td>
+  </tr>
+  <tr>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+    <td align="center" contenteditable>&nbsp;</td>
+  </tr>
+</table>           
+        
+</div>
+  <div style="page-break-after:always;"></div>
+  <div style="padding:5px" id="zt2">
+    <table width="100%" border="0">
+      <tr>
+        <td width="40" rowspan="2" style=" border:0"><img src="images/zbs-print_clip_image021.jpg" width="40" height="32"></td>
+        <td align="left" style=" border-bottom:0; text-align:left; padding:0"><strong>宜兴华威封头有限公司</strong></td>
+        <td width="328" rowspan="2" align="center" valign="top"  style=" border:0"><span style="font-size:20px; font-weight:600">工艺流转检验卡（锥体兼质量计划）</span><br/>
+          <span style="font-size:14px">表G-04&nbsp;&nbsp;共1联&nbsp;&nbsp;修订号&nbsp;&nbsp;REV4.0</span></td>
+      </tr>
+      <tr>
+        <td align="left"  style=" border-bottom:0; text-align:left; padding:0"><strong>YIXING HUAWEI HEAD PLATE CO., LTD</strong></td>
+      </tr>
+    </table>
+    <table width="100%" align="center" cellpadding="0" cellspacing="0" class="table_yl8" style="margin-bottom:0px;">
+      <tr>
+        <td colspan="2" align="center">指令号</td>
+        <td field="code"></td>
+        <td align="center">下达日期</td>
+        <td colspan="4" field="createTime"></td>
+        <td width="4%" rowspan="2" align="center"><p>制</p>
+          <p>作</p></td>
+        <td colspan="3" rowspan="2">&nbsp;</td>
+        <td width="3%" rowspan="2" align="center"><p>审</p>
+          <p>核</p></td>
+        <td width="7%" rowspan="2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">材料</td>
+        <td field="materialSource"></td>
+        <td align="center">完工日期</td>
+        <td colspan="4" field="completionDate"></td>
+      </tr>
+      <tr>
+        <td width="5%" rowspan="7" align="center"><p>用</p>
+          <p>户</p>
+          <p>要</p>
+          <p>求</p></td>
+        <td width="12%" align="center" class="sknwj">上口内径</td>
+        <td width="16%" field="diameter"></td>
+        <td width="12%" align="center">上口直边</td>
+        <td width="8%" field="straightEdge"></td>
+        <td width="10%" align="center">上口R</td>
+        <td colspan="2" field="littleR"></td>
+        <td colspan="2" align="center">上坡口</td>
+        <td colspan="4" field="groove"></td>
+      </tr>
+      <tr>
+        <td align="center" class="xknwj">下口内径</td>
+        <td field="downDiameter"></td>
+        <td align="center">下口直边</td>
+        <td field="downStraight"></td>
+        <td align="center">下口R</td>
+        <td colspan="2" field="bigR"></td>
+        <td colspan="2" align="center">下坡口</td>
+        <td colspan="4" field="downGroove"></td>
+      </tr>
+      <tr>
+        <td align="center">形状</td>
+        <td field="shape"></td>
+        <td align="center">壁厚</td>
+        <td field="thickness"></td>
+        <td align="center">锥角</td>
+        <td colspan="5" field="coneAngle"></td>
+        <td colspan="2" align="center">数量</td>
+        <td field="count"></td>
+      </tr>
+      <tr>
+        <td width="12%" align="center">制造标准</td>
+        <td field="manufacture"></td>
+        <td align="center" class="nwzg">外总高</td>
+        <td field="height"></td>
+        <td align="center">材质</td>
+        <td colspan="5" field="material"></td>
+        <td colspan="2" align="center">重量</td>
+        <td><span field="weight"></span>Kg</td>
+      </tr>
+      <tr>
+        <td align="center">探伤</td>
+        <td colspan="4"><span field="rtReport"></span> <span field="rtPer"></span> <span field="rtLevel"></span></td>
+        <td colspan="2" align="center">主机种</td>
+        <td colspan="3" field="hostType"></td>
+        <td colspan="3">加工方法&nbsp;&nbsp;<span field="processingMethod"></span></td>
+      </tr>
+      <tr>
+        <td align="center">见证</td>
+        <td colspan="4" id="jz" contenteditable></td>
+        <td width="5%" rowspan="3" align="center">备<br/>注</td>
+        <td colspan="7" rowspan="3" valign="top" field="remark"></td>
+      </tr>
+      <tr>
+        <td align="center">其它</td>
+        <td colspan="4" id="qt" contenteditable>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="126" align="center"><p>坯<br/>料<br/>尺<br/>寸</p></td>
+        <td height="150" colspan="5" align="center"><img id="plImgId" class="backImg"></td>
+      </tr>
+
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl9">
+      <tr>
+        <td width="5%" align="center">序号</td>
+        <td width="12%" align="center">工序/控制点</td>
+        <td width="11%" align="center">操作依据</td>
+        <td align="center">工艺要求</td>
+        <td width="8%" align="center">计划<br/>
+          开始</td>
+        <td width="8%" align="center">计划<br/>结束</td>
+        <td width="8%" align="center">加工<br/>日期</td>
+        <td width="8%" align="center">操作者</td>
+        <td width="8%" align="center">检验员</td>
+      </tr>
+      <tbody id="gx"></tbody>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" class="table_yl10"  style="margin-bottom:15px;">
+      <tr>
+        <td align="center">更改标记</td>
+        <td align="center">更改处数</td>
+        <td align="center">更改人</td>
+        <td align="center">更改日期</td>
+        <td align="center">更改标记</td>
+        <td align="center">更改处数</td>
+        <td align="center">更改人</td>
+        <td align="center">更改日期</td>
+        <td align="center">更改标记</td>
+        <td align="center">更改处数</td>
+        <td align="center">更改人</td>
+        <td align="center">更改日期</td>
+      </tr>
+      <tr>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+        <td align="center" contenteditable>&nbsp;</td>
+      </tr>
+    </table>
+    <div style="page-break-after:always;"></div>
+    <table width="100%" cellspacing="0" cellpadding="0"  class="table_yl9" style="margin-bottom:0px">
+      <tr>
+        <td width="5%" rowspan="4" align="center"><p>尺</p>
+          <p>寸</p>
+          <p>公</p>
+          <p>差</p></td>
+        <td colspan="2" align="center" class="nwzcgc1">上口外周公差</td>
+        <td colspan="2" align="center" field="circumference1"></td>
+        <td colspan="2" align="center" class="zjzcgc1">上口直径公差</td>
+        <td colspan="2" align="center"><span field="toleranceMin1"></span>~<span field="toleranceMax1"></span></td>
+        <td width="17%" rowspan="4" valign="top" contenteditable>特别记录事项：</td>
+        <td width="13%" rowspan="4" valign="top" contenteditable>合格确认：</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center" class="nwzcgc2">下口外周公差</td>
+        <td colspan="2" align="center" field="circumference2"></td>
+        <td colspan="2" align="center"class="zjzcgc2">下口直径公差</td>
+        <td colspan="2" align="center" ><span field="toleranceMin2"></span>~<span field="toleranceMax2"></span></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">断面形状</td>
+        <td colspan="2" align="center"><span field="sectionShape1"></span>~<span field="sectionShape2"></span></td>
+        <td colspan="2" align="center">总高公差</td>
+        <td colspan="2" align="center"><span field="totalHeight1"></span>~<span field="totalHeight2"></span></td>
+      </tr>
+      <tr>
+        <td width="11%" align="center">失圆度</td>
+        <td colspan="2" align="center" field="roundness"></td>
+        <td width="10%" align="center">最小厚度</td>
+        <td width="10%" align="center" field="min"></td>
+        <td colspan="2" align="center">同心度</td>
+        <td width="5%" align="center" field="concentric"></td>
+      </tr>
+    </table>
+    <table id="countTd" width="100%" cellspacing="0" cellpadding="0" class="table_yl10"  style="margin-bottom:15px;">
+      <tr>
+        <td width="5%" rowspan="3" align="center">产<br/>品<br/>编<br/>号</td>
+        <td colspan="2" align="center">下料检查</td>
+        <td width="10%" align="center">材料标记</td>
+        <td colspan="17" align="center">成品检查记录</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">板材厚度</td>
+        <td rowspan="2" align="center">入库号</td>
+        <td width="5%" rowspan="2" align="center">表面质量</td>
+        <td rowspan="2" align="center">上下区分</td>
+        <td rowspan="2" align="center">外周长</td>
+        <td colspan="4" align="center">内径</td>
+        <td colspan="3" align="center">板厚</td>
+        <td width="5%" rowspan="2" align="center">铁素体</td>
+        <td width="4%" rowspan="2" align="center">外总高</td>
+        <td colspan="2" align="center">断面</td>
+        <td width="5%" rowspan="2" align="center">坡口</td>
+        <td width="5%" rowspan="2" align="center">倾斜度</td>
+        <td width="5%" rowspan="2" align="center">焊缝余高</td>
+      </tr>
+      <tr>
+        <td width="5%" align="center">最大</td>
+        <td width="5%" align="center">最小</td>
+        <td width="4%" align="center">D1</td>
+        <td width="4%" align="center">D2</td>
+        <td width="4%" align="center">D3</td>
+        <td width="4%" align="center">D4</td>
+        <td width="4%" align="center">T1</td>
+        <td width="4%" align="center">T2</td>
+        <td width="4%" align="center">T3</td>
+        <td width="4%" align="center">R</td>
+        <td width="4%" align="center">转角R</td>
+      </tr>
+
+    </table>
+
+  </div>
+
+</div>
+
+</div>
+<script>
+
+    function setGXRows(list) {
+        let arr = [];
+        for (let i = 0; i < list.length; i++){
+            arr.push(
+                "<tr>" +
+                "<td align='center'>" + (i*1+1) + "</td>" +
+                "<td align='center'>"+ list[i].process + (list[i].control && list[i].control != '' ? ('('+list[i].control+')') : '') +"</td>" +
+                "<td align='center'>" + (list[i].basis == null ? "" : list[i].basis) + "</td>" +
+                "<td align='center'>" + (list[i].require == null ? '' : list[i].require) + "</td>" +
+                "<td align='center'>" + list[i].beginTime + "</td>" +
+                "<td align='center'>" + list[i].endTime + "</td>" +
+                "<td></td>" +
+                "<td></td>" +
+                "<td></td>" +
+                "</tr>"
+            )
+        }
+        $("#gx").html(arr.join(""))
+    }
+
+    function initData(data) {
+        ajaxPostInvoke("/processCard/ftCard/findPrint", {id: data.id}, function (res) {
+            for(let i in res.list){
+                res.list[i].beginTime = moment(res.list[i].beginTime, "YYYY-MM-DD HH:mm:ss").format("M/DD");
+                res.list[i].endTime = moment(res.list[i].endTime, "YYYY-MM-DD HH:mm:ss").format("M/DD");
+            }
+
+            if(res.list && res.list.length > 0){
+                setGXRows(res.list)
+            }
+
+            res.createTime = res.createTime.split(" ")[0];
+            res.completionDate = res.completionDate && res.completionDate != null ? res.completionDate.split(" ")[0] : '';
+            setData2Text(res);
+
+            let jz = "合格证 材质证";
+            jz += res.rtReport && res.rtReport !== '' ? " RT" : "";
+            jz += res.pt && res.pt == 1 ? " PT" : "";
+            jz += res.rtReport && res.rtReport == 1 ? " UT" : "";
+            jz += res.rtReport && res.rtReport == 1 ? " MT" : "";
+            jz += res.rtReport && res.rtReport == 1 ? " 热处理" : "";
+            $("#jz").text(jz);
+
+            let qt = '';
+            qt += res.detection && res.detection == 1 ? "监检" : "";
+            qt += res.boardPerformance && res.boardPerformance == 1 ? " 试板性能" : "";
+            qt += res.materialRetest && res.materialRetest == 1 ? " 材料复验" : "";
+            $("#qt").text(qt);
+
+            if(res.diameterStandard && res.diameterStandard == 1){
+                $(".sknwj").text("上口内径");
+            }else {
+                $(".sknwj").text("上口外径");
+            }
+
+            if(res.diameterStandard && res.diameterStandard == 1){
+                $(".xknwj").text("下口内径");
+            }else {
+                $(".xknwj").text("下口外径");
+            }
+
+            if(res.heightStandard && res.heightStandard == 1){
+                $(".nwzg").text("内总高");
+            }else {
+                $(".nwzg").text("外总高");
+            }
+
+            if(res.circumferenceStandard1 && res.circumferenceStandard1 == 1){
+                $(".nwzcgc1").text("上口外周公差");
+            }else {
+                $(".nwzcgc1").text("上口内周公差");
+            }
+
+            if(res.circumferenceStandard2 && res.circumferenceStandard2 == 1){
+                $(".nwzcgc2").text("下口外周公差");
+            }else {
+                $(".nwzcgc2").text("下口内周公差");
+            }
+
+            if(res.toleranceStandard1 && res.toleranceStandard1 == 1){
+                $(".zjzcgc1").text("上口周长公差");
+            }else {
+                $(".zjzcgc1").text("上口直径公差");
+            }
+
+            if(res.toleranceStandard2 && res.toleranceStandard2 == 1){
+                $(".zjzcgc2").text("下口周长公差");
+            }else {
+                $(".zjzcgc2").text("下口直径公差");
+            }
+
+            if(res.count && res.count != ''){
+                let arr = [];
+                for(let i = 0; i < res.count *1; i++){
+                    arr.push('<tr>');
+                    arr.push('<td rowspan="2" align="center">'+ (i*1+1) +'</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td width="5%" align="center">上口</td>');
+                    arr.push('<td width="5%" align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td rowspan="2" align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td></tr><tr>');
+                    arr.push('<td align="center">下口</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('<td align="center">&nbsp;</td>');
+                    arr.push('</tr>');
+
+                }
+                $("#countTd").append(arr.join(""))
+            }
+
+            <!-- 加載圖片 -->
+            $("#grooveImgId").attr("field", res.grooveImgId);
+            $("#downGrooveImgId").attr("field", res.downGrooveImgId);
+            $("#plImgId").attr("field", res.plImgId);
+            getBackImg([res.grooveImgId, res.downGrooveImgId, res.plImgId]);
+
+            let ztcc = getZTCC(res);
+            $("#ztForm1").form("load", getZTCC(res));
+            $("#ztForm2").form("load", getZTCC(res));
+            $("#" + res.ztTopId).css("display","block");
+            $("#" + res.ztBottomId).css("display","block");
+
+
+            $("input,select option").each(function(){
+                $(this).attr('value',$(this).val());
+            });
+        })
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="order.css" />
+
+  <script src="/js/utils.js"></script>
+  <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <script src="/plugins/jquery/jquery.json.min.js"></script>
+  <script src="/plugins/moment.min.js"></script>
+  <script src="/js/easy_common.js"></script>
+  
+        
+        
+<title>新热处理报告正火</title>
+
+</head>
+<body>
+
+
+<div  style="padding:5px" id="print1">
+  <table cellspacing="0" cellpadding="0" class="table_yl7">
+
+    <tr>
+      <td colspan="10" rowspan="2" align="center" valign="middle"><span style="font-size:25px; font-weight:600; letter-spacing:5px; font-family:'宋体'">封头定作加工合同</span></td>
+      <td width="72" align="center">甲方</td>
+      <td width="165">宜兴华威封头有限公司</td>
+      <td width="65" align="center">签署时间</td>
+      <td width="72" id="orderDate"></td>
+      <td width="5%" align="center" contenteditable>共　页</td>
+    </tr>
+    <tr>
+      <td align="center">乙方</td>
+      <td colspan="2" id="customer"></td>
+      <td align="center">合同编号</td>
+      <td id="orderNum">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="15">　一、规格、数量、技术要求、价格：　　　　　　</td>
+    </tr>
+    <tr>
+      <td width="4%" rowspan="2" align="center">序号</td>
+      <td width="5%" rowspan="2" align="center">形状</td>
+      <td width="8%" rowspan="2" align="center">材 质</td>
+      <td width="8%" rowspan="2" align="center">规格</td>
+      <td width="4%" rowspan="2" align="center">最小<br/>厚度</td>
+      <td width="4%" rowspan="2" align="center">直边<br/>高h</td>
+      <td width="5%" rowspan="2" align="center">总高Ｈ</td>
+      <td width="10%" rowspan="2" align="center">坡口</td>
+      <td colspan="2" align="center">封头用途</td>
+      <td rowspan="2" align="center">制造验收<br/>执行标准</td>
+      <td width="160" align="center">无损检测标准</td>
+      <td width="60" rowspan="2" align="center">数量</td>
+      <td width="72" rowspan="2" align="center">单价<br/>（含税）</td>
+      <td rowspan="2" align="center">总价</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center">类别</td>
+      <td width="7%" align="center">工作介质</td>
+      <td align="center">部位方法 比例 级别</td>
+    </tr>
+
+
+    <tr id="detail">
+      <td>&nbsp;</td>
+      <td colspan="14">合计价款金额（人民币大写）：<span id="amount"></span></td>
+    </tr>
+    <tr>
+      <td colspan="10" rowspan="2" valign="top">　<strong>二、材料提供、加工地：</strong>　　　　　　　　　　　　　　　　　　　　　　　  
+        <p>　　<input type="checkbox" id="zb"><label for="zb">甲方自备</label> <input type="checkbox" id="ll"><label for="ll">乙方来料（乙方按加工单位＂材料验收要求规定供料＂）。</label></p>
+        <p>　<strong>三、监检、资料提供、标记：</strong></p>
+        <p>　　<input type="checkbox" id="jj"><label for="jj">监检</label>   <input type="checkbox" id="yfjd"><label for="yfjd">乙方监督</label>     。 提供资料<u contenteditable> 1 </u>份。　　　</p>
+        <p>　<strong>四、交货地点、交货时间：</strong>　　　　　</p>
+        <p>　　<input type="checkbox" id="jf"><label for="jf">甲方</label> <input type="checkbox" id="yf"><label for="yf">乙方</label>             　　　　　</p>
+        <p> 　<u contenteditable> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </u>       <br>
+        　<strong>五、运输：　</strong>　　　　　　</p>
+      <p>　　<input type="checkbox" id="yfzt"><label for="yfzt">乙方自提；</label> <input type="checkbox" id="jfdb"><label for="jfdb">甲方代办托运。</label>运费<u contenteditable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>元，由乙方承担。</p>
+      <p>　<strong>六、结算方式、期限：</strong>　</p>
+      <p contenteditable>　　乙方在    年    月       日前支付总价款30%预付款      元，余款      元，款到发货。甲方在收到预付款后开始制作。预付款延时支付造成交货期延期由乙方承担　</p>
+      <p>　<strong>七、合同解除、变更：</strong>　　　　　</p>
+      <p>　　1、根据合同法第二百六十八条，合同签字生效后，乙方提出解除合同，乙方应承担自接到乙     方书面通知为止时所造成的材料费和加工费及可得利益的损失。</p>
+      <p>　　2、合同生效后，如发生合同内容变更，必须签署补充合同或重新签订合同。如因     乙方要求合同变更造成甲方损失时，乙方应给于甲方相应补偿。　　　　　　　　　　　　　　　　　　　　　</p></td>
+      <td colspan="5"><p><strong>八、违约责任：</strong>　　　 </p>
+        <p contenteditable> 　1、因不可抗拒有可能导致交货延期时，甲方及时将情况以书面形式通知乙方。　     因此而导致交货延期予以免除甲方责任。　 </p>
+        <p contenteditable> 　2、乙方在收到货物10天内对货物进行验收。如有不符合约定情形，在前述期限　内书面通知甲方，经甲方确认，如属甲方责任，甲方负责免费修理或更换替代品。</p>
+      <p><strong>九、其它约定事项: </strong>　　</p>
+            　本合同一式<u contenteditable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>份　　　　</td>
+    </tr>
+    <tr>
+      <td colspan="2"><p>甲方单位：宜兴华威封头有限公司</p>
+        <p>&nbsp;</p>
+      <p>法定代表人：</p>
+      <p>委托代理人：</p>
+      <p>邮编地址：宜兴市万石镇工业园区 214212</p>
+      <p>电话：0510-87845988</p>
+      <p>传真：0510-87844999</p>
+      <p>开户银行：中国银行和桥支行账号：535258219037</p></td>
+      <td colspan="3" valign="top"><p>乙方单位盖章：　</p>
+        <p>&nbsp;</p>
+      <p>法定代表人：　</p>
+      <p>委托代理人：　</p>
+      <p>邮编地址：　</p>
+      <p>电话：　　　</p>
+      <p>开户账号：　</p>
+      <p>账号：　　　</p></td>
+    </tr>
+  </table>
+</div>
+
+<<script>
+    function initData(data) {
+        ajaxPostInvoke("/sale/order/findPrint", {id: data.id}, function (res) {
+          if (res && res != null){
+            $("#customer").text(res.customer);
+            $("#orderDate").text(res.orderDate.split(" ")[0]);
+            $("#orderNum").text(res.orderNum);
+
+              let td = [];
+              let amount = 0;
+              for(let i = 1; i <= res.list.length; i++){
+                let row = res.list[i-1];
+                  amount += (row.nums * 1) * (row.realPrice * 1);
+                td.push('<tr><td readonly align="center" contenteditable>' + i + '</td>');
+                td.push('<td align="center" contenteditable="true">'+ row.shape + '</td>' );
+                td.push('<td align="center" contenteditable="true">'+ row.material +'</td>');
+                td.push('<td align="center" contenteditable="true">'+ (row.outDiameter == null ? row.innerDiameter : row.outDiameter) + '*' + row.thickness +'</td>');
+                td.push('<td align="center" contenteditable="true">'+ row.thickness +'</td>');
+                td.push('<td align="center" contenteditable="true">'+ row.straightEdge +'</td>');
+                td.push('<td align="center" contenteditable="true">'+ (row.innerHeight != null ? row.innerHeight : row.outHeight) +'</td>');
+                td.push('<td align="center" contenteditable="true">'+ row.groove +'</td>');
+                td.push('<td align="center" contenteditable="true"></td>');
+                td.push('<td align="center" contenteditable="true"></td>' );
+                td.push('<td align="center" contenteditable="true">'+ row.standards +'</td>');
+                td.push('<td align="center" contenteditable="true">'+ row.rtReport +'</td>');
+                td.push('<td align="center" contenteditable="true">'+ row.nums +'</td>');
+                td.push('<td align="center" contenteditable="true">'+ row.realPrice +'</td>' );
+                td.push('<td align="center" contenteditable="true">'+ (row.nums * 1) * (row.realPrice * 1) +'</td></tr>');
+            }
+              $("#detail").before(td.join(""));
+              $("#amount").text(number2China(amount))
+          }
+        })
+    }
+</script>
+   
+</body>
+</html>

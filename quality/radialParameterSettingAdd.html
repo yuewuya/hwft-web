@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <script src="../plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.edatagrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="../../plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<style>
+    p {
+        margin: 10px;
+    }
+
+    .showLine {
+        background: ghostwhite;
+        padding: 10px 0 0 50px;
+        width: 899px;
+        margin-bottom: 10px;
+    }
+
+    .showLine p {
+        display: inline-block;
+        width: 30%;
+    }
+
+    p label {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+    }
+
+    .showV {
+        float: left;
+        padding: 10px;
+        background: ghostwhite;
+        margin-right: 22px;
+    }
+
+    #savePage div {
+    }
+</style>
+<body>
+        <form id="form">
+            <input name="id" id="id" type="hidden"/>
+            <p>
+                <label>壁厚:</label>
+                <input name="thickness" id="thickness" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:160px;"/>
+            </p>
+            <p>
+                <label>设备型号:</label>
+                <input name="equipment" id="equipment" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:160px;"/>
+            </p>
+            <p>
+                <label>焦点尺寸:</label>
+                <input name="focus" id="focus" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:160px;"/>
+            </p>
+            <p>
+                <label>管电压:</label>
+                <input name="voltage" id="voltage" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:160px;"/>
+            </p>
+            <p>
+                <label>曝光量:</label>
+                <input name="exposure" id="exposure" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:160px;"/>
+            </p>
+            <p>
+                <label>象质型号:</label>
+                <input name="imageQuality" id="imageQuality" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:160px;"/>
+            </p>
+            <p>
+                <label>丝号:</label>
+                <input name="silkNumber" id="silkNumber" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:160px;"/>
+            </p>
+        </form>
+</body>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+
+    /**
+     * 初始化
+     *
+     * */
+    function init(data) {
+        if (data) {
+            $('#form').form('load', data);
+        }
+    }
+
+    /**
+     * 获取数据
+     */
+    function getFormData() {
+        if (!$("#form").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return;
+        }
+        let obj = $("#form").getData();
+        return obj;
+    }
+</script>
+</html>
+
+

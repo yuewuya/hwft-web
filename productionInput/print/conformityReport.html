@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/css/css.css" />
+  <script src="/js/utils.js"></script>
+  <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <script src="/plugins/jquery/jquery.json.min.js"></script>
+  <script src="/plugins/moment.min.js"></script>
+  <script src="/js/easy_common.js"></script>
+<style>
+
+</style>
+<title>无标题文档</title>
+</head>
+<body>
+<div id="print1" class="formbody">
+  <ul class="forminfo">
+    <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center" class="">
+      <tr>
+        <td height="40" align="center"><span class="font-title-back">不合格报告处理单</span></td>
+      </tr>
+      <tr>
+        <td height="25" align="left">宜兴华威封头有限公司</td>
+      </tr>
+
+    </table>
+    <table width="95%" border="1" cellpadding="2" cellspacing="1" bgcolor="#000000" align="center" style="margin-top:8px" class="line">
+      <tr align='center' bgcolor="#FFFFFF"  height="25" class="bk-top" >
+        <td width="100%" align="center" >
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="5%" rowspan="6" align="center" valign="middle" class="bk1">不符合品的状况及原因分析</td>
+              <td width="11%" height="30" align="center" class="bk0">工作令号</td>
+              <td width="12%" align="center" class="bk0" field="code"></td>
+              <td width="12%" align="center" class="bk0">材质</td>
+              <td width="12%" align="center" class="bk0" field="material"></td>
+              <td width="12%" align="center" class="bk0">数量</td>
+              <td width="12%" align="center" class="bk0" field="count"></td>
+              <td width="12%" align="center" class="bk0">报告人</td>
+              <td width="12%" align="center" class="bk2" field="reportPerson"></td>
+            </tr>
+            <tr>
+              <td height="30" align="center" class="bk0">规格</td>
+              <td align="center" class="bk0" field="specification"></td>
+              <td align="center" class="bk0">炉批号</td>
+              <td align="center" class="bk0" field="heatNo"></td>
+              <td align="center" class="bk0">单件</td>
+              <td align="center" class="bk0" field="singleNum"></td>
+              <td align="center" class="bk0">日期</td>
+              <td align="center" class="bk2" field="dateTime"></td>
+            </tr>
+            <tr>
+              <td height="25" colspan="4" align="left" class="bk1 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&middot;</strong>&nbsp;缺陷类别：</td>
+              <td height="25" colspan="4" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<strong>&middot;</strong>&nbsp;缺陷部位、尺寸：</td>
+            </tr>
+            <tr>
+              <td colspan="4" align="center" class="bk1"><table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="6%" align="left"><input field="defectCategory" type="checkbox" value="1" disabled="disabled"/></td>
+                  <td width="28%" height="25" align="left">材料开裂 </td>
+                  <td width="6%" align="left"><input type="checkbox" field="defectCategory" value="2" disabled="disabled"/></td>
+                  <td width="27%" align="left">尺寸超差</td>
+                </tr>
+                <tr>
+                  <td align="left"><input type="checkbox" field="defectCategory" value="4" disabled="disabled"/></td>
+                  <td height="25" align="left">焊缝开裂</td>
+                  <td align="left"><input type="checkbox" field="defectCategory" value="5" disabled="disabled"/></td>
+                  <td align="left">形状不符</td>
+                </tr>
+                <tr>
+                  <td align="left"><input type="checkbox" field="defectCategory" value="3"  disabled="disabled"/></td>
+                  <td height="25" align="left">其它 </td>
+                  <td align="left">&nbsp;</td>
+                  <td align="left">&nbsp;</td>
+                </tr>
+              </table></td>
+              <td colspan="4" rowspan="3" align="left" valign="top" ><span style="padding: 5px;" field="defectLocation"></span></td>
+            </tr>
+            <tr>
+              <td height="25" colspan="4" align="left" class="bk1">&nbsp;&nbsp;&nbsp;<strong>&middot;&nbsp;</strong>说明：</td>
+            </tr>
+            <tr>
+              <td height="120" colspan="4" valign="top" class="bk1" style="min-height:120px">
+                <span style="padding: 5px;" field="explain"></span>
+              </td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+        <td align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="5%" align="center" class="bk1">处理决定</td>
+            <td align="center"><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="35"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="5%"><input field="processDecision" type="checkbox" value="1" disabled="disabled"/></td>
+                    <td width="12%" align="left">报废</td>
+                    <td width="5%"><input field="processDecision" type="checkbox" value="2" disabled="disabled"/></td>
+                    <td width="12%" align="left">特许</td>
+                    <td width="5%"><input field="processDecision" type="checkbox" value="3" disabled="disabled"/></td>
+                    <td width="12%" align="left">返修</td>
+                    <td width="5%"><input field="processDecision" type="checkbox" value="4" disabled="disabled"/></td>
+                    <td width="33%" align="left">工艺制定返修工艺</td>
+                    <td width="5%"><input field="processDecision" type="checkbox" value="5" disabled="disabled"/></td>
+                    <td width="12%" align="left">修磨</td>
+                  </tr>
+                </table></td>
+              </tr>
+              <tr>
+                <td height="35" align="center"><table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="100">检验质量责任人：</td>
+                    <td field="responsiblePerson"></td>
+                    <td width="9%">日期：</td>
+                    <td field="inspectionDate"></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+        <td align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="5%" align="center" class="bk1">返修工艺</td>
+            <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td width="5%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="9%" height="40" align="center" class="bk0">程序<br>
+                          工艺</td>
+                        <td width="8%" align="center" class="bk0" field="processTechnology"></td>
+                        <td width="9%" align="center" class="bk0">焊接<br>
+                          返修</td>
+                        <td width="8%" align="center" class="bk0" field="weldingRepair"></td>
+                        <td width="5%" align="center" class="bk0">RT</td>
+                        <td align="center" class="bk0" field="rt"></td>
+                        <td width="9%" align="center" class="bk0">热处理</td>
+                        <td align="center" class="bk0" field="heatTreatment"></td>
+                        <td width="8%" align="center" class="bk0">整形</td>
+                        <td align="center" class="bk0" field="plastic"></td>
+                        <td width="8%" align="center"  class="bk0">检查</td>
+                        <td width="8%" align="center" class="bk2" field="inspect"></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                  <tr>
+                    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="16%" height="45" align="center" class="bk0"><p>日期计划</p>
+                          <p>/实施</p></td>
+                        <td width="14%" align="center" valign="top" class="bk0"><span field="datePlan1"></span>/<span field="implementation1"></span></td>
+                        <td width="14%" align="center" valign="top" class="bk0"><span field="datePlan2"></span>/<span field="implementation2">/</span></td>
+                        <td width="14%" align="center" valign="top" class="bk0"><span field="datePlan3"></span>/<span field="implementation3">/</span></td>
+                        <td width="14%" align="center" valign="top" class="bk0"><span field="datePlan4"></span>/<span field="implementation4">/</span></td>
+                        <td width="14%" align="center" valign="top" class="bk0"><span field="datePlan5"></span>/<span field="implementation5">/</span></td>
+                        <td width="14%" align="center" valign="top" class="bk2"><span field="datePlan6"></span>/<span field="implementation6">/</span></td>
+                      </tr>
+                      <tr>
+                        <td height="25" align="center" class="bk0">操作者</td>
+                        <td height="25" align="center" class="bk0" field="operator1"></td>
+                        <td align="center" class="bk0" field="operator2"></td>
+                        <td align="center" class="bk0" field="operator3"></td>
+                        <td align="center" class="bk0" field="operator4"></td>
+                        <td align="center" class="bk0" field="operator5"></td>
+                        <td align="center" class="bk2" field="operator6"></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                  <tr>
+                    <td align="center"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td height="25" align="left">&nbsp;<strong>&middot;</strong>&nbsp;返修工艺及要求说明</td>
+                      </tr>
+                      <tr>
+                        <td align="center" field="description"></td>
+                      </tr>
+                    </table></td>
+                  </tr>
+                </table></td>
+              </tr>
+              <tr>
+                <td align="center"><table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="12%" height="25" align="center">编制：</td>
+                    <td width="12%" field="organization"></td>
+                    <td width="12%" align="center">日期：</td>
+                    <td width="12%" align="center" field="processDate"></td>
+                    <td width="12%" align="center">审批：</td>
+                    <td width="12%" align="center" field="processApproval"></td>
+                    <td width="12%" align="center">日期：</td>
+                    <td width="12%" align="center" field="approvalDate"></td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+        <td align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="5%" height="115" align="center" class="bk1">预防措施</td>
+            <td align="center"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td align="center" field="preventiveMeasure"></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr align='center' bgcolor="#FFFFFF" class="bx1" >
+        <td align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="5%" align="center" class="bk1">检查结果</td>
+            <td align="center"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="32" align="left">&nbsp;<strong>&middot;</strong>&nbsp;NDE结果：<span field="ned"></span></td>
+              </tr>
+              <tr>
+                <td height="32" align="left">&nbsp;<strong>&middot;</strong>&nbsp;外观、尺寸：<span field="appearanceSize"></span></td>
+              </tr>
+              <tr>
+                <td height="32" align="left">&nbsp;<strong>&middot;</strong>&nbsp;意见：<span field="opinion"></span></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+        <td align="center"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="5%" align="center" class="bk1">确认</td>
+            <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="33%" class="bk11"><table width="100%">
+                  <tr>
+                    <td align="center"><input field="confirm" type="checkbox" value="合格" disabled="disabled"/></td>
+                    <td height="30" align="left">合格</td>
+                    <td align="center"><input field="confirm" type="checkbox" value="特许" disabled="disabled"/></td>
+                    <td align="left">特许</td>
+                    <td align="center"><input field="confirm" type="checkbox" value="再修" disabled="disabled"/></td>
+                    <td align="left">再修</td>
+                  </tr>
+                  <tr>
+                    <td height="30" colspan="6">&nbsp;&nbsp;&nbsp;检验员：<span field="examiner"></span></td>
+                  </tr>
+                </table></td>
+                <td width="33%"  class="bk11"><table width="100%">
+                  <tr>
+                    <td height="35">&nbsp;<strong>&nbsp;&middot;</strong>&nbsp;审核</td>
+                  </tr>
+                  <tr>
+                    <td height="35">&nbsp;&nbsp;签名：</td>
+                  </tr>
+                </table></td>
+                <td width="33%"><table width="100%">
+                  <tr>
+                    <td height="35">&nbsp;<strong>&nbsp;&middot;</strong>&nbsp;批准</td>
+                  </tr>
+                  <tr>
+                    <td height="35">&nbsp;&nbsp;签名：</td>
+                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+          </tr>
+        </table></td>
+      </tr>
+    </table>
+  </ul>
+</div>
+<script>
+  
+  function initData(data) {
+      setData2Text(data)
+  }
+</script>
+   
+</body>
+</html>

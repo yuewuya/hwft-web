@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <style>
+        p{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div title="生产采购管理" style="width: 700px;margin: 20px 60px;">
+        <form id="form">
+            <input id="id" name="id" type="hidden" class="easyui-validatebox textbox"/>
+            <p>
+                   <span>发送对象: </span>&nbsp;
+                        <input id="switch" class="easyui-switchbutton" data-options="onText:'  部 门  ',offText:'  用 户  ', width:70">
+                        <input id="names" class="scinput" name="names" readonly onclick="getNames()" style="width: 475px">
+            </p>
+            <p style="display: inline-block; width: 48%">
+                <span>需求部门：</span>
+                <input class="easyui-textbox" style="width: 200px" name="applyDepart" required="true">
+            </p>
+            <p style="display: inline-block; width: 48%">
+                <span>需求物品：</span>
+                <input class="easyui-textbox" name="applyGoods" required="true" style="width: 200px">
+            </p>
+            <p style="display: inline-block; width: 48%">
+                <span>需求数量：</span>
+                <input class="easyui-numberbox" name="applyNum" required="true" style="width: 200px">
+            </p>
+            <p style="display: inline-block; width: 48%">
+                <span>请购时间：</span>
+                <input class="easyui-datebox" name="applyTime" style="width: 200px">
+            </p>
+            <p>
+                <span>请购理由：</span>
+                <input name="reason" class="easyui-textbox" data-options="multiline:true" style="height:100px; width: 550px">
+            </p>
+            <p>
+                <span>请购要求：</span>
+                <input class="easyui-textbox" data-options="multiline:true" style="height:100px; width: 550px" name="require">
+            </p>
+            <p>
+                <span>库存可用：</span>
+                <input class="easyui-textbox" data-options="multiline:true" style="height:100px; width: 550px" name="available">
+            </p>
+
+        </form>
+    </div>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+    var departIds = '';
+    var userIds = '';
+    var userIdList = [];
+    var departIdList = [];
+    function getNames() {
+        let status =  $("#switch").switchbutton("options").checked;
+        if (status){
+            selectRowsOtherPage("选择发送部门", "/sys/department.html", {}, function (res) {
+                let ids = [];
+                departIdList = [];
+                for(let i in res){
+                    ids.push(res[i].depName);
+                    departIdList.push(res[i].id);
+                }
+                departIds = ids.join(",");
+                $("#names").val(departIds);
+            })
+        }else {
+            selectRowsOtherPage("选择发送人员", "/sys/sysUser.html", {}, function (res) {
+                let ids = [];
+                userIdList = [];
+                for(let i in res){
+                    ids.push(res[i].username);
+                    userIdList.push(res[i].userId);
+                }
+                userIds = ids.join(",");
+                $("#names").val(userIds);
+            })
+        }
+    }
+
+    $('#switch').switchbutton({
+        onChange: function(checked){
+            checked ? $("#names").val(departIds) : $("#names").val(userIds);
+        }
+    })
+    
+    function getFormData() {
+        if(!$("#form").form('validate')){
+            layer.alert("请完善表单数据！",{icon: 2});
+            return null;
+        }else{
+            let data = $('#form').getData();
+            if(!data.names || data.names == ''){
+                layer.alert("发送对象不能为空！",{icon: 2});
+                return null;
+            }else{
+                let flag = $("#switch").switchbutton("options").checked;
+                if(flag){
+                    data.departIds = data.names;
+                    data.userIds = '';
+                    data.departIdList = departIdList;
+                }else {
+                    data.userIds = data.names;
+                    data.departIds = '';
+                    data.userIdList = userIdList;
+                }
+                data.reply = 0;
+                return data;
+            }
+        }
+    }
+
+    function initData(data) {
+        $('#form').form('load', data);
+        if(data.departIds && data.departIds != ''){
+            $('#switch').switchbutton('check');
+            $("#names").val(data.departIds);
+            departIds = data.departIds;
+            departIdList = data.departIdList;
+        }else {
+            userIds = data.userIds;
+            userIdList = data.userIdList;
+            $("#names").val(data.userIds)
+        }
+    }
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生产采购清单打印</title>
+    <script src="/js/utils.js"></script>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <style type="text/css">
+        *{font-size:9pt;border:0;margin:0;padding:0;}
+        body{
+            font-family: '微软雅黑';
+            margin: 0 auto;
+            min-width: 980px;
+
+        }
+        .font-title-back {
+            font-size: 20px;
+            line-height: 40px;
+            font-weight: bold;
+        }
+
+        .line3 {
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-right-color: #000;
+            border-bottom-color: #000;
+            border-left-color: #000;
+        }
+        .line2 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #000;
+            font-size: 14px;
+        }
+        .linleft {
+            border-top-width: 1px;
+            border-left-width: 1px;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-top-color: #000;
+            border-left-color: #000;
+        }
+        .formbody{padding:10px 18px;}
+        .forminfo{padding-left:23px;}
+    </style>
+</head>
+<body>
+<div class="formbody" style="padding-bottom:5px; " id="print1">
+    <ul class="forminfo">
+        <div style="height:20px;" align="right"> 表L-01</div>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+                <td height="40" align="center"><span class="font-title-back">理化试验委托单</span></td>
+            </tr>
+
+        </table>
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:8px">
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td width="12%" align="right">入库号：</td>
+                <td width="21%" align="left" field="storageNumber"></td>
+                <td width="12%" align="right">理化编号：</td>
+                <td width="22%" align="left" field="rationalizeNumber"></td>
+                <td width="13%" align="right">&nbsp;</td>
+                <td width="20%" align="left">&nbsp;</td>
+            </tr>
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td width="12%" align="right">委托单位：</td>
+                <td width="21%" align="left" field="commUnit"></td>
+                <td width="12%" align="right">委托人：</td>
+                <td width="22%" align="left" field="clientPerson"></td>
+                <td width="13%" align="right">委托时间：</td>
+                <td width="20%" align="left" field="commTime">
+                </td>
+
+            </tr>
+
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td width="12%" align="right">形状：</td>
+                <td width="21%" align="left" field="shape"></td>
+                <td width="12%" rowspan="2" align="right">试样编号：</td>
+                <td width="22%" rowspan="2" align="left" field="sampleNumber"></td>
+                <td width="13%" rowspan="2" align="right">产品编号：</td>
+                <td width="20%" rowspan="2" align="left" field="productNumber"></td>
+
+            </tr>
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td align="right">规格：</td>
+                <td width="21%" align="left" field="specification"></td>
+            </tr>
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td width="12%" align="right">材料牌号：</td>
+                <td width="21%" align="left" field="materialGrade"></td>
+                <td width="12%" align="right">焊工钢印：</td>
+                <td width="22%" align="left" field="welder"></td>
+                <td width="13%" align="right">焊接材料：</td>
+                <td width="20%" align="left" field="weldingMaterial"></td>
+
+            </tr>
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td width="12%" align="right">入库号：</td>
+                <td width="21%" align="left" field="materialCode"></td>
+                <td width="12%" align="right">坡口型式：</td>
+                <td width="22%" align="left" field="grooveType"></td>
+                <td width="13%" align="right">焊接方法及位置：</td>
+                <td width="20%" align="left" field="weldingMethod"></td>
+
+            </tr>
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td width="12%" align="right">热处理状态：</td>
+                <td width="21%" align="left" field="heatTreatment"></td>
+                <td width="12%" align="right">炉批号：</td>
+                <td width="22%" align="left" field="batchNumber"></td>
+                <td width="13%" align="right">代表部位:</td>
+                <td width="20%" align="left" field="representPosition"></td>
+
+            </tr>
+
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td align="right">&nbsp;</td>
+                <td align="left">&nbsp;</td>
+                <td align="right">&nbsp;</td>
+                <td align="left">&nbsp;</td>
+                <td align="right">&nbsp;</td>
+                <td align="left">&nbsp;</td>
+            </tr>
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td colspan="6" align="right">
+                    <table width="100%" border="0" cellpadding="1" cellspacing="1" align="center" class="linleft">
+                        <tr>
+                            <td colspan="2" align="center" bgcolor="#FFFFFF"  class="line2">项目</td>
+                            <td align="center" class="line2">数量</td>
+                            <td colspan="2" align="center" class="line2">项目</td>
+                            <td align="center" class="line2">数量</td>
+                            <td colspan="3" align="center" class="line2">项目</td>
+                            <td align="center" class="line2">数量</td>
+                            <td colspan="2" align="center"  class="line2">项目</td>
+                            <td align="center" class="line2">数量</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" rowspan="2" align="center"  class="line2">拉伸</td>
+                            <td rowspan="2" align="center"  class="line2"><input type="checkbox" field="stretching"/></td>
+                            <td rowspan="2"  class="line2">冲击</td>
+                            <td align="center"  class="line2">温度：<span field="lashTemperature"></span></td>
+                            <td rowspan="2" align="center"  class="line2" field="lashCount"></td>
+                            <td rowspan="5" align="center"  class="line2">金相<br />
+                                检验</td>
+                            <td rowspan="2"  class="line2">晶间腐蚀</td>
+                            <td rowspan="2" valign="top"  class="line2">方法：<br />
+                                <span field="corrosionMethod"></span> </td>
+                            <td align="center" class="line2" field="corrosionInt"></td>
+                            <td width="50" rowspan="6" align="center"  class="line2">化<br />
+                                学<br />
+                                分<br />
+                                析<br />
+                                及<br />
+                                其<br />
+                                它</td>
+                            <td rowspan="6" align="center" valign="top"  class="line2">分析成分：<br />
+                                <span field="compositionAnalysis"></span></td>
+                            <td rowspan="6" align="center"  class="line2" field="compositionInt"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line2"><input type="checkbox" field="lashTypeV"/>
+                                缺口型式V形</td>
+                            <td align="center"  class="line2" field="corrosionInt2"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" align="center"  class="line2">弯曲</td>
+                            <td  class="line2">面弯</td>
+                            <td align="center"  class="line2"><input type="checkbox" field="curvedSurface"/></td>
+                            <td colspan="2" align="center"  class="line2">硬度</td>
+                            <td align="center"  class="line2"><input type="checkbox" field="hardness"/></td>
+                            <td colspan="2" align="center"  class="line2">宏观</td>
+                            <td align="center"  class="line2" field="macroscopic"></td>
+                        </tr>
+                        <tr>
+                            <td  class="line2">背弯</td>
+                            <td align="center"  class="line2"><input type="checkbox" field="carryCurved"/></td>
+                            <td colspan="2" align="center"  class="line2">断口</td>
+                            <td align="center"  class="line2"><input type="checkbox" field="fracture"/></td>
+                            <td colspan="2" align="center"  class="line2">微观</td>
+                            <td align="center"  class="line2" field="microcosmic"></td>
+                        </tr>
+                        <tr>
+                            <td  class="line2">侧弯</td>
+                            <td align="center"  class="line2"><input type="checkbox" field="lateralBending"/></td>
+                            <td colspan="2"  class="line2">&nbsp;</td>
+                            <td  class="line2">&nbsp;</td>
+                            <td colspan="2" align="center"  class="line2">&nbsp;</td>
+                            <td align="center"  class="line2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"  class="line2">压扁</td>
+                            <td align="center"  class="line2"><input type="checkbox" field="squash"/></td>
+                            <td colspan="2"  class="line2">&nbsp;</td>
+                            <td  class="line2">&nbsp;</td>
+                            <td align="center"  class="line2">&nbsp;</td>
+                            <td colspan="2" align="center"  class="line2">应变强化</td>
+                            <td  class="line2" align="center"><input type="checkbox" field="strainStrengthen"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"  class="line2">备注：</td>
+                            <td colspan="8"  class="line2"><table width="100%" border="0">
+                                <tr>
+                                    <td width="280px">拉伸试验
+
+                                        GB/T228.1-2010标准执行
+                                        <input type="checkbox" field="tensileTest"/></td>
+                                    <td rowspan="3" align="center"><textarea cols="50" rows="6" id="note" field="note"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td>弯曲试验
+                                        GB/T232-2010标准执行
+                                        <input type="checkbox" field="bendTest"/></td>
+                                </tr>
+                                <tr>
+                                    <td>冲击试验
+                                        GB/T229-2007标准执行
+                                        <input type="checkbox" field="impactTest"/></td>
+                                </tr>
+                            </table></td>
+                            <td colspan="2"  class="line2" align="center">要求完成时间</td>
+                            <td  class="line2" field="completedTime" style="width: 120px" align="center"></td>
+                        </tr>
+                    </table></td>
+            </tr>
+
+
+        </table>
+    </ul>
+
+</div>
+</body>
+
+<script>
+
+    function initData(data) {
+        data.commTime = data.commTime.split(" ")[0];
+        data.completedTime = data.completedTime.split(" ")[0];
+        setData2Text(data)
+    }
+</script>
+
+</html>

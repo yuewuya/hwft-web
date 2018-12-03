@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/css/css.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<body>
+<form id="form">
+    <div style="padding:5px; height:100%; overflow:auto" id="print1">
+        <table width="100%" border="1" align="center" cellpadding="1" cellspacing="1">
+            <tr>
+                <td width="45%" style="border-right:0">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="line-height:22px">
+                        <tr>
+                            <td width="10%" rowspan="2" style=" border:0px"><img src="/images/huawei_logo.jpg" width="39"
+                                                                                 height="32"></td>
+                            <td width="90%" valign="bottom" style=" border:0px;  padding:0">宜兴华威封头有限公司</td>
+                        </tr>
+                        <tr>
+                            <td valign="top" style=" border:0px;padding:1px">YIXING HUAWEI HEAD PLATE CO., LTD &nbsp;
+                                表号:H-2
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="10" align="left" valign="middle">
+                    <table width="100%" border="0">
+                        <tr>
+                            <td align="center"><span
+                                    style="font-size:20px; font-weight:600; letter-spacing:5px; font-family:'宋体'">焊接工艺卡</span>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_yl5">
+            <tr>
+                <td colspan="2" align="center">生产令号</td>
+                <td colspan="2" align="center" id="code"></td>
+                <td width="12%" align="center">产品名称</td>
+                <td width="7%" align="center" id="produceName"></td>
+                <td width="14%" align="center">产品规格</td>
+                <td width="16%" align="center" id="specification"></td>
+                <td width="10%" align="center">工艺卡编号</td>
+                <td width="22%" align="center" id="weldingNo"></td>
+            </tr>
+            <tr>
+                <td width="4%" rowspan="4" align="center">母材</td>
+                <td width="6%" align="center">名称</td>
+                <td colspan="2">牌号</td>
+                <td align="center">规格</td>
+                <td>焊接长度（mm）</td>
+                <td align="center">PQR编号</td>
+                <td id="por"></td>
+                <td>焊工持证项目</td>
+                <td id="licensed"></td>
+            </tr>
+            <tr>
+                <td align="center">板</td>
+                <td colspan="2">Q345R</td>
+                <td align="center">18</td>
+                <td>3.000.00</td>
+                <td colspan="2" rowspan="9" align="center"><img src="images/001.jpg" width="262" height="268"
+                                                                class="dy_img"></td>
+                <td colspan="2">工艺过程及要求</td>
+            </tr>
+            <tr>
+                <td align="center">&nbsp;</td>
+                <td colspan="2">&nbsp;</td>
+                <td align="center">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td colspan="2" rowspan="8">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center">&nbsp;</td>
+                <td colspan="2">&nbsp;</td>
+                <td align="center">&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr id="div1">
+                <td width="4%" rowspan="4" align="center">焊接材料</td>
+                <td colspan="2" align="center">牌号</td>
+                <td width="4%">烘烤温度℃</td>
+                <td align="center">烘烤时间h</td>
+                <td>定额数量（kg）</td>
+            </tr>
+
+            <!-- 焊接材料 -->
+
+
+            <tr>
+                <td colspan="2" align="center">保护气体比例</td>
+                <td colspan="2" id="protective"></td>
+                <td align="center">流量（升/分）</td>
+                <td id="flow"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">焊前预热</td>
+                <td colspan="2" id="preheating"></td>
+                <td align="center">焊后热处理</td>
+                <td id="afterWelding"></td>
+            </tr>
+            <tr>
+                <td colspan="8" align="center">焊接说明</td>
+                <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center">焊接规范</td>
+                <td colspan="9" align="center" style="padding:0; ">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr id="div2">
+                            <td>焊接方法</td>
+                            <td>层次</td>
+                            <td>电源</td>
+                            <td width="15%">焊材</td>
+                            <td>规格</td>
+                            <td>电流(A)</td>
+                            <td>电压(V)</td>
+                            <td>速度(mm/min)</td>
+                            <td>层间温度</td>
+                            <td>钨极直径</td>
+                            <td>喷咀直径</td>
+                            <td width="5%">气体流量(L/min)</td>
+                            <td width="5%">线能量(kj/cm)</td>
+                            <td width="12%">备注</td>
+                        </tr>
+                        <tr>
+                            <td height="90" colspan="14" style="border-bottom:0">&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="10" align="center" style="padding:0; border-bottom:0">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="10%" rowspan="2">修改记录</td>
+                            <td width="10%">修改标记</td>
+                            <td width="10%">处数</td>
+                            <td width="10%">文件号</td>
+                            <td width="10%">签名</td>
+                            <td width="10%">日期</td>
+                            <td width="10%">编制</td>
+                            <td width="10%">日期</td>
+                            <td width="10%">审核</td>
+                            <td width="10%" style="border-right:0">日期</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>
+<script>
+    function initData(data) {
+        for (let key in data) {
+            $("#" + key).text(data[key]);
+        }
+        initMethod(data['weldingId']);
+        initWeldingMaterial(data.weldingId);
+    }
+
+    function initMethod(weldingId) {
+        ajaxPostInvoke('/process/welding/hjMethodList', {weldingId: weldingId}, function (data) {
+            let arr = data.list;
+            let str = '';
+            for (let i = 0; i < arr.length; i++) {
+                arr[i].remark = arr[i].remark == null ? '' : arr[i].remark;
+                str = str + '<tr><td>' + arr[i].method + '</td>' +
+                    '<td>' + arr[i].arrangement + '</td>' +
+                    '<td>' + arr[i].vcc + '</td>' +
+                    '<td width="15%">' + arr[i].hc + '</td>' +
+                    '<td>' + arr[i].specification + '</td>' +
+                    '<td>' + arr[i].i + '</td>' +
+                    '<td>' + arr[i].u + '</td>' +
+                    '<td>' + arr[i].speed + '</td>' +
+                    '<td>' + arr[i].arrangementTemperature + '</td>' +
+                    '<td>' + arr[i].wjDiameter + '</td>' +
+                    '<td>' + arr[i].pzDiameter + '</td>' +
+                    '<td width="5%">' + arr[i].flow + '</td>' +
+                    '<td width="5%">' + arr[i].energy + '</td>' +
+                    '<td width="12%">' + arr[i].remark + '</td></tr>';
+            }
+            $("#div2").after(str);
+        });
+    }
+
+    function initWeldingMaterial(weldingId) {
+        ajaxPostInvoke('/process/welding/weldingMaterialList', {weldingId: weldingId}, function (data) {
+            let arr = data.list;
+            let str = '';
+            let space = '<tr><td colspan="2" align="center">&nbsp;</td><td>&nbsp;</td><td align="center">&nbsp;</td><td>&nbsp;</td></tr>';
+            for (let i = 0; i < arr.length; i++) {
+                str = str + '<tr><td colspan="2" align="center">' + arr[i].cardNo + '</td>' +
+                    '<td>' + arr[i].temperature + '</td>' +
+                    '<td align="center">' + arr[i].time + '</td>' +
+                    '<td>' + arr[i].num + '</td></tr>';
+            }
+            if (arr.length == 1) {
+                str = str + space + space;
+            }
+            if (arr.length == 2) {
+                str = str + space;
+            }
+            if (arr.length == 0) {
+                str = space + space + space;
+            }
+            $("#div1").after(str);
+        });
+    }
+</script>

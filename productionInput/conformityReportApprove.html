@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <style type="text/css">
+        .bk {
+            border-left-width: 1px;
+            border-left-style: solid;
+            border-left-color: #DEEFFF;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #DEEFFF;
+        }
+        .bk0 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #DEEFFF;
+        }
+        .bk1 {
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #DEEFFF;
+        }
+        .bk2 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+        }
+        .bx1 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+        }
+        .bk-top {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: #DEEFFF;
+        }
+        .bk-right {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: #DEEFFF;
+        }
+    </style>
+</head>
+<body>
+<body>
+<div class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <div title="不合格品反馈单审批" style="padding:10px;">
+        <div class="formbody" style="padding-bottom:5px; " >
+    <ul class="forminfo" style="line-height:40px; font-size:14px;">
+        <form id="saveForm">
+            <input name="id" id="id" type="hidden"/>
+            <table width="95%" border="0" cellpadding="2" cellspacing="1" bgcolor="#93CDF3" align="center" style="margin-top:8px">
+                <tr align='center' bgcolor="#FFFFFF"  height="22" class="bk-top" >
+                    <td width="100%" align="center" class="bk"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="5%" rowspan="6" align="center" valign="middle" class="bk1">不符合品的状况及原因分析</td>
+                            <td width="11%" align="center" class="bk0">指令号</td>
+                            <td width="12%" align="center" class="bk0"><input disabled name="code"></td>
+                            <td width="12%" align="center" class="bk0">材质</td>
+                            <td width="12%" align="center" class="bk0"><input disabled name="material"></td>
+                            <td width="12%" align="center" class="bk0">数量</td>
+                            <td width="12%" align="center" class="bk0"><input disabled name="count"></td>
+                            <td width="12%" align="center" class="bk0">报告人</td>
+                            <td width="12%" align="center" class="bk2"><input disabled name="reportPerson"></td>
+                        </tr>
+                        <tr>
+                            <td align="center" class="bk0">规格</td>
+                            <td align="center" class="bk0"><input disabled name="specification"></td>
+                            <td align="center" class="bk0">炉批号</td>
+                            <td align="center" class="bk0"><input disabled name="heatNo"></td>
+                            <td align="center" class="bk0">单件</td>
+                            <td align="center" class="bk0"><input disabled name="singleNum"></td>
+                            <td align="center" class="bk0">日期</td>
+                            <td align="center" class="bk2"><input disabled name="dateTime"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="left" class="bk1 ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&middot;</strong>&nbsp;缺陷类别：</td>
+                            <td colspan="4" align="left">&nbsp;&nbsp;&nbsp;&nbsp;<strong>&middot;</strong>&nbsp;缺陷部位、尺寸：</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center" class="bk0"><table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td width="6%" align="left"><input name="defectCategory" type="checkbox" value="1" disabled="disabled" /></td>
+                                    <td width="28%" align="left">材料开裂 </td>
+                                    <td width="6%" align="left"><input type="checkbox" name="defectCategory" value="2" disabled="disabled"/></td>
+                                    <td width="27%" align="left">尺寸超差</td>
+                                    <td width="6%" align="left"><input type="checkbox" name="defectCategory" value="3" disabled="disabled"/></td>
+                                    <td width="27%" align="left">其它 </td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><input type="checkbox" name="defectCategory" value="4" disabled="disabled"/></td>
+                                    <td align="left">焊缝开裂</td>
+                                    <td align="left"><input type="checkbox" name="defectCategory" value="5" disabled="disabled"/></td>
+                                    <td align="left">形状不符</td>
+                                    <td align="left">&nbsp;</td>
+                                    <td align="left">&nbsp;</td>
+                                </tr>
+                            </table></td>
+                            <td colspan="4" rowspan="4" align="center" valign="top" ><textarea class="textinput"  cols="30" rows="10" style="width:90%; height:200px" disabled name="defectLocation"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="left" class="bk1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&middot;&nbsp;</strong>说明：</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center" class="bk1"><p>
+                                <textarea disabled name="explain" class="textinput"  cols="30" rows="10" style="width:90%; height:75px"></textarea>
+                            </p></td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" class="bk1">&nbsp;</td>
+                            <td colspan="4" align="center" class="bk1">&nbsp;</td>
+                        </tr>
+                    </table></td>
+                </tr>
+
+
+                    <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+                        <td align="center" class="bk"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%" align="center" class="bk1">处理决定</td>
+                                <td width="95%" align="center"><table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="5%"><input name="processDecision" type="checkbox" value="1" disabled="disabled"/></td>
+                                                <td width="12%" align="left">报废</td>
+                                                <td width="5%"><input name="processDecision" type="checkbox" value="2" disabled="disabled"/></td>
+                                                <td width="12%" align="left">特许</td>
+                                                <td width="5%"><input name="processDecision" type="checkbox" value="3" disabled="disabled"/></td>
+                                                <td width="12%" align="left">返修</td>
+                                                <td width="5%"><input name="processDecision" type="checkbox" value="4" disabled="disabled"/></td>
+                                                <td width="33%" align="left">工艺制定返修工艺</td>
+                                                <td width="5%"><input name="processDecision" type="checkbox" value="5" disabled="disabled"/></td>
+                                                <td width="12%" align="left">修磨</td>
+                                            </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"><table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="17%">检验质量责任人：</td>
+                                                <td width="34%"><input disabled name="responsiblePerson"></td>
+                                                <td width="9%">日期：</td>
+                                                <td width="40%"><input disabled name="inspectionDate" /></td>
+                                            </tr>
+                                        </table></td>
+                                    </tr>
+                                </table></td>
+                            </tr>
+                        </table></td>
+                    </tr>
+                    <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+                        <td align="center" class="bk"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%" align="center" class="bk1">返修工艺</td>
+                                <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="5%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td width="9%" align="center" class="bk0">程序工艺</td>
+                                                        <td width="8%" class="bk0"><input disabled name="processTechnology"></td>
+                                                        <td width="9%" align="center" class="bk0">焊接返修</td>
+                                                        <td width="8%" class="bk0"><input disabled name="weldingRepair"></td>
+                                                        <td width="8%" align="center" class="bk0">RT</td>
+                                                        <td width="8%" class="bk0"><input disabled name="rt"></td>
+                                                        <td width="9%" align="center" class="bk0">热处理</td>
+                                                        <td class="bk0"><input disabled name="heatTreatment"></td>
+                                                        <td width="8%" align="center" class="bk0">整形</td>
+                                                        <td class="bk0"><input disabled name="plastic"></td>
+                                                        <td width="8%" align="center"  class="bk0">检查</td>
+                                                        <td width="8%" class="bk2"><span class="bk0">
+                          <input disabled name="inspect">
+                        </span></td>
+                                                    </tr>
+                                                </table></td>
+                                            </tr>
+                                            <tr>
+                                                <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td width="16%" align="center" class="bk0"><p>日期计划/实施</p></td>
+                                                        <td width="14%" align="center" valign="top" class="bk0"><input disabled name="datePlan1">/<input disabled name="implementation1"></td>
+                                                        <td width="14%" align="center" valign="top" class="bk0"><input disabled name="datePlan2">
+                                                            /<input disabled name="implementation2"></td>
+                                                        <td width="14%" align="center" valign="top" class="bk0"><input disabled name="datePlan3">
+                                                            /<input disabled name="implementation3"></td>
+                                                        <td width="14%" align="center" valign="top" class="bk0"><input disabled name="datePlan4">
+                                                            /<input disabled name="implementation4"></td>
+                                                        <td width="14%" align="center" valign="top" class="bk0"><input disabled name="datePlan5">
+                                                            /<input disabled name="implementation5"></td>
+                                                        <td width="14%" align="center" valign="top" class="bk2"><input disabled name="datePlan6">
+                                                            /<input disabled name="implementation6">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center" class="bk0">操作者</td>
+                                                        <td align="center" class="bk0"><input disabled name="operator1"></td>
+                                                        <td align="center" class="bk0"><input disabled name="operator2"></td>
+                                                        <td align="center" class="bk0"><input disabled name="operator3"></td>
+                                                        <td align="center" class="bk0"><input disabled name="operator4"></td>
+                                                        <td align="center" class="bk0"><input disabled name="operator5"></td>
+                                                        <td align="center" class="bk2"><span class="bk0">
+                                                          <input disabled name="operator6">
+                                                        </span></td>
+                                                    </tr>
+                                                </table></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td align="left">&nbsp;<strong>&middot;</strong>&nbsp;返修工艺及要求说明</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center"><textarea disabled name="description" class="textinput" cols="30" rows="10" style="width:90%; height:75px"></textarea></td>
+                                                    </tr>
+                                                </table></td>
+                                            </tr>
+                                        </table></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center"><table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td width="12%" align="center">编制：</td>
+                                                <td width="12%"><input disabled name="organization"></td>
+                                                <td width="12%" align="center">日期：</td>
+                                                <td width="12%" align="center"><input disabled name="processDate"></td>
+                                                <td width="12%" align="center">审批：</td>
+                                                <td width="12%" align="center"><input disabled name="processApproval"></td>
+                                                <td width="12%" align="center">日期：</td>
+                                                <td width="12%" align="center"><input disabled name="approvalDate"></td>
+                                            </tr>
+                                        </table></td>
+                                    </tr>
+                                </table></td>
+                            </tr>
+                        </table></td>
+                    </tr>
+                    <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+                        <td align="center" class="bk"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%" height="115" align="center" class="bk1">预防措施</td>
+                                <td align="center"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td align="center">
+                                            <textarea name="preventiveMeasure" class="textinput" cols="30" rows="10" style="width:90%; height:75px"></textarea>
+                                        </td>
+                                    </tr>
+                                </table></td>
+                            </tr>
+                        </table></td>
+                    </tr>
+                    <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+                        <td align="center" class="bk"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%" align="center" class="bk1">检查结果</td>
+                                <td align="center"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td width="10%" align="left"><strong>&middot;</strong>&nbsp;NDE &nbsp; 结  果：                  </td>
+                                        <td width="90%" align="left"><input name="ned" type="text" class="dfinput" style="width:80%"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">&nbsp;<strong>&middot;</strong>&nbsp;外观、尺寸：                  </td>
+                                        <td align="left"><input name="appearanceSize" type="text" class="dfinput" style="width:80%"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left">&nbsp;<strong>&middot;</strong>&nbsp;意&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 见：                  </td>
+                                        <td align="left"><input name="opinion" type="text" class="dfinput" style="width:80%"/></td>
+                                    </tr>
+                                </table></td>
+                            </tr>
+                        </table></td>
+                    </tr>
+                    <tr align='center' bgcolor="#FFFFFF"  height="22" class="bx1" >
+                        <td align="center" class="bk"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="5%" align="center" class="bk1">确认</td>
+                                <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td width="33%" class="bk1"><table width="100%">
+                                            <tr>
+                                                <td align="center"><input name="confirm" type="checkbox" value="1"/></td>
+                                                <td align="left">合格</td>
+                                                <td align="center"><input name="confirm" type="checkbox" value="2"/></td>
+                                                <td align="left">特许</td>
+                                                <td align="center"><input name="confirm" type="checkbox" value="3"/></td>
+                                                <td align="left">再修</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="6">&nbsp;&nbsp;&nbsp;检验员：
+                                                    <input name="examiner" type="text" class="dfinput"  style="width:80%"/></td>
+                                            </tr>
+                                        </table></td>
+                                        <td width="33%"  class="bk1">&nbsp;</td>
+                                        <td width="33%">&nbsp;</td>
+                                    </tr>
+                                </table></td>
+                            </tr>
+                        </table></td>
+                    </tr>
+
+
+                <tr align="center" bgcolor="#EEF4EA">
+                    <td height="34" colspan="2" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+                </tr>
+            </table>
+        </form>
+    </ul>
+</div>
+    </div>
+</div>
+
+</body>
+<script>
+    function initData(data) {
+        data.defectCategory = data.defectCategory == null ? null : data.defectCategory.split(",");
+        data.processDecision = data.processDecision == null ? null : data.processDecision.split(",");
+        data.confirm = data.confirm == null ? null : data.confirm.split(",");
+        $("#saveForm").form("load", data)
+    }
+
+    function getFormData(){
+        let param = $("#saveForm").getData();
+        let confirm = [];
+        $("input[name=confirm]:checked").each(function () {
+            confirm.push($(this).val());
+        })
+        param.confirm = confirm.join(",");
+        param.status = 4;
+        return param;
+    }
+</script>
+</html>
+
+

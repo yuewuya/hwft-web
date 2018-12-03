@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/assembly/css/css.css"/>
+  <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+  <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+  <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+  <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+  <link href="/css/print.css" rel="stylesheet" type="text/css" media="print">
+  <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+  <script src="/plugins/jquery/jquery.json.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+  <script src="/plugins/moment.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/easy_common.js"></script>
+  <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/html2canvas.js"></script>
+               
+        
+        
+<title>无标题文档</title>
+
+</head>
+<body>
+
+<div >
+    <div style="margin:15px 0 15px 200px">
+        <div style="margin-right: 50px; display: inline-block">
+            <input name="pj" value="1" type="radio" id="1g" checked><label for="1g"> 整 版 </label>
+        </div>
+        <div style="margin-right: 50px; display: inline-block">
+            <input name="pj" value="2" type="radio" id="2g"><label for="2g"> 双 拼 </label>
+        </div>
+        <div style="margin-right: 50px; display: inline-block">
+            <input name="pj" value="3" type="radio" id="3g"><label for="3g"> 三 拼 </label>
+        </div>
+    </div>
+    <div style="padding:10px;">
+          <table border="0" cellspacing="0" cellpadding="0" style="width:60%; margin-left:auto; margin-right:auto; line-height:25px;">
+            <tr>
+              <td width="45%" height="198"><table id="plImg" width="325" border="0" cellspacing="0" cellpadding="0" height="186"  style=" border-radius:5px" background="/img/xl/xl1.jpg">
+                <tr>
+                  <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td width="249" rowspan="2" align="right"><input id="text2" type="text" class="scinput"  style="height: 23px; width: 50px; line-height: 23px; margin-top:10px;" value=""/></td>
+                      <td align="right">&nbsp;</td>
+                      <td align="right">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td width="26">&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td colspan="3">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" align="right"><input id="text1" type="text" class="scinput"  style="height: 23px; width: 60px; line-height: 23px;" value=""/></td>
+                      <td width="50">&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" align="right">&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2" align="right"><input id="text3" type="text" class="scinput"  style="height: 23px; width: 50px; line-height: 23px; margin-top:10px;" value="0"/></td>
+                      <td align="right">&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                      <td align="right">&nbsp;</td>
+                      <td>&nbsp;</td>
+                    </tr>
+                  </table></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table>
+        </div>
+         
+</div>
+
+<script>
+
+    function getJT(index) {
+        html2canvas(document.getElementById("plImg"), {
+            allowTaint: true,
+            taintTest: false,
+            onrendered: function(canvas) {
+                let img = canvas.toDataURL();
+                parent.$("#plImg").val(img);
+                parent.layer.close(index);
+            }
+        });
+    }
+
+    $("#text2,#text3").hide();
+    $("#1g,#2g,#3g").click(function () {
+        let opt = $('input[type=radio]:checked').val();
+        if(opt == 1){
+            $("#text2,#text3").hide();
+            $("#text2,#text3").val("");
+            $("#text1").show();
+        }else if(opt == 2){
+            $("#text3").hide();
+            $("#text3").val("");
+            $("#text2,#text1").show()
+        }else{
+            $("#text3,#text2,#text1").show()
+        }
+    })
+    
+    function getFormData() {
+        return {cutting1 : $("#text1").val(), cutting2 : $("#text2").val(), cutting3 : $("#text3").val()};
+    }
+
+    function initData(data) {
+        $("#text1").val(data.cutting1);
+        $("#text2").val(data.cutting2);
+        $("#text3").val(data.cutting3);
+    }
+</script>
+
+</body>
+</html>

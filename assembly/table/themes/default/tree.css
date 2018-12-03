@@ -1,0 +1,162 @@
+.tree {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-family: "微软雅黑";
+}
+.tree li {
+  white-space: nowrap;
+}
+.tree li ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.tree-node {
+  height: 25px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tree-hit {
+  cursor: pointer;
+}
+.tree-expanded,
+.tree-collapsed,
+.tree-folder,
+.tree-file,
+.tree-checkbox,
+.tree-indent {
+  display: inline-block;
+  width: 18px;
+  height: 25px;
+  vertical-align: top;
+  overflow: hidden;
+}
+.tree-expanded {
+  background: url('images/tree_icons.png') no-repeat -20px 0px;
+}
+.tree-expanded-hover {
+  background: url('images/tree_icons.png') no-repeat -60px 0px;
+}
+.tree-collapsed {
+  background: url('images/tree_icons.png') no-repeat 0px 0px;
+}
+.tree-collapsed-hover {
+  background: url('images/tree_icons.png') no-repeat -40px 0px;
+}
+.tree-lines .tree-expanded,
+.tree-lines .tree-root-first .tree-expanded {
+  background: url('images/tree_icons.png') no-repeat -180px 0;
+}
+.tree-lines .tree-collapsed,
+.tree-lines .tree-root-first .tree-collapsed {
+  background: url('images/tree_icons.png') no-repeat -160px 0;
+}
+.tree-lines .tree-node-last .tree-expanded,
+.tree-lines .tree-root-one .tree-expanded {
+  background: url('images/tree_icons.png') no-repeat -100px 0;
+}
+.tree-lines .tree-node-last .tree-collapsed,
+.tree-lines .tree-root-one .tree-collapsed {
+  background: url('images/tree_icons.png') no-repeat -80px 0;
+}
+.tree-line {
+  background: url('images/tree_icons.png') no-repeat -220px 0;
+}
+.tree-join {
+  background: url('images/tree_icons.png') no-repeat -240px 0;
+}
+.tree-joinbottom {
+  background: url('images/tree_icons.png') no-repeat -200px 0;
+}
+.tree-folder {
+  background: url('images/tree_icons.png') no-repeat -260px 0;
+}
+.tree-folder-open {
+  background: url('images/tree_icons.png') no-repeat -280px 0;
+}
+.tree-file {
+  background: url('images/tree_icons.png') no-repeat -300px 0;
+}
+.tree-loading {
+  background: url('images/loading.gif') no-repeat center center;
+}
+.tree-checkbox0 {
+  background: url('images/tree_icons.png') no-repeat -260px -26px;
+}
+.tree-checkbox1 {
+  background: url('images/tree_icons.png') no-repeat -280px -26px;
+}
+.tree-checkbox2 {
+  background: url('images/tree_icons.png') no-repeat -300px -26px;
+}
+.tree-title {
+	font-size: 14px;
+	display: inline-block;
+	text-decoration: none;
+	vertical-align: top;
+	white-space: nowrap;
+	padding: 0 2px;
+	height: 25px;
+	line-height: 25px;
+	font-family: "微软雅黑";
+}
+.tree-node-proxy {
+  font-size: 15px;
+  line-height: 30px;
+  padding: 0 2px 0 20px;
+  border-width: 1px;
+  border-style: solid;
+  z-index: 9900000;
+}
+.tree-dnd-icon {
+  display: inline-block;
+  position: absolute;
+  width: 18px;
+  height: 25px;
+  left: 2px;
+  top: 100%;
+  margin-top: -9px;
+}
+.tree-dnd-yes {
+  background: url('images/tree_icons.png') no-repeat -256px 0;
+}
+.tree-dnd-no {
+  background: url('images/tree_icons.png') no-repeat -256px -18px;
+}
+.tree-node-top {
+  border-top: 1px dotted red;
+}
+.tree-node-bottom {
+  border-bottom: 1px dotted red;
+}
+.tree-node-append .tree-title {
+  border: 1px dotted red;
+}
+.tree-editor {
+  border: 1px solid #ccc;
+  font-size: 12px;
+  height: 14px !important;
+  height: 18px;
+  line-height: 14px;
+  padding: 1px 2px;
+  width: 80px;
+  position: absolute;
+  top: 0;
+}
+.tree-node-proxy {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #95B8E7;
+}
+.tree-node-hover {
+  background: #f5f5f5;
+  color: #2977B3;
+}
+.tree-node-selected {
+	color: #2977B3;
+	background-color: #E3EFFF;
+}
+.tree-node-hidden {
+  display: none;
+}

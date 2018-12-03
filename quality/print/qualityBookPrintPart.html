@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="qualityPrintPart.css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+</head>
+<body>
+<div id="print1" style="margin-top: -18px;">
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+            <td width="20%" rowspan="3" align="center">&nbsp;</td>
+            <td align="center">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="30%" align="center">&nbsp;</td>
+            <td align="center" style="border-bottom:solid #000 3px"><span
+                    style="font-size:25px; font-weight:600;  font-family:'宋体'">封头部件数据报告</span></td>
+            <td width="15%" align="center"><strong>表J-02</strong></td>
+        </tr>
+        <tr>
+            <td align="center">&nbsp;</td>
+            <td align="center"><span style="font-size:20px; font-weight:600; font-family:'宋体'">Partial data report of head plate</span>
+            </td>
+            <td align="center">&nbsp;</td>
+        </tr>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="33%">
+                <table width="100%" cellspacing="0" cellpadding="0" class="print-table5"
+                       style="padding-bottom:5px; border-bottom:#000 solid 1px;">
+                    <tr>
+                        <td width="30%">订货编号</td>
+                        <td width="70%" rowspan="2" align="center"><strong><span id="orderNo"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td height="18">Order No</td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0" class="print-table5"
+                       style="padding-bottom:5px; border-bottom:#000 solid 1px;">
+                    <tr>
+                        <td width="30%">指令号</td>
+                        <td width="70%" rowspan="2" align="left"><strong><span id="code"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td height="18">Job No</td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" class="print-table5" width="100%"
+                       style="border-bottom:#000 solid 1px;">
+                    <tr>
+                        <td width="30%">封头类型</td>
+                        <td width="380" align="left"><span id="shapeZnName"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Type</td>
+                        <td align="left"><span id="shapeEnName"></span></td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0" class="print-table5">
+                    <tr>
+                        <td width="30%">制造标准</td>
+                        <td width="70%"><strong><span id="manufacture"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td height="18" colspan="2" valign="top" style="border-bottom:#000 solid 1px;">
+                            <strong>Manufacture </strong>Standard
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0" class="print-table5">
+                    <tr>
+                        <td>封头设计标记</td>
+                        <td><strong><span id="ftsjbj"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td height="18" colspan="2" valign="top" style="border-bottom:#000 solid 1px;">
+                            Design mark of head
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0" class="print-table5">
+                    <tr>
+                        <td>封头成品标记</td>
+                        <td><strong><span id="ftcpbj"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td height="18" colspan="2" valign="top" style="border-bottom:#000 solid 1px;">
+                            Product mark of head
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="50%">
+                            <table width="98%" cellspacing="0" cellpadding="0" class="print-table5"
+                                   style="padding-bottom:5px; border-bottom:#000 solid 1px;">
+
+                                <tr>
+                                    <td width="50%">毛坯尺寸</td>
+                                    <td rowspan="2"><span id="cutting1"></span></td>
+                                </tr>
+                                <tr>
+                                    <td height="18">Blank Dia</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table width="98%" cellspacing="0" cellpadding="0" class="print-table5"
+                                   style="padding-bottom:5px; border-bottom:#000 solid 1px;">
+                                <tr>
+                                    <td width="50%">数量</td>
+                                    <td width="50%" rowspan="2" align="center"><span id="num"></span></td>
+                                </tr>
+                                <tr>
+                                    <td height="18">Quantity</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" cellspacing="0" class="print-table5">
+                    <tr>
+                        <td height="18">加工方法</td>
+                        <td><span id="processingMethod"></span></td>
+                    </tr>
+                    <tr>
+                        <td height="18" valign="top" style="border-bottom:#000 solid 1px;">Forming Method
+                        </td>
+                        <td valign="top" style="border-bottom:#000 solid 1px;"><span id="processingMethodEn"></span></td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" cellspacing="0" class="print-table5">
+                    <tr>
+                        <td>尺寸单位：mm</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="border-bottom:#000 solid 1px;">Size ：mm</td>
+                    </tr>
+                </table>
+            </td>
+            <td valign="top">
+                <table width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="50%"><img width="231" height="137"
+                                             src="/images/quality/quality_part_1.jpg"></td>
+                        <td width="50%" valign="top">
+                            <table width="100%" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center">封头简图</td>
+                                </tr>
+                                <tr>
+                                    <td align="center">Sketch of head plate</td>
+                                </tr>
+                                <tr>
+                                    <td height="74" align="center" valign="bottom"><strong>H</strong>=<span id="height"></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" align="center"><img width="160" height="159"
+                                                            src="/images/quality/quality_part_2.jpg"></td>
+                        <td width="50%" align="center" valign="top"><span id="pkt"></span>
+                            <span id="pkt2"></span>
+                            <table width="80%" cellspacing="0" cellpadding="0"
+                                   style="border-bottom:solid #000 1px; border-top:solid #000 1px;">
+                                <tr>
+                                    <td height="30" align="center" id="groove"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="33%" valign="top">
+                <table cellspacing="0" cellpadding="0" class="print-table5" width="100%">
+                    <tr>
+                        <td width="98">制造单位</td>
+                        <td width="41" rowspan="2" align="center"><span class="print-pic"><img
+                                src="/images/huawei_logo.jpg" width="40" height="32"></span></td>
+                        <td width="447" align="center">宜兴华威封头有限公司</td>
+                    </tr>
+                    <tr>
+                        <td>Enterprise</td>
+                        <td align="center">YIXING HUAWEI HEAD PLATE CO., LTD.</td>
+                    </tr>
+                    <tr>
+                        <td>地址</td>
+                        <td colspan="2" align="center">中国江苏省宜兴市万石镇</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td colspan="2" align="center">Wanshi Town,Yixing City,Jiangsu Province,China</td>
+                    </tr>
+                    <tr>
+                        <td>电话(Tel)：</td>
+                        <td colspan="2">0510-87845988</td>
+                    </tr>
+                    <tr>
+                        <td valign="top">传真(Fax)：</td>
+                        <td colspan="2" valign="top">0510-87842999</td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" cellspacing="0" class="print-table5">
+                    <tr>
+                        <td>技术文件号&nbsp;&nbsp;&nbsp;<span id="qualityDesc"></span></td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="border-bottom:#000 solid 1px;">Paper number of technalogy
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" cellspacing="0" class="print-table5">
+                    <tr>
+                        <td>探伤编号&nbsp;&nbsp;&nbsp;<span></span></td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="border-bottom:#000 solid 1px;">flaw number</td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" cellspacing="0" class="print-table5">
+                    <tr>
+                        <td>材料复验</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="border-bottom:#000 solid 1px;">material reviewr</td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" cellspacing="0" class="print-table5">
+                    <tr>
+                        <td>产品试板</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="border-bottom:#000 solid 1px;">sample plate of product</td>
+                    </tr>
+                </table>
+                <table width="100%" cellpadding="0" cellspacing="0" class="print-table5">
+                    <tr>
+                        <td>热处理报告编号</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="border-bottom:#000 solid 1px;">report numbert of heat
+                            treatment
+                        </td>
+                    </tr>
+                </table>
+                <table width="100%" cellspacing="0" cellpadding="0" class="print-table-b2">
+                    <tr>
+                        <td width="50%">容器类别<br/>container classification</td>
+                        <td>直边高度<br/>Straight side heigh</td>
+                    </tr>
+                    <tr>
+                        <td>焊缝表面质量<br/>Quality of face wel</td>
+                        <td>焊缝最大咬边深度<br/>Deep Max of undercut weld</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" class="print-table-b2">
+        <tr>
+            <td colspan="2" align="center">项目<br/>Item</td>
+            <td width="14%" rowspan="3" align="center">入库号<br/>Heat No. / Batch No.</td>
+            <td width="10%" align="center">表面质量<br/>Outward Quality</td>
+            <td width="8%" align="center">外圆周长<br/>Circumference</td>
+            <td width="15%" align="center">内径<br/>inside diameter</td>
+            <td width="4%" align="center">平均值<br/>Average</td>
+            <td width="5%" align="center">圆度公差<br/>Roundness</td>
+            <td width="7%" align="center">厚  度<br/>Thickness</td>
+            <td width="6%" align="center">总高度<br/>Height H</td>
+            <td colspan="2" align="center">形状公差<br/>
+                Shapedeviation
+            </td>
+            <td width="6%" rowspan="3" align="center">直  边<br/>倾斜度<br/>
+                Straight
+                side rake
+            </td>
+            <td width="6%" rowspan="3" align="center">焊缝余高<br/>
+                Reinforcem
+                ent of weld
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" rowspan="2" align="center">标准规定<br/>Tolerance</td>
+            <td rowspan="2" align="center">不允许折叠<br/>Don't Wrinkling</td>
+            <td rowspan="2" align="center"><span id="circumferenceStandard1"></span><br/><span
+                    id="toleranceMin1"></span>~<span id="toleranceMax1"></span></td>
+            <td rowspan="2" align="center"><strong>D1   D2   D3 D4</strong></td>
+            <td rowspan="2" align="center"><strong><span id="diameter"></span></strong></td>
+            <td rowspan="2" align="center">Max<br/><strong>6.00</strong></td>
+            <td rowspan="2" align="center">T1   T2   TMin</td>
+            <td rowspan="2" align="center">
+                <strong><span id="height"></span><br/></strong><strong><span id="totalHeight1"></span></strong>~<strong>&nbsp;<span
+                    id="totalHeight2"></span></strong></td>
+            <td colspan="2" align="center"><span id="sectionShape1"></span>~<span id="sectionShape2"></span></td>
+        </tr>
+        <tr id="descDiv">
+            <td width="4%" align="center">外凸</td>
+            <td width="5%" align="center">内凹</td>
+        </tr>
+        <tr>
+            <td colspan="14">
+                <table width="100%" cellspacing="0" cellpadding="0" class="print-ntable" style="font-size: 15px">
+                    <tr>
+                        <td width="33%" height="18" style="border:0">产品制造变更报告和备注</td>
+                        <td width="41%" rowspan="2" style="border:0">检验责任师 Chief Inspector ： 徐立军&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;检验员
+                            Inspector&nbsp;&nbsp;王萍
+                        </td>
+                        <td width="25%" rowspan="2" align="right" style="border:0">
+                            <table width="60%" align="right" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center" style="border:0" id="year"></td>
+                                    <td align="center" style="border:0"> 年<br/>
+                                        Year
+                                    </td>
+                                    <td align="center" style="border:0" id="month"></td>
+                                    <td align="center" style="border:0">月<br/>
+                                        Month
+                                    </td>
+                                    <td align="center" style="border:0" id="day"></td>
+                                    <td align="center" style="border:0">日<br/>Day</td>
+                                </tr>
+                            </table>
+                              
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20" style="border:0">Charge report of product manufacture &amp;
+                            Remarks
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+<script>
+    function initData(object) {
+        let date = new Date;
+        $("#year").text(date.getFullYear());
+        $("#month").text(date.getMonth()+1);
+        $("#day").text(date.getDate());
+        ajaxPostInvoke('/quality/book/queryOne', {id: object.id}, function (data) {
+            let parameter = data.parameter;
+            let shapeSetting = parameter.shapeSetting;
+            $("#shapeZnName").text(shapeSetting.chineseName);
+            $("#shapeEnName").text(shapeSetting.englishName);
+            let obj = mergeJsonObject(data, parameter);
+            $("#createTime").text(moment(obj.createTime).format("YYYY-MM-DD"));
+            $("#createTime1").text(moment(obj.createTime).format("YYYY-MM-DD"));
+            $("#ftsjbj").text(obj.shape + ' ' + obj.diameter + '×' + obj.thickness + '(' + obj.min + ')-' + obj.material);
+            $("#ftcpbj").text(obj.shape + ' ' + obj.diameter + '×' + obj.thickness + '(TMin)-' + obj.material);
+            delete obj.createTime;
+            let desc = obj.desc;
+            delete obj.desc;
+            if(obj.processingMethod == '锥体压制'){
+                obj.processingMethodEn = 'cone pressing';
+            }else if(obj.processingMethod == '冲旋结合'){
+                obj.processingMethodEn = 'Percussion with';
+            }else if(obj.processingMethod == '冷冲压'){
+                obj.processingMethodEn = 'cold pressing';
+            }else if(obj.processingMethod == '冷冲压'){
+                obj.processingMethodEn = 'cold pressing';
+            }else if(obj.processingMethod == '冷旋压'){
+                obj.processingMethodEn = 'cold spinning';
+            }
+            for (let key in obj) {
+                $("#" + key).text(obj[key]);
+            }
+            console.log(desc);
+            createDesc(desc);
+            let newImg = document.createElement("img");
+            newImg.src = obj.grooveImg;
+            newImg.style.width = '150px';
+            document.getElementById("pkt").appendChild(newImg);
+        });
+    }
+
+    function createDesc(desc) {
+        let str = '';
+        for (let i = 0; i < desc.length; i++) {
+            let obj = desc[i];
+            //unqualified
+            if (i == 0) {
+                str = str + '<tr><td width="3%" rowspan="' + desc.length + '" align="center"><img src="/images/quality/qualityPartLogo.jpg"width="28" height="160"></td>' +
+                    '<td width="3%;height:20px" align="center">' + (1 * i + 1) + '</td>' +
+                    '<td align="center">' + obj.storage + '</td>' +
+                    '<td align="center">' + obj.qualityWeight + '<br/>conformity</td>' +
+                    '<td align="center">' + obj.circumference + '</td>' +
+                    '<td align="center">' + obj.d1 + ' ' + obj.d2 + ' ' + obj.d3 + ' ' + obj.d4 + '</td>' +
+                    '<td align="center">' + obj.average + '</td>' +
+                    '<td align="center">' + obj.ellipse + '</td>' +
+                    '<td align="center">' + obj.tmin + ' ' + obj.tmax + ' ' + obj.timi + '</td>' +
+                    '<td align="center">' + obj.allHeight + '</td>' +
+                    '<td align="center">' + obj.shapeA + '</td>' +
+                    '<td align="center">' + obj.shapeB + '</td>' +
+                    '<td align="center">' + obj.straightEdge + '</td>' +
+                    '<td align="center">' + obj.weldLine + '</td></tr>';
+            } else {
+                str = str + '<tr><td align="center">' + (1 * i + 1) + '</td>' +
+                    '<td align="center">' + obj.storage + '</td>' +
+                    '<td align="center">' + obj.qualityWeight + '<br/>conformity</td>' +
+                    '<td align="center">' + obj.circumference + '</td>' +
+                    '<td align="center">' + obj.d1 + ' ' + obj.d2 + ' ' + obj.d3 + ' ' + obj.d4 + '</td>' +
+                    '<td align="center">' + obj.average + '</td>' +
+                    '<td align="center">' + obj.ellipse + '</td>' +
+                    '<td align="center">' + obj.tmin + ' ' + obj.tmax + ' ' + obj.timi + '</td>' +
+                    '<td align="center">' + obj.allHeight + '</td>' +
+                    '<td align="center">' + obj.shapeA + '</td>' +
+                    '<td align="center">' + obj.shapeB + '</td>' +
+                    '<td align="center">' + obj.straightEdge + '</td>' +
+                    '<td align="center">' + obj.weldLine + '</td></tr>';
+            }
+        }
+        $("#descDiv").after(str);
+    }
+</script>
+</body>
+</html>
+
+

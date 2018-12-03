@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Build CRUD DataGrid with jQuery EasyUI - jQuery EasyUI Demo</title>
+
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/formula.js"></script>
+    <script src="/js/html2canvas.js"></script>
+</head>
+<body>
+<div>
+    <form id="getForm">
+    diameter:<input name="diameter" value="800">
+    straightEdge:<input name="straightEdge" value="25">
+    downDiameter:<input name="downDiameter" value="400">
+    downStraight:<input name="downStraight" value="25">
+    bigR:<input name="bigR" value="100">
+    littleR:<input name="littleR" value="100">
+    thickness:<input name="thickness" value="14">
+    coneAngle:<input name="coneAngle" value="59">
+    diameterStandard:<input name="diameterStandard" value="1">
+    downGroove:<input name="downGroove" value="abc">
+    </form>
+    <button onclick="setData()">赋值</button>
+</div>
+<div id="allPic">
+    <form id="setForm">
+<table border="0" cellspacing="0" cellpadding="0" style="width:820px; margin-left:auto; margin-right:auto; line-height:25px;margin-bottom:20px;">
+    <tr>
+        <td>
+            <table id="sxzb" width="400" border="0" cellspacing="0" cellpadding="0" height="250" background="/img/ztt/sxzb-nj1.png">
+                <tr>
+                    <td height="250" valign="top"><table width="400" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td height="25" colspan="2" align="right">&nbsp;</td>
+                            <td align="right" valign="top"><input name="straightEdge" type="text" class="scinput4"  style="height: 23px; width: 30px; line-height: 23px; "/></td>
+                            <td colspan="2" align="right" valign="top"><input name="diameter" type="text" class="scinput4"  style="height: 23px; width: 60px; line-height: 23px; "/></td>
+                            <td colspan="4" align="right" valign="bottom"><input name="jsDiameter" type="text" class="scinput4"  style="height: 23px; width: 60px; line-height: 23px; "/></td>
+                            <td width="109" align="center">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="49" colspan="2">&nbsp;</td>
+                            <td width="49" height="49" align="center">&nbsp;</td>
+                            <td height="49" colspan="2" align="center"><input name="bigR" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px; "/></td>
+                            <td height="49" colspan="2">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                            <td width="29" height="49">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="44" colspan="10" align="center"><input name="coneAngle" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                        </tr>
+                        <tr>
+                            <td width="9">&nbsp;</td>
+                            <td width="6" align="left">&nbsp;</td>
+                            <td colspan="2" align="center"><input name="height" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                            <td width="49" align="left">&nbsp;</td>
+                            <td colspan="2" align="right">&nbsp;</td>
+                            <td width="49" align="right">&nbsp;</td>
+                            <td align="center">&nbsp;</td>
+                            <td align="center"><input name="jsHeight" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                        </tr>
+                        <tr>
+                            <td height="78" colspan="2" rowspan="2">&nbsp;</td>
+                            <td rowspan="2">&nbsp;</td>
+                            <td colspan="2" align="right">&nbsp;</td>
+                            <td colspan="2" rowspan="2" align="right">&nbsp;</td>
+                            <td rowspan="2" align="right">&nbsp;</td>
+                            <td rowspan="2" align="right">&nbsp;</td>
+                            <td rowspan="2" align="right">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="45" colspan="2" align="center"><input name="littleR" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                        </tr>
+                        <tr>
+                            <td height="25" colspan="2">&nbsp;</td>
+                            <td align="right"><input name="downStraight" type="text" class="scinput4"  style="height: 23px; width: 30px; line-height: 23px; "/></td>
+                            <td width="46" align="right">&nbsp;</td>
+                            <td colspan="2" align="right"><input name="downDiameter" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                            <td colspan="2" align="center"><input name="jsDownDiameter" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                        </tr>
+                    </table></td>
+                </tr>
+            </table>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+
+
+            <table id="xzb" width="400" border="0" cellspacing="0" cellpadding="0" height="250" background="/img/ztt/xzb-nj1.png">
+                <tr>
+                    <td height="250" valign="top"><table width="400" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="19" height="25">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td align="right"><input name="diameter" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; ; background-color: transparent;"/></td>
+                            <td align="center"><font style="font-size:13px;">未坡口</font></td>
+                            <td align="left"><input name="jsDiameter" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                            <td width="31" align="right">&nbsp;</td>
+                            <td width="82" align="right">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="49">&nbsp;</td>
+                            <td width="40" height="49" align="center">&nbsp;</td>
+                            <td width="106" height="49">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="44" colspan="7" align="center"><input name="coneAngle" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input name="height" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                            <td>&nbsp;</td>
+                            <td width="74" align="right">&nbsp;</td>
+                            <td width="48" align="right">&nbsp;</td>
+                            <td align="center">&nbsp;</td>
+                            <td align="center"><input name="jsHeight" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                        </tr>
+                        <tr>
+                            <td height="60">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td valign="bottom"><input name="littleR" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="42">&nbsp;</td>
+                            <td valign="bottom"><input name="downStraight" type="text" class="scinput4"  style="height: 23px; width: 30px; line-height: 23px; "/></td>
+                            <td align="right">&nbsp;</td>
+                            <td colspan="2" align="center" valign="bottom"><input name="jsDownDiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px; "/></td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="25">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td colspan="3" align="center"><input name="downDiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px; "/></td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                        </tr>
+                    </table></td>
+                </tr>
+            </table>
+
+
+        </td>
+    </tr>
+    <tr>
+        <td height="35" align="center">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+        <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            <table id="szb" width="400" border="0" cellspacing="0" cellpadding="0" height="250" background="/img/ztt/szb-nj1.png">
+                <tr>
+                    <td valign="top"><table width="400" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td height="37" colspan="2" align="right"><input name="straightEdge" type="text" class="scinput4"  style="height: 23px; width: 30px; line-height: 23px; "/></td>
+                            <td colspan="2" align="center" valign="top"><input name="diameter" type="text" class="scinput4"  style="height: 23px; width: 60px; line-height: 23px; "/></td>
+                            <td colspan="2" align="center" valign="bottom"><input name="jsDiameter" type="text" class="scinput4"  style="height: 23px; width: 60px; line-height: 23px; "/></td>
+                            <td width="21" align="center">&nbsp;</td>
+                            <td width="82" align="center">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="49" colspan="2">&nbsp;</td>
+                            <td width="49" height="49" align="center">&nbsp;</td>
+                            <td width="101" height="49"><input name="bigR" type="text" class="scinput4"  style="height: 23px; width: 60px; line-height: 23px; "/></td>
+                            <td height="49">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                            <td height="49">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="44" colspan="8" align="center"><input name="coneAngle" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                        </tr>
+                        <tr>
+                            <td width="19">&nbsp;</td>
+                            <td colspan="3" align="left"><input name="height" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; " /></td>
+                            <td width="55" align="right">&nbsp;</td>
+                            <td width="62" align="right">&nbsp;</td>
+                            <td align="center">&nbsp;</td>
+                            <td align="center"><input name="jsHeight" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; " /></td>
+                        </tr>
+                        <tr>
+                            <td height="78" colspan="2">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="25" colspan="2">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td align="right"><input name="downDiameter" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                            <td align="center"><font style="font-size:13px;">未坡口</font></td>
+                            <td align="left"><input name="jsDownDiameter" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px; "/></td>
+                            <td align="right">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                        </tr>
+                    </table></td>
+                </tr>
+            </table></td>
+        <td>&nbsp;</td>
+        <td>
+            <table id="wzb" width="400" border="0" cellspacing="0" cellpadding="0" height="250" background="/img/ztt/wzb1.png">
+                <tr>
+                    <td height="250" valign="top"><table width="400" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                            <td width="66" align="center"><input name="diameter" type="text" class="scinput4" style="height: 23px; width: 60px; line-height: 23px; "/></td>
+                            <td width="71" align="center">未坡口</td>
+                            <td width="67" align="center"><input name="jsDiameter" type="text" class="scinput4"  style="height: 23px; width: 60px; line-height: 23px; "/></td>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td width="50" height="149" align="left"><input name="height" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px; "/></td>
+                            <td width="49">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td><input name="coneAngle" type="text" class="scinput4"  style="height: 23px; width: 60px; line-height: 23px; "/></td>
+                            <td>&nbsp;</td>
+                            <td width="40">&nbsp;</td>
+                            <td width="55" align="right"><input name="jsHeight" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px; "/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                            <td align="center"><input name="downDiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px; "/></td>
+                            <td align="center">未坡口</td>
+                            <td align="center"><input name="jsDownDiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px; "/></td>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                    </table></td>
+                </tr>
+            </table></td>
+    </tr>
+</table>
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" style="width:820px; margin-left:auto; margin-right:auto; line-height:25px; margin-bottom:20px;">
+    <tr>
+        <td width="400" height="35">&nbsp;</td>
+        <td width="20">&nbsp;</td>
+        <td width="400">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+
+        </td>
+        <td>&nbsp;</td>
+        <td>
+
+
+            <table id="sb" width="400" border="0" cellspacing="0" cellpadding="0" height="239" background="/img/ztt/szb-nj6.png">
+                <tr>
+                    <td height="250" valign="top">
+                        <table width="400" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td colspan="5">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td width="31" height="57">&nbsp;</td>
+                                <td colspan="2" align="center" valign="bottom"><input name="jsBjd" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="25">&nbsp;</td>
+                                <td width="132" align="center"><input name="jsBbigR" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                                <td width="124">&nbsp;</td>
+                                <td width="63" align="right"><input name="jsBheight2" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                                <td width="50" rowspan="3"><input name="jsBheight1" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" rowspan="2" align="center" valign="bottom"><input name="jsBlittleR" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="33">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="40" align="center">&nbsp;</td>
+                                <td colspan="2" align="center" valign="bottom"><input name="jsBdiameter" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px;"/></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td height="29" align="center">&nbsp;</td>
+                                <td height="29" colspan="2" align="center"><input name="jsBdownDiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table></td>
+                </tr>
+            </table>
+
+
+
+        </td>
+    </tr>
+    <tr>
+        <td height="35">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td height="35">
+            <table id="lb" width="400" border="0" cellspacing="0" cellpadding="0" height="239" background="/img/ztt/szb-nj2.png">
+                <tr>
+                    <td height="237" valign="top"><table width="400" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td colspan="5">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td width="32" height="43">&nbsp;</td>
+                            <td colspan="2" align="center"><input name="jsBjd" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="44">&nbsp;</td>
+                            <td width="135" align="center"><input name="jsBbigR" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td width="118">&nbsp;</td>
+                            <td width="71" align="center"><input name="jsBheight1" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td width="44" rowspan="3"><input name="jsBheight2" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" rowspan="2" align="center" valign="bottom"><input name="jsBlittleR" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="39" align="center">&nbsp;</td>
+                            <td colspan="2" align="center"><input name="jsBdiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="29" align="center">&nbsp;</td>
+                            <td height="29" colspan="2" align="center"><input name="jsBdownDiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table></td>
+                </tr>
+            </table></td>
+        <td>&nbsp;</td>
+        <td>
+            <table id="mb" width="400" border="0" cellspacing="0" cellpadding="0" height="239" background="/img/ztt/szb-nj4.png">
+                <tr>
+                    <td height="237" valign="top"><table width="400" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td colspan="6">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td width="32" height="43">&nbsp;</td>
+                            <td colspan="3" align="center"><input name="jsBjd" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="44">&nbsp;</td>
+                            <td width="67" align="center">&nbsp;</td>
+                            <td width="68" align="center"><input name="jsBbigR" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td width="157">&nbsp;</td>
+                            <td width="32" align="center">&nbsp;</td>
+                            <td width="44" rowspan="3"><input name="jsBheight1" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" rowspan="2" align="right" valign="bottom"><input name="jsBlittleR" type="text" class="scinput4"  style="height: 23px; width: 40px; line-height: 23px;"/></td>
+                            <td rowspan="2" align="center" valign="bottom">&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="46">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="25" align="center">&nbsp;</td>
+                            <td colspan="3" align="center"><input name="jsBdiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td height="25" align="center">&nbsp;</td>
+                            <td height="25" colspan="3" align="center"><input name="jsBdownDiameter" type="text" class="scinput4"  style="height: 23px; width: 50px; line-height: 23px;"/></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table></td>
+                </tr>
+            </table></td>
+    </tr>
+</table>
+    </form>
+</div>
+
+<img id="img1" src="">
+<img id="img2" src="">
+<script>
+    function setData() {
+        $("#allPic").show();
+        let data = $("#getForm").getData();
+        let res = getZTCC(data);
+        $("#setForm").form("load",res);
+        res.ztBottom = res.coneAngle < 60 ? "sb" : (res.coneAngle == 60 ? "mb" : "lb");
+        html2canvas(document.getElementById(res.ztTop), {
+            allowTaint: true,
+            taintTest: false,
+            onrendered: function(canvas) {
+                res.ztTop = canvas.toDataURL();
+                html2canvas(document.getElementById(res.ztBottom), {
+                    allowTaint: true,
+                    taintTest: false,
+                    onrendered: function(canvas) {
+                        res.ztBottom = canvas.toDataURL();
+                        console.log("img1",img1)
+                        console.log("img2",img1)
+                        $("#allPic").hide();
+                    }
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

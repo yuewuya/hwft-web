@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <script src="../plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.edatagrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="../../plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<style>
+    p {
+        margin: 10px;
+    }
+
+    .showLine {
+        background: ghostwhite;
+        padding: 10px 0 0 50px;
+        width: 899px;
+        margin-bottom: 10px;
+    }
+
+    .showLine p {
+        display: inline-block;
+        width: 30%;
+    }
+
+    p label {
+        display: inline-block;
+        width: 110px;
+        text-align: right;
+    }
+
+    .showV {
+        float: left;
+        padding: 10px;
+        background: ghostwhite;
+        margin-right: 22px;
+    }
+
+    #savePage div {
+    }
+</style>
+<body>
+<div id="tabs" class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <!-- form 工艺数据-->
+    <div id="tabs1" title="工艺数据/器材及参数" style="padding:10px;">
+        <form id="form">
+            <input name="id" id="id" type="hidden"/>
+            <div class="datagrid-toolbar">工件</div>
+            <p>
+                <label>报告编号:</label>
+                <input name="reportNo" id="reportNo" type="text" required="true" readonly
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>工件名称:</label>
+                <input name="workpiece" id="workpiece" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>材料牌号:</label>
+                <input name="material" id="material" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>产品编号:</label>
+                <input name="code" id="code" type="text" required="true" class="dfinput3" style="width:140px;height: 30px" />
+                <input name="number" id="number" type="text" required="true" class="dfinput3"
+                       style="width:45px;height: 30px" />
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>表面状态:</label>
+                <input name="surfaceState" id="surfaceState" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>检测部位:</label>
+                <select name="site" id="site" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>检测时机:</label>
+                <input name="testingTime" id="testingTime" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+
+            <!-- 器材及参数(Equipment and Parameter) -->
+            <div class="datagrid-toolbar">器材及参数(Equipment and Parameter)</div>
+            <p style="width:44%; display: inline-block">
+                <label>检测方法:</label>
+                <select name="testMethod" id="testMethod" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="ⅡC-d">ⅡC-d</option>
+                </select>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>渗透剂施加方法:</label>
+                <select name="penetrantMethod" id="penetrantMethod" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="喷涂Spraying">喷涂Spraying</option>
+                </select>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>清洗剂:</label>
+                <select name="cleaningAgent" id="cleaningAgent" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option value="HR-ST">HR-ST</option>
+                </select>
+            </p>
+             <p style="width:44%; display: inline-block">
+                <label>去除方法:</label>
+                <select name="removalMethod" id="removalMethod" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="擦拭Wiping">擦拭Wiping</option>
+                </select>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>渗透剂:</label>
+                <select name="penetrant" id="penetrant" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="HP-ST">HP-ST</option>
+                </select>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>显像剂施加方法:</label>
+                <select name="imagingMethod" id="imagingMethod" class="easyui-combobox" style="width:140px;"
+                        data-options="panelHeight:'auto'">
+                    <option selected value="喷涂Spraying">喷涂Spraying</option>
+                </select>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>显像剂:</label>
+                <input name="imaging" id="imaging" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="HD-ST"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>渗透时间:</label>
+                <input name="penetrantTime" id="penetrantTime" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="≥10min"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>工件和渗透材料温度:</label>
+                <input name="temperature" id="temperature" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>干燥时间:</label>
+                <input name="dryingTime" id="dryingTime" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="5min"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>工件表面亮度:</label>
+                <input name="brightness" id="brightness" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="5min" value="≥1000lx"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>显像时间:</label>
+                <input name="imagingTime" id="imagingTime" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="≥10min"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>试块类型:</label>
+                <input name="block" id="block" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="镀铬"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>检验时间:</label>
+                <input name="testTime" id="testTime" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="10~60min"/>
+            </p>
+            <!-- 技术 -->
+            <div class="datagrid-toolbar">技术要求</div>
+            <p style="width:30%; display: inline-block">
+                <label>检测比例:</label>
+                <input name="detection" id="detection" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="100%"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>合格级别:</label>
+                <input name="qualificationLevel" id="qualificationLevel" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="Ⅰ级"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>林敏度等级:</label>
+                <input name="sensitivity" id="sensitivity" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="B级"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>检测标准:</label>
+                <input name="testingStandard" id="testingStandard" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="NB/T47013.5-2015"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>工艺规程:</label>
+                <input name="regulation" id="regulation" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;" value="HWJ0404"/>
+            </p>
+            <p>
+                <label>检测结论:</label>
+                <input name="conclusion" id="conclusion" class="easyui-textbox" data-options="multiline:true"
+                       style="width:500px;height:200px">
+            </p>
+            <div class="datagrid-toolbar">审核信息</div>
+            <p style="width:44%; display: inline-block">
+                <label>填表:</label>
+                <input name="applyId" id="applyId" type="hidden">
+                <input name="applyUser" id="applyUser" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>制作日:</label>
+                <input name="applyTime" id="applyTime" type="text" class="easyui-datebox"
+                       style="height:30px; width:140px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>审核人:</label>
+                <input name="examineId" id="examineId" type="hidden">
+                <input name="examineUser" id="examineUser" type="text"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:44%; display: inline-block">
+                <label>审核日:</label>
+                <input name="examineTime" id="examineTime" type="text" class="easyui-datebox"
+                       style="height:30px; width:140px;"/>
+            </p>
+        </form>
+        <div class="datagrid-toolbar">底片评定表</div>
+        <table id="dg" style="width:80%"></table>
+        <div id="toolbar">
+            <label>1A</label>
+            <input name="a1" id="a1" type="text"
+                   class="easyui-validatebox textbox"
+                   style="width:40px;"/>
+            <label>2A</label>
+            <input name="a2" id="a2" type="text"
+                   class="easyui-validatebox textbox"
+                   style="width:40px;"/>
+            <label>3A</label>
+            <input name="a3" id="a3" type="text"
+                   class="easyui-validatebox textbox"
+                   style="width:40px;"/>
+            选择:
+            <select name="ax" id="ax" class="easyui-combobox" style="width:80px;"
+                    data-options="panelHeight:'auto'">
+                <option value="4A">4A</option>
+                <option value="5A">5A</option>
+                <option value="6A">6A</option>
+                <option value="7A">7A</option>
+                <option value="8A">8A</option>
+                <option value="9A">9A</option>
+                <option value="10A">10A</option>
+                <option value="11A">11A</option>
+                <option value="12A">12A</option>
+            </select>
+            <input name="axvalue" id="axvalue" type="text"
+                   class="easyui-validatebox textbox"
+                   style="width:40px;"/>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+               onclick="add()">添加</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="$('#dg').edatagrid('destroyRow')">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+               onclick="save()">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+               onclick="$('#dg').edatagrid('cancelRow')">取消</a>
+        </div>
+    </div>
+    <script>
+        function search(obj) {
+            changeParameter(obj.thickness);
+        }
+        $(function () {
+            $('#a1').textbox({
+                onChange: function (value) {
+                    newRow('1A', value);
+                    save();
+                }
+            });
+            $('#a3').textbox({
+                onChange: function (value) {
+                    newRow('3A', value);
+                    save();
+                }
+            });
+            $('#a2').textbox({
+                onChange: function (value) {
+                    newRow('2A', value);
+                    save();
+                }
+            });
+        });
+        function add() {
+            let oldLevel = $("#qualificationLevel").val();
+            if (!oldLevel) {
+                layer.alert("合格级别没有填写", {icon: 2});
+                return;
+            }
+            let negativeNoPre = $("#ax").textbox('getValue');
+            let number = $("#axvalue").val();
+            if (!(negativeNoPre && number)) {
+                return;
+            }
+            let index = checkIndex(negativeNoPre);
+            for (let i = 1; i <= number - index; i++) {
+                let row = {
+                    no: negativeNoPre + (1 * i + index),
+                    defect: '/',
+                    position: '经检测未发现超标缺陷',
+                    grindingCharacter: '/',
+                    defectNo:'/',
+                    grindingIndication: '/',
+                    weldCharacter: '/',
+                    weldIndication: '/',
+                    level: '/'
+                };
+                $('#dg').edatagrid('addRow', {
+                    index: i * 1 + index - 1,
+                    row: row
+                });
+            }
+            $('#dg').edatagrid('saveRow')
+        }
+
+        /**
+         * @param negativeNoPre 编号前缀
+         * @param length 数量
+         * @param index  从哪里开始添加
+         */
+        function newRow(negativeNoPre, length) {
+            let index = checkIndex(negativeNoPre);
+            //如果新增的数量少于已有的数量，那就不再新增
+            if (index <= length)
+                for (let i = 1; i <= length - index; i++) {
+                    let row = {
+                        no: negativeNoPre + (1 * i + index),
+                        defect: '/',
+                        defectNo:'/',
+                        position: '经检测未发现超标缺陷',
+                        grindingCharacter: '/',
+                        grindingIndication: '/',
+                        weldCharacter: '/',
+                        weldIndication: '/',
+                        level: '/'
+                    };
+                    $('#dg').edatagrid('addRow', {
+                        index: i * 1 + index - 1,
+                        row: row
+                    });
+                }
+            $('#dg').edatagrid('saveRow')
+        }
+
+        /**
+         * 计算添加数据的下标
+         * @param negativeNoPre
+         * @returns {number}
+         */
+        function checkIndex(negativeNoPre) {
+            let detail = $("#dg").datagrid("getData").rows.filter(item => item.no.indexOf('R') == -1);
+            let count = 0;
+            for (let i = 0; i < detail.length; i++) {
+                if (detail[i].no.indexOf(negativeNoPre) != -1) {
+                    count++;
+                }
+            }
+            return count;
+        }
+        function save() {
+            $('#dg').edatagrid('saveRow');
+        }
+    </script>
+</div>
+</body>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+    let maxNumber;
+    /**
+     * 初始化
+     *
+     * */
+    function init(id) {
+        if (id) {
+            ajaxPostInvoke('/infiltration/queryOne', {id: id}, function (data) {
+                let examine = data.examineEntity;
+                delete examine.id;
+                data = mergeJsonObject(data, examine);
+                data.workpiece = '封头 ' + data.shape + ' ' + data.diameter + '*' + data.thickness;
+                $('#form').form('load', data);
+            });
+        } else {
+            ajaxPostInvoke('/infiltration/getNumbering', {id: id}, function (data) {
+                let obj = {};
+                obj.applyTime = data.applyTime;
+                obj.reportNo = data.reportNo;
+                obj.applyUser = data.applyUser;
+                $('#form').form('load', obj);
+            });
+        }
+        initTable(id);
+        $('input[name=number]').change(function() {
+                if ($("#code").val() == '') {
+                    layer.alert("请先选择工艺卡", {icon: 2});
+                    $('#number').val('');
+                    return;
+                }
+                if (maxNumber < value) {
+                    layer.alert("此工艺卡最多只有" + maxNumber + "个", {icon: 2});
+                    $('#number').val('');
+                }
+        });
+        $('input[name=code]').change(function() {
+                ajaxPostInvoke('/infiltration/findSameData', { code: $("#code").val() }, function (data) {
+                    if (!data.code) {
+                        layer.alert("没有此工艺卡！", {
+                            icon: 2
+                        });
+                        $('#code').val('');
+                        return;
+                    }
+                    delete data.examineEntity;
+                    data.workpiece = '封头 ' + data.shape + ' ' + data.diameter + '*' + data.thickness;
+                    if (data.id) {
+                        $('#dg').datagrid('reload', { id: data.id });
+                    }
+                    delete data.id;
+                    delete data.reportNo;
+                    delete data.applyUser;
+                    delete data.applyId;
+                    delete data.applyTime;
+                    maxNumber = data.number;
+                    delete data.number;
+                    let ss = {};
+                    for(let key in data){
+                        if(data[key]){
+                            ss[key] = data[key];
+                        }
+                    }
+                    $('#form').form('load', ss);
+                });
+        });
+    }
+
+    /**
+     * 获取数据
+     */
+    function getFormData() {
+        if (!$("#form").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return;
+        }
+        let obj = $("#form").getData();
+        obj.detail = $("#dg").datagrid("getData").rows;
+        return obj;
+    }
+
+    /**
+     * 初始化 表
+     *
+     * */
+    function initTable(id) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#dg").edatagrid({
+            queryParams: {
+                id: id
+            },
+            width: '98%',
+            height: mContentHeight,
+            singleSelect: true,
+            autoRowHeight: false,
+            fitColumns: false,
+            toolbar: '#toolbar',
+            idField: 'id',
+            url: getRootPath() + '/infiltration/detailList',
+            columns: [
+                [
+                    {
+                        field: 'no',
+                        rowspan: 3,
+                        title: '焊缝(工件)部件编号',
+                        width: 200,
+                        align: 'center',
+                        editor: { type: 'validatebox' }
+                    },
+                    {
+                        field: 'defectNo',
+                        title: '缺陷编号',
+                        rowspan: 3,
+                        width: 200,
+                        align: 'center',
+                        editor: { type: 'validatebox' }
+                    },
+                    {
+                        field: 'defect',
+                        title: '缺陷类型',
+                        rowspan: 3,
+                        width: 100,
+                        align: 'center',
+                        editor: { type: 'validatebox' }
+                    }, {
+                    field: 'position',
+                    title: '缺陷痕迹尺寸',
+                    rowspan: 3,
+                    width: 200,
+                    align: 'center',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    title: '缺陷处理方式及结果',
+                    align: 'center',
+                    colspan: 4
+                }, {
+                    field: 'level',
+                    title: '最终评级',
+                    width: 80,
+                    align: 'center',
+                    rowspan: 3
+                }
+                ],
+                [
+                    {
+                        title: '打磨后复检缺陷',
+                        align: 'center',
+                        colspan: 2
+                    },
+                    {
+                        title: '补焊后复检缺陷',
+                        align: 'center',
+                        colspan: 2
+                    }
+                ],
+                [
+                    {
+                        field: 'grindingCharacter',
+                        title: '性质',
+                        align: 'center',
+                        width: 200,
+                        editor: {
+                            type: 'validatebox'
+                        }
+                    },
+                    {
+                        field: 'grindingIndication',
+                        title: '磁痕尺寸',
+                        align: 'center',
+                        width: 200,
+                        editor: {
+                            type: 'validatebox'
+                        }
+                    },
+                    {
+                        field: 'weldCharacter',
+                        title: '性质',
+                        align: 'center',
+                        width: 200,
+                        editor: {
+                            type: 'validatebox'
+                        }
+                    },
+                    {
+                        field: 'weldIndication',
+                        title: '磁痕尺寸',
+                        align: 'center',
+                        width: 200,
+                        editor: {
+                            type: 'validatebox'
+                        }
+                    }
+                ]
+            ]
+        });
+    }
+</script>
+</html>
+
+

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="css.css" />
+
+  <script src="/js/utils.js"></script>
+  <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <script src="/plugins/jquery/jquery.json.min.js"></script>
+  <script src="/plugins/moment.min.js"></script>
+  <script src="/js/easy_common.js"></script>
+<style>
+
+</style>
+<title>无标题文档</title>
+
+</head>
+<body>
+
+
+<div id="print1" style="width: 100%">
+
+
+                
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td width="60%" style="border-right:0"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="line-height:22px">
+                      <tr>
+                        <td width="10%" rowspan="2" style=" border:0px"><img src="images/pic.png" width="39" height="32"></td>
+                        <td width="90%" valign="bottom"  style=" border:0px;  padding:0">宜兴华威封头有限公司</td>
+                      </tr>
+                      <tr>
+                        <td valign="top"  style=" border:0px;padding:0">YIXING HUAWEI HEAD PLATE CO., LTD</td>
+                      </tr>
+                    </table></td>
+                    <td width="10" align="center" valign="middle">
+                    <table width="100%" border="0">
+                      <tr>
+                          <td align="center"><span style="font-size:20px; font-weight:600; letter-spacing:5px; font-family:'宋体'">工艺流转检验卡（常规）</span></td>
+                      </tr>
+                        <tr>
+                          <td align="center">表G-04 共1联 修订号 REV4.0</td>
+                        </tr>
+                    </table></td>
+                  </tr>
+  </table>    
+                
+
+
+            <table width="100%" cellpadding="0" cellspacing="0"  class="table_print" style="margin-top:10px;" >
+              <tr>
+                <td colspan="2" align="center">指令号</td>
+                <td width="11%" field="code" align="center">&nbsp;</td>
+                <td colspan="2" align="center">下达日期</td>
+                <td colspan="3" field="createTime" align="center">&nbsp;</td>
+                <td width="6%" rowspan="2" align="center" >制作</td>
+                <td width="10%" rowspan="2">&nbsp;</td>
+                <td width="12%" rowspan="2" align="center">审核</td>
+                <td width="10%" rowspan="2">&nbsp;</td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">材料</td>
+                <td field="materialSource" align="center">&nbsp;</td>
+                <td colspan="2" align="center">完工日期</td>
+                <td colspan="3" field="completionDate" align="center">&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="5%" rowspan="5" align="center">用户要求</td>
+                <td width="12%" align="center">形状</td>
+                <td field="shape" align="center">&nbsp;</td>
+                <td colspan="2" align="center" id="nwj">内径×厚</td>
+                <td width="12%" align="center"><span field="diameter"></span> × <span field="thickness"></span></td>
+                <td width="9%" align="center">材质</td>
+                <td colspan="3" field="material" align="center">&nbsp;</td>
+                <td width="6%" align="center">数量</td>
+                <td field="count" align="center">&nbsp;</td>
+              </tr>
+              <tr>
+                <td align="center">制造标准</td>
+                <td field="manufacture" align="center">&nbsp;</td>
+                <td colspan="2" align="center" id="nwzg">直边/ 内总高</td>
+                <td align="center"><span field="straightEdge"></span> / <span field="height"></span></td>
+                <td align="center">坡口</td>
+                <td colspan="3" field="groove" align="center">&nbsp;</td>
+                <td align="center">重量</td>
+                <td align="center"><span field="weight"></span>Kg</td>
+              </tr>
+              <tr>
+                <td align="center">探伤</td>
+                <td colspan="4" align="center" contenteditable><span field="rtReport"></span> <span field="rtPer"></span> <span field="rtLevel"></span></td>
+                <td align="center">主机种</td>
+                <td colspan="3" field="hostType" align="center">&nbsp;</td>
+                <td width="60px" align="center">加工方法</td>
+                <td field="processingMethod" align="center">&nbsp;</td>
+              </tr>
+              <tr>
+                <td align="center">见证</td>
+                <td colspan="4" align="center" id="jz" contenteditable></td>
+                <td rowspan="3" align="center">备注</td>
+                <td colspan="5" rowspan="3" field="remark" align="center">&nbsp;</td>
+              </tr>
+              <tr>
+                <td align="center">其它</td>
+                <td colspan="2" id="qt" contenteditable></td>
+                <td colspan="2">坡口图：</td>
+              </tr>
+              <tr>
+                <td align="center">坯料尺寸</td>
+                <td colspan="3" align="center"><img width="250px" class="backImg" id="plImgId"></td>
+                <td colspan="2" align="center"><img width="150px" class="backImg" id="grooveImgId"></td>
+              </tr>
+  </table>
+              
+              
+  <table width="100%"  cellpadding="0" cellspacing="0"  class="table_print">
+              <tr>
+                <td width="5%" align="center">序号</td>
+                <td width="15%" align="center">工序/控制点</td>
+                <td width="12%" align="center">操作依据</td>
+                <td width="20%" align="center">工艺要求</td>
+                <td width="8%" align="center">计划开始</td>
+                <td width="8%" align="center">计划结束</td>
+                <td width="8%" align="center">加工日期</td>
+                <td width="10%" align="center">操作者</td>
+                <td width="10%" align="center">检验员</td>
+              </tr>
+             <tbody id="gx"></tbody>
+  </table>
+              
+              
+  <table width="100%" cellpadding="00" cellspacing="0" class="table_print">
+    <tr>
+      <td width="5%" rowspan="3" align="center">尺寸公差</td>
+      <td width="12%" align="center" id="nwzcgc">外周公差</td>
+      <td width="10%" align="center" field="circumference1"></td>
+      <td width="12%" align="center">最小壁厚</td>
+      <td width="10%" field="min" align="center">&nbsp;</td>
+      <td width="10%">客户号</td>
+      <td width="10%" field="customerId" align="center">&nbsp;</td>
+      <td width="15%" rowspan="3" align="center">&nbsp;</td>
+      <td width="20%" rowspan="3" valign="top">合格确认：</td>
+    </tr>
+    <tr>
+      <td align="center" id="zjzcgc">直径公差</td>
+      <td align="center"><span field="toleranceMin1"></span> ~ <span field="toleranceMax1"></span></td>
+      <td align="center">断面形状</td>
+      <td align="center"><span field="sectionShape1"></span> ~ <span field="sectionShape2"></span></td>
+      <td colspan="2" rowspan="2">特别记录事项：</td>
+    </tr>
+    <tr>
+      <td align="center">失圆度</td>
+      <td align="center" field="roundness">&nbsp;</td>
+      <td align="center">总高公差</td>
+      <td align="center"><span field="totalHeight1"></span> ~ <span field="totalHeight2"></span></td>
+    </tr>
+  </table>
+  
+  
+  <table id="countTd" width="100%" cellpadding="0" cellspacing="0" class="table_print">
+    <tr>
+      <td width="5%" rowspan="3" align="center">产品编号</td>
+      <td colspan="3" align="center">下料检查</td>
+      <td align="center">材料标记</td>
+      <td colspan="15" align="center">成品检查记录</td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">板材厚度</td>
+      <td rowspan="2" width="6%" align="center">直径</td>
+      <td rowspan="2" width="10%" align="center">入库号</td>
+      <td width="5%" rowspan="2" align="center">外周长</td>
+      <td colspan="4" align="center">内径</td>
+      <td colspan="3" align="center">板厚（min）</td>
+      <td width="8%" rowspan="2" align="center">铁素体</td>
+      <td width="5%" rowspan="2" align="center">内总高</td>
+      <td colspan="2" align="center">断面</td>
+      <td width="5%" rowspan="2" align="center">坡口</td>
+      <td width="5%" rowspan="2" align="center">倾斜度</td>
+      <td width="5%" rowspan="2" align="center">焊缝余高</td>
+    </tr>
+    <tr>
+      <td width="6%" align="center">最大</td>
+      <td width="6%" align="center">最小</td>
+      <td width="5%" align="center">D1</td>
+      <td width="5%" align="center">D2</td>
+      <td width="5%" align="center">D3</td>
+      <td width="5%" align="center">D4</td>
+      <td width="5%" align="center">T1</td>
+      <td width="5%" align="center">T2</td>
+      <td width="5%" align="center">T3</td>
+      <td width="6%" align="center">外凸</td>
+      <td width="6%" align="center">内凹</td>
+    </tr>
+  </table>
+  <table id="cc" width="100%" cellpadding="0" cellspacing="0"class="table_print" style="margin-top:50px; margin-bottom:20px;">
+    <tr>
+      <td align="center">更改标记</td>
+      <td align="center">更改处数</td>
+      <td align="center">更改人</td>
+      <td align="center">更改日期</td>
+      <td align="center">更改标志</td>
+      <td align="center">更改处数</td>
+      <td align="center">更改人</td>
+      <td align="center">更改日期</td>
+      <td align="center">更改标志</td>
+      <td align="center">更改处数</td>
+      <td align="center">更改人</td>
+      <td align="center">更改日期</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+</div>
+
+<script>
+  function setGXRows(list) {
+      let arr = [];
+      for (let i = 0; i < list.length; i++){
+        arr.push(
+            "<tr>" +
+            "<td align='center'>" + (i*1+1) + "</td>" +
+            "<td align='center'>"+ list[i].process + (list[i].control && list[i].control != '' ? ('('+list[i].control+')') : '') +"</td>" +
+            "<td align='center'>" + (list[i].basis == null ? "" : list[i].basis) + "</td>" +
+            "<td align='center'>" + (list[i].require == null ? '' : list[i].require) + "</td>" +
+            "<td align='center'>" + list[i].beginTime + "</td>" +
+            "<td align='center'>" + list[i].endTime + "</td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "</tr>"
+        )
+      }
+      $("#gx").html(arr.join(""))
+  }
+  
+  function initData(data) {
+      ajaxPostInvoke("/processCard/ftCard/findPrint", {id: data.id}, function (res) {
+          for(let i in res.list){
+              res.list[i].beginTime = moment(res.list[i].beginTime, "YYYY-MM-DD HH:mm:ss").format("M/DD");
+              res.list[i].endTime = moment(res.list[i].endTime, "YYYY-MM-DD HH:mm:ss").format("M/DD");
+          }
+
+          if(res.list && res.list.length > 0){
+              setGXRows(res.list)
+          }
+
+          res.createTime = res.createTime.split(" ")[0];
+          res.completionDate = res.completionDate && res.completionDate != null ? res.completionDate.split(" ")[0] : '';
+          setData2Text(res);
+
+          let jz = "合格证 材质证";
+          jz += res.rtReport && res.rtReport !== '' ? " RT" : "";
+          jz += res.pt && res.pt == 1 ? " PT" : "";
+          jz += res.rtReport && res.rtReport == 1 ? " UT" : "";
+          jz += res.rtReport && res.rtReport == 1 ? " MT" : "";
+          jz += res.rtReport && res.rtReport == 1 ? " 热处理" : "";
+          $("#jz").text(jz);
+
+          let qt = '';
+          qt += res.detection && res.detection == 1 ? "监检" : "";
+          qt += res.boardPerformance && res.boardPerformance == 1 ? " 试板性能" : "";
+          qt += res.materialRetest && res.materialRetest == 1 ? " 材料复验" : "";
+          $("#qt").text(qt);
+
+          if(res.diameterStandard && res.diameterStandard == 1){
+              $("#nwj").text("内径×厚");
+          }else {
+              $("#nwj").text("外径×厚");
+          }
+
+          if(res.circumferenceStandard1 && res.circumferenceStandard1 == 1){
+              $("#nwzg").text("外周公差");
+          }else {
+              $("#nwzg").text("内周公差");
+          }
+
+          if(res.toleranceStandard1 && res.toleranceStandard1 == 1){
+              $("#zjzcgc").text("周长公差");
+          }else {
+              $("#zjzcgc").text("直径公差");
+          }
+
+          if(res.heightStandard && res.heightStandard == 1){
+              $("#nwzcgc").text("直边/内总高");
+          }else {
+              $("#nwzg").text("直边/外总高");
+          }
+
+          if(res.count && res.count != ''){
+              for(let i = 0; i < res.count *1; i++){
+                  $("#countTd").append(
+                      '<tr><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td>' +
+                      '<td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td>' +
+                      '<td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td><td contenteditable>&nbsp;</td></tr>'
+                  )
+              }
+          }
+
+          $("#grooveImgId").attr("field", res.grooveImgId);
+          $("#plImgId").attr("field", res.plImgId);
+          getBackImg([res.grooveImgId, res.plImgId]);
+      })
+  }
+</script>
+   
+</body>
+</html>

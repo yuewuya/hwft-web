@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生产采购清单打印</title>
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <style type="text/css">
+
+        *{font-size:9pt;border:0;margin:0;padding:0;}
+        body{
+            margin: 0 auto;
+            min-width: 980px;
+
+        }
+        .font-title-back {
+            font-size: 20px;
+            line-height: 40px;
+            font-weight: bold;
+        }
+
+        .line3 {
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-right-color: #000;
+            border-bottom-color: #000;
+            border-left-color: #000;
+        }
+        .line2 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #000;
+            font-size: 14px;
+        }
+         .linleft {
+            border-top-width: 1px;
+            border-left-width: 1px;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-top-color: #000;
+            border-left-color: #000;
+        }
+        .linall {
+            border: 1px solid #000;
+        }
+        {padding:10px 18px;}
+         .forminfo{padding-left:23px;}
+         .toolbar{
+            float: left;
+        }
+         .toolbar li{background:url(/images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-right:5px;border-radius: 3px; cursor:pointer;}
+         .toolbar li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
+
+         .line0 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #000;
+            font-size: 11px;
+            height: 25px;
+            line-height: 25px;
+        }
+
+         .bk {	border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+            border-left-width: 1px;
+            border-left-style: solid;
+            border-left-color: #DEEFFF;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #DEEFFF;
+        }
+         .bt {
+            float: left;
+            padding: 5px;
+            width: 50%;
+            height: auto;
+            line-height: 25px;
+        }
+         .ybt {
+            float: right;
+            margin-right: 20px;
+            line-height: 25px;
+            height: auto;
+        }
+         .ntable {
+            width: 100%;
+            padding-top: 5px;
+            margin: 0px;
+            padding-bottom: 15px;
+            float: left;
+        }
+         .sp {
+            float: left;
+            font-size: 12px;
+            padding-left: 30px;
+            width: 60%;
+            padding-top: 5px;
+            padding-bottom: 30px;
+        }
+         .xbk {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000;
+        }
+    </style>
+</head>
+<body>
+<div class="formbody" id="print1">
+    <ul class="forminfo">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" >
+            <tr>
+                <td height="35" align="center"><p class="font-title-back">封头加工技术协议</p></td>
+            </tr>
+            <tr>
+                <td height="20" align="right" field="numbers">&nbsp;&nbsp;</td>
+            </tr>
+
+        </table>
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="linall">
+            <tr>
+                <td align="left" bgcolor="#FFFFFF">
+                    &nbsp;&nbsp; 一、本协议作为封头定作合同的附件，与封头定作合同具有同等法律效力。<br />
+                    &nbsp;&nbsp; 二、本协议的内容，只对封头加工技术作出约定，与封头的定作合同的商务内容无关。<br />
+                    &nbsp;&nbsp; 三、封头的规格、数量、质量技术等如下表： <span style="float: right;">单位 尺寸 mm 数量&nbsp;&nbsp;</span> <br />
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    <table width="95%"  border="0" align="center" cellpadding="0" cellspacing="0" class="linleft" style="margin-top:2px;margin: 0 auto;">
+                        <tr>
+                            <td align="center" class="line0">NO.</td>
+                            <td colspan="2" align="center" class="line0">封头序号</td>
+                            <td align="center"  class="line0">规格1</td>
+                            <td align="center"  class="line0">规格2</td>
+                            <td align="center"  class="line0">规格3</td>
+                            <td align="center"  class="line0">规格4</td>
+                            <td align="center"  class="line0">规格5</td>
+                            <td align="center"  class="line0">规格6</td>
+                            <td align="center"  class="line0">规格7</td>
+                            <td align="center"  class="line0">规格8</td>
+                        </tr>
+                        <tr>
+                            <td width="5%" align="center" class="line0">1</td>
+                            <td width="5%" rowspan="5" align="center" class="line0">材料</td>
+                            <td width="10%" align="center" class="line0">材质牌号</td>
+                            <td width="10%" align="center" class="line0" field="list_materialNumber"></td>
+                            <td width="10%" align="center" class="line0" field="list_materialNumber"></td>
+                            <td width="10%" align="center" class="line0" field="list_materialNumber"></td>
+                            <td width="10%" align="center" class="line0" field="list_materialNumber"></td>
+                            <td width="10%" align="center" class="line0" field="list_materialNumber"></td>
+                            <td width="10%" align="center" class="line0" field="list_materialNumber"></td>
+                            <td width="10%" align="center" class="line0" field="list_materialNumber"></td>
+                            <td width="10%" align="center" class="line0" field="list_materialNumber"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">2</td>
+                            <td align="center"  class="line0">材质来源</td>
+                            <td align="center"  class="line0" field="list_materialSource"></td>
+                            <td align="center"  class="line0" field="list_materialSource"></td>
+                            <td align="center"  class="line0" field="list_materialSource"></td>
+                            <td align="center"  class="line0" field="list_materialSource"></td>
+                            <td align="center"  class="line0" field="list_materialSource"></td>
+                            <td align="center"  class="line0" field="list_materialSource"></td>
+                            <td align="center"  class="line0" field="list_materialSource"></td>
+                            <td align="center"  class="line0" field="list_materialSource"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" align="center"  class="line0">3</td>
+                            <td align="center"  class="line0">常规复验</td>
+                            <td align="center"  class="line0" field="list_materialCommon"></td>
+                            <td align="center"  class="line0" field="list_materialCommon"></td>
+                            <td align="center"  class="line0" field="list_materialCommon"></td>
+                            <td align="center"  class="line0" field="list_materialCommon"></td>
+                            <td align="center"  class="line0" field="list_materialCommon"></td>
+                            <td align="center"  class="line0" field="list_materialCommon"></td>
+                            <td align="center"  class="line0" field="list_materialCommon"></td>
+                            <td align="center"  class="line0" field="list_materialCommon"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">其他复验</td>
+                            <td align="center"  class="line0" field="list_materialOther"></td>
+                            <td align="center"  class="line0" field="list_materialOther"></td>
+                            <td align="center"  class="line0" field="list_materialOther"></td>
+                            <td align="center"  class="line0" field="list_materialOther"></td>
+                            <td align="center"  class="line0" field="list_materialOther"></td>
+                            <td align="center"  class="line0" field="list_materialOther"></td>
+                            <td align="center"  class="line0" field="list_materialOther"></td>
+                            <td align="center"  class="line0" field="list_materialOther"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">4</td>
+                            <td align="center"  class="line0">其它要求</td>
+                            <td align="center"  class="line0" field="list_materialRequire"></td>
+                            <td align="center"  class="line0" field="list_materialRequire"></td>
+                            <td align="center"  class="line0" field="list_materialRequire"></td>
+                            <td align="center"  class="line0" field="list_materialRequire"></td>
+                            <td align="center"  class="line0" field="list_materialRequire"></td>
+                            <td align="center"  class="line0" field="list_materialRequire"></td>
+                            <td align="center"  class="line0" field="list_materialRequire"></td>
+                            <td align="center"  class="line0" field="list_materialRequire"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">5</td>
+                            <td colspan="2" align="center"  class="line0">封头形状</td>
+                            <td align="center"  class="line0" field="list_shape"></td>
+                            <td align="center"  class="line0" field="list_shape"></td>
+                            <td align="center"  class="line0" field="list_shape"></td>
+                            <td align="center"  class="line0" field="list_shape"></td>
+                            <td align="center"  class="line0" field="list_shape"></td>
+                            <td align="center"  class="line0" field="list_shape"></td>
+                            <td align="center"  class="line0" field="list_shape"></td>
+                            <td align="center"  class="line0" field="list_shape"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">6</td>
+                            <td rowspan="6" align="center"  class="line0">封头尺寸</td>
+                            <td align="center"  class="line0">公称直径</td>
+                            <td align="center"  class="line0" field="list_diameter"></td>
+                            <td align="center"  class="line0" field="list_diameter"></td>
+                            <td align="center"  class="line0" field="list_diameter"></td>
+                            <td align="center"  class="line0" field="list_diameter"></td>
+                            <td align="center"  class="line0" field="list_diameter"></td>
+                            <td align="center"  class="line0" field="list_diameter"></td>
+                            <td align="center"  class="line0" field="list_diameter"></td>
+                            <td align="center"  class="line0" field="list_diameter"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">7</td>
+                            <td align="center"  class="line0">投料厚度</td>
+                            <td align="center"  class="line0" field="list_materialThickness"></td>
+                            <td align="center"  class="line0" field="list_materialThickness"></td>
+                            <td align="center"  class="line0" field="list_materialThickness"></td>
+                            <td align="center"  class="line0" field="list_materialThickness"></td>
+                            <td align="center"  class="line0" field="list_materialThickness"></td>
+                            <td align="center"  class="line0" field="list_materialThickness"></td>
+                            <td align="center"  class="line0" field="list_materialThickness"></td>
+                            <td align="center"  class="line0" field="list_materialThickness"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">8</td>
+                            <td align="center"  class="line0">直边高度</td>
+                            <td align="center"  class="line0" field="list_straightHeight"></td>
+                            <td align="center"  class="line0" field="list_straightHeight"></td>
+                            <td align="center"  class="line0" field="list_straightHeight"></td>
+                            <td align="center"  class="line0" field="list_straightHeight"></td>
+                            <td align="center"  class="line0" field="list_straightHeight"></td>
+                            <td align="center"  class="line0" field="list_straightHeight"></td>
+                            <td align="center"  class="line0" field="list_straightHeight"></td>
+                            <td align="center"  class="line0" field="list_straightHeight"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">9</td>
+                            <td align="center"  class="line0">封头总高</td>
+                            <td align="center"  class="line0" field="list_allHeight"></td>
+                            <td align="center"  class="line0" field="list_allHeight"></td>
+                            <td align="center"  class="line0" field="list_allHeight"></td>
+                            <td align="center"  class="line0" field="list_allHeight"></td>
+                            <td align="center"  class="line0" field="list_allHeight"></td>
+                            <td align="center"  class="line0" field="list_allHeight"></td>
+                            <td align="center"  class="line0" field="list_allHeight"></td>
+                            <td align="center"  class="line0" field="list_allHeight"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">10</td>
+                            <td align="center"  class="line0">最小厚度</td>
+                            <td align="center"  class="line0" field="list_minThickness"></td>
+                            <td align="center"  class="line0" field="list_minThickness"></td>
+                            <td align="center"  class="line0" field="list_minThickness"></td>
+                            <td align="center"  class="line0" field="list_minThickness"></td>
+                            <td align="center"  class="line0" field="list_minThickness"></td>
+                            <td align="center"  class="line0" field="list_minThickness"></td>
+                            <td align="center"  class="line0" field="list_minThickness"></td>
+                            <td align="center"  class="line0" field="list_minThickness"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">11</td>
+                            <td align="center"  class="line0">坡口形式</td>
+                            <td align="center"  class="line0" field="list_pkType"></td>
+                            <td align="center"  class="line0" field="list_pkType"></td>
+                            <td align="center"  class="line0" field="list_pkType"></td>
+                            <td align="center"  class="line0" field="list_pkType"></td>
+                            <td align="center"  class="line0" field="list_pkType"></td>
+                            <td align="center"  class="line0" field="list_pkType"></td>
+                            <td align="center"  class="line0" field="list_pkType"></td>
+                            <td align="center"  class="line0" field="list_pkType"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">12</td>
+                            <td colspan="2" align="center"  class="line0">封头数量</td>
+                            <td align="center"  class="line0" field="list_num"></td>
+                            <td align="center"  class="line0" field="list_num"></td>
+                            <td align="center"  class="line0" field="list_num"></td>
+                            <td align="center"  class="line0" field="list_num"></td>
+                            <td align="center"  class="line0" field="list_num"></td>
+                            <td align="center"  class="line0" field="list_num"></td>
+                            <td align="center"  class="line0" field="list_num"></td>
+                            <td align="center"  class="line0" field="list_num"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">13</td>
+                            <td rowspan="2" align="center"  class="line0">公差要求</td>
+                            <td align="center"  class="line0">对准基准</td>
+                            <td align="center"  class="line0" field="list_gcBase"></td>
+                            <td align="center"  class="line0" field="list_gcBase"></td>
+                            <td align="center"  class="line0" field="list_gcBase"></td>
+                            <td align="center"  class="line0" field="list_gcBase"></td>
+                            <td align="center"  class="line0" field="list_gcBase"></td>
+                            <td align="center"  class="line0" field="list_gcBase"></td>
+                            <td align="center"  class="line0" field="list_gcBase"></td>
+                            <td align="center"  class="line0" field="list_gcBase"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">14</td>
+                            <td align="center"  class="line0">公差数值</td>
+                            <td align="center"  class="line0" field="list_gcNum"></td>
+                            <td align="center"  class="line0" field="list_gcNum"></td>
+                            <td align="center"  class="line0" field="list_gcNum"></td>
+                            <td align="center"  class="line0" field="list_gcNum"></td>
+                            <td align="center"  class="line0" field="list_gcNum"></td>
+                            <td align="center"  class="line0" field="list_gcNum"></td>
+                            <td align="center"  class="line0" field="list_gcNum"></td>
+                            <td align="center"  class="line0" field="list_gcNum"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">15</td>
+                            <td rowspan="2" align="center"  class="line0">抛光要求</td>
+                            <td align="center"  class="line0">抛光面</td>
+                            <td align="center"  class="line0" field="list_pgFace"></td>
+                            <td align="center"  class="line0" field="list_pgFace"></td>
+                            <td align="center"  class="line0" field="list_pgFace"></td>
+                            <td align="center"  class="line0" field="list_pgFace"></td>
+                            <td align="center"  class="line0" field="list_pgFace"></td>
+                            <td align="center"  class="line0" field="list_pgFace"></td>
+                            <td align="center"  class="line0" field="list_pgFace"></td>
+                            <td align="center"  class="line0" field="list_pgFace"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">16</td>
+                            <td align="center"  class="line0">粗糙度</td>
+                            <td align="center"  class="line0" field="list_pgRough"></td>
+                            <td align="center"  class="line0" field="list_pgRough"></td>
+                            <td align="center"  class="line0" field="list_pgRough"></td>
+                            <td align="center"  class="line0" field="list_pgRough"></td>
+                            <td align="center"  class="line0" field="list_pgRough"></td>
+                            <td align="center"  class="line0" field="list_pgRough"></td>
+                            <td align="center"  class="line0" field="list_pgRough"></td>
+                            <td align="center"  class="line0" field="list_pgRough"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">17</td>
+                            <td colspan="2" align="center"  class="line0">制造标准</td>
+                            <td align="center"  class="line0" field="list_makeStandard"></td>
+                            <td align="center"  class="line0" field="list_makeStandard"></td>
+                            <td align="center"  class="line0" field="list_makeStandard"></td>
+                            <td align="center"  class="line0" field="list_makeStandard"></td>
+                            <td align="center"  class="line0" field="list_makeStandard"></td>
+                            <td align="center"  class="line0" field="list_makeStandard"></td>
+                            <td align="center"  class="line0" field="list_makeStandard"></td>
+                            <td align="center"  class="line0" field="list_makeStandard"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">18</td>
+                            <td rowspan="2" align="center"  class="line0">封头用途</td>
+                            <td align="center"  class="line0">容器类别</td>
+                            <td align="center"  class="line0" field="list_containerType"></td>
+                            <td align="center"  class="line0" field="list_containerType"></td>
+                            <td align="center"  class="line0" field="list_containerType"></td>
+                            <td align="center"  class="line0" field="list_containerType"></td>
+                            <td align="center"  class="line0" field="list_containerType"></td>
+                            <td align="center"  class="line0" field="list_containerType"></td>
+                            <td align="center"  class="line0" field="list_containerType"></td>
+                            <td align="center"  class="line0" field="list_containerType"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">19</td>
+                            <td align="center"  class="line0">工作介质</td>
+                            <td align="center"  class="line0" field="list_medium"></td>
+                            <td align="center"  class="line0" field="list_medium"></td>
+                            <td align="center"  class="line0" field="list_medium"></td>
+                            <td align="center"  class="line0" field="list_medium"></td>
+                            <td align="center"  class="line0" field="list_medium"></td>
+                            <td align="center"  class="line0" field="list_medium"></td>
+                            <td align="center"  class="line0" field="list_medium"></td>
+                            <td align="center"  class="line0" field="list_medium"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">20</td>
+                            <td rowspan="3" align="center"  class="line0">无损检测</td>
+                            <td align="center"  class="line0">探伤方法</td>
+                            <td align="center"  class="line0" field="list_flawMethod"></td>
+                            <td align="center"  class="line0" field="list_flawMethod"></td>
+                            <td align="center"  class="line0" field="list_flawMethod"></td>
+                            <td align="center"  class="line0" field="list_flawMethod"></td>
+                            <td align="center"  class="line0" field="list_flawMethod"></td>
+                            <td align="center"  class="line0" field="list_flawMethod"></td>
+                            <td align="center"  class="line0" field="list_flawMethod"></td>
+                            <td align="center"  class="line0" field="list_flawMethod"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">21</td>
+                            <td align="center"  class="line0">探伤部位</td>
+                            <td align="center"  class="line0" field="list_flawPart"></td>
+                            <td align="center"  class="line0" field="list_flawPart"></td>
+                            <td align="center"  class="line0" field="list_flawPart"></td>
+                            <td align="center"  class="line0" field="list_flawPart"></td>
+                            <td align="center"  class="line0" field="list_flawPart"></td>
+                            <td align="center"  class="line0" field="list_flawPart"></td>
+                            <td align="center"  class="line0" field="list_flawPart"></td>
+                            <td align="center"  class="line0" field="list_flawPart"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">22</td>
+                            <td align="center"  class="line0">具体要求</td>
+                            <td align="center"  class="line0" field="list_flawRequire"></td>
+                            <td align="center"  class="line0" field="list_flawRequire"></td>
+                            <td align="center"  class="line0" field="list_flawRequire"></td>
+                            <td align="center"  class="line0" field="list_flawRequire"></td>
+                            <td align="center"  class="line0" field="list_flawRequire"></td>
+                            <td align="center"  class="line0" field="list_flawRequire"></td>
+                            <td align="center"  class="line0" field="list_flawRequire"></td>
+                            <td align="center"  class="line0" field="list_flawRequire"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">23</td>
+                            <td rowspan="4" align="center"  class="line0">其它要求</td>
+                            <td align="center"  class="line0">热处理</td>
+                            <td align="center"  class="line0" field="list_heatTreatment"></td>
+                            <td align="center"  class="line0" field="list_heatTreatment"></td>
+                            <td align="center"  class="line0" field="list_heatTreatment"></td>
+                            <td align="center"  class="line0" field="list_heatTreatment"></td>
+                            <td align="center"  class="line0" field="list_heatTreatment"></td>
+                            <td align="center"  class="line0" field="list_heatTreatment"></td>
+                            <td align="center"  class="line0" field="list_heatTreatment"></td>
+                            <td align="center"  class="line0" field="list_heatTreatment"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">24</td>
+                            <td align="center"  class="line0">焊接试板</td>
+                            <td align="center"  class="line0" field="list_testBody"></td>
+                            <td align="center"  class="line0" field="list_testBody"></td>
+                            <td align="center"  class="line0" field="list_testBody"></td>
+                            <td align="center"  class="line0" field="list_testBody"></td>
+                            <td align="center"  class="line0" field="list_testBody"></td>
+                            <td align="center"  class="line0" field="list_testBody"></td>
+                            <td align="center"  class="line0" field="list_testBody"></td>
+                            <td align="center"  class="line0" field="list_testBody"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">25</td>
+                            <td align="center"  class="line0">钢印</td>
+                            <td align="center"  class="line0" field="list_stamp"></td>
+                            <td align="center"  class="line0" field="list_stamp"></td>
+                            <td align="center"  class="line0" field="list_stamp"></td>
+                            <td align="center"  class="line0" field="list_stamp"></td>
+                            <td align="center"  class="line0" field="list_stamp"></td>
+                            <td align="center"  class="line0" field="list_stamp"></td>
+                            <td align="center"  class="line0" field="list_stamp"></td>
+                            <td align="center"  class="line0" field="list_stamp"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">26</td>
+                            <td align="center"  class="line0">监检</td>
+                            <td align="center"  class="line0" field="list_check"></td>
+                            <td align="center"  class="line0" field="list_check"></td>
+                            <td align="center"  class="line0" field="list_check"></td>
+                            <td align="center"  class="line0" field="list_check"></td>
+                            <td align="center"  class="line0" field="list_check"></td>
+                            <td align="center"  class="line0" field="list_check"></td>
+                            <td align="center"  class="line0" field="list_check"></td>
+                            <td align="center"  class="line0" field="list_check"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">27</td>
+                            <td colspan="2" align="center"  class="line0">附件资料页数</td>
+                            <td align="center"  class="line0" field="list_fileNums"></td>
+                            <td align="center"  class="line0" field="list_fileNums"></td>
+                            <td align="center"  class="line0" field="list_fileNums"></td>
+                            <td align="center"  class="line0" field="list_fileNums"></td>
+                            <td align="center"  class="line0" field="list_fileNums"></td>
+                            <td align="center"  class="line0" field="list_fileNums"></td>
+                            <td align="center"  class="line0" field="list_fileNums"></td>
+                            <td align="center"  class="line0" field="list_fileNums"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">28</td>
+                            <td colspan="2" align="center"  class="line0">完工日</td>
+                            <td align="center"  class="line0" field="list_finishDate"></td>
+                            <td align="center"  class="line0" field="list_finishDate"></td>
+                            <td align="center"  class="line0" field="list_finishDate"></td>
+                            <td align="center"  class="line0" field="list_finishDate"></td>
+                            <td align="center"  class="line0" field="list_finishDate"></td>
+                            <td align="center"  class="line0" field="list_finishDate"></td>
+                            <td align="center"  class="line0" field="list_finishDate"></td>
+                            <td align="center"  class="line0" field="list_finishDate"></td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">29</td>
+                            <td colspan="2" align="center"  class="line0">指令号</td>
+                            <td align="center"  class="line0" field="list_code"></td>
+                            <td align="center"  class="line0" field="list_code"></td>
+                            <td align="center"  class="line0" field="list_code"></td>
+                            <td align="center"  class="line0" field="list_code"></td>
+                            <td align="center"  class="line0" field="list_code"></td>
+                            <td align="center"  class="line0" field="list_code"></td>
+                            <td align="center"  class="line0" field="list_code"></td>
+                            <td align="center"  class="line0" field="list_code"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" align="center"  class="line0">备注</td>
+                            <td colspan="10" align="left"  class="line0">
+                                <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>1.公称直径和封头总高通常默认为内径和內总高。作外径时须表明‘ODxxxx’,作外高时须标明‘外xxx’</td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center"  class="line0">其他</td>
+                            <td height="64" colspan="9"  class="line0" field="remark"></td>
+                        </tr>
+                    </table></td>
+            </tr>
+            <tr>
+                <td><table width="100%" border="0" align="center">
+                    <tr>
+                        <td height="35">审批：</td>
+                        <td>盖章：</td>
+                    </tr>
+                    <tr>
+                        <td height="35">日期：</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table></td>
+            </tr>
+        </table>
+    </ul>
+</div>
+</body>
+
+<script>
+
+    function initData(data) {
+        ajaxPostInvoke("/processCard/technicalProtocol/findOne", {id: data.id}, function (res) {
+            for(let i in res.list){
+                for(let code in res.list[i]){
+                    if(code == "finishDate"){
+                        res.list[i][code] = res.list[i][code].split(" ")[0]
+                    }else if(code == "heatTreatment" || code == "testBody" || code == "stamp" || code == "check"){
+                        if(res.list[i][code] && res.list[i][code] == 1){
+                            res.list[i][code] = "需要";
+                        }else {
+                            res.list[i][code] = "不需要";
+                        }
+                    }
+                }
+            }
+            setData2Text(res)
+        })
+    }
+</script>
+
+</html>

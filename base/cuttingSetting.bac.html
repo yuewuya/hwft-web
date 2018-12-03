@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <script src="/plugins/element-ui/vue.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/assembly/js2/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/plugins/element-ui/styles/index.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/vue_common.js"></script>
+    <script src="/js/common.js"></script>
+</head>
+<body>
+<div class="place">
+    <ul class="placeul">
+        <li>
+            <a href="#">首页</a>
+        </li>
+        <li>
+            <a href="#">下料设置窗口</a>
+        </li>
+    </ul>
+</div>
+<div class="mainbox">
+    <!-- elementUI 表格 -->
+    <div id="app" v-cloak>
+        <transition name="el-fade-in-linear">
+            <div v-show="pageShow">
+                <div >
+                    <el-form :model="searchForm" ref="searchForm"  >
+                        加工方法
+                            <el-select
+                                    popper-class="my-autocomplete"
+                                    v-model="searchForm.processingMethod"
+                                    placeholder="请输入内容"
+                                    filterable
+                                    allow-create
+                                    default-first-option>
+                                <el-option
+                                        v-for="item in processingMethods"
+                                        :key="item"
+                                        :label="item"
+                                        :value="item">
+                                </el-option>
+                            </el-select>
+                        形状
+                           <el-select popper-class="my-autocomplete"
+                                      v-model="searchForm.shape"
+                                placeholder="请输入内容"
+                                filterable
+                                allow-create
+                                default-first-option>
+                               <el-option
+                                       v-for="item in shapes"
+                                       :key="item"
+                                       :label="item"
+                                       :value="item">
+                               </el-option>
+                           </el-select>
+                        <el-button-group>
+                            <el-button  type="primary" @click="searchTable()" icon="el-icon-search" ></el-button>
+                            <!--<el-button  @click="resetSearch()" ></el-button>-->
+                            <el-button  @click="add()" icon="el-icon-circle-plus"></el-button>
+                            <el-button  type="danger" @click="del()" icon="el-icon-delete"  ></el-button>
+                        </el-button-group>
+                    </el-form>
+
+                </div>
+                <div>
+                    <template>
+                        <!--列表-->
+                        <el-table v-loading="loading" :data="tableData" stripe border style="width: 90%" height="450"
+                                  @selection-change="handleSelectionChange">
+                            <el-table-column fixed type="index" width="50">
+                            </el-table-column>
+                            <el-table-column fixed type="selection" width="55">
+                            </el-table-column>
+
+                            <div v-for="row in tableRow">
+                                <el-table-column :prop="row.prop"
+                                                 :label="row.label"
+                                                 :formatter="rowFormatter"
+                                                 :width="row.width">
+                                </el-table-column>
+                            </div>
+
+                            <el-table-column fixed="right" label="操作" width="100">
+                                <template slot-scope="scope">
+                                    <el-button size="mini" type="primary" @click="show(scope.row)" icon="el-icon-view"
+                                               circle></el-button>
+                                    <el-button size="mini" type="success" @click="edit(scope.row)" icon="el-icon-edit"
+                                               circle></el-button>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </template>
+                </div>
+                <!-- 分页 -->
+                <div class="block" style="margin-top: 5px;width:90%">
+                    <el-pagination @current-change="changePage" background layout="prev, pager, next"
+                                   :total="pageData.total"
+                                   :page-size="pageData.pageSize"
+                                   :current-page="pageData.currentPage"></el-pagination>
+                </div>
+
+                <!-- 弹出层 -->
+                <el-dialog title="下料参数" :visible.sync="dialogFormVisible">
+                    <el-form :model="dataForm" :rules="rules" ref="dataForm" label-width="80px">
+                        <el-input v-model="dataForm.id" v-if="false"></el-input>
+                        <el-row type="flex" class="row-bg">
+                            <el-col :span="12">
+                                <el-form-item label="加工方法" prop="processingMethod">
+                                    <el-select
+                                            v-model="dataForm.processingMethod"
+                                            placeholder="请输入内容"
+                                            filterable
+                                            allow-create
+                                    >
+                                        <el-option
+                                                v-for="item in processingMethods"
+                                                :key="item"
+                                                :label="item"
+                                                :value="item">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="形状" prop="shape">
+                                    <el-select
+                                               v-model="dataForm.shape"
+                                               placeholder="请输入内容"
+                                               filterable
+                                               allow-create>
+                                        <el-option
+                                                v-for="item in shapes"
+                                                :key="item"
+                                                :label="item"
+                                                :value="item">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+
+                        <el-row type="flex" class="row-bg">
+                            <el-col :span="12">
+                                <el-form-item label="直径" prop="diameter">
+                                    <el-input v-model.number="dataForm.diameter" placeholder="请输入内容"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="<=壁厚" prop="thicknessLeft">
+                                    <el-input v-model.number="dataForm.thicknessLeft" placeholder="请输入内容"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+
+                        <el-row type="flex" class="row-bg">
+
+                            <el-col :span="12">
+                                <el-form-item label="壁厚<" prop="thicknessRight">
+                                    <el-input v-model.number="dataForm.thicknessRight" placeholder="请输入内容"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="12">
+                                <el-form-item label="下料" prop="cutting">
+                                    <el-input v-model="dataForm.cutting" placeholder="请输入内容"></el-input>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+
+
+                    </el-form>
+                    <div slot="footer" class="dialog-footer">
+                        <el-button type="primary" @click="onSubmit()" v-show="submitShow">提交</el-button>
+                        <el-button @click="dialogFormVisible = false">取消</el-button>
+                        <el-button @click="resetForm('dataForm')" v-show="submitShow">重置</el-button>
+                    </div>
+                </el-dialog>
+            </div>
+        </transition>
+    </div>
+</div>
+<style>
+    .el-select .el-input {
+        width: 180px;
+    }
+
+    .input-with-select .el-input-group__prepend {
+        background-color: #fff9fb;
+    }
+</style>
+<script src="/plugins/element-ui/index.js"></script>
+<script src="/js/base/cuttingSetting.js"></script>
+</body>
+</html>

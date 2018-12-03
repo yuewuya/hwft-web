@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/formula.js"></script>
+    <script src="/js/html2canvas.js"></script>
+
+    <style>
+        #savePageForm p{
+            margin: 10px 0 10px 5px;
+        }
+    </style>
+
+<title>无标题文档</title>
+
+</head>
+<body>
+<div class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <div title="工艺卡" style="padding:10px;">
+<form id="saveForm">
+        <div style="width:50%; float:left">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftgyk_table">
+  <tr>
+    <td>产品编号</td>
+    <td>
+        <input name="code" id="code" type="text" class="dfinput"  style="width: 120px;" />
+        <input name="id" id="id" type="hidden">
+        <input name="status" id="status" type="hidden">
+        <input name="ztTopId" type="hidden">
+        <input name="ztBottomId" type="hidden">
+    </td>
+    <td>客户号</td>
+    <td><input name="customerId" type="text" class="easyui-numberbox"  style="width: 120px;" /></td>
+  </tr>
+  <tr>
+    <td>形状</td>
+    <td>
+        <input name="shapeId" type="hidden" id="shapeId">
+        <input readonly id="shape" name="shape" type="text" class="dfinput" onclick="selectOtherPage('形状选择','/base/shapeSetting.html',null,setShape)" style="width: 120px;" />
+    </td>
+    <td>材质</td>
+    <td>
+        <input name="materialId" type="hidden" id="materialId">
+        <input readonly id="material" name="material" type="text" class="dfinput" onclick="selectOtherPage('材质选择','/base/materialSetting.html',null,setMaterial)" style="width: 120px;" />
+    </td>
+  </tr>
+  <tr>
+    <td id="diameterText">直径</td>
+    <td>
+        <input id="diameter" name="diameter" type="text" class="dfinput" onchange="diameterChange();getHeight();" style="width: 70px;" />
+        +
+        <input id="compositeBoard" onchange="diameterChange();getHeight();" name="compositeBoard" type="text" class="dfinput" style="width:60px;" />
+    </td>
+    <td class="needHide">下口直径</td>
+    <td class="needHide">
+        <input id="downDiameter" name="downDiameter" type="text" class="dfinput" onchange="downDiameterChange()" style="width: 120px;" />
+    </td>
+  </tr>
+  <tr>
+    <td>壁厚</td>
+    <td><input id="thickness" name="thickness" type="text" class="dfinput" onchange="getHeight();getWeight()" style="width: 120px;" /></td>
+    <td id="straightEdgeText">直边</td>
+    <td><input name="straightEdge" type="text" class="dfinput" onchange="getHeight()" style="width: 120px;" /></td>
+  </tr>
+  <tr>
+    <td>总高</td>
+    <td><input id="height" name="height" type="text" class="dfinput" data-options="min:0,precision:2" style="width: 120px;" /></td>
+    <td>Min</td>
+    <td><input name="min" type="text" class="dfinput" data-options="min:0,precision:2" style="width: 120px;" /></td>
+  </tr>
+  <tr class="needHide">
+    <td>下口直边</td>
+    <td><input name="downStraight" type="text" class="dfinput" style="width: 120px;" /></td>
+    <td>锥角</td>
+    <td><input id="coneAngle" name="coneAngle" type="text" class="dfinput"  style="width: 120px;" /></td>
+  </tr>
+  <tr>
+    <td>大r</td>
+    <td><input name="bigR" type="text" class="dfinput" style="width: 120px;" /></td>
+    <td>小r</td>
+    <td>
+        <input name="littleR" type="text" class="dfinput" onchange="getHeight()" style="width: 120px;" />
+    </td>
+  </tr>
+  <tr>
+    <td>数量</td>
+    <td><input id="count" name="count" type="text" class="dfinput" style="width: 120px;" /></td>
+    <td align="right">
+        <input name="diameterStandard" id="diameterStandard" class="easyui-switchbutton" value="1" data-options="onText:'内 直 径',offText:'外 直 径', width:80"></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>重量</td>
+    <td><input id="weight" name="weight" type="text" class="dfinput" style="width: 120px;" /></td>
+    <td align="right">
+        <input name="heightStandard" id="heightStandard" class="easyui-switchbutton" value="1" data-options="onText:'内 总 高',offText:'外 总 高', width:80">
+    </td>
+    <td>
+
+    </td>
+  </tr>
+  <tr>
+    <td>加工方法</td>
+    <td><input name="processingMethod" id="processingMethod" class="dfinput" readonly onclick="selectOtherPage('加工方法选择','/base/processingMethod.html',null,setMethod)" style="height: 25px; width: 121px;"/></td>
+    <td>主机种</td>
+    <td><select name="hostType" id="hostType" class="easyui-combobox" style="height: 25px; width: 121px;" editable="false"
+                data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+    </select></td>
+  </tr>
+          </table>
+
+        </div>
+
+        <div style="width:49.5%; float:left; margin-left:0.5%">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftgyk_table">
+  <tr>
+    <td>通知单号</td>
+    <td><input name="noticeNumber" type="text" class="dfinput" id="noticeNumber"  style="width: 120px;" /></td>
+    <td>单件号</td>
+    <td><input name="singleNumber" readonly type="text" class="dfinput" onclick="getSingle()" style="width: 100px;" /></td>
+  </tr>
+  <tr>
+    <td>下料</td>
+    <td>
+      <input name="cutting1" readonly id="cutting1" type="text" class="dfinput"  style="width: 120px;" />
+        <input name="plImg" type="hidden" id="plImg">
+        <input name="plImgId" type="hidden">
+    </td>
+    <td>下料</td>
+    <td>
+      <input name="cutting2" readonly id="cutting2" type="text" class="dfinput"  style="width: 120px;" />
+    </td>
+  </tr>
+  <tr>
+    <td>下料</td>
+    <td colspan="3">
+      <input name="cutting3" readonly id="cutting3" type="text" class="dfinput"  style="width: 120px;" />
+      <a href="javascript:void(0)"><img src="/images/ck.png"  onclick="setCutting('常见封头下料尺寸调整')"/></a></td>
+    </tr>
+  <tr>
+    <td>完工日期</td>
+    <td><input type="text" editable="false" name="completionDate" class="easyui-datebox"  style="height: 30px; width: 180px; line-height: 20px;" /></td>
+      <td>材料来源</td>
+      <td>
+          <select name="materialSource" class="easyui-combobox" style="height:30px; width:120px;">
+              <option value=""></option>
+              <option value="自料">自料</option>
+              <option value="来料">来料</option>
+          </select>
+      </td>
+    </tr>
+  <tr>
+    <td>制造标准</td>
+    <td colspan="3"><select name="manufacture" class="easyui-combobox" style="height: 30px; width: 180px;">
+      <option value="JB/T4746-2002">JB/T4746-2002</option>
+    </select></td>
+    </tr>
+  <tr>
+    <td>
+      RT报告</td>
+    <td colspan="3"><select name="rtReport" class="easyui-combobox" style="height: 30px; width: 180px;">
+        <option value="RT报告1">RT报告1</option>
+        <option value="RT报告2">RT报告2</option>
+        <option value="RT报告3">RT报告3</option>
+      </select>
+      <select name="rtPer" class="easyui-combobox" style="height: 30px; width: 60px;">
+          <option value="10">10</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      %
+      <select name="rtLevel" class="easyui-combobox" style="height: 30px; width: 60px;">
+          <option value="Ⅰ">Ⅰ</option>
+          <option value="Ⅱ">Ⅱ</option>
+          <option value="Ⅲ">Ⅲ</option>
+      </select>
+      级</td>
+    </tr>
+  <tr>
+    <td>坡口</td>
+    <td colspan="3">
+        <input readonly name="groove" type="text" id="pokou" class="dfinput"  style="width:130px;"  onclick="getPk('坡口选择窗口','/sale/pk.html', 'pokou', 'pokouImg', 'grooveImg')"/>
+        <input name="groovePic" id="pokouImg" type="hidden">
+        <input name="grooveImg" id="grooveImg" type="hidden">
+        <input name="grooveImgId" type="hidden">
+    </td>
+  </tr>
+  <tr class="needHide">
+    <td>下坡口</td>
+    <td colspan="3">
+        <input readonly name="downGroove" type="text" id="xiapokou" class="dfinput"  style="width:130px;"  onclick="getPk('坡口选择窗口','/sale/pk.html', 'xiapokou', 'xiapokouImg', 'downGrooveImg')"/>
+        <input name="downGroovePic" id="xiapokouImg" type="hidden">
+        <input name="downGrooveImg" id="downGrooveImg" type="hidden">
+        <input name="downGrooveImgId" type="hidden">
+    </td>
+  </tr>
+  <tr>
+    <td height="24">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="24">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+          </table>
+        </div>
+
+
+
+        <div style="width:100%; float:left;margin-top:5px">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftgyk_table">
+  <tr>
+    <td>
+        <input name="circumferenceStandard1" id="circumferenceStandard1" class="easyui-switchbutton" value="1" data-options="onText:'内圆周长',offText:'外圆周长', width:80">
+    </td>
+    <td><input name="circumference1" type="text" class="dfinput"  style="width: 120px;" /></td>
+    <td>
+        <div class="needHide">
+            <input name="circumferenceStandard2" id="circumferenceStandard2" class="easyui-switchbutton" value="1" data-options="onText:'内圆周长',offText:'外圆周长', width:80">
+        </div>
+
+    </td>
+    <td>
+        <div class="needHide">
+            <input name="circumference2" type="text" class="dfinput"  style="width: 120px;" />
+        </div>
+    </td>
+    <td>
+        <input name="toleranceStandard1" id="toleranceStandard1" class="easyui-switchbutton" value="1" data-options="onText:'直径公差',offText:'周长公差', width:80">
+    </td>
+    <td>
+        <input id="toleranceMin1" name="toleranceMin1" type="text" class="dfinput"  style="width: 60px;" value="-3"/>
+        <input id="toleranceMax1" name="toleranceMax1" type="text" class="dfinput"  style="width: 60px;" value="6"/>
+    </td>
+    <td>
+        <div class="needHide">
+            <input name="toleranceStandard2" id="toleranceStandard2" class="easyui-switchbutton" value="1" data-options="onText:'直径公差',offText:'周长公差', width:80">
+        </div>
+    </td>
+    <td>
+        <div class="needHide">
+            <input id="toleranceMin2" name="toleranceMin2" type="text" class="dfinput"  style="width: 60px;" value="-3"/>
+            <input id="toleranceMax2" name="toleranceMax2" type="text" class="dfinput"  style="width: 60px;" value="6"/>
+        </div>
+    </td>
+    </tr>
+  <tr>
+    <td>断面形状</td>
+    <td><input id="sectionShape1" name="sectionShape1" type="text" class="dfinput"  style="width: 60px;" />
+      <input id="sectionShape2" name="sectionShape2" type="text" class="dfinput"  style="width: 60px;" /></td>
+    <td>总高公差</td>
+    <td><input id="totalHeight1" name="totalHeight1" type="text" class="dfinput"  style="width: 60px;" />
+      <input id="totalHeight2" name="totalHeight2" type="text" class="dfinput"  style="width: 60px;" /></td>
+    <td>失圆度</td>
+    <td><input id="roundness" name="roundness" type="text" class="dfinput"  style="width: 120px;" /></td>
+    <td><div class="needHide">同心度</div></td>
+      <td><div class="needHide"><input name="concentric" type="text" class="dfinput"  style="width: 120px;" /></div></td>
+  </tr>
+  <tr>
+    <td>直边高度公差</td>
+    <td><input name="edgeHeight1" type="text" class="dfinput"  style="width: 60px;" />
+      <input name="edgeHeight2" type="text" class="dfinput"  style="width: 60px;" /></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+        </div>
+
+
+        <div style="width:66%; float:left; margin-top:5px;">
+
+
+            <table id="dg">
+
+            </table>
+            <div id="toolbar">
+                <!--<a href="javascript:void(0)" class="easyui-linkbutton"
+                   onclick="addBtn('新增', 'savePage')"
+                   data-options="plain:true,iconCls:'icon-add'">新增</a>
+                <a href="#" class="easyui-linkbutton" onclick="editBtn('修改', 'savePage')"
+                   data-options="plain:true,iconCls:'icon-edit'">修改</a>
+                <a href="#" class="easyui-linkbutton" onclick="delBtn('删除','/processCard/ftCard/deleteWork')"
+                   data-options="plain:true,iconCls:'icon-remove'">删除</a>-->
+                <a href="#" class="easyui-linkbutton" onclick="gxap()"
+                   data-options="plain:true,iconCls:'icon-edit'">工序安排</a>
+            </div>
+
+
+  </div>
+
+        <div style="width:33.5%; float:left; margin-top:5px; margin-left:0.5%">
+
+           <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftgyk_table">
+  <tr>
+    <td width="35%">备注：<a href="javascript:void(0)"><img src="/images/ck.png"  onclick="openRemark()"/></a></td>
+    <td width="71%" colspan="3" rowspan="8" valign="top"><textarea name="remark" class="dfinput" style="width: 100%; height: 250px"></textarea></td>
+    </tr>
+  <tr>
+    <td height="24">
+        <input type="checkbox" name="pt" id="cc1" value="1">
+        <label for="cc1">PT报告</label>
+    </td>
+    </tr>
+  <tr>
+    <td height="24">
+        <input type="checkbox" name="ut" id="cc2" value="1">
+        <label for="cc2">UT报告</label>
+      </td>
+    </tr>
+  <tr>
+    <td height="24">
+        <input type="checkbox" name="mt" id="cc3" value="1">
+        <label for="cc3">MT报告</label>
+      </td>
+    </tr>
+  <tr>
+    <td height="24">
+        <input type="checkbox" name="detection" id="cc4" value="1">
+        <label for="cc4">监检</label>
+      </td>
+    </tr>
+  <tr>
+    <td height="24">
+        <input type="checkbox" name="heatTreatment" id="cc5" value="1">
+        <label for="cc5">热处理</label>
+      </td>
+    </tr>
+  <tr>
+    <td height="24">
+        <input type="checkbox" name="boardPerformance" id="cc6" value="1">
+        <label for="cc6">试板性能</label>
+      </td>
+    </tr>
+  <tr>
+    <td height="24">
+        <input type="checkbox" name="materialRetest" id="cc7" value="1">
+        <label for="cc7">材料复验</label>
+      </td>
+    </tr>
+          </table>
+        </div>
+
+  <div class="cyda" style="margin-top:10px; border-top:1px dashed #666666">
+              <ul class="cyda_cx">
+                <li>
+                     <label>填表</label>
+                     <input name="createName" readonly type="text" class="scinput"  style="height:23px; width:80px; line-height:23px; background:url(/images/itabbg2.png);"/>
+
+                </li>
+
+                <li>
+                     <label>制作日期</label>
+                     <input type="text" readonly name="createTime" class="easyui-datebox" style="height:23px; width:140px;line-height:23px; background:url(/images/itabbg2.png);" />
+                </li>
+
+                <li>
+                  <label>审核</label>
+                     <input name="approveName" readonly type="text" class="scinput"  style="height:23px; width:80px; line-height:23px; background-color:#9CF; background:url(/images/itabbg2.png);"/>
+
+                </li>
+                <li>
+                     <label>审核日</label>
+                     <input type="text" readonly class="easyui-datebox" name="approveTime" style="height:23px; width:140px;line-height:23px; background:url(/images/itabbg2.png);" />
+
+                </li>
+
+
+              </ul>
+
+            </div>
+
+
+
+
+</form>
+
+
+
+
+
+</div></div>
+<div id="savePage" title="工序设置" style="padding:50px 10px 10px 10px;display:none">
+    <form id="savePageForm">
+        <div>
+            <p style="width: 100px;display: inline-block">
+                <label>序号</label>
+                <input name="no" required="true" class="easyui-numberbox" style="width: 50px">
+                <input name="id" type="hidden">
+            </p>
+            <p style="width: 210px;display: inline-block">
+                <label>工序</label>
+                <select name="process" required="true" class="scinput" style="width: 150px">
+                    <option>打磨</option>
+                </select>
+            </p>
+            <p style="width: 220px;display: inline-block">
+                <label>操作依据</label>
+                <input name="basis" class="scinput" style="width: 150px">
+            </p>
+            <p style="width: 250px;display: inline-block">
+                <label>开始日期</label>
+                <input required="true" editable="false" id="startTime" name="beginTime" class="easyui-datebox" style="width: 150px" data-options="
+                        onShowPanel:function(){
+                            $(this).combobox('panel').panel('panel').css('z-index',layerZ);
+                        }">
+            </p>
+            <p style="width: 250px;display: inline-block">
+                <label>结束日期</label>
+                <input required="true" editable="false" id="endTime" name="endTime" class="easyui-datebox" style="width: 150px" data-options="
+                        onShowPanel:function(){
+                            $(this).combobox('panel').panel('panel').css('z-index',layerZ);
+                        }">
+            </p>
+            <p style="width: 250px;display: inline-block">
+                <label>工艺要求</label>
+                <input name="require" class="scinput" style="width: 150px">
+            </p>
+            <p style="width: 250px;display: inline-block">
+                <label>控制点&nbsp;&nbsp;&nbsp;</label>
+                <input name="control" class="scinput" style="width: 150px">
+            </p>
+            <p style="width: 250px;display: inline-block">
+                <label>安排产能</label>
+                <input name="planCount" required="true" class="easyui-numberbox" style="width: 150px">
+            </p>
+        </div>
+    </form>
+</div>
+
+<script>
+    let noticeId = 0;
+    let tableData = [];
+    let bz = 0;
+    let duplex = false;
+    let steelGrade = '';
+    // $("#allPic").hide();
+
+    function initTable(id) {
+        $("#dg").datagrid({
+            width: '98%',
+            height: '260px',
+            singleSelect: false,
+            autoRowHeight: false,
+            fitColumns: false,
+            toolbar: '#toolbar',
+            url: getRootPath() + "/processCard/ftCard/findAllWork",
+            queryParams:{id:id},
+            rownumbers: true,
+            columns: [[{
+                field: 'process',
+                title: '工序/控制点',
+                width: 80,
+                align: 'center',
+                formatter: function (value, row) {
+                    return row.control && row.control != '' ? value + "(" + row.control + ")" : value;
+                }
+            }, {
+                field: 'require',
+                title: '工艺要求',
+                width: 230,
+                align: 'center'
+            }, {
+                field: 'beginTime',
+                title: '开始日期',
+                width: 100,
+                align: 'center',
+                formatter: function (value, row) {
+                    return moment(value).format("YYYY-MM-DD");
+                }
+            }, {
+                field: 'endTime',
+                title: '结束日期',
+                width: 100,
+                align: 'center',
+                formatter: function (value, row) {
+                    return moment(value).format("YYYY-MM-DD");
+                }
+            }, {
+                field: 'finishCount',
+                title: '完工数量',
+                width: 80,
+                align: 'center'
+            }, {
+                field: 'planCount',
+                title: '安排产能',
+                width: 80,
+                align: 'center'
+            }, {
+                field: 'setCount',
+                title: '设定产能',
+                width: 80,
+                align: 'center'
+            }, {
+                field: 'remark',
+                title: '说明',
+                width: 120,
+                align: 'center'
+            }]],
+            onLoadError: function (XMLHttpRequest) {
+
+            }
+        });
+    }
+    
+    function ztzh(shape) {
+        if(pdzt(shape)){
+            $(".needHide").show();
+            $("#straightEdgeText").text("上口直边");
+            $("#diameterText").text("上口直径")
+        }else {
+            $(".needHide").hide();
+            $("#straightEdgeText").text("直边");
+            $("#diameterText").text("直径")
+        }
+    }
+
+    function initData(data) {
+        if(data && data != null){
+            initTable(data.id);
+            $("#saveForm").form("load", data);
+            $("#code").attr("readonly", true);
+
+            if(data.noticeNumber && data.noticeNumber != ''){
+                ajaxPostInvoke("/production/notice/getProductionNo",{productionNo: $("#noticeNumber").val()},function (res) {
+                    if (res){
+                        noticeId = res
+                    }
+                })
+            }
+
+            if(data.materialId && data.materialId != ''){
+                ajaxPostInvoke("/base/materialInfo", {id: data.materialId}, function (res) {
+                    if(res){
+                        bz = res.proportion;
+                        duplex = res.duplex;
+                        steelGrade = res.steelGrade;
+                    }
+                })
+            }
+
+            ztzh(data.shape);
+        }else {
+            initTable(0);
+        }
+    }
+
+    function getFormData() {
+        let data = $("#saveForm").getData();
+        if(!data.id || data.id == ''){
+            if(gxapData.length > 0){
+                data.list = gxapData;
+            }
+        }
+        data.groove = $("#pokou").val();
+        data.groovePic = $("#pokouImg").val();
+        data.downGroove = $("#xiapokou").val();
+        data.downGroovePic = $("#xiapokouImg").val();
+        return data;
+    }
+
+    $("#noticeNumber").blur(function () {
+        ajaxPostInvoke("/production/notice/getProductionNo",{productionNo: $("#noticeNumber").val()},function (res) {
+            if (res){
+                noticeId = res
+            }
+        })
+    })
+
+    function getSingle() {
+        if(noticeId == 0){
+            layer.alert("通知单号不存在，请输入正确的通知单号！", {
+                icon: 2
+            });
+        }else{
+            selectOtherPage('单件选择','/sale/productionNoticeAdd.html', noticeId,setSingleNumber)
+        }
+    }
+
+    function getPk(title, url, text, img, jt) {
+        layer.open({
+            type: 2,
+            title: title,
+            fix: false,
+            shadeClose: true,
+            maxmin: true,
+            area: ['1000px', '650px'],
+            content: url
+            , btn: ['确定','关闭']
+            ,success: function (layero, index) {
+                let sonFrame = window['layui-layer-iframe' + index];
+                if($("#" + img).val() == 1){
+                    sonFrame.initData($("#"+jt).val())
+                }
+            }
+            ,yes: function (index, layero) {
+                let obj = window[layero.find('iframe')[0]['name']].getFormData();
+                $("#"+text).val(obj.text);
+                if(obj.id == "cc"){
+                    $("#" + img).val(1);
+                }else {
+                    $("#" + img).val(0);
+                }
+                window[layero.find('iframe')[0]['name']].getJT(obj.id, jt, index);
+            }
+            , btn2: function () {
+                layer.closeAll();
+            }
+        });
+    }
+
+    function setCutting(title) {
+        let shape = $("#shape").val();
+        layer.open({
+            type: 2,
+            title: title,
+            fix: false,
+            shadeClose: true,
+            maxmin: true,
+            area: ['650px', '450px'],
+            content: pdzt(shape) ? "xl2.html" : "xl.html",
+            btn: ['确定','取消'],  //只是为了演示
+            success: function (layero, index) {
+                let sonFrame = window['layui-layer-iframe' + index];
+                    sonFrame.initData($("#saveForm").getData());
+            },
+            yes: function (index, layero) {
+                let obj = window[layero.find('iframe')[0]['name']].getFormData();
+                $("#cutting1").val(obj.cutting1);
+                $("#cutting2").val(obj.cutting2);
+                $("#cutting3").val(obj.cutting3);
+                let thickness = $("#thickness").val();
+                if(thickness != ''){
+                    getWeight()
+                }
+                window[layero.find('iframe')[0]['name']].getJT(index);
+            },
+            btn2: function () {
+                layer.closeAll();
+            }
+        });
+    }
+    
+    function getWeight() {
+        let thickness = $("#thickness").val() * 1;
+        let cutting = $("#cutting1").val() * 1;
+        $("#weight").val((cutting / 2000) * (cutting / 2000) * 3.1416 * thickness * bz);
+    }
+
+    function setMaterial(row) {
+        $("#material").val(row.material);
+        $("#materialId").val(row.id);
+        bz = row.proportion;
+        steelGrade = row.steelGrade;
+    }
+
+    function setShape(row) {
+        $("#shape").val(row.shape);
+        $("#shapeId").val(row.id);
+        if(row.shape == "CHA(30)"){
+            $("#coneAngle").val(30);
+        }else if(row.shape == "CHA(45)"){
+            $("#coneAngle").val(45);
+        }else if(row.shape == "CHA(60)"){
+            $("#coneAngle").val(60);
+        }
+        ztzh(row.shape);
+    }
+
+    function setMethod(row) {
+        $("#processingMethod").val(row.methodName);
+        let opts = [
+            {id:row.model1, text:row.model1},
+            {id:row.model2, text:row.model2},
+            {id:row.model3, text:row.model3},
+            {id:row.model4, text:row.model4},
+            {id:row.model5, text:row.model5},
+        ];
+        $("#hostType").combobox("setValue", '');
+        $("#hostType").combobox("loadData", opts)
+    }
+
+    function setSingleNumber(row) {
+        let data = {};
+        data.boardPerformance = row.boardPerformance;
+        data.heatTreatment = row.heatTreatment;
+        data.materialRetest = row.materialRetest;
+        data.materialId = row.materials;
+        data.material = row.materialsName;
+        data.min = row.minimumThickness;
+        data.detection = row.monitor;
+        data.mt = row.mt;
+        data.count = row.numbers;
+        data.pt = row.pt;
+        data.ut = row.ut;
+        data.shapeId = row.shapes;
+        data.shape = row.shapesName;
+        data.singleNumber = row.singleNo;
+        data.manufacture = row.standard;
+        let specification = row.specifications;
+        if(specification && specification != ''){
+            if(specification.indexOf("*") != -1){
+                data.thickness = specification.split("*")[1];
+                if(specification.indexOf("+") != -1){
+                    data.diameter = specification.split("*")[0].split("+")[0].replace("(", "");
+                    data.compositeBoard = specification.split("*")[0].split("+")[1].replace(")", "");
+                }else {
+                    data.diameter = specification.split("*")[0];
+                }
+            }
+        }
+        $("#saveForm").form("load", data);
+        if(row.materials && row.materials != null){
+            ajaxPostInvoke("/base/materialInfo", {id: row.materials}, function (res) {
+                if(res){
+                    bz = res.proportion;
+                    duplex = res.duplex;
+                    steelGrade = res.steelGrade;
+                }
+            })
+        }
+        ztzh(row.shapesName);
+        getWeight();
+        getHeight();
+    }
+
+    function openWindow(title, url, data) {
+        let status = $("#status").val();
+        if(status == 1){
+            layer.alert("已审核无法修改！", {
+                icon: 2
+            });
+        }else {
+            layer.open({
+                type: 1,
+                title: title,
+                fix: false,
+                shadeClose: true,
+                area: ['600px', '350px'],//width,height
+                content: $('#'+url),
+                btn: ['确定', '关闭'],
+                success: function (layero, index) {
+                    if(data){
+                        $("#savePageForm").form("load",data)
+                    }
+                    $("#savePageForm").form("load",{planCount: $("#count").val()})
+                },
+                yes: function (index, layero) {
+                    let id = $("#id").val();
+                    if(!$("#savePageForm").form('validate')){
+                        layer.alert("请填写完整！", {
+                            icon: 2
+                        });
+                    }else{
+                        let param = $("#savePageForm").getData();
+                        if(id && id != ''){
+                            param.parentId = id;
+                            ajaxSubmit("/processCard/ftCard/saveWork", param)
+                        }else {
+                            if(data && data != null){
+                                tempDataUpdate("dg", param, tableData);
+                            }else {
+                                let flag = true;
+                                for(let i in tableData){
+                                    if(tableData[i].no == param.no){
+                                        layer.alert("序号已存在!");
+                                        flag = false;
+                                        break;
+                                    }
+                                    if((tableData[i].no < param.no) && (timeCompare(tableData[i].endTime, param[i].beginTime) > 0)){
+                                        layer.alert("工序开始时间不可大于前工序结束时间!");
+                                        flag = false;
+                                        break;
+                                    }
+                                }
+                                if(flag){
+                                    tempDataInsert("dg", param, tableData);
+                                }
+                            }
+                            layer.close(index);
+                        }
+                    }
+
+                },
+                btn2: function () {
+                    layer.closeAll();
+                },
+                end:function () {
+                    $('#savePageForm').form('reset');
+                }
+            });
+        }
+
+    }
+
+    function openRemark() {
+        layer.open({
+            type: 2,
+            title: "备注",
+            fix: false,
+            shadeClose: true,
+            area: ['800px', '500px'],//width,height
+            content: getRootPath() + "/processCard/ftCardRemark.html",
+            success: function (layero, index) {
+                let sonFrame = window['layui-layer-iframe' + index];
+                sonFrame.initData($("#code").val());
+            }
+        });
+    }
+
+    function deleteInvoke(row) {
+        let id = $("#id").val();
+        if (id && id != ''){
+            return true;
+        }
+        tempDataDelete("dg", row, tableData);
+        return false;
+    }
+
+    function search() {
+        $('#dg').datagrid('reload');
+    }
+</script>
+
+
+    <script type="text/javascript">
+	$('.ftgyk_table tbody tr:odd').addClass('odd');
+
+    $('#startTime').datebox({
+        onSelect: function(date){
+            ajaxPostInvoke("/periodic/findByDate", {planTime: moment(date).format("YYYY-MM-DD HH:mm:ss")}, function (res) {
+                if(res && res != null){
+                    $("#savePageForm").form("load", res)
+                }else {
+                    $("#savePageForm").form("reset");
+                    $('#planTime').datebox('setValue', moment(date).format("YYYY-MM-DD HH:mm:ss"))
+                }
+            })
+        }
+    });
+
+    $("#shape").change(function(){
+        ztzh($("#shape").val());
+    });
+
+    $("#toleranceStandard1").switchbutton({
+        onChange:function (flag) {
+            if(flag){
+                $("#toleranceMin1").val(-3);
+                $("#toleranceMax1").val(3);
+            }else {
+                $("#toleranceMin1").val(-3);
+                $("#toleranceMax1").val(6);
+            }
+        }
+    })
+
+    $("#toleranceStandard2").switchbutton({
+        onChange:function (flag) {
+            if(flag){
+                $("#toleranceMin2").val(-3);
+                $("#toleranceMax2").val(3);
+            }else {
+                $("#toleranceMin2").val(-3);
+                $("#toleranceMax2").val(6);
+            }
+        }
+    })
+
+    $("#circumferenceStandard1").switchbutton({
+        onChange:function (flag) {
+            let diameter = $("#compositeBoard").val() + $("#diameter").val() * 1;
+            let data = {};
+            if(flag){
+                data.circumference1 = 3.1416 * diameter;
+            }else {
+                data.circumference1 = 3.1416 * (diameter + $("#thickness").val() * 1 * 2);
+            }
+            $("#saveForm").form("load", data);
+        }
+    })
+
+    $("#circumferenceStandard2").switchbutton({
+        onChange:function (flag) {
+            let diameter = $("#downDiameter").val();
+            let data = {};
+            if(flag){
+                data.circumference2 = 3.1416 * diameter;
+            }else {
+                data.circumference2 = 3.1416 * (diameter + $("#thickness").val() * 1 * 2);
+            }
+            $("#saveForm").form("load", data);
+        }
+    })
+
+    function diameterChange() {
+        let diameter = $("#compositeBoard").val() * 1 + $("#diameter").val() * 1;
+        let data = {};
+        data.roundness = diameter * 0.005;
+        data.totalHeight1 = -0.002 * diameter;
+        data.totalHeight2 = 0.006 * diameter;
+        data.sectionShape1 = -0.00625 * diameter;
+        data.sectionShape2 = 0.0125 * diameter;
+        if($("#circumferenceStandard1").switchbutton("options").checked){
+            data.circumference1 = 3.1416 * diameter;
+        }else {
+            data.circumference1 = 3.1416 * (diameter + $("#thickness").val() * 1 * 2);
+        }
+        $("#saveForm").form("load", data);
+    }
+
+    function downDiameterChange() {
+        let data = {};
+        let diameter = $("#downDiameter").val() * 1;
+        if($("#circumferenceStandard2").switchbutton("options").checked){
+            data.circumference2 = 3.1416 * diameter;
+        }else {
+            data.circumference2 = 3.1416 * (diameter + $("#thickness").val() * 1 * 2);
+        }
+        $("#saveForm").form("load", data);
+    }
+
+
+    let gxapData = [];
+    function gxap() {
+        layer.open({
+            type: 2,
+            title: "工序安排",
+            fix: false,
+            shadeClose: true,
+            maxmin: true,
+            area: ['98%', '98%'],
+            content: "gxszck.html",
+            btn: ['确定','取消'],
+            success: function (layero, index) {
+                let son = window['layui-layer-iframe' + index];
+                let card = $("#saveForm").getData();
+                let id = $("#id").val();
+
+                if(gxapData.length > 0){
+                    son.initData(card, gxapData, false);
+                }else if(id && id != ''){
+                    ajaxPostInvoke("/processCard/ftCard/gxap", {id: id}, function (res) {
+                        if(res != null && res.length > 0){
+                            son.initData(card, res, true);
+                        }else {
+                            son.initData(card)
+                        }
+                    })
+                }else {
+                    son.initData(card)
+                }
+            },
+            yes: function (index, layero) {
+                if($("#status").val() == 1){
+                    layer.msg("已审核无法修改")
+                }else{
+                    let data = window[layero.find('iframe')[0]['name']].getFormData();
+                    if(data != null){
+                        let id = $("#id").val();
+                        if(data.opt){
+                            data.data[0].status = 1;
+                            ajaxPostInvoke("/processCard/ftCard/saveAllgx", {list: data.data}, function (res) {
+                                layer.close(index);
+                                $("#dg").datagrid("reload");
+                            })
+                        }else {
+                            if(id && id != ''){
+                                data.data.forEach(e => e.parentId = id);
+                                data.data[0].status = 1;
+                                ajaxPostInvoke("/processCard/ftCard/saveAllgx", {list: data.data}, function (res) {
+                                    layer.close(index);
+                                    $("#dg").datagrid("reload");
+                                })
+                            }else {
+                                data.data[0].status = 1;
+                                gxapData = data.data;
+                                let tempData = gxapData.filter(item => item.process && item.process != '');
+                                $("#dg").datagrid("loadData", {total: tempData.length, rows: tempData});
+                                layer.close(index);
+                            }
+                        }
+                    }
+                }
+            },
+            btn2: function () {
+                layer.closeAll();
+            }
+        });
+    }
+
+
+
+	</script>
+
+</body>
+</html>

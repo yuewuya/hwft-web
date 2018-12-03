@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="layout" content="main">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/assembly/css/css.css"/>
+  <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+  <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+  <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+
+  <link rel="stylesheet" href="/plugins/bootstrap-3.3.7/css/bootstrap.css">
+  <link rel="stylesheet" href="/plugins/bootstrap-fileinput/css/fileinput.css">
+  <link rel="stylesheet" media="all" href="/plugins/bootstrap-fileinput/themes/explorer-fa/theme.css">
+  <link rel="stylesheet" href="/plugins/bootstrap-3.3.7/css/font-awesome.min.css">
+
+  <link type="text/css" rel="stylesheet" href="/js/imgUpload_base64.css">
+
+  <script src="/plugins/bootstrap-fileinput/js/fileinput.js"></script>
+  <script src="/plugins/bootstrap-fileinput/js/plugins/piexif.js"></script>
+  <script src="/plugins/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
+  <script src="/plugins/bootstrap-fileinput/themes/explorer-fa/theme.js"></script>
+  <script src="/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+  <script src="/plugins/popper.min.js"></script>
+  <script src="/plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
+
+
+  <script src="/plugins/jquery/jquery.json.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+  <script src="/plugins/moment.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/easy_common.js"></script>
+  <script src="/assembly/layer/layer.js"></script>
+  <script src="/js/html2canvas.js"></script>
+  <script src="/js/imgUpload_base64.js"></script>
+  <title>无标题文档</title>
+
+</head>
+<body>
+<div id="tt" class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+
+  <div title="外坡口" style="padding:10px;">
+
+    <table border="0" cellspacing="0" cellpadding="0" style="width:60%; margin-left:auto; margin-right:auto; line-height:25px;">
+      <tr>
+        <td width="45%" height="35">
+          <input id="pk1" type="radio" name="radio" value="radio">
+
+          <label for="pk1">外坡口一</label> </td>
+        <td>&nbsp;</td>
+        <td width="45%"><input id="pk2" type="radio" name="radio" value="radio">
+          <label for="pk2">外坡口二</label></td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt1" width="210" border="0" cellspacing="0" cellpadding="0" height="210"  style="border:1px #CCC solid" background="/assembly/img/pk/wpk1.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="109" align="right"><input id="pk1-1" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px; text-align:center" value="0"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td width="62">&nbsp;</td>
+                  <td width="39" align="right"><input id="pk1-2" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="30"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <table id="jt2" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/wpk2.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="123" align="right"><input  id="pk2-1" name="input2" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td width="49">&nbsp;</td>
+                  <td width="38"><input id="pk2-2" name="input2" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="30"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr>
+        <td height="35"><input type="radio" id="pk3" name="radio" value="radio">
+          <label for="pk3"> 外坡口三</label></td>
+        <td>&nbsp;</td>
+        <td><input type="radio" name="radio" id="pk4" value="radio">
+          <label for="pk4">外坡口四</label></td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt3" width="210" border="0" cellspacing="0" cellpadding="0" height="210"  style="border:1px #CCC solid" background="/assembly/img/pk/wpk3.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right"><input id="pk3-1" name="input3" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="32" height="43">&nbsp;</td>
+                  <td colspan="3"><input id="pk3-4" name="input4" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td width="51">&nbsp;</td>
+                  <td width="44"><input id="pk3-2" name="input3" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><input id="pk3-3" name="input5" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        <td>&nbsp;</td>
+        <td>
+          <table id="jt4" width="210" border="0" cellspacing="0" cellpadding="0" height="210"  style="border:1px #CCC solid" background="/assembly/img/pk/wpk4.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right"><input id="pk4-1" name="input6" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="29" height="43">&nbsp;</td>
+                  <td colspan="3"><input id="pk4-4" name="input6" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td width="54">&nbsp;</td>
+                  <td width="41"><input id="pk4-2" name="input6" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2"><input id="pk4-3" name="input8" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+      </tr>
+    </table>
+
+
+  </div>
+
+
+  <div title="内坡口" style="padding:10px;">
+
+    <table border="0" cellspacing="0" cellpadding="0" style="width:60%; margin-left:auto; margin-right:auto; line-height:25px;">
+      <tr>
+        <td width="45%" height="35">
+          <input type="radio" name="radio" value="radio" id="pk5">
+
+          <label for="pk5"> 内坡口一</label></td>
+        <td>&nbsp;</td>
+        <td width="45%"><input type="radio" name="radio" value="radio" id="pk6">
+          <label for="pk6">内坡口二</label></td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt5" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/npk1.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right"><input id="pk5-1" name="input7" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="55"><input id="pk5-2" name="input9" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="30"/></td>
+                  <td width="97">&nbsp;</td>
+                  <td width="9">&nbsp;</td>
+                  <td width="49">&nbsp;</td>
+                </tr>
+              </table></td>
+            </tr>
+          </table>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <table id="jt6" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/npk2.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right"><input id="pk6-1" name="input10" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="1"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="55"><input id="pk6-2" name="input10" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="30"/></td>
+                  <td width="70">&nbsp;</td>
+                  <td width="36">&nbsp;</td>
+                  <td width="49">&nbsp;</td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr>
+        <td height="35"><input id="pk7" type="radio" name="radio" value="radio">
+          <label for="pk7">内坡口三</label></td>
+        <td>&nbsp;</td>
+        <td><input type="radio" id="pk8" name="radio" value="radio">
+          <label for="pk8">内坡口四</label></td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt7" width="210" border="0" cellspacing="0" cellpadding="0" height="210
+      "  style="border:1px #CCC solid" background="/assembly/img/pk/npk3.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right"><input id="pk7-1" name="input3" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td align="center">&nbsp;</td>
+                  <td colspan="2" rowspan="2" align="left"><input id="pk7-2" name="input11" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td width="111">&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="19">&nbsp;</td>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td height="41">&nbsp;</td>
+                  <td><input id="pk7-4" name="input12" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td width="43" rowspan="2"><input id="pk7-3" name="input13" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td width="20">&nbsp;</td>
+                  <td width="17">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        <td>&nbsp;</td>
+        <td>
+          <table id="jt8" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/npk4.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="3" align="right"><input id="pk8-1" name="input14" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td width="111">&nbsp;</td>
+                  <td width="9">&nbsp;</td>
+                  <td width="50" colspan="2" rowspan="2" align="center"><input id="pk8-2" name="input16" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td width="19" height="52">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td><input id="pk8-4" name="input14" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="3" rowspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td><input id="pk8-3" name="input15" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+      </tr>
+    </table>
+  </div>
+
+
+  <div title="X型坡口" style="padding:10px;">
+    <table border="0" cellspacing="0" cellpadding="0" style="width:60%; margin-left:auto; margin-right:auto; line-height:25px;">
+      <tr>
+        <td width="45%" height="35">
+          <input id="pk9" type="radio" name="radio" value="radio">
+
+          <label for="pk9">X型坡口一</label></td>
+        <td>&nbsp;</td>
+        <td width="45%"><input id="pk10" type="radio" name="radio" value="radio">
+          <label for="pk10">X型坡口二</label></td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt9" width="225" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/X1.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="right"><input id="pk9-1" name="input7" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td align="right">&nbsp;</td>
+                  <td colspan="2" align="center"><input id="pk9-2" name="input17" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="55" align="center"><input id="pk9-4" name="input9" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="30"/></td>
+                  <td width="87">&nbsp;</td>
+                  <td width="19">&nbsp;</td>
+                  <td width="49"><input id="pk9-3" name="input21" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="30"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        <td>&nbsp;</td>
+        <td>
+          <table id="jt10" width="225" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/X2.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="right"><input id="pk10-1" name="input18" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td align="right">&nbsp;</td>
+                  <td colspan="2" align="center"><input id="pk10-2" name="input18" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="55" align="center"><input id="pk10-4" name="input18" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="30"/></td>
+                  <td width="87">&nbsp;</td>
+                  <td width="27">&nbsp;</td>
+                  <td width="41"><input id="pk10-3" name="input22" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr>
+        <td height="35"><input id="pk11" type="radio" name="radio" value="radio">
+          <label for="pk11">X型坡口三</label></td>
+        <td>&nbsp;</td>
+        <td><input type="radio" name="radio" id="pk12" value="radio">
+          <label for="pk12">X型坡口四</label></td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt11" width="225" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/X3.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="right"><input id="pk11-6" name="input19" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td width="38" align="left">&nbsp;</td>
+                  <td width="49" align="left"><input id="pk11-1" name="input20" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center"><input id="pk11-2" name="input19" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="5">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="55" align="center"><input id="pk11-5" name="input19" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2">&nbsp;</td>
+                  <td width="25">&nbsp;</td>
+                  <td width="43"><input id="pk11-3" name="input23" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td align="center">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="center">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="center">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td align="right"><input id="pk11-4" name="input24" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        <td>&nbsp;</td>
+        <td>
+          <table id="jt12" width="225" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/X4.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="right"><input id="pk12-6" name="input25" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td width="38" align="left">&nbsp;</td>
+                  <td width="49" align="left"><inpu id="pk12-1" name="input25" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center"><input id="pk12-2" name="input25" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td colspan="5">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="55" align="center"><input id="pk12-5" name="input25" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2">&nbsp;</td>
+                  <td width="19">&nbsp;</td>
+                  <td width="49"><input id="pk12-3" name="input25" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td align="center">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td rowspan="2" align="center"><input id="pk12-4" name="input26" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td align="center">&nbsp;</td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+      </tr>
+    </table>
+  </div>
+
+
+  <div title="平坡口" style="padding:10px;">
+    <table border="0" cellspacing="0" cellpadding="0" style="width:60%; margin-left:auto; margin-right:auto; line-height:25px;">
+      <tr>
+        <td width="45%" height="35">
+          <input type="radio" name="radio" value="radio" id="pk13">
+          <label for="pk13">平坡口一</label></td>
+        <td>&nbsp;</td>
+        <td width="45%"><input type="radio" name="radio" value="radio" id="pk14">
+          <label for="pk14">平坡口二</label></td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt13" width="251" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/ppk1.png">
+            <tr>
+              <td width="249" valign="top"><table width="230" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right"><input id="pk13-1" name="input7" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="54">&nbsp;</td>
+                  <td width="66">&nbsp;</td>
+                  <td width="57">&nbsp;</td>
+                  <td width="53">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><input id="pk13-2" name="input27" type="text" class="scinput2"  style="height: 23px; width: 50px; line-height: 23px;" value="1/4"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        <td>&nbsp;</td>
+        <td>
+          <table id="jt14" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/ppk2.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right"><input id="pk14-1" name="input28" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="72">&nbsp;</td>
+                  <td width="71">&nbsp;</td>
+                  <td width="18">&nbsp;</td>
+                  <td width="49">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td rowspan="2" align="right"><input id="pk14-2" name="input29" type="text" class="scinput2"  style="height: 23px; width: 50px; line-height: 23px;" value="1/4"/></td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr>
+        <td height="35"><input type="radio" name="radio" value="radio" id="pk15">
+          <label for="pk15">平坡口三</label></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><table id="jt15" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/ppk3.png">
+          <tr>
+            <td valign="top">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+
+
+  <div title="SH坡口" style="padding:10px;">
+    <table border="0" cellspacing="0" cellpadding="0" style="width:60%; margin-left:auto; margin-right:auto; line-height:25px;">
+      <tr>
+        <td width="45%" height="35">
+          <input type="radio" name="radio" id="pk16" value="radio">
+          <label for="pk16">SH坡口一</label></td>
+        <td>&nbsp;</td>
+        <td width="45%"><input type="radio" name="radio" id="pk17" value="radio">
+          <label for="pk17">SH坡口二</label></td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt16" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/SH1.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right">&nbsp;</td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="2" align="center"><input name="input31" readonly type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="54">&nbsp;</td>
+                  <td width="46">&nbsp;</td>
+                  <td width="38">&nbsp;</td>
+                  <td width="72">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td align="right"><input name="input30" readonly type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td><input id="pk16-2" name="input27" type="text" class="scinput2"  style="height: 23px; width: 50px; line-height: 23px;" value="0"/></td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        <td>&nbsp;</td>
+        <td>
+          <table id="jt17" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/SH2.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right">&nbsp;</td>
+                  <td colspan="2" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4" align="center"><input id="pk17-1" name="input32" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                </tr>
+                <tr>
+                  <td width="54">&nbsp;</td>
+                  <td width="46">&nbsp;</td>
+                  <td width="38">&nbsp;</td>
+                  <td width="72">&nbsp;</td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr>
+        <td height="35"><input type="radio" name="radio" id="pk18" value="radio">
+          <label for="pk18">SH坡口三</label></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>
+          <table id="jt18" width="210" border="0" cellspacing="0" cellpadding="0" height="195"  style="border:1px #CCC solid" background="/assembly/img/pk/SH3.png">
+            <tr>
+              <td valign="top"><table width="210" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td colspan="2" align="right">&nbsp;</td>
+                  <td width="52" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td width="103" colspan="2" rowspan="2" align="center"><input name="input33" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td height="29">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td height="40" colspan="2" align="center"><input name="input33" type="text" class="scinput2"  style="height: 23px; width: 30px; line-height: 23px;" value="0"/></td>
+                  <td>&nbsp;</td>
+                </tr>
+              </table></td>
+            </tr>
+          </table></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="set19" title="特殊坡口" onclick="setSelect(19)" style="padding:10px;">
+<!--
+    <div class="index_table4_title">
+      <input type="radio" name="radio" id="pk19" value="radio"><label for="pk19">特殊坡口：
+      <input id="tspk" type="text" class="dfinput" style="width:130px;" value="特殊坡口" />
+    </label>
+    </div>
+    <div style="width:49%; margin-right:1%">
+
+      <div class="index_table4">
+        <div class="index_table4_content" style="height:240px;">
+
+
+          <div class="page-header">
+
+            <div class="index_table2">
+              <div class="index_table2_title">
+                <span>示意图</span>
+              </div>
+              <div class="index_table2_content" style="height:350px">
+                &lt;!&ndash; 图片上传 &ndash;&gt;
+                <input id="tspkImg" type="file">
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>-->
+
+
+
+
+
+
+
+    <div style="width:49%; margin-right:1%">
+
+        <div class="index_table4_title">
+            <input type="radio" name="radio" id="pk19" value="radio"><label for="pk19">特殊坡口：
+            <input id="tspk" type="text" class="dfinput" style="width:130px;" value="特殊坡口" />
+        </label>
+        </div>
+
+          <div class="page-header">
+              <div class="fileinput fileinput-new" data-provides="fileinput"  id="exampleInputUpload">
+                <div id="cc">
+                <div class="fileinput-new thumbnail" style="width: 260px;height: 180px;">
+                  <img id='picImg' style="width:260px;height:180px;" src="/assembly/table/images/noimage.png"/>
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="width: 260px; height: 180px;"></div>
+                </div>
+                <div>
+                                       <span class="btn btn-primary btn-file">
+                                          <span class="fileinput-new">选择文件</span>
+                                          <span class="fileinput-exists">换一张</span>
+                                          <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                                      </span>
+                  <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+                </div>
+              </div>
+          </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+
+
+
+
+</div>
+<script src="/assembly/layer/layer.js"></script>
+<script src="/plugins/uploadCommon.js"></script>
+
+<script type="text/javascript">
+    function getJT(id, jt, index) {
+        html2canvas(document.getElementById(id), {
+            allowTaint: true,
+            taintTest: false,
+            onrendered: function(canvas) {
+                let img = canvas.toDataURL();
+                console.log("------", img)
+                parent.$("#" + jt).val(img);
+                parent.layer.close(index);
+            }
+        });
+    }
+
+
+    let obj = {};
+
+    $('.tablelist3 tbody tr:odd').addClass('odd');
+    
+    function initData(img) {
+        $("#picImg").attr("src", img);
+    }
+
+    /*function initData(tspkImg) {
+        //图片数据初始化
+        let arr = [];
+        if (!tspkImg || tspkImg == '') {//新建
+            //如果新建，就给图片数据生成一个guid数据
+            let tempTspkImg = guid();
+            obj.tspkImg = tempTspkImg;
+            arr = [
+                fileInputData('tspkImg', tempTspkImg),
+            ];
+        } else {//修改
+            obj.tspkImg = tspkImg;
+            arr = [
+                fileInputData('tspkImg', tspkImg),
+            ];
+        }
+        initFileInputBatch(arr);
+    }*/
+
+    function isok() {
+        if(init == 0){
+
+        }else {
+            return;
+        }
+    }
+
+    function getFormData() {
+        let id = $("input[name='radio']:checked").attr("id");
+        if(id == "pk1"){
+            return {id: "jt1", text : "VO" + $("#pk1-2").val() + "/" + $("#pk1-1").val()};
+        }else if(id == "pk2"){
+            return {id: "jt2", text : $("#pk2-1").val() + "-VO" + $("#pk2-2").val() + "/F"};
+        }else if(id == "pk3"){
+            return {id: "jt3", text : ($("#pk3-1").val() - $("#pk3-4").val()) + "-VO" + $("#pk3-2").val() + "/" + $("#pk3-4").val() + "外锥" + $("#pk3-3").val() + "F"};
+        }else if(id == "pk4"){
+            return {id: "jt4", text : ($("#pk4-1").val() - $("#pk4-4").val()) + "-VO" + $("#pk4-2").val() + "/" + $("#pk4-4").val() + "外锥" + $("#pk4-3").val() + "F"};
+        }else if(id == "pk5"){
+            return {id: "jt5", text : "V" + $("#pk5-2").val() + "/" + $("#pk5-1").val()};
+        }else if(id == "pk6"){
+            return {id: "jt6",  text : $("#pk6-1").val() + "-VI" + $("#pk6-2").val() + "/F"};
+        }else if(id == "pk7"){
+            return {id: "jt7",  text : ($("#pk7-1").val() - $("#pk7-4").val()) + "-VI" + $("#pk7-4").val() + "/" + $("#pk7-2").val() + "外锥" + $("#pk7-3").val() + "F"};
+        }else if(id == "pk8"){
+            return {id: "jt8",  text : ($("#pk8-1").val() - $("#pk8-4").val()) + "-VI" + $("#pk8-4").val() + "/" + $("#pk8-2").val() + "内锥" + $("#pk8-3").val() + "F" };
+        }else if(id == "pk9"){
+            return {id: "jt9", text : $("#pk9-2").val() + "-VO-" + $("#pk9-3").val() + ",R-" + $("#pk9-1").val() + ",F-VI-" + $("#pk9-4").val()};
+        }else if(id == "pk10"){
+            return {id: "jt10", text :  "F-VO-" + $("#pk10-3").val() + ",R-" + $("#pk10-2").val() + "," + $("#pk10-1").val() + "-VI-" + $("#pk10-4").val()};
+        }else if(id == "pk11"){
+            return {id: "jt11",  text : $("#pk11-2").val() + "-VO-" + $("#pk11-3").val() + ",R-" + $("#pk11-1").val() + "," + $("#pk11-6").val() + "-VI-" +$("#pk11-5").val() + "外锥" + $("#pk11-4").val() + "F"};
+        }else if(id == "pk12"){
+            return {id: "jt12",  text : $("#pk12-2").val() + "-VO-" + $("#pk12-3").val() + ",R-" + $("#pk12-1").val() + "," + $("#pk12-6").val() + "-VI-" +$("#pk12-5").val() + "内锥" + $("#pk12-4").val() + "F"};
+        }else if(id == "pk13"){
+            return {id: "jt13",  text : "I,R-" + $("#pk13-1").val() + ",外锥" + $("#pk13-2").val() + "F"};
+        }else if(id == "pk14"){
+            return {id: "jt14",  text : "I,R-" + $("#pk14-1").val() + ",外锥" + $("#pk14-2").val() + "F"};
+        }else if(id == "pk15"){
+            return {id: "jt15",  text : "I"};
+        }else if(id == "pk16"){
+            return {id: "jt16",  text : "I" + $("#pk16-2").val()};
+        }else if(id == "pk17"){
+            return {id: "jt17",  text : "竖直坡口"};
+        }else if(id == "pk18"){
+            return {id: "jt18",  text : "水平坡口" };
+        }else if(id == "pk19"){
+            return {id: "cc",  text : $("#tspk").val() };
+        }
+    }
+
+
+    $('#tt').tabs({
+        onSelect : function (title, index){
+            console.log("--index--",index)
+            if(index == 5){
+                $("#pk19").attr("checked",true)
+            }
+        }
+    })
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>华威封头</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/AdminLTE.min.css">
+    <link rel="stylesheet" href="css/all-skins.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <!-- <script src="/js/cloud.js"></script> -->
+    <script src="/js/utils.js"></script>
+    <script language="javascript">
+        $(function () {
+            $('.loginbox').css({'position': 'absolute', 'left': ($(window).width() - 692) / 2});
+            $(window).resize(function () {
+                $('.loginbox').css({'position': 'absolute', 'left': ($(window).width() - 692) / 2});
+            })
+        });
+    </script>
+    <![endif]-->
+</head>
+<body class="hold-transition login-page" style="background-color: #056DAF;
+background-image: url(images/light.png);
+background-repeat: no-repeat; background-position: center top;
+overflow: hidden;">
+<div id="mainBody">
+    <!-- <div id="cloud1" class="cloud"></div>
+    <div id="cloud2" class="cloud"></div> -->
+</div>
+<div class="logintop">
+    <span>欢迎登录华威封头信息管理系统</span>
+    <ul>
+        <li><a href="#">回首页</a></li>
+        <li><a href="#">帮助</a></li>
+        <li><a href="#">关于</a></li>
+    </ul>
+</div>
+<div class="login-box" id="hwft" v-cloak>
+    <div class="login-logo">
+        华威封头信息管理系统
+        <p style="font-size: 18px;color: red">测试版1.0</p>
+    </div>
+    <div class="login-box-body">
+        <p class="login-box-msg">用户登录</p>
+        <div v-if="error" class="alert alert-danger alert-dismissible">
+            <h4 style="margin-bottom: 0px;"><i class="fa fa-exclamation-triangle"></i> {{errorMsg}}</h4>
+        </div>
+        <div class="form-group has-feedback">
+            <input type="text" class="form-control" v-model="username" placeholder="账号">
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <input type="password" class="form-control" v-model="password" placeholder="密码">
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <input type="text" class="form-control" v-model="captcha" @keyup.enter="login" placeholder="验证码">
+            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+            <img alt="如果看不清楚，请单击图片刷新！" class="pointer" :src="src" @click="refreshCode">
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:" @click="refreshCode">点击刷新</a>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="checkbox icheck">
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <button type="button" class="btn btn-primary btn-block btn-flat" @click="login">登录</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="libs/jquery.min.js"></script>
+<script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="libs/vue.min.js"></script>
+<script src="libs/bootstrap.min.js"></script>
+<script src="libs/app.js"></script>
+<script src="js/common.js"></script>
+<script src="libs/jquery.json.min.js"></script>
+<script type="text/javascript">
+let t = guid();
+    var vm = new Vue({
+        el: '#hwft',
+        data: {
+            username: '',
+            password: '',
+            captcha: '',
+            error: false,
+            errorMsg: '',
+            src: getRootPath() + '/captcha.jpg?t=' + t
+        },
+        beforeCreate: function () {
+            if (self != top) {
+                top.location.href = self.location.href;
+            }
+        },
+        methods: {
+            refreshCode: function () {
+                console.log("----", this);
+                this.src = getRootPath() + "/captcha.jpg?t=" + t;
+            },
+            login: function () {
+                var obj = {username: vm.username, password: vm.password, captcha: vm.captcha, uuid: t};
+                console.info($.toJSON(obj));
+                // modify ....
+                $.ajax({
+                    type: "POST",
+                    url: getRootPath() + "/sys/login",
+                    data: $.toJSON(obj),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (r) {
+                        if (r.code == 0) {//登录成功
+                            localStorage.setItem("token", r.token);
+                            parent.location.href = 'index.html';
+                        } else {
+                            vm.error = true;
+                            vm.errorMsg = r.msg;
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

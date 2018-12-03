@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <link href="print/qualityPrintPart.css" rel="stylesheet" type="text/css" media="print">
+    <script language="javascript" src="/js/jquery.jqprint-0.3.js"></script>
+    <script language="javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+</head>
+<body>
+<div class="mainbox">
+    <form id="searchForm">
+        <p>
+            <label>厚度：</label>
+            <input name="thickness" id="thickness" type="text" class="scinput"
+                   style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+    </form>
+    <div class="cyda">
+        <table id="dg" style="width:80%">
+        </table>
+        <div id="toolbar">
+            <a href="javascript:void(0)" class="easyui-linkbutton"
+               onclick="addBtn('新增', '/quality/radialParameterSettingAdd.html')"
+               data-options="plain:true,iconCls:'icon-add'">新增</a>
+            <a href="#" class="easyui-linkbutton"
+               onclick="editBtn('修改', '/quality/radialParameterSettingAdd.html')"
+               data-options="plain:true,iconCls:'icon-edit'">修改</a>
+            <a href="#" class="easyui-linkbutton" onclick="delBtn('删除','/radial/report/parameterDelete')"
+               data-options="plain:true,iconCls:'icon-remove'">删除</a>
+        </div>
+    </div>
+</div>
+<script src="../../assembly/layer/layer.js"></script>
+<script>
+    $(function () {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#dg").datagrid({
+            width: '98%',
+            height: mContentHeight,
+            singleSelect: false,
+            autoRowHeight: false,
+            rownumbers: true,
+            showFooter: true,
+            fitColumns: false,
+            toolbar: '#toolbar',
+            url: getRootPath() + '/radial/report/parameterList',
+            columns: [[{
+                field: 'ck',
+                checkbox: true
+            }, {
+                field: 'thickness',
+                title: '厚度',
+                width: 100,
+                align: 'left'
+            }, {
+                field: 'equipment',
+                title: '设备型号',
+                width: 100,
+                align: 'left'
+            }, {
+                field: 'focus',
+                title: '焦点尺寸',
+                width: 100,
+                align: 'left'
+            }, {
+                field: 'voltage',
+                title: '管电压',
+                width: 100,
+                align: 'left'
+            }, {
+                field: 'exposure',
+                title: '曝光量',
+                width: 100,
+                align: 'left'
+            }, {
+                field: 'imageQuality',
+                title: '象质型号',
+                width: 100,
+                align: 'left'
+            }, {
+                field: 'silkNumber',
+                title: '丝号',
+                width: 100,
+                align: 'left'
+            }]]
+        });
+    });
+
+    function search() {
+        $('#dg').datagrid('reload', {thickness: $("#thickness").val()});
+    }
+
+    /**
+     * 弹出层
+     * @param title
+     * @param url
+     * @param data
+     */
+    function openWindow(title, url, data) {
+        layer.open({
+            type: 2,
+            title: title,
+            fix: false,
+            shadeClose: true,
+            area: ['50%', '90%'],//width,height
+            content: getRootPath() + url,
+            btn: ['提交', '关闭'],
+            success: function (layero, index) {
+                let sonFrame = window['layui-layer-iframe' + index];
+                if (data) {
+                    sonFrame.init(data);
+                } else {
+                    sonFrame.init(null);
+                }
+            },
+            yes: function (index, layero) {
+                let obj = window[layero.find('iframe')[0]['name']].getFormData();
+                if (obj) {
+                    ajaxSubmit('/radial/report/parameterUpdate', obj);
+                }
+            },
+            btn2: function () {
+                layer.closeAll();
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>
+
+

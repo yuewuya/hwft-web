@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>部门管理</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<body>
+<div class="place">
+    <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">参考材质设置窗口</a></li>
+    </ul>
+</div>
+<div class="mainbox">
+    <div class="tools">
+        <form id="searchForm">
+            <ul class="cyda_cx">
+                <li>
+                    部门:
+                    <input name="departmentName" id="departmentName" type="text" class="scinput"/>
+                </li>
+                <li>
+                    姓名:
+                    <input name="username" id="username" type="text" class="scinput"/>
+                </li>
+                <li>
+                    <a href="javascript:"><img src="/assembly/images/bl.png" onclick="search()"/></a>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div class="cyda">
+        <table id="dg" style="width:80%">
+        </table>
+        <div id="toolbar">
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addBtn('新增 部门', 'saveDepartment')"
+               data-options="plain:true,iconCls:'icon-add'" id="modal-add">新增</a>
+            <a href="#" class="easyui-linkbutton" onclick="editBtn('修改 部门', 'saveDepartment')"
+               data-options="plain:true,iconCls:'icon-edit'">修改</a>
+            <a href="#" class="easyui-linkbutton" onclick="delBtn('/sys/user/delete')"
+               data-options="plain:true,iconCls:'icon-remove'">删除</a>
+        </div>
+    </div>
+</div>
+<script src="/assembly/layer/layer.js"></script>
+<script src="/js/sys/sysUser.js"></script>
+</body>
+
+<div id="saveDepartment" title="人员" style="padding:10px;display:none" align="left">
+    <form id="form">
+        <input name="userId" type="hidden" class="easyui-validatebox textbox"/>
+        <div class="ccForm">姓名: &nbsp;<input name="username" type="text" class="easyui-validatebox textbox"
+                                              required="true"/></div>
+        <br/>
+        <div class="ccForm">部门: &nbsp;<input name="departmentName" id="departmentNameValue" type="text" disabled required="true" class="easyui-validatebox textbox"/>
+            <input name="department" id="departmentValue" type="hidden"/>
+            <a href="javascript:void(0)"><img src="/assembly/images/ck.png" style="display: inline-block;border: none; vertical-align: middle;"
+                                              onclick="chooseDepartment('客户选择','/sys/department.html')"/></a>
+        </div>
+        <br/>
+        <div class="ccForm">角色: &nbsp;<input name="roleName" id="roleName" type="text" disabled required="true" class="easyui-validatebox textbox"/>
+            <input name="roleId" id="roleId" type="hidden"/>
+            <a href="javascript:void(0)"><img src="/assembly/images/ck.png" style="display: inline-block;border: none; vertical-align: middle;"
+                                              onclick="selectRole('选择角色','/sys/sysRoleManage.html')"/></a>
+        </div>
+        <br/>
+        <div class="ccForm">邮箱: &nbsp;<input name="email" type="text" class="easyui-validatebox textbox"
+                                                required="true"/></div>
+        <br/>
+        <div class="ccForm">手机: &nbsp;<input name="mobile" type="text" class="easyui-validatebox textbox"
+                                             required="true"/></div>
+        <br/>
+    </form>
+</div>
+<script>
+    function selectRole(title, url) {
+        layer.open({
+            type: 2,
+            title: title,
+            fix: false,
+            shadeClose: true,
+            area: ['40%', '80%'],//width,height
+            content: getRootPath() + url,
+            btn: ['确定', '关闭'],
+            yes: function (index, layero) {
+                let sonFrame = window['layui-layer-iframe' + index];
+                let arr = sonFrame.getSelections();
+                $("#roleName").val(arr.roleName);
+                $("#roleId").val(arr.roleId);
+                console.log(arr);
+                layer.close(index);
+            },
+            btn2: function (index) {
+                layer.close(index);
+            }
+        });
+    }
+</script>
+</html>
+
+

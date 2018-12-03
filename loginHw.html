@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>欢迎登录华威封头信息管理系统</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/js/verificationNumbers.js" tppabs="/js/verificationNumbers.js"></script>
+    <script src="/js/cloud.js"></script>
+    <script language="javascript">
+        $(function () {
+            $('.loginbox').css({'position': 'absolute', 'left': ($(window).width() - 692) / 2});
+            $(window).resize(function () {
+                $('.loginbox').css({'position': 'absolute', 'left': ($(window).width() - 692) / 2});
+            })
+        });
+    </script>
+</head>
+<body style="background-color: #056DAF;
+background-image: url(images/light.png);
+background-repeat: no-repeat; background-position: center top;
+overflow: hidden;">
+<div id="mainBody">
+    <div id="cloud1" class="cloud"></div>
+    <div id="cloud2" class="cloud"></div>
+</div>
+<div class="logintop">
+    <span>欢迎登录华威封头信息管理系统</span>
+    <ul>
+        <li><a href="#">回首页</a></li>
+        <li><a href="#">帮助</a></li>
+        <li><a href="#">关于</a></li>
+    </ul>
+</div>
+<div class="loginbody">
+    <span class="systemlogo"></span>
+    <div class="loginbox">
+        <ul>
+            <li><input name="username" type="text" class="loginuser" placeholder="账号"/></li>
+            <li><input name="password" type="text" class="loginpwd" placeholder="密码"/></li>
+            <li>
+                <dd class="val_icon">
+                    <div class="checkcode">
+                        <input type="text" id="captcha" name="captcha" placeholder="验证码" maxlength="4" class="loginyzm">
+                        <canvas class="J_codeimg" id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!
+                        </canvas>
+                    </div>
+                </dd>
+            </li>
+            <li><input name="" type="button" class="loginbtn" value="登录"
+                       onclick="window.location='indexOld.html'"/>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="loginbm">版权所有 2018 宜兴市华威封头</div>
+</body>
+</html>

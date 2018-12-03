@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+
+</head>
+
+<style>
+    #savePageForm div{
+        display: inline-block;
+        width: 45%;
+        margin: 10px;
+    }
+
+    #savePageForm div label{
+        display: inline-block;
+        width: 100px;
+        text-align: right;
+    }
+</style>
+<body>
+
+    <div class="mainbox">
+
+        <div class="cyda">     
+        <form id="initForm">
+            <h2 style="font-size: 16px;font-weight: 700;">
+                客户名称：<input readonly name="customer">
+                签署时间：<input readonly name="orderDate">
+                合同编号：<input readonly name="orderNum">
+                付款方式：<input readonly name="paymentWay">
+                经手人：<input readonly name="createName">
+                材料来源：<input readonly name="materialSource">
+            </h2>
+        </form>
+         <div style="margin-bottom:20px; margin-top:5px;">
+
+             <table id="dg" style="width:80%"></table>
+             <div id="toolbar">
+                 <a href="javascript:void(0)" class="easyui-linkbutton"
+                    onclick="openWindow()"
+                    data-options="plain:true,iconCls:'icon-add'">编辑台账</a>
+             </div>
+                            
+           </div>
+           
+           
+        </div>
+    </div>
+
+
+    <div id="savePage" title="合同台账设置" style="padding:10px 0 0 50px;display:none">
+        <form id="savePageForm">
+            <div style="display: none;">
+                <input name="id" type="hidden"/>
+            </div>
+            <div>
+                <label>已发金额: &nbsp;</label>
+                <input name="yfAmount" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div>
+            <div>
+                <label>未发金额: &nbsp;</label>
+                <input name="wfAmount" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div>
+
+            <div>
+                <label>已开发票数量: &nbsp;</label>
+                <input name="ykfpCount" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div>
+            <div>
+                <label>已开发票金额: &nbsp;</label>
+                <input name="ykfpAmount" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div>
+            <div>
+                <label>未开发票数量: &nbsp;</label>
+                <input name="wkfpCount" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div>
+            <div>
+                <label>未开发票金额: &nbsp;</label>
+                <input name="wkfpAmount" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div><br>
+            <h3>开具发票（1）</h3>
+            <div>
+                <label>时间号码: &nbsp;</label>
+                <input name="kpNumber1" type="text" class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>数量: &nbsp;</label>
+                <input name="kpCount1" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div><br>
+            <h3>开具发票（2）</h3>
+            <div>
+                <label>时间号码: &nbsp;</label>
+                <input name="kpNumber2" type="text" class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>数量: &nbsp;</label>
+                <input name="kpCount2" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div><br>
+            <h3>开具发票（3）</h3>
+            <div>
+                <label>时间号码: &nbsp;</label>
+                <input name="kpNumber3" type="text" class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>数量: &nbsp;</label>
+                <input name="kpCount3" type="text" class="easyui-numberbox" style="width:200px;"/>
+            </div>
+
+            <div>
+                <label>合同扫描件: &nbsp;</label>
+                <input name="orderScanner" type="text" class="scinput" style="width:200px;"/>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+<script>
+    function initTable(id) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 200;
+        $("#dg").datagrid({
+            width: '98%',
+            height: mContentHeight,
+            singleSelect: false,
+            autoRowHeight: false,
+            rownumbers: true,
+            showFooter: true,
+            fitColumns: false,
+            toolbar: '#toolbar',
+            url: getRootPath() + "/sale/order/queryPageLedger3",
+            queryParams:{id: id},
+            columns: [[
+                {field: 'shape', title: '形状', align: 'center', width: '150', rowspan: 3},
+                {field: 'material',title: '材质',align: 'center', width: '100', rowspan: 3},
+                {
+                field: 'outDiameter',
+                title: '规格',
+                align: 'center',
+                width: '100',
+                rowspan: 3,
+                formatter: function (value, row) {
+                    return row.id == null ? "----" : (value == null ? row.innerDiameter : value) + "*" + row.thickness;
+                }
+            },  {field: 'nums', title: '数量', align: 'center', width: '100', rowspan: 3},
+                {field: 'realPrice', title: '单价', align: 'center', width: '100', rowspan: 3,
+                    formatter: function (value, row) {
+                        return row.id == null ? "----" : value;
+                    }
+                },
+                {
+                field: 'jine',
+                title: '金额',
+                align: 'center',
+                width: '100',
+                formatter: function (value, row) {
+                    return row.realPrice * row.nums;
+                },
+                rowspan: 3
+            },  {field: 'allDeliveryCount', title: '已发数量', align: 'center', width: '80', rowspan: 3},
+                {title: '发货（1）', align: 'center', colspan: 2},
+                {title: '发货（2）', align: 'center', colspan: 2},
+                {title: '发货（3）', align: 'center', colspan: 2},
+                {field: 'yfAmount', title: '已发金额', align: 'center', width: '100', rowspan: 3},
+                {field: 'wfCount', title: '未发数量', align: 'center', width: '100', rowspan: 3,
+                    formatter: function (value, row) {
+                        return row.nums - row.allDeliveryCount;
+                    }
+                },
+                {field: 'wfAmount', title: '未发金额', align: 'center', width: '100', rowspan: 3},
+                {field: 'ykfpCount', title: '已开发票数量', align: 'center', width: '100', rowspan: 3},
+                {field: 'ykfpAmount', title: '已开发票金额', align: 'center', width: '100', rowspan: 3},
+                {field: 'wkfpCount', title: '未开发票数量', align: 'center', width: '100', rowspan: 3},
+                {field: 'wkfpAmount', title: '未开发票金额', align: 'center', width: '100', rowspan: 3},
+                {title: '发票开具', align: 'center', colspan: 6},
+                {field: 'orderScanner', title: '合同扫描件', align: 'center', rowspan: 3},
+                ],
+                [
+                {field: 'deliveryTime1', title: '时间', align: 'center', width: '100', rowspan: 2,
+                    formatter: function (value, row) {
+                        return value == null ? "--" : moment(value).format("YYYY-MM-DD");
+                    }},
+                {field: 'deliveryCount1', title: '数量', align: 'center', width: '100', rowspan: 2},
+                {field: 'deliveryTime2', title: '时间', align: 'center', width: '100', rowspan: 2,
+                    formatter: function (value, row) {
+                        return value == null ? "--" : moment(value).format("YYYY-MM-DD");
+                    }},
+                {field: 'deliveryCount2', title: '数量', align: 'center', width: '100', rowspan: 2},
+                {field: 'deliveryTime3', title: '时间', align: 'center', width: '100', rowspan: 2,
+                    formatter: function (value, row) {
+                        return value == null ? "--" : moment(value).format("YYYY-MM-DD");
+                    }},
+                {field: 'deliveryCount3', title: '数量', align: 'center', width: '100', rowspan: 2},
+                {title: '发票开具（1）', align: 'center', colspan: 2},
+                {title: '发票开具（2）', align: 'center', colspan: 2},
+                {title: '发票开具（3）', align: 'center', colspan: 2},
+                ],
+                [
+                {field: 'kpNumber1', title: '时间', align: 'center', width: '100'},
+                {field: 'kpCount1', title: '数量', align: 'center', width: '100'},
+                {field: 'kpNumber2', title: '时间', align: 'center', width: '100'},
+                {field: 'kpCount2', title: '数量', align: 'center', width: '100'},
+                {field: 'kpNumber3', title: '时间', align: 'center', width: '100'},
+                {field: 'kpCount3', title: '数量', align: 'center', width: '100'},
+                ]
+            ],
+            onLoadError: function (XMLHttpRequest) {
+
+            }
+        });
+    }
+
+    function initData(param){
+        initTable(param.id);
+        param.orderDate = moment(param.orderDate).format("YYYY年MM月DD日");
+        $("#initForm").form("load", param);
+    }
+    
+    function openWindow() {
+        let rows = $('#dg').datagrid('getSelections');
+        if (rows.length != 1) {
+            layer.alert("请选择一条需要编辑的数据！", {
+                icon: 2
+            });
+            return;
+        }else {
+            setPage(rows[0])
+        }
+    }
+
+    function setPage(data){
+        layer.open({
+            type: 1,
+            title: "编辑台账",
+            fix: false,
+            shadeClose: true,
+            area: ['800px', "530px"],//width,height
+            content: $('#savePage'),
+            btn: ['确定', '关闭'],
+            success: function (layero, index) {
+                if(data && data != null){
+                    $("#savePageForm").form("load",data)
+                }
+            },
+            yes: function (index, layero) {
+                let param = $("#savePageForm").getData();
+                ajaxSubmit("/sale/order/saveDetail", param);
+                layer.closeAll();
+            },
+            btn2: function () {
+                layer.closeAll();
+            },
+            end:function () {
+                $('#savePageForm').form('clear');
+            }
+        });
+    }
+    
+    function search() {
+        $("#dg").datagrid("reload")
+    }
+</script>
+
+
+</html>
+ 
+ 
+ 

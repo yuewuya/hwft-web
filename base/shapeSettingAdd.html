@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/assembly/table/easyui-2/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/table/easyui-2/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/table/easyui-2/themes/xyy.css">
+    <link href="/assembly/css/css2.css" rel="stylesheet" type="text/css">
+    <!-- 图片上传 -->
+    <link rel="stylesheet" href="/plugins/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="/plugins/bootstrap-fileinput/css/fileinput.css">
+    <link rel="stylesheet" media="all" href="/plugins/bootstrap-fileinput/themes/explorer-fa/theme.css">
+    <link rel="stylesheet" href="/plugins/bootstrap-3.3.7/css/font-awesome.min.css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/plugins/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/plugins/bootstrap-fileinput/js/plugins/piexif.js"></script>
+    <script src="/plugins/bootstrap-fileinput/themes/fa/theme.js" type="text/javascript"></script>
+    <script src="/plugins/bootstrap-fileinput/themes/explorer-fa/theme.js"></script>
+    <script src="/plugins/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script src="/plugins/popper.min.js"></script>
+    <script src="/plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<body>
+<div style="width:100%; float:left; padding-bottom:10px; margin:0px; border-bottom:1px #a7b1c2 dashed;">
+    <div class="index_table2">
+        <div class="index_table2_title">
+            <span>形状</span>
+        </div>
+        <input name="shape" id="shape" style="width:96%;height:30px">
+        <input name="id" id="id" type="hidden">
+    </div>
+
+
+    <div class="index_table2">
+        <div class="index_table2_title">
+            <span>形状系数</span>
+        </div>
+        <input name="coefficient" id="coefficient" style="width:96%;height:30px ">
+    </div>
+
+</div>
+
+<div style="width:100%; float:left; padding-bottom:10px; margin:0px; border-bottom:1px #a7b1c2 dashed;">
+    <div class="index_table2">
+        <div class="index_table2_title">
+            <span>英文名</span>
+        </div>
+        <input name="englishName" id="englishName" style="width:96%;height:30px">
+    </div>
+
+
+    <div class="index_table2">
+        <div class="index_table2_title">
+            <span>中文名</span>
+        </div>
+        <input name="chineseName" id="chineseName" style="width:96%;height:30px ">
+    </div>
+
+</div>
+<div style="width:100%; float:left; margin:0px;">
+    <div class="index_table2">
+        <div class="index_table2_title">
+            <span>示意图</span>
+        </div>
+        <div class="index_table2_content" style="height:350px;">
+            <!-- 图片上传 -->
+            <input id="schematic" type="file">
+        </div>
+    </div>
+
+
+    <div class="index_table2">
+        <div class="index_table2_title">
+            <span>截面图</span>
+        </div>
+        <div class="index_table2_content" style="height:350px;">
+            <!-- 图片上传 -->
+            <input id="sectional" type="file">
+        </div>
+    </div>
+
+</div>
+</div>
+<script src="/assembly/layer/layer.js"></script>
+<script src="/plugins/uploadCommon.js"></script>
+<script>
+    let obj = {};
+
+    /**
+     * 初始化表单数据
+     * @param data
+     */
+    function initData(data) {
+        obj = data;
+        //图片数据初始化
+        let arr = [];
+        if (data.id == undefined) {//新建
+            //如果新建，就给图片数据生成一个guid数据
+            obj.schematic = guid();
+            obj.sectional = guid();
+            arr = [
+                fileInputData('schematic', obj.schematic),
+                fileInputData('sectional', obj.sectional)
+            ];
+        } else {//修改
+            $("#id").val(data.id);
+            $("#shape").val(data.shape);
+            $("#coefficient").val(data.coefficient);
+            $("#chineseName").val(data.chineseName);
+            $("#englishName").val(data.englishName);
+            arr = [
+                fileInputData('schematic', obj.schematic),
+                fileInputData('sectional', obj.sectional)
+            ];
+        }
+        initFileInputBatch(arr);
+    }
+
+    //表单数据回调
+    function getFormData() {
+        obj.id = $("#id").val();
+        obj.shape = $("#shape").val();
+        obj.coefficient = $("#coefficient").val();
+        obj.chineseName = $("#chineseName").val();
+        obj.englishName = $("#englishName").val();
+        obj.coefficient = $("#coefficient").val();
+        obj.chineseName = $("#chineseName").val();
+        obj.englishName = $("#englishName").val();
+        return obj;
+    }
+</script>
+</body>
+</html>

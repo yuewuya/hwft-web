@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/warehouse/partsOut.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <style>
+        #savePageForm div{
+            margin: 10px;
+            text-align: center;
+            display: inline-block;
+            width: 45%;
+        }
+        #savePageForm div label{
+            display: inline-block;
+            width: 80px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div class="place">
+      <ul class="placeul">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">材料入库管理窗口</a></li>
+      </ul>
+    </div>
+    
+
+    <div class="mainbox">
+       
+        <div>
+            <form id="searchForm">
+                <p>
+                    <label>索引编码：</label>
+                    <input name="searchCode" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+                </p>
+                <p>
+                    <label>部件名称：</label>
+                    <input name="partsName" type="text" class="scinput"  style="height: 23px; width: 148px; line-height: 23px;"/>
+                </p>
+                <p>
+                    <label>出库日期：</label>
+                    <input type="text" name="start" class="easyui-datebox" id="Calendar" style="height: 23px; width: 148px; line-height: 23px;" />
+                    <label>-</label>
+                    <input type="text" name="end" class="easyui-datebox" id="Calendar2" style="height: 23px; width: 148px; line-height: 23px;" />
+                </p>
+                <p>
+                        <label>部件类别：</label>
+                        <select name="partsType"
+                                id="bjlb1"
+                                class="easyui-combobox"
+                                style="height:25px; width:150px;"
+                                editable="false"
+                                data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                        </select>
+                </p>
+                <p>
+                    <label>操作类型：</label>
+                    <select name="optType"
+                            id="czlx1"
+                            class="easyui-combobox"
+                            style="height:25px; width:150px;"
+                            editable="false"
+                            data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                    </select>
+                </p>
+                <p>
+                    <label>仓库类型：</label>
+                    <select name="warehouseType"
+                            id="cklx1"
+                            class="easyui-combobox"
+                            style="height:25px; width:150px;"
+                            editable="false"
+                            data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                    </select>
+                </p>
+            </form>
+        </div>
+       
+        <div class="cyda">
+         <div style="margin-bottom:20px; margin-top:5px;">
+							<!---获取数据--->
+
+             <table id="dg" style="width:80%"></table>
+                            <div id="toolbar">
+
+
+                                <a href="javascript:void(0)" class="easyui-linkbutton"
+                                   onclick="addBtn('新增出库', 'savePage')"
+                                   data-options="plain:true,iconCls:'icon-add'">新增</a>
+                                <a href="#" class="easyui-linkbutton" onclick="editBtn('修改出库', 'savePage')"
+                                   data-options="plain:true,iconCls:'icon-edit'">修改</a>
+                                <a href="#" class="easyui-linkbutton" onclick="delBtn('/ware/partsOut/delete')"
+                                   data-options="plain:true,iconCls:'icon-remove'">删除</a>
+                                
+								<a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-search" plain="true" >查询</a>
+                                <a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-print" plain="true" onclick="removeUser()">打印</a>                          
+                               
+                                <a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-publish" plain="true" onclick="openWindow2('材料明细表打印','clrk-mxbyl.html')">明细表预览</a>                           
+                             
+                                <a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-dc" plain="true" onclick="removeUser()">导出</a> 
+                                                        
+                                <a href="javascript:void(0)"   class="easyui-linkbutton"  iconCls="icon-logout" plain="true" onclick="removeUser()">退出</a> 
+              
+								
+						    </div>
+           </div>
+           
+           
+        </div>
+    </div>
+
+
+    <div id="savePage" title="出库" style="padding:50px 10px 10px 10px;display:none">
+        <form id="savePageForm">
+            <div style="display: none;">
+                <input name="id" type="hidden"/>
+                <input id="partsInId" name="partsInId" class="easyui-textbox" required="true" type="hidden">
+            </div>
+            <div>
+                <label>入库号: &nbsp;</label>
+                <input id="changePartsNum"
+                       onclick="selfSelectOtherPage('获取库存信息',
+                                '/warehouse/partsIn.html',
+                                {partsInNum:$('#changePartsNum').val(), singleNum:$('#changeSingleNum').val()},
+                                function(data) {
+                                   let oldData = $('#savePageForm').getData();
+                                   let partsInId = data.id;
+                                   data.remark = oldData.remark;
+                                   data.optType = oldData.optType;
+                                   data.id = oldData.id;
+                                   data.nums = null;
+                                   data.partsType = compareDict(allDict, 'PARTS_TYPE', data.partsType);
+                                   data.warehouseType = compareDict(allDict, 'WAREHOUSE_TYPE', data.warehouseType)
+                                   data.partsInId = partsInId;
+                                   $('#savePageForm').form('load',data);
+                                })"
+                       name="partsInNum"
+                       type="text"
+                       readonly
+                       class="scinput"
+                       style="width:150px;"/>
+                <input id="changeSingleNum" name="singleNum" type="text" readonly class="scinput" style="width:50px;"/>
+            </div>
+            <div>
+                <label>品名: &nbsp;</label>
+                <input name="partsName" type="text" readonly class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>牌号: &nbsp;</label>
+                <input name="partsCode" type="text" class="easyui-textbox" style="width:200px;"/>
+            </div>
+            <div>
+                <label>规格: &nbsp;</label>
+                <input name="partsSpecification" type="text" class="easyui-textbox" style="width:200px;"/>
+            </div>
+            <div>
+                <label>操作类型: &nbsp;</label>
+                <select class="easyui-combobox" name="optType"
+                        style="width:200px;display: inherit;"
+                        id="czlx2"
+                        editable="false"
+                        required="true"
+                        data-options="panelHeight:'auto',valueField:'id', textField:'text',
+                        onShowPanel:function(){
+                            $(this).combobox('panel').panel('panel').css('z-index',layerZ);
+                        }" >
+                </select>
+            </div>
+            <div>
+                <label>出库数量: &nbsp;</label>
+                <input name="nums" type="text" id="cksl" class="easyui-numberbox" required="true" style="width:200px;" data-options="onChange: function (a, b) { leStockNums (a); }"/>
+            </div>
+            <div>
+                <label>部件类别: &nbsp;</label>
+                <input id="bjlb2" name="partsType" type="text" readonly class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>计量单位: &nbsp;</label>
+                <input name="unit" type="text" readonly class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>仓库类型: &nbsp;</label>
+                <input id="cklx2" name="warehouseType" type="text" readonly class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>进价: &nbsp;</label>
+                <input name="inAmount" type="text" readonly class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>进货公司: &nbsp;</label>
+                <input name="companyName" type="text" readonly class="scinput" style="width:200px;"/>
+            </div>
+            <div>
+                <label>备注: &nbsp;</label>
+                <input name="remark" type="text" class="easyui-textbox" style="width:200px;"/>
+            </div>
+
+            <footer style="margin-top: 20px">可出数量：<input readonly id="stockNums" name="stockNums" style="border: 0px"></footer>
+        </form>
+    </div>
+</body>
+
+<script>
+
+    function leStockNums(a) {
+        let stockNums = $("#stockNums").val();
+        if (a > stockNums){
+            layer.msg("出库数量不能大于库存数量！！！");
+            $("#cksl").textbox("setValue", stockNums)
+        }
+    }
+</script>
+
+</html>
+ 
+ 
+ 

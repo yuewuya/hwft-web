@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <script src="/js/utils.js"></script>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <style type="text/css">
+        *{font-size:9pt;border:0;margin:0;padding:0;}
+        body{
+            font-family: '微软雅黑';
+            margin: 0 auto;
+            min-width: 980px;
+
+        }
+        .line2 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #000;
+            font-size: 14px;
+        }
+        .linleft {
+            border-top-width: 1px;
+            border-left-width: 1px;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-top-color: #000;
+            border-left-color: #000;
+        }
+        .table{border: 1px solid #ccc;border-collapse: collapse;}
+        .table th,.table td{border: 1px solid #ccc;padding: 10px;}
+    </style>
+<body>
+<div class="formbody" style="padding-bottom:5px; " id="print1">
+    <ul class="forminfo">
+        <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center" class="">
+            <tr>
+                <td height="40" align="center"><span class="font-title-back">付 款 申 请 单</span></td>
+            </tr>
+            <tr>
+                <td height="35" align="right" field="dateTime"></td>
+            </tr>
+        </table>
+
+        <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" class="linleft" style="margin-top:8px">
+            <tr align='center'  >
+                <td width="89" height="35" align="center" class="line2">付款单位</td>
+                <td colspan="3" align="center" class="line2">宜兴华威封头有限公司</td>
+                <td width="75" align="center" class="line2">付款方式</td>
+                <td colspan="3" align="center" class="line2">
+                    <input type="checkbox" name="radio"  value="电汇" readonly />电汇
+                    <input type="checkbox" name="radio"  value="汇票" readonly />汇票
+                    <input type="checkbox" name="radio"  value="本票" readonly />本票
+                    <input type="checkbox" name="radio"  value="承兑汇票" readonly />承兑汇票
+                    <input type="checkbox" name="radio"  value="转账支票" readonly />转账支票        </td>
+            </tr>
+            <tr align='center'  >
+                <td rowspan="2" align="center" class="line2">收款单位</td>
+                <td width="89" height="35" align="center" class="line2">单位名称</td>
+                <td height="35" colspan="6" align="left" class="line2" field="collectionUnit"></td>
+            </tr>
+            <tr align='center'  >
+                <td height="35" align="center" class="line2">开户银行</td>
+                <td height="35" colspan="2" align="left" class="line2" field="collectionBank"></td>
+                <td colspan="2" align="center" class="line2">帐号 </td>
+                <td colspan="2" align="left" class="line2" field="collectionAccounts"></td>
+            </tr>
+            <tr  >
+                <td height="35" align="center" valign="middle" class="line2">付款用途</td>
+                <td colspan="2" class="line2" field="paymentPurpose"></td>
+                <td width="107" align="center" valign="middle" class="line2">货到情况</td>
+                <td colspan="2" class="line2" field="goodsSituation"></td>
+                <td width="120" align="center" class="line2">发票情况</td>
+                <td width="210" class="line2" field="invoiceStatus"></td>
+            </tr>
+            <tr align='center'  >
+                <td height="35" align="center" class="line2">付款事项</td>
+                <td height="80" colspan="7" align="left" class="line2" field="paymentItems" ></td>
+            </tr>
+            <tr align='center'  >
+                <td height="35" align="center" class="line2">付款金额</td>
+                <td colspan="6" align="left" class="line2" field="paymentAmoutc" >（大写）</td>
+                <td align="left" class="line2" field="paymentAmouts" >小写</td>
+            </tr>
+            <tr  >
+                <td height="35" valign="middle" class="line2" align="center">申请人</td>
+                <td colspan="2" class="line2" field="applicant"></td>
+                <td align="center" valign="middle" class="line2">财务经办人</td>
+                <td colspan="2" class="line2">&nbsp;</td>
+                <td align="center" class="line2">领导审批</td>
+                <td class="line2" field="leadershipApproval"></td>
+            </tr>
+        </table>
+    </ul>
+</div>
+
+<script>
+
+    function initData(data) {
+        setData2Text(data)
+        $('input[type="checkbox"][value="'+data.paymentMethod+'"]').prop("checked",true);
+    }
+</script>
+</body>
+</html>

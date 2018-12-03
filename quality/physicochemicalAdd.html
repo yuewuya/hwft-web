@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <script src="../plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.edatagrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.edatagrid.js"></script>
+    <script src="../../plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<style>
+    p {
+        margin: 10px;
+    }
+
+    .showLine {
+        background: ghostwhite;
+        padding: 10px 0 0 50px;
+        width: 899px;
+        margin-bottom: 10px;
+    }
+
+    .showLine p {
+        display: inline-block;
+        width: 30%;
+    }
+
+    p label {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+    }
+
+    .showV {
+        float: left;
+        padding: 10px;
+        background: ghostwhite;
+        margin-right: 20px;
+    }
+
+    #savePage div {
+    }
+</style>
+<body>
+<div id="tabs" class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+
+    <!-- form 工艺数据-->
+    <div id="tabs1" title="工艺数据" style="padding:10px;">
+        <form id="form">
+            <input name="id" id="id" type="hidden"/>
+            <input name="processCardId" id="processCardId" type="hidden"/>
+            <p style="width:50%; display: inline-block">
+                <label><span>理化</span>编号:</label>
+                <input name="no" id="no" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>制作日:</label>
+                <input name="createTime" id="createTime" type="text" required="true"
+                       class="easyui-datebox"
+                       style="width:193px;"/>
+            </p>
+            <p>
+                <label>理化类型:</label>
+                <input class="easyui-combobox"
+                       name="type"
+                       style="height:35px; height:35px; width:193px;"
+                       id="type"
+                       editable="false"
+                       data-options="panelHeight:'auto',valueField:'id', textField:'text'"/>
+            </p>
+            <p style="display: none" id="show1">
+                <label>入库号:</label>
+                <input name="storage" id="storage" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p id="show2">
+                <label>焊接方法:</label>
+                <input name="baseProcessingMethod" id="baseProcessingMethod" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p>
+                <label>指令号:</label>
+                <input name="code" id="code" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p>
+                <label>炉批号:</label>
+                <input name="furnaceNo" id="furnaceNo" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:50%; display: inline-block">
+                <label>材质:</label>
+                <input name="material" id="material" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>试板号:</label>
+                <input name="bordNo" id="bordNo" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:50%; display: inline-block">
+                <label>D:</label>
+                <input name="d" id="d" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p style="width:40%; display: inline-block">
+                <label>规格:</label>
+                <input name="specifications" id="specifications" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:193px;"/>
+            </p>
+            <p>
+                <label>备注:</label>
+                <input name="remark" class="easyui-textbox" data-options="multiline:true"
+                       style="width:450px;height:120px">
+            </p>
+        </form>
+    </div>
+
+    <!-- codeForm 化学成分 -->
+    <div id="tabs2" title="化学成分" style="padding:10px;">
+        <form id="codeForm">
+            <div id="chemicalDiv"></div>
+        </form>
+    </div>
+
+    <!--  表格数据-->
+    <div id="tabs3" title="数据表格" style="padding:10px;">
+        <table id="tbl1" title="拉伸试验" style="width:80%"></table>
+        <div id="toolbar1">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+               onclick="$('#tbl1').edatagrid('addRow')">新增</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="$('#tbl1').edatagrid('destroyRow')">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+               onclick="$('#tbl1').edatagrid('saveRow')">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+               onclick="$('#tbl1').edatagrid('cancelRow')">取消</a>
+        </div>
+        <table id="tbl2" title="弯曲试验" style="width:80%"></table>
+        <div id="toolbar2">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+               onclick="$('#tbl2').edatagrid('addRow')">新增</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="$('#tbl2').edatagrid('destroyRow')">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+               onclick="$('#tbl2').edatagrid('saveRow')">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+               onclick="$('#tbl2').edatagrid('cancelRow')">取消</a>
+        </div>
+        <table id="tbl3" title="冲击试验" style="width:80%"></table>
+        <div id="toolbar3">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true"
+               onclick="$('#tbl3').edatagrid('addRow')">新增</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="$('#tbl3').edatagrid('destroyRow')">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+               onclick="$('#tbl3').edatagrid('saveRow')">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+               onclick="$('#tbl3').edatagrid('cancelRow')">取消</a>
+        </div>
+    </div>
+
+    <!-- resultForm 结论以及标准-->
+    <div id="tabs4" title="结论以及标准" style="padding:10px;">
+        <form id="resultForm">
+            <p>
+                <label>金相试验:</label>
+                <input name="metallography" class="easyui-textbox" data-options="multiline:true"
+                       style="width:450px;height:120px">
+            </p>
+            <p>
+                <label>硬度测验:</label>
+                <input name="hardness" class="easyui-textbox" data-options="multiline:true"
+                       style="width:450px;height:120px">
+            </p>
+            <p>
+                <label>晶腐试验:</label>
+                <input name="crystaRot" class="easyui-textbox" data-options="multiline:true"
+                       style="width:450px;height:120px">
+            </p>
+            <p>
+                <label>测试结论:</label>
+                <input name="conclusion" class="easyui-textbox" data-options="multiline:true"
+                       style="width:450px;height:120px">
+            </p>
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+    let allDict = {};
+    let dictArr = [{typeCode: 'PHYSICOCHEMICAL_TYPE'}, {typeCode: 'CHEMICAL_TYPE_KIND'}];
+
+    /**
+     * 初始化
+     *
+     * */
+    function init(id) {
+        getChemical(function () {
+            if (id) {
+                ajaxPostInvoke('/quality/physicochemical/queryOne', {id: id}, function (data) {
+                    if (data.chemicalComposition) {
+                        let chemicalComposition = JSON.parse(data.chemicalComposition);
+                        for (let key in chemicalComposition) {
+                            $("#" + key).val(chemicalComposition[key]);
+                        }
+                    }
+                    delete data.chemicalComposition;
+                    $('#form').form('load', data);
+                    $("#resultForm").form('load', data);
+                    initTbl1(id, data.type);
+                });
+            } else {
+                ajaxPostInvoke('/quality/physicochemical/getNumbering', null, function (data) {
+                    $("#no").val(data.no);
+                    $("#createTime").val(data.createTime);
+                    initTbl1(id, null);
+                });
+            }
+            initTbl2(id);
+            initTbl3(id);
+            $('#type').combobox({
+                onChange: function (newValue, oldValue) {
+                    initTbl1($("#id").val(), newValue);
+                    if (newValue == '材料复验' || newValue == '应变强化') {
+                        $("#show1").show();
+                        $("#show2").hide();
+                    } else {
+                        $("#show1").hide();
+                        $("#show2").show();
+                    }
+                }
+            });
+        });
+    }
+
+    function search() {
+        $('#tbl1').edatagrid('reload', {id: $("#id").val()});
+        $('#tbl2').edatagrid('reload', {id: $("#id").val()});
+        $('#tbl3').edatagrid('reload', {id: $("#id").val()});
+    }
+
+    /**
+     * 初始化 表1
+     *
+     * */
+    function initTbl1(id, type) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#tbl1").edatagrid({
+            queryParams: {
+                id: id
+            },
+            width: '98%',
+            height: mContentHeight,
+            singleSelect: true,
+            autoRowHeight: false,
+            toolbar: '#toolbar1',
+            idField: 'id',
+            url: getRootPath() + '/quality/physicochemical/table1List',
+            columns: [[
+                {
+                    field: 'sampleNo',
+                    title: '试样号',
+                    width: 100,
+                    align: 'left',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'sampleType',
+                    title: '试样类型',
+                    width: 120,
+                    align: 'left',
+                    editor: {
+                        type: 'combobox',
+                        options: {
+                            valueField: 'id',
+                            textField: 'text',
+                            panelHeight: 'auto',
+                            data: [{id: '拉伸', text: '拉伸'}, {id: '面弯', text: '面弯'}, {id: '面弯', text: '面弯'}, {
+                                id: '面弯',
+                                text: '面弯'
+                            }]
+                        }
+                    }
+                }, {
+                    field: 'rp1',
+                    title: 'Rp0.2',
+                    width: 120,
+                    hidden: type == '焊接试板' || type == '应变强化' ? true : false,
+                    align: 'left',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'rp2',
+                    title: 'Rp1.0',
+                    width: 120,
+                    align: 'left',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'rel',
+                    title: 'Rel',
+                    width: 120,
+                    hidden: type == '焊接试板' || type == '应变强化' ? true : false,
+                    align: 'left',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'tensileStrength',
+                    title: '抗拉强度',
+                    width: 120,
+                    align: 'left',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'extensionLength',
+                    title: '伸长度',
+                    width: 120,
+                    hidden: type == '应变强化' ? true : false,
+                    align: 'left',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'fracturePosition',
+                    title: '断裂位置',
+                    width: 120,
+                    align: 'left',
+                    editor: {
+                        type: 'combobox',
+                        options: {
+                            valueField: 'id',
+                            textField: 'text',
+                            panelHeight: 'auto',
+                            data: [{id: '母材', text: '母材'}]
+                        }
+                    }
+                }, {
+                    field: 'fractureProperties',
+                    title: '断裂性质',
+                    width: 120,
+                    align: 'left',
+                    hidden: type == '应变强化' ? true : false,
+                    editor: {
+                        type: 'combobox',
+                        options: {
+                            valueField: 'id',
+                            textField: 'text',
+                            panelHeight: 'auto',
+                            data: [{id: '塑性', text: '塑性'}]
+                        }
+                    }
+                }, {
+                    field: 'fractureLoad',
+                    title: '断裂载荷',
+                    width: 120,
+                    align: 'left',
+                    hidden: type == '材料复验' || type == '工艺评定' ? true : false,
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'sectionalArea',
+                    title: '截面积',
+                    width: 120,
+                    align: 'left',
+                    hidden: type == '材料复验' || type == '工艺评定' ? true : false,
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'hw',
+                    title: '厚*宽',
+                    hidden: type == '应变强化' ? false : true,
+                    width: 120,
+                    align: 'left',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }]]
+        });
+    }
+
+    /**
+     * 初始化 表2
+     *
+     * */
+    function initTbl2(id) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#tbl2").edatagrid({
+            queryParams: {
+                id: id
+            },
+            width: '98%',
+            height: mContentHeight,
+            singleSelect: true,
+            autoRowHeight: false,
+            toolbar: '#toolbar2',
+            idField: 'id',
+            url: getRootPath() + '/quality/physicochemical/table2List',
+            columns: [[{
+                field: 'sampleNo',
+                title: '试样号',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'sampleType',
+                title: '试样类型',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'combobox',
+                    options: {
+                        valueField: 'id',
+                        textField: 'text',
+                        panelHeight: 'auto',
+                        data: [{id: '拉伸', text: '拉伸'}, {id: '面弯', text: '面弯'}, {id: '面弯', text: '面弯'}, {
+                            id: '面弯',
+                            text: '面弯'
+                        }],
+                        required: true
+                    }
+                }
+            }, {
+                field: 'bendingDiameter',
+                title: '弯曲直径/试样厚度',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'bendingBending',
+                title: '弯曲弯度',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'result',
+                title: '试验结果',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'combobox',
+                    options: {
+                        valueField: 'id',
+                        textField: 'text',
+                        panelHeight: 'auto',
+                        data: [{id: '合格', text: '合格'}, {id: '不合格', text: '不合格'}],
+                        required: true
+                    }
+                }
+            }]]
+        });
+        $('#tbl2').edatagrid({
+            saveUrl: '/quality/physicochemical/updateTbl2',
+            updateUrl: '/quality/physicochemical/updateTbl2',
+        });
+    }
+
+    /**
+     * 初始化 表3
+     *
+     * */
+    function initTbl3(id) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#tbl3").edatagrid({
+            queryParams: {
+                id: id
+            },
+            width: '98%',
+            height: mContentHeight,
+            singleSelect: true,
+            autoRowHeight: false,
+            toolbar: '#toolbar3',
+            idField: 'id',
+            url: getRootPath() + '/quality/physicochemical/table3List',
+            columns: [[{
+                field: 'sampleNo',
+                title: '试样号',
+                width: 100,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'specificationsDesc',
+                title: '规格',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'gapSituation',
+                title: '缺口形势',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'sampleSize',
+                title: '试样尺寸',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'combobox',
+                    options: {
+                        valueField: 'id',
+                        textField: 'text',
+                        panelHeight: 'auto',
+                        data: [{id: '5×10×55', text: '5×10×55'}],
+                        required: true
+                    }
+                }
+            }, {
+                field: 'temperature',
+                title: '温度',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'impact',
+                title: '冲击功',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'expand',
+                title: '测膨胀',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'plasticFracture',
+                title: '塑性断口',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }, {
+                field: 'notchPosition',
+                title: '缺口位置',
+                width: 120,
+                align: 'left',
+                editor: {
+                    type: 'validatebox'
+                }
+            }
+            ]]
+        });
+        $('#tbl3').edatagrid({
+            saveUrl: '/quality/physicochemical/updateTbl3',
+            updateUrl: '/quality/physicochemical/updateTbl3',
+        });
+    }
+
+    /**
+     * 获取数据
+     */
+    function getFormData() {
+        if (!$("#form").form('validate') && !$("#resultForm").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return;
+        }
+        let chemicalComposition = $("#codeForm").getData();
+        let obj = mergeJsonObject($("#form").getData(), $("#resultForm").getData());
+        obj.chemicalComposition = JSON.stringify(chemicalComposition);
+        obj.tb1 = $("#tbl1").datagrid("getData").rows;
+        obj.tb2 = $("#tbl2").datagrid("getData").rows;
+        obj.tb3 = $("#tbl3").datagrid("getData").rows;
+        return obj;
+    }
+
+    /**
+     * 获取化学成分
+     */
+    function getChemical(sucessFunc) {
+        if (dictArr.length > 0) {
+            ajaxDictQuery(dictArr, function (obj) {
+                allDict = obj;
+                setDictOption(['type'], 'PHYSICOCHEMICAL_TYPE');
+                let str = '';
+                let data = [];
+                let index = 0;
+                for (let item in allDict.CHEMICAL_TYPE_KIND) {
+                    data[index] = allDict.CHEMICAL_TYPE_KIND[item];
+                    index++;
+                }
+                for (let i = 0; i < data.length; i++) {
+                    if (i + 1 < data.length) {
+                        str = str + '<p style="width:50%; display: inline-block">' +
+                            '<label>' + data[i].info + ':</label>' +
+                            '<input name="' + data[i].info + '" id="' + data[i].info + '" type="text" required="true"' +
+                            'class="easyui-validatebox textbox"' +
+                            'style="width:193px;"/>' +
+                            '</p>' +
+                            '<p style="width:40%; display: inline-block">' +
+                            '<label>' + data[i + 1].info + ':</label>' +
+                            '<input name="' + data[i + 1].info + '" id="' + data[i + 1].info + '" type="text" required="true"' +
+                            'class="easyui-validatebox textbox"' +
+                            'style="width:193px;"/>' +
+                            '</p>';
+                    } else {
+                        str = str + '<p style="width:50%; display: inline-block">' +
+                            '<label>' + data[i].info + ':</label>' +
+                            '<input name="' + data[i].info + '" id="' + data[i].info + '"type="text" required="true"' +
+                            'class="easyui-validatebox textbox"' +
+                            'style="width:193px;"/>' +
+                            '</p>';
+                    }
+                    i++;
+                }
+                $("#chemicalDiv").html(str);
+                sucessFunc();
+            });
+        }
+    }
+</script>
+</html>
+
+

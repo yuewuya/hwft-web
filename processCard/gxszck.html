@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" href="/assembly/css/css.css"/>
+  <script src="../plugins/jquery/jquery-1.9.1.min.js"></script>
+  <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+  <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+  <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/jquery.edatagrid.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+  <script src="../../plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+  <script src="/plugins/jquery/jquery.json.min.js"></script>
+  <script src="/plugins/moment.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/cookieUtil.js"></script>
+  <script src="/js/easy_common.js"></script>
+  <script src="/assembly/layer/layer.js"></script>
+        
+<title>无标题文档</title>
+
+</head>
+<body>
+
+
+    
+    
+<div class="mainbox" style="padding:10px;">
+
+  <table id="dg" style="width:80%"></table>
+</div>
+
+</body>
+
+<script>
+
+    let opt = false;
+
+    function initData(card, tableData, flag){
+        ajaxPostInvoke("/processingSetting/findAllProcess", {}, function (res) {
+            let processList = [];
+            if(res && res != null){
+                opt = false;
+                for(let i in res){
+                    processList.push({id: res[i].process, text: res[i].process});
+                }
+            }
+            initTbl(processList, res);
+
+            if(tableData && tableData.length > 0){
+                tableData.forEach(e => {
+                    e.beginTime = e.beginTime && e.beginTime != null ? e.beginTime.split(" ")[0] : '';
+                    e.endTime = e.endTime && e.endTime != null ? e.endTime.split(" ")[0] : '';
+                });
+                $("#dg").datagrid("loadData", {total: tableData.length, rows: tableData});
+            }else {
+                let tableData = getDefaultData(card);
+                $("#dg").datagrid("loadData", {total: tableData.length, rows: tableData});
+            }
+
+            opt = flag ? flag : false;
+        })
+
+    }
+    
+    function getFormData() {
+        $('#dg').edatagrid('saveRow');
+        let data = $("#dg").datagrid("getData").rows;
+        let time = 1;
+        for (let i in data){
+            if(data[i].process && data[i].process != ''){
+
+                data[i].beginTime += " 00:00:00";
+                data[i].endTime += " 00:00:00";
+
+                if(timeCompare(data[i].beginTime, data[i].endTime) == 1){
+                    layer.msg(data[i].process + "的开始时间晚于本工序结束时间，请调整！");
+                    return null;
+                }
+
+                if(time == 1){
+                    time = data[i].endTime;
+                }else{
+                    if(timeCompare(time, data[i].beginTime) == 1){
+                        layer.msg(data[i].process + "的开始时间晚于上个工序的结束时间，请调整！");
+                        return null;
+                    }else {
+                        time = data[i].endTime;
+                    }
+                }
+
+            }
+
+        }
+        return {opt: opt, data: data};
+    }
+
+    function getDefaultData(card) {
+        let defaultData = [];
+        defaultData.push({no:1, process: "领料", beginTime: moment(), endTime:moment().add(1, "days"), planCount: card.count});
+        defaultData.push({no:2, process: "切割", basis: "HW J0801", require: "领取合格材料，按线下料作标记移植", control: "E", planCount: card.count});
+        if (card.processingMethod == "锥体压制" || pdzt(card.shape)){
+            defaultData.push({no:3, process: "折锥", planCount: card.count});
+        }else {
+            defaultData.push({no:3});
+        }
+
+        if(card.processingMethod == "锥体压制" || pdzt(card.shape) || card.diameter*1 >= 1600){
+            defaultData.push({no:4, process: "焊接", basis: "HW J0201", require: "按焊接作业指导书规定施焊，做好印记并记录", planCount: card.count, control: "E"});
+            defaultData.push({no:5, process: "打磨", planCount: card.count})
+        }else{
+            defaultData.push({no:4, planCount: card.count});
+            defaultData.push({no:5, planCount: card.count});
+        }
+
+        if(card.processingMethod == "冷冲压" || card.processingMethod == "热冲压"){
+            defaultData.push({no:6, process: "冲压", basis: "HW J0802", require: "选用配套的公称直径模具，压制成型", planCount: card.count, control: "E"});
+            defaultData.push({no:7});
+        }else if (card.processingMethod == "冷旋压" || card.processingMethod == "热旋压"){
+            defaultData.push({no:6});
+            defaultData.push({no:7, process: "旋压", basis: "HW J0804", require: "选用配套的公称直径模具，旋压成型", planCount: card.count, control: "E"});
+        }else if (card.processingMethod == "压鼓"){
+            defaultData.push({no:6});
+            defaultData.push({no:7, process: "压鼓", planCount: card.count});
+        }else {
+            defaultData.push({no:6});
+            defaultData.push({no:7});
+        }
+
+        defaultData.push({no:8, process: "坡口", require: "按用户要求坡口，见坡口图", planCount: card.count, control: "E"});
+        card.heatTreatment && card.heatTreatment == 1 ? defaultData.push({no:9, process: "热处理", planCount: card.count}) : '';
+        let tt = 1;
+        card.rtReport && card.rtReport != '' ? defaultData.push({no:tt*1+9, process: "探伤RT", planCount: card.count})  && tt++: '';
+        card.pt && card.pt == 1 ? defaultData.push({no:tt*1+9, process: "探伤PT", planCount: card.count}) && tt++: '';
+        card.ut && card.ut == 1 ? defaultData.push({no:tt*1+9, process: "探伤UT", planCount: card.count}) && tt++: '';
+        card.mt && card.mt == 1 ? defaultData.push({no:tt*1+9, process: "探伤MT", planCount: card.count}) && tt++: '';
+
+        card.duplex || card.steelGrade == "不锈钢" ? defaultData.push({no:tt*1+9, process: "检查", basis: "HW J0806", require: "在封头内外表面进行酸洗后用清水冲洗干净", planCount: card.count, control: "E"}) : '';
+        defaultData.push({no:29, process: "检查"});
+        defaultData.push({no:30, process: "入库", require: "汇总各种检验资料、报告，验收合格后入库", control: "E"});
+
+        let time = new Date();
+        for (let i = 0; i < defaultData.length; i++){
+            if(defaultData[i].process && defaultData[i].process != ''){
+                defaultData[i].planCount = card.count;
+                defaultData[i].beginTime = moment(time).format("YYYY-MM-DD");
+                time = moment(time).add(1, "days").valueOf();
+                defaultData[i].endTime = moment(time).format("YYYY-MM-DD");
+            }
+        }
+
+        return defaultData;
+    }
+
+    function initTbl(options, data) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+
+        $("#dg").edatagrid({
+            width: "95%",
+            height: mContentHeight,
+            singleSelect: true,
+            autoRowHeight: false,
+            columns: [[
+                {
+                    field: 'no',
+                    title: 'No',
+                    width: 50,
+                    align: 'center'
+                }, {
+                    field: 'process',
+                    title: '工序',
+                    width: 120,
+                    align: 'center',
+                    editor: {
+                        type: 'combobox',
+                        options: {
+                            valueField: 'id',
+                            textField: 'text',
+                            panelHeight: 'auto',
+                            editable:false,
+                            data: options,
+                            onChange:function(a,b){
+                                let rindex = getRowIndex(this);
+                                let ed = $('#dg').datagrid('getEditor', {index : rindex, field : 'model'});
+                                $(ed.target).combobox('clear');
+                                let tempOpt = [];
+                                for(let i in data){
+                                    if (data[i].process == a){
+                                        data[i].model1 != '' && data[i].model1 != null ? tempOpt.push({id:data[i].model1, text:data[i].model1}) : '';
+                                        data[i].model2 != '' && data[i].model2 != null ? tempOpt.push({id:data[i].model2, text:data[i].model2}) : '';
+                                        data[i].model3 != '' && data[i].model3 != null ? tempOpt.push({id:data[i].model3, text:data[i].model3}) : '';
+                                        data[i].model4 != '' && data[i].model4 != null ? tempOpt.push({id:data[i].model4, text:data[i].model4}) : '';
+                                        data[i].model5 != '' && data[i].model5 != null ? tempOpt.push({id:data[i].model5, text:data[i].model5}) : '';
+                                        data[i].model6 != '' && data[i].model6 != null ? tempOpt.push({id:data[i].model6, text:data[i].model6}) : '';
+                                        data[i].model7 != '' && data[i].model7 != null ? tempOpt.push({id:data[i].model7, text:data[i].model7}) : '';
+                                        data[i].model8 != '' && data[i].model8 != null ? tempOpt.push({id:data[i].model8, text:data[i].model8}) : '';
+                                        data[i].model9 != '' && data[i].model9 != null ? tempOpt.push({id:data[i].model9, text:data[i].model9}) : '';
+                                    }
+                                }
+                                $(ed.target).combobox('loadData',tempOpt);
+                            }
+                        }
+                    }
+                }, {
+                    field: 'model',
+                    title: '主机种',
+                    width: 120,
+                    align: 'center',
+                    editor: {
+                        type: 'combobox',
+                        options: {
+                            valueField: 'id',
+                            textField: 'text',
+                            panelHeight: 'auto',
+                            editable:false
+                        }
+                    }
+                }, {
+                    field: 'basis',
+                    title: '操作依据',
+                    width: 150,
+                    align: 'center',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'beginTime',
+                    title: '开始日期',
+                    width: 150,
+                    align: 'center',
+                    editor: {
+                        type: 'datebox',
+                        editable:false
+                    }
+                }, {
+                    field: 'endTime',
+                    title: '结束日期',
+                    width: 150,
+                    align: 'center',
+                    editor: {
+                        type: 'datebox',
+                        editable:false
+                    }
+                }, {
+                    field: 'require',
+                    title: '工艺要求',
+                    width: 270,
+                    align: 'center',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'control',
+                    title: '控制点',
+                    width: 100,
+                    align: 'center',
+                    editor: {
+                        type: 'validatebox'
+                    }
+                }, {
+                    field: 'planCount',
+                    title: '数量',
+                    width: 100,
+                    align: 'center',
+                    editor: {
+                        type: 'numberbox'
+                    }
+                }]]
+        });
+    }
+</script>
+</html>

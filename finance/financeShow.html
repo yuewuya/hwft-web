@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/js/jQuery.print.js"></script>
+    <style>
+        table tr td{
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="mainbox">
+    <div class="tools">
+        <ul class="cyda_cx">
+            <li>
+                年份：
+                <select class="easyui-combobox"
+                        name="year"
+                        style="height:25px; width:150px;"
+                        id="year"
+                        data-options="panelHeight:'auto',valueField:'id', textField:'text'" >
+                </select>
+            </select>
+
+            </li>
+            <li>
+                <a href="javascript:"><img src="/assembly/images/bl.png" onclick="search()"/></a>
+            </li>
+        </ul>
+    </div>
+    <div class="cyda">
+        <table id="dt" style="width:80%">
+        </table>
+        <div id="toolbar">
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onClick="editFinance()">修改业务</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onClick="removeBtn('/finance/delFinance')">删除业务</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-back" plain="true" onClick="backFinance()">收回</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onClick="editBack()">修改收回</a>
+            <a href="#" class="easyui-linkbutton" iconCls="icon-ok" plain="true" onClick="settlement()">结算</a>
+            <a href="#" class="easyui-linkbutton" onclick="printPage('打印','/finance/print/financeShow.html?year='
+                +$('#year').val()+'&ywyId='+$('#ywyId').val()+'&companyId='+$('#companyId').val())"
+               data-options="plain:true,iconCls:'icon-print'">打印</a>
+            <!--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-dc" plain="true" onclick="exportBtn()">导出</a>-->
+        </div>
+    </div>
+</div>
+<input id="ywyId" type="hidden">
+<input id="companyId" type="hidden">
+<input id="company" type="hidden">
+<script src="/assembly/layer/layer.js"></script>
+<script src="/js/finance/financeShow.js"></script>
+<script>
+    function initData(companyId,ywyId,company) {
+        $('#companyId').val(companyId);
+        $('#ywyId').val(ywyId);
+        $('#company').val(company);
+        initTable();
+    }
+    function getFormData() {
+        if(!$("#saveYwForm").form('validate')){
+            layer.alert("请完善表单数据！",{icon: 2});
+            return null;
+        }else{
+            return $('#saveYwForm').getData();
+        }
+    }
+    function getOpData() {
+        if(!$("#saveBackForm").form('validate')){
+            layer.alert("请完善表单数据！",{icon: 2});
+            return null;
+        }else{
+            return $('#saveBackForm').getData();
+        }
+    }
+</script>
+</body>
+</html>
+<div  id="saveYwPage" title="财务核算" style="padding:50px 10px 10px 10px;display:none">
+    <form id="saveYwForm">
+        <table>
+        <tr>
+            <td>名称: &nbsp;</td>
+            <td><input id="companyName" type="text" class="easyui-validatebox textbox" style="width: 300px" disabled/></td>
+        </tr>
+        <tr>
+            <td>发票金额: &nbsp;</td>
+            <td><input name="fpje" type="text" class="easyui-numberbox" data-options="min:0,precision:2"
+                       style="width: 300px" required="true"/></td>
+        </tr>
+        <tr>
+            <td>开票时间: &nbsp;</td>
+            <td><input name="kpsj" type="text" class="easyui-datebox" required="required" style="width: 300px;"
+                       data-options="onShowPanel:function(){$(this).combobox('panel').panel('panel').css('z-index',layerZ);
+                        }"/></td>
+        </tr>
+        <tr>
+            <td>利率: &nbsp;</td>
+            <td><input name="rate" type="text" class="easyui-numberbox" data-options="min:0,precision:2"
+                       style="width: 300px" required="true"/><b>%</b></td>
+        </tr>
+        </table>
+    </form>
+</div>
+
+<div id="backPage" title="收回" style="padding:50px 10px 10px 10px;display:none">
+    <form id="saveBackForm">
+        <table>
+            <tr>
+                <td>收回时间: &nbsp;</td>
+                <td><input name="shsj" type="text" class="easyui-datebox" required="required" style="width: 300px;"
+                           data-options="onShowPanel:function(){
+                            $(this).combobox('panel').panel('panel').css('z-index',layerZ);}"/></td>
+            </tr>
+            <tr>
+                <td>收回金额: &nbsp;</td>
+                <td><input name="hsje" type="text" class="easyui-numberbox"
+                           data-options="min:0,precision:2" style="width: 300px" required="true"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+<div id="settlementPage" title="结算" style="padding:50px 10px 10px 10px;display:none">
+    <form id="settlementForm">
+        <table>
+        <tr>
+            <td>业务费: &nbsp;</td>
+            <td><input id="ywf" type="text" class="easyui-numberbox" data-options="min:0,precision:2"
+                       style="width: 300px" required="true"/></td>
+            <td>已结算: &nbsp;<input id="zt" type="checkbox" /></td></tr>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+
+    <style>
+        #saveForm a img{
+            position: relative;
+            top: 9px;
+            left: -2px
+        }
+
+        .disableInput{
+            width: 130px;
+            height: 32px;
+            position: absolute;
+            top: 3px;
+            left: 2px;
+            background: #80808038;
+            z-index: 10;
+        }
+        .disableArea{
+            width: 1195px;
+            height: 300px;
+            position: absolute;
+            background: #80808038;
+            z-index: 10;
+        }
+    </style>
+<title>无标题文档</title>
+
+</head>
+<body style="padding: 50px;">
+
+
+    
+
+<div style="height: 600px;padding: 10px;">
+
+        <div class="dicc"><span style="background-color:#FFF; padding-right:10px; font-size:15px; font-weight:600">价格信息</span></div>
+    <form id="saveForm">
+        <table width="100%"  align="center"  class="tablelist3">
+              <tbody>
+                <tr>
+                  <td width="10%" align="right">订单编号: &nbsp;</td>
+                  <td width="25%" colspan="2" align="left">
+                      <input readonly name="orderNum" type="text" class="dfinput"  style="width:130px;" />
+                      <input readonly name="resNum" type="text" class="dfinput"  style="width: 50px;" />
+                      <input name="id" type="hidden" />
+                  </td>
+                  <td width="10%" align="right">询价编号: &nbsp;</td>
+                  <td width="30%" colspan="3" align="left">
+                      <input readonly name="numbering" type="text" class="dfinput" id="xj1"  style="width:130px;" />
+                      <input readonly name="singleNum" type="text" class="dfinput" id="xj2"  style="width: 50px;" />
+                      <input name="singleId" type="hidden">
+                  <a href="javascript:void(0)"><img src="/assembly/images/ck.png"  onclick="selectOtherPage('选择询价单','/sale/quotation.html',
+                  {numbering:$('#xj1').val(), singleNum:$('#xj2').val(), detailStatus: 3},
+                  function(row) {
+
+                      let param = {};
+                      param.numbering = row.numbering;
+                      param.singleNum = row.singleNum;
+                      param.singleId = row.id;
+
+                      if(row.rfqBean && row.rfqBean != null){
+                          param.deliveryDate = row.rfqBean.deliveryDate;
+                      }
+
+                      if(row.quotationBean && row.quotationBean != null){
+                          param.productionCost = row.quotationBean.productionCosts;
+                          param.materialCost = row.quotationBean.materialCosts;
+                          param.otherCost = row.quotationBean.otherCosts;
+                          param.price = row.quotationBean.price;
+                          param.utilizationRate = row.quotationBean.utilizationRate;
+                          param.weight = row.quotationBean.cuttingWeight;
+                      }
+
+                      param.materialSource = row.materialSourceName;
+                      param.shape = row.shapeName;
+                      param.material = row.materialName;
+                      param.processingMethod = row.processingMethodName;
+                      if(row.diameterType == 0){
+                          param.innerDiameter = row.diameter;
+                      }else{
+                          param.outDiameter = row.diameter;
+                      }
+                      param.bigR = row.bigR;
+                      param.straightEdge = row.straightEdge;
+                      param.thickness = row.thickness;
+                      param.claimThickness = row.claimThickness;
+                      param.minR = row.minR;
+                      if(row.hightType == 0){
+                          param.innerHeight = height;
+                      }else {
+                          param.outHeightr = height;
+                      }
+                      param.materialRetest = row.materialRetest;
+                      param.nums = row.num;
+                      param.supervision = row.supervision;
+                      param.standards = row.standards;
+                      param.otherClaim = row.otherClaim;
+                      param.testBord = row.testBord;
+                      param.rtReport = row.flawDetection;
+                      param.stamp = row.stamp;
+                      param.flawClaim = row.flawClaim;
+                      param.heatTreatment = row.heatTreatment;
+                      initData(param)
+                      $('.needChange').show();
+                })"/></a></td>
+                  <td width="10%" align="right">发货日: &nbsp;</td>
+                  <td width="15%" align="left">
+                      <div style="position: relative">
+                          <div class="disableInput needChange"></div>
+                      <input name="deliveryDate" id="deliveryDate" type="text" class="easyui-datebox"  style="width:130px;" />
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">坡口: &nbsp;</td>
+                  <td colspan="2" align="left">
+                      <input readonly name="groove" type="text" id="pokou" class="dfinput"  style="width:130px;" />
+                      <input readonly name="grooveImg" id="pokouImg" type="hidden">
+                  <a href="javascript:void(0)"><img src="/assembly/images/ck.png"  onclick="openWindow('坡口选择窗口','pk.html', 'pokou', 'pokouImg')"/></a></td>
+                  <td align="right">公差: &nbsp;</td>
+                  <td colspan="3" align="left">
+                      <input readonly name="tolerance" id="gc1" type="text" class="dfinput"  style="width:130px;" />
+                  <a href="javascript:void(0)"><img src="/assembly/images/ck.png"  onclick="openWindowgc('公差设置','gc.html', 'gc1')"/></a></td>
+                  <td align="right">生产成本: &nbsp;</td>
+                  <td align="left">
+                      <div style="position: relative">
+                          <div class="disableInput needChange"></div>
+                      <input name="productionCost" type="text" class="easyui-numberbox"  style="width:130px;" />
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">下坡口: &nbsp;</td>
+                  <td colspan="2" align="left">
+                      <input readonly name="downGroove" type="text" id="xiapokou" class="dfinput"  style="width:130px;" />
+                      <input readonly name="downGrooveImg" id="xiapokouImg" type="hidden">
+                    <a href="javascript:void(0)"><img src="/assembly/images/ck.png"  onclick="openWindow('坡口选择窗口','pk.html', 'xiapokou', 'xiapokouImg')"/></a></td>
+                  <td align="right">公差: &nbsp;</td>
+                  <td colspan="3" align="left">
+                      <input readonly name="downTolerance" type="text" id="gc2" class="dfinput"  style="width:130px;" />
+                    <a href="javascript:void(0)"><img src="/assembly/images/ck.png"  onclick="openWindowgc('公差设置','gc.html', 'gc2')"/></a></td>
+                  <td align="right">材料成本: &nbsp;</td>
+                  <td align="left">
+                      <div style="position: relative">
+                          <div class="disableInput needChange"></div>
+                          <input name="materialCost" type="text" class="easyui-numberbox"  style="width:130px;" />
+                      </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="right">实际售价: &nbsp;</td>
+                  <td align="left"><input name="realPrice" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="right">封头价: &nbsp;</td>
+                  <td colspan="2" align="left">
+                      <div style="position: relative">
+                          <div class="disableInput needChange"></div>
+                          <input name="price" type="text" class="easyui-numberbox"  style="width:130px;" />
+                      </div>
+                  </td>
+                  <td align="right">利用率: &nbsp;</td>
+                  <td align="left">
+                      <div style="position: relative">
+                          <div class="disableInput needChange"></div>
+                          <input name="utilizationRate" type="text" class="easyui-numberbox"  style="width:130px;" />
+                      </div>
+                  </td>
+                  <td align="right">其他成本: &nbsp;</td>
+                  <td align="left">
+                      <div style="position: relative">
+                          <div class="disableInput needChange"></div>
+                          <input name="otherCost" type="text" class="easyui-numberbox"  style="width:130px;" />
+                      </div>
+                  </td>
+                </tr>
+              </tbody>
+  </table>
+
+  <div class="dicc"><span style="background-color:#FFF; padding-right:10px; font-size:15px; font-weight:600">协议内容</span></div>
+        <div class="disableArea needChange" ></div>
+  <table width="100%"  align="center"  class="tablelist3">
+              <tbody>
+                <tr>
+                  <td width="10%" align="right">材料来源: &nbsp;</td>
+                  <td width="15%" align="left"><select name="materialSource" class="easyui-combobox" id="clly" style="height:25px; width:130px;" data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                  </select></td>
+                  <td width="10%" align="right">形状: &nbsp;</td>
+                  <td width="15%" align="left"><select name="shape" class="easyui-combobox" style="height:25px; width:130px;" id="xz" data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+</select></td>
+                  <td width="10%" align="right">材质: &nbsp;</td>
+                  <td width="15%" align="left"><input name="material" class="dfinput" style="height:25px; width:130px;" ></td>
+                  <td width="10%" align="right">加工方法: &nbsp;</td>
+                  <td width="15%" align="left"><select name="processingMethod" class="easyui-combobox" style="height:25px; width:130px;" id="jgff" data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                  </select></td>
+                </tr>
+                <tr>
+                  <td align="right">
+                      <div style="line-height: 20px; margin-right: 10px;">
+
+                          <input type="radio" name="zj" id="nz" value="inner" >
+                          <label for="nz">内直:</label><br>
+
+                          <input type="radio" name="zj" id="wz" value="out">
+                          <label for="wz">外直:</label>
+                      </div>
+                  </td>
+                  <td align="left"><input name="diameter" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="right">大R: &nbsp;&nbsp;</td>
+                  <td align="left"><input name="bigR" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="right">直边: &nbsp;&nbsp;</td>
+                  <td align="left"><input name="straightEdge" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="right">壁厚: &nbsp;&nbsp;</td>
+                  <td align="left"><input name="thickness" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                </tr>
+                <tr>
+                  <td align="right">要求壁厚: &nbsp;&nbsp;</td>
+                  <td align="left"><input name="claimThickness" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="right">小r: &nbsp;&nbsp;</td>
+                  <td align="left"><input name="minR" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="right">
+                      <div style="line-height: 20px; margin-right: 10px;">
+
+                          <input type="radio" name="zg" id="ng" value="inner" checked>
+                          <label for="ng">内总高:</label><br>
+
+                          <input type="radio" name="zg" id="wg" value="out">
+                          <label for="wg">外总高:</label>
+                      </div>
+                  </td>
+                  <td align="left"><input name="height" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="left">&nbsp;</td>
+                  <td align="left"><input type="checkbox" name="materialRetest" id="checkbox4" value="1">
+                    <label for="checkbox4">材料复验</label> </td>
+                </tr>
+                <tr>
+                  <td align="right">&nbsp;</td>
+                  <td align="left">&nbsp;</td>
+                  <td align="right">重量: &nbsp;&nbsp;</td>
+                  <td align="left"><input name="weight" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="right">订货数量: &nbsp;&nbsp;</td>
+                  <td align="left"><input name="nums" type="text" class="easyui-numberbox"  style="width:130px;" /></td>
+                  <td align="left">&nbsp;</td>
+                  <td align="left"><input type="checkbox" name="supervision" id="checkbox5" value="1">
+                    <label for="checkbox5">要监检</label>
+</td>
+                </tr>
+                <tr>
+                  <td align="right">制造标准: &nbsp;&nbsp;</td>
+                  <td align="left"><select id="zzbz" name="standards" class="easyui-combobox" style="height: 25px; width: 250px;" editable="false" data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+                  </select></td>
+
+                    <td align="right" rowspan="3">其他要求: &nbsp;&nbsp;</td>
+                    <td colspan="4" rowspan="3" align="left"><textarea name="otherClaim" class="dfinput" style="width:80%; height:100px"></textarea></td>
+                  <td align="left"><input type="checkbox" name="testBord" id="checkbox6" value="1">
+                    <label for="checkbox6">要试板</label>
+</td>
+                </tr>
+                <tr>
+                  <td align="right"><input type="checkbox" id="checkbox9">
+                  RT报告: &nbsp;&nbsp;</td>
+                  <td align="left"><select name="rtReport" id="rtbg" class="easyui-combobox" style="height: 25px; width: 250px;"  editable="false" data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+</select></td>
+                  <td align="left"><input type="checkbox" name="stamp" id="checkbox7" value="1">
+                    <label for="checkbox7">要钢印</label>
+</td>
+                </tr>
+                <tr>
+                  <td align="right">探伤要求: &nbsp;&nbsp;</td>
+                  <td  align="left"><select id="tsyq" name="flawClaim" class="easyui-combobox" style="height: 25px; width: 250px;"  editable="false" data-options="panelHeight:'auto',valueField:'id', textField:'text'">
+</select></td>
+                  <td><input type="checkbox" name="heatTreatment" id="checkbox8" value="1">
+<label for="checkbox8">热处理</label> </td>
+                </tr>
+              </tbody>
+  </table>
+    </form>
+
+
+</div>
+
+    
+    <script>
+        function hideChange() {
+            $(".needChange").hide()
+        }
+        
+        
+    function openWindow(title, url, text, img) {
+        parent.layer.open({
+                type: 2,
+                title: title,
+                fix: false,
+                shadeClose: true,
+                maxmin: true,
+                area: ['1000px', '650px'],
+                content: url
+                , btn: ['确定','关闭']
+                ,success: function (layero, index) {
+                    let sonFrame = parent.window['layui-layer-iframe' + index];
+                    sonFrame.initData($("#"+img).val())
+                }
+                ,yes: function (index, layero) {
+                    let obj = parent.window[layero.find('iframe')[0]['name']].getFormData();
+                    $("#"+text).val(obj.text);
+                    if(obj.tspkImg && obj.tspkImg != ''){
+                        $("#"+img).val(obj.tspkImg);
+                    }else {
+                        $("#"+img).val('');
+                    }
+                    parent.layer.close(index);
+                }
+                , btn2: function () {
+                    layer.closeAll();
+                }
+            });
+	}
+    layer.ready(function() {
+        //官网欢迎页
+    });
+</script>
+
+<script>
+    function openWindowgc(title, url, id) {
+	parent.layer.open({
+            type: 2,
+            //skin: 'layui-layer-lan',
+            title: title,
+            fix: false,
+            shadeClose: true,
+            maxmin: true,
+            area: ['600px', '250px'],
+            content: url
+            , btn: ['确定'] //只是为了演示
+            ,success: function (layero, index) {
+                let sonFrame = parent.window['layui-layer-iframe' + index];
+                let values = $("#"+id).val().split(" ");
+                if(values.length == 3){
+                    let param = {
+                        radio : values[0],
+                        js : values[1],
+                        gc1 : values[2].split("~")[0],
+                        gc2 : values[2].split("~")[1]
+                    };
+                    sonFrame.initData(param)
+                }
+            }
+            , yes: function (index, layero) {
+                let obj = parent.window[layero.find('iframe')[0]['name']].getFormData();
+                $("#"+id).val(obj)
+                parent.layer.close(index);
+            }
+            , btn2: function () {
+                layer.closeAll();
+            }
+        });
+	}
+    layer.ready(function() {
+        //官网欢迎页
+    });
+</script>
+    
+    <script type="text/javascript">
+        let dictArr = [
+            {typeCode:'SALE_MATERIAL_SOURCE'},
+            {typeCode:'PROCESSING'},
+            {typeCode:'SHAPE'},
+            {typeCode:'SALE_STANDARDS'},
+            {typeCode:'RT_REPORT'},
+            {typeCode:'FLAW_CLAIM'},
+        ];
+        let allDict = {};
+        $(function () {
+            if (dictArr.length > 0) {
+                ajaxDictQuery(dictArr, function (data) {
+                    allDict = data;
+                    setDictOption(['clly'], 'SALE_MATERIAL_SOURCE');
+                    setDictOption(['jgff'], 'PROCESSING');
+                    setDictOption(['xz'], 'SHAPE');
+                    setDictOptionKey(['zzbz'], 'SALE_STANDARDS');
+                    setDictOptionKey(['rtbg'], 'RT_REPORT');
+                    setDictOptionKey(['tsyq'], 'FLAW_CLAIM');
+                });
+            }
+        });
+
+	$('.tablelist3 tbody tr:odd').addClass('odd');
+	
+	function getFormData() {
+        let param = $("#saveForm").getData();
+        if(param.zj == 'inner'){
+            param.innerDiameter = param.diameter;
+        }else {
+            param.outDiameter = param.diameter;
+        }
+        delete param.zj;
+        delete param.diameter;
+        if(param.zg == 'inner'){
+            param.innerHeight = param.height;
+        }else {
+            param.outHeightr = param.height;
+        }
+        delete param.zg;
+        delete param.height;
+        return param;
+    }
+
+    function initData(data) {
+	    if (data.outDiameter == null || data.outDiameter == ''){
+            data.zj = "inner";
+            data.diameter = data.innerDiameter;
+        }else {
+            data.zj = "out";
+            data.diameter = data.outDiameter;
+        }
+        if (data.outHeightr == null || data.outHeightr == ''){
+            data.zg = "inner";
+            data.height = data.innerHeight;
+        }else {
+            data.zg = "out";
+            data.height = data.outHeightr;
+        }
+        $('#saveForm').form('load', data);
+    }
+	</script>
+
+</body>
+</html>

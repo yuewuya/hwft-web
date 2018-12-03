@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../assembly/css/css.css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="../plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="../../assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../assembly/css/icon.css">
+    <script src="../../plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="../../plugins/jquery/jquery.json.min.js"></script>
+    <script src="../../plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="../../plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="../../plugins/moment.min.js"></script>
+    <script src="../../js/moreElement.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script src="../../js/easy_common.js"></script>
+    <link href="print/physicochemicalPrint.css" rel="stylesheet" type="text/css" media="print">
+    <script language="javascript" src="/js/jquery.jqprint-0.3.js"></script>
+    <script language="javascript" src="/js/jquery-migrate-1.2.1.min.js"></script>
+</head>
+<body>
+<div class="mainbox">
+    <form id="searchForm">
+        <p>
+            <label>理化编号：</label>
+            <input name="no" type="text" class="scinput" style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+        <p>
+            <label>指令号：</label>
+            <input name="code" type="text" class="scinput"  style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+        <p>
+            <label>创建人：</label>
+            <input name="createUser" type="text" class="scinput"  style="height: 30px; width: 148px; line-height: 30px;"/>
+        </p>
+    </form>
+    <div class="cyda">
+        <table id="dg" style="width:80%">
+        </table>
+        <div id="toolbar">
+        </div>
+    </div>
+</div>
+<script>createTooBar();</script>
+<script src="../../assembly/layer/layer.js"></script>
+<script src="../../js/quality/physicochemical.js"></script>
+</body>
+</html>
+
+

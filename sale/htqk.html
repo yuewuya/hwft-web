@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="/assembly/css/css.css"/>
+  <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+  <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+  <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+  <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+  <script src="/plugins/jquery/jquery.json.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+  <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+  <script src="/plugins/moment.min.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/easy_common.js"></script>
+  <script src="/assembly/layer/layer.js"></script>
+        
+        
+<title>无标题文档</title>
+
+</head>
+<body>
+
+   <div style="padding:15px">
+     <form id="saveForm">
+     <table width="100%"  align="center">
+     <tbody>
+       <tr>
+         <td><table width="100%"  align="center">
+           <tbody>
+             <tr>
+               <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px solid #efefef; margin-bottom:10px; ">
+                 <tr>
+                   <td width="25%"  style="padding:10px">付款方式</td>
+                   <td width="25%"  style="padding:10px">
+                     <input type="radio" name="paymentWay" id="radio2" value="现款" checked>
+                     <label for="radio2">现款</label>
+                   </td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="paymentWay" id="radio3" value="银行承兑">
+                     <label for="radio3">银行承兑</label></td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="paymentWay" id="radio4" value="other">
+                    <!-- <label for="radio3" class="dfinput"  style="width: 180px;" contenteditable="true"></label>-->
+                     <input id="io4" name="paymentWayOther" type="text"class="dfinput writeIn"  style="width: 180px;" /></td>
+                 </tr>
+               </table></td>
+             </tr>
+             <tr>
+               <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px solid #efefef;margin-bottom:10px; ">
+                 <tr>
+                   <td width="25%"  style="padding:10px">付款条件</td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="paymentTerms" id="radio" value="款到发货" checked>
+                     <label for="radio">款到发货</label></td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="paymentTerms" id="radio5" value="time">
+                     <label for="radio5">货到
+                      <input name="paymentTermsTime" type="text"class="dfinput" id="days" style="width: 30px;" />
+                       日内付款</label></td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="paymentTerms" id="radio6" value="other">
+                     <input id="io6" type="text"class="dfinput writeIn" name="paymentTermsOther"  style="width: 180px;" /></td>
+                 </tr>
+               </table></td>
+             </tr>
+             <tr>
+               <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px solid #efefef;margin-bottom:10px; ">
+                 <tr>
+                   <td width="25%"  style="padding:10px">交货情况</td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="deliverySituation" id="radio7" value="完工翌日发货" checked>
+                     <label for="radio7">完工翌日发货</label> </td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="deliverySituation" id="radio8" value="完工当日发货">
+                     <label for="radio8">完工当日发货</label></td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="deliverySituation" id="radio9" value="other">
+                     <input id="io9" type="text"class="dfinput writeIn" name="deliverySituationOther" style="width: 180px;" /></td>
+                 </tr>
+               </table></td>
+             </tr>
+             <tr>
+               <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" style="border:1px solid #efefef; ">
+                 <tr>
+                   <td width="25%"  style="padding:10px">运输方法</td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="transportWay" id="radio10" value="代办运输" checked>
+                     <label for="radio10">代办运输</label> </td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="transportWay" id="radio11" value="客户自提">
+                     <label for="radio11">客户自提</label></td>
+                   <td width="25%"  style="padding:10px"><input type="radio" name="transportWay" id="radio12" value="other">
+                     <input id="io12" name="transportWayOther" type="text"class="dfinput writeIn"  style="width: 180px;" /></td>
+                 </tr>
+               </table></td>
+             </tr>
+           </tbody>
+         </table></td>
+       </tr>
+     </tbody>
+     </table>
+     </form>
+</div>
+
+</body>
+
+
+<script>
+  function initData(data) {
+      $("#saveForm").form("load", data)
+  }
+
+$(".writeIn").focus(function () {
+    let name = $(this).prev().attr('name');
+    $("[name="+name+"]").eq(2).prop("checked",true);
+})
+
+  function getFormData() {
+    let param = {};
+      $(":checked").each(function(){
+          if($(this).attr("id") == "radio4"){
+              param.paymentWay = $("#io4").val();
+          }else if($(this).attr("id") == "radio6"){
+              param.paymentTerms = $("#io6").val();
+          }else if($(this).attr("id") == "radio9"){
+              param.deliverySituation = $("#io9").val();
+          }else if($(this).attr("id") == "radio12"){
+              param.transportWay = $("#io12").val();
+          }else if($(this).attr("id") == "radio5"){
+              param.paymentTerms = "货到" + $("#days").val() + "日内付款";
+          }else {
+              param[$(this).attr("name")] = $(this).next().text();
+          }
+      })
+      return param;
+  }
+</script>
+</html>

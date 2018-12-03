@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <script src="../plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.edatagrid.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="../../plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<style>
+    p {
+        margin: 10px;
+    }
+
+    .showLine {
+        background: ghostwhite;
+        padding: 10px 0 0 50px;
+        width: 899px;
+        margin-bottom: 10px;
+    }
+
+    .showLine p {
+        display: inline-block;
+        width: 30%;
+    }
+
+    p label {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+    }
+
+    .showV {
+        float: left;
+        padding: 10px;
+        background: ghostwhite;
+        margin-right: 20px;
+    }
+
+    #savePage div {
+    }
+</style>
+<body>
+<div id="tabs" class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <!-- form 表单-->
+    <div id="tabs1" title="焊接规范" style="padding:10px;">
+        <form id="form">
+            <div class="datagrid-toolbar">焊接详情</div>
+            <input name="weldingId" id="weldingId" type="hidden"/>
+            <input name="weldingMethod" id="weldingMethod" type="hidden"/>
+            <p style="width:30%; display: inline-block">
+                <label>编号:</label>
+                <input name="weldingNo" id="weldingNo" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>指令号:</label>
+                <input name="code" id="code" type="text" required="true" class="dfinput3"
+                       style="width:140px;height: 30px"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>材质:</label>
+                <input name="materialName" id="materialName" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       readonly="readonly"
+                       style="width:140px;"/>
+                <input name="materialId" id="materialId" type="hidden">
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>产品名称:</label>
+                <input name="produceName" id="produceName" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>厚度:</label>
+                <input name="thickness" id="thickness" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>焊接长度:</label>
+                <input name="weldingLength" id="weldingLength" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:22%; display: inline-block">
+                <label>规格:</label>
+                <input name="specification" id="specification" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>por编号:</label>
+                <input name="por" id="por" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>持证项目:</label>
+                <input name="licensed" id="licensed" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>流量:</label>
+                <input name="flow" id="flow" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+
+            <p style="width:30%; display: inline-block">
+                <label>保护气比:</label>
+                <input name="protective" id="protective" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>焊前预热:</label>
+                <input name="preheating" id="preheating" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+            <p style="width:30%; display: inline-block">
+                <label>焊后热处:</label>
+                <input name="afterWelding" id="afterWelding" type="text" required="true"
+                       class="easyui-validatebox textbox"
+                       style="width:140px;"/>
+            </p>
+        </form>
+    <div class="datagrid-toolbar">焊接材料</div>
+    <table id="dg" style="width:80%"></table>
+        <div id="toolbar">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="add('dg')">添加</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="$('#dg').edatagrid('destroyRow')">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+               onclick="save('dg')">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+               onclick="$('#dg').edatagrid('cancelRow')">取消</a>
+        </div>
+    <div class="datagrid-toolbar">焊接规范</div>
+    <table id="dg2" style="width:80%"></table>
+        <div id="toolbar2">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="add('dg2')">添加</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true"
+               onclick="$('#dg2').edatagrid('destroyRow')">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true"
+               onclick="save('dg2')">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true"
+               onclick="$('#dg2').edatagrid('cancelRow')">取消</a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+
+    /**
+     * 工艺卡
+     */
+    function selectCode(data) {
+        $("#materialId").val(data.materialId);
+        $("#materialName").val(data.material);
+        $("#code").val(data.code);
+        $("#specification").val(data.shape + ' '+data.diameter + '*'+data.thickness);
+        $("#produceName").val('封头');
+    }
+
+    $('input[name=code]').change(function () {
+        ajaxPostInvoke('/processCard/ftCard/findByCode', {code: $("#code").val()}, function (data) {
+            if (!data.code) {
+                layer.alert("没有此工艺卡！", {
+                    icon: 2
+                });
+                $('#code').val('');
+                return;
+            }
+            selectCode(data);
+        });
+    });
+
+    /**
+     * 获取数据
+     */
+    function getFormData() {
+        if (!$("#form").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return;
+        }
+        let obj = $("#form").getData();
+        obj.weldingMaterialEntityList = $("#dg").datagrid("getData").rows;
+        obj.hjMethodList = $("#dg2").datagrid("getData").rows;
+        return obj;
+    }
+
+    /**
+     * 初始化
+     */
+    function initData(data) {
+        if (data.weldingId == null) {
+            initWeldingMaterial(null);
+            initMethod(null);
+        } else {
+            initWeldingMaterial(data.weldingId);
+            initMethod(data.weldingId);
+        }
+        $('#form').form('load', data);
+    }
+
+    /**
+     * 搜索
+     */
+    function search() {
+        $('#dg').datagrid('reload', {});
+    }
+
+    function add(tableId){
+        let row = {};
+        if('dg' == tableId){
+            row = {
+                cardNo: '',
+                temperature: '',
+                time: '',
+                num: ''
+            };
+        }else if('dg2' == tableId){
+            row = {
+                method: 'SMAW',
+                arrangement: '点固',
+                vcc: 'DCEP',
+                hc: 'SJ101 H10Mn2',
+                specification: 'Ф4',
+                i: '450-550',
+                u: '28-34',
+                speed: '440-480',
+                arrangementTemperature: '≤200℃',
+                wjDiameter: '',
+                pzDiameter: '',
+                flow: '',
+                energy: '≤24.1',
+                remark: '无'
+            };
+        }
+        $('#'+tableId).edatagrid('addRow', {
+            row: row
+        });
+    }
+
+    function save(tableId){
+        $('#'+tableId).edatagrid('saveRow');
+    }
+    /**
+     * 加载焊接材料
+     */
+    function initWeldingMaterial(weldingId) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#dg").edatagrid({
+            queryParams: {
+                weldingId: weldingId
+            },
+            height: mContentHeight,
+            singleSelect: true,
+            width: '98%',
+            autoRowHeight: false,
+            fitColumns: false,
+            toolbar: '#toolbar',
+            idField: 'id',
+            url: getRootPath() + '/process/welding/weldingMaterialList',
+            columns: [[{
+                field: 'cardNo',
+                title: '牌号',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'temperature',
+                title: '烘烤温度',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'time',
+                title: '烘烤时间',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'num',
+                title: '数量',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }]]
+        });
+    }
+
+    /**
+     * 加载焊接规范
+     */
+    function initMethod(weldingId) {
+        let mWindHeight = $(window).height();
+        let mContentHeight = mWindHeight - 100;
+        $("#dg2").edatagrid({
+            queryParams: {
+                weldingId: weldingId
+            },
+            width: '98%',
+            height: mContentHeight,
+            singleSelect: true,
+            autoRowHeight: false,
+            fitColumns: false,
+            toolbar: '#toolbar2',
+            idField: 'id',
+            url: '/process/welding/hjMethodList',
+            columns: [[{
+                field: 'method',
+                title: '焊接方法',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'arrangement',
+                title: '层次',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'vcc',
+                title: '电源',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'hc',
+                title: '焊材',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'specification',
+                title: '规格',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'i',
+                title: '电流',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'u',
+                title: '电压',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'speed',
+                title: '速度',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'arrangementTemperature',
+                title: '层间温度',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'wjDiameter',
+                title: '钨极直径',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'pzDiameter',
+                title: '喷咀直径',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'flow',
+                title: '流量',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'energy',
+                title: '线能量',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }, {
+                field: 'remark',
+                title: '备注',
+                width: 200,
+                align: 'center',
+                editor: {type: 'validatebox'}
+            }]]
+        });
+    }
+</script>
+</html>
+
+

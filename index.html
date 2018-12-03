@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>宜兴华威封头</title>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="/assembly/js3/bootstrap/css/bootstrap.min.css">
+    <script src="/plugins/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/_all-skins.css">
+    <link rel="stylesheet" href="/plugins/bootstrap-3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="/plugins/bootstrap-fileinput/css/fileinput.css">
+    <link rel="stylesheet" media="all" href="/plugins/bootstrap-fileinput/themes/explorer-fa/theme.css">
+    <link type="text/css" rel="stylesheet" href="/js/imgUpload_base64.css">
+    <script src="/js/html2canvas.js"></script>
+    <script src="/js/imgUpload_base64.js"></script>
+    <style>
+        #savePwdForm p {
+            margin: 0 60px 10px 60px;
+        }
+        #savePwdForm p label {
+            display: inline-block;
+            width: 84px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini" style="overflow:hidden;">
+<div id="ajax-loader"
+     style="cursor: progress; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: #fff; z-index: 10000; overflow: hidden;">
+    <img src="img/ajax-loader.gif" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto;"/>
+</div>
+<div class="wrapper">
+    <!--头部信息-->
+    <header class="main-header">
+        <a href="http://www.learun.cn/adms/index.html" target="_blank" class="logo">
+            <span class="logo-mini">华威</span>
+            <span class="logo-lg"><strong>宜兴华威封头</strong></span>
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a class="sidebar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <ul class="navtop" id="innerTopHtml">
+                <!-- 上侧菜单栏 -->
+            </ul>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown messages-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                            <img src="images/help.png" title="帮助" class="helpimg"> 帮助
+                        </a>
+                    </li>
+
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs" id="userName2"></span>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a class="menuItem" data-id="userInfo" onclick="savePwd()"><i class="fa fa-user"></i>修改密码</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a onclick="autograph()"><i class="ace-icon fa fa-power-off"></i>签名设置</a></li>
+                            <li class="divider"></li>
+                            <li><a onclick="logOut('/sys/logout')"><i class="ace-icon fa fa-power-off"></i>安全退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--左边导航-->
+    <div class="main-sidebar" style="height: 650px">
+        <div class="sidebar">
+            <!--<div class="user-panel">
+                <div class="pull-left image">
+                    <img src="img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p id="userName"></p>
+                    <a><i class="fa fa-circle text-success"></i>在线</a>
+                </div>
+            </div>-->
+            <ul class="sidebar-menu" id="sidebar-menu">
+            </ul>
+        </div>
+    </div>
+    <!--中间内容-->
+    <div id="content-wrapper" class="content-wrapper">
+        <div class="content-tabs">
+            <button class="roll-nav roll-left tabLeft">
+                <i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs menuTabs">
+                <div class="page-tabs-content" style="margin-left: 0px;">
+                    <a href="javascript:" class="menuTab active" data-id="home.html">欢迎首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right tabRight">
+                <i class="fa fa-forward" style="margin-left: 3px;"></i>
+            </button>
+            <div class="btn-group roll-nav roll-right">
+                <button class="dropdown tabClose" data-toggle="dropdown">
+                    页签操作<i class="fa fa-caret-down" style="padding-left: 3px;"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li><a class="tabReload" href="#">刷新当前</a></li>
+                    <li><a class="tabCloseCurrent" href="#">关闭当前</a></li>
+                    <li><a class="tabCloseAll" href="#">全部关闭</a></li>
+                    <li><a class="tabCloseOther" href="#">除此之外全部关闭</a></li>
+                </ul>
+            </div>
+            <button class="roll-nav roll-right fullscreen"><i class="fa fa-arrows-alt"></i></button>
+        </div>
+        <div class="content-iframe" style="overflow: hidden;">
+            <div class="mainContent" id="content-main" style="margin: 0px; margin-bottom: 0px; padding: 0;">
+                <iframe class="LRADMS_iframe" width="100%" height="100%" src="home.html" frameborder="0"
+                        data-id="home.html"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 修改密码 -->
+<div id="savePwd" title="修改密码" style="padding:50px 10px 10px 10px;display:none">
+    <form id="savePwdForm">
+        <p>
+            <label>原密码：</label>
+            <input class="scinput" name="password" type="password" style="width: 150px;height:35px" id="reset1">
+        </p>
+        <p>
+            <label>新密码：</label>
+            <input class="scinput" name="newPassword" type="password" style="width: 150px;height:35px" id="reset2">
+        </p>
+        <p>
+            <label>确认密码：</label>
+            <input class="scinput" name="rePwd" type="password" style="width: 150px;height:35px" id="reset3">
+        </p>
+    </form>
+</div>
+
+<!-- 签名设置 -->
+<div id="autograph" title="签名设置" style="child-align: auto;padding:50px 10px 10px 10px;display:none">
+    <div class="page-header">
+        <div class="fileinput fileinput-new" data-provides="fileinput" id="exampleInputUpload">
+            <div id="cc">
+                <div class="fileinput-new thumbnail" style="width: 260px;height: 180px;">
+                    <img id='picImg' style="width:260px;height:180px;" src="/assembly/table/images/noimage.png"/>
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail" style="width: 260px; height: 180px;"></div>
+            </div>
+            <div>
+                   <span class="btn btn-primary btn-file">
+                                          <span class="fileinput-new">选择文件</span>
+                                          <span class="fileinput-exists">换一张</span>
+                                          <input type="file" name="pic1" id="picID"
+                                                 accept="image/gif,image/jpeg,image/x-png"/>
+                    </span>
+                <a href="javascript:" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/utils.js"></script>
+<script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+<script src="/plugins/jquery/jquery.json.min.js"></script>
+<script src="/plugins/moment.min.js"></script>
+<script src="/js/easy_common.js"></script>
+<script src="/js/cookieUtil.js"></script>
+<script src="/assembly/layer/layer.js"></script>
+<script src="/js/indexHw.js"></script>
+<script>
+    function autograph() {
+        layer.open({
+            type: 1,
+            title: "签名设置",
+            fix: false,
+            shadeClose: true,
+            area: ['600px', '400px'],//width,height
+            content: $('#autograph'),
+            btn: ['确定', '关闭'],
+            success: function (layero, index) {
+                ajaxPostInvoke('/screenshot/findOne',getUserInfo().autograph,function(data){
+                    $("#picImg").attr("src",data);
+
+                });
+            },
+            yes: function (index, layero) {
+                html2canvas(document.getElementById('cc'), {
+                    allowTaint: true,
+                    taintTest: false,
+                    onrendered: function (canvas) {
+                        let img = canvas.toDataURL();
+                        let obj = {};
+                        obj.autographImg = img;
+                        ajaxPostInvoke('/sys/user/autograph', obj, function () {
+                            layer.alert("签名修改成功", {
+                                icon: 1
+                            });
+                            layer.close(index);
+                        });
+                    }
+                });
+            },
+            btn2: function () {
+                layer.closeAll();
+            },
+            end: function () {
+
+            }
+        });
+    }
+
+    function logOut(url) {
+        ajaxPostInvoke(url, {}, function (res) {
+            localStorage.removeItem("token");
+            window.location.href = "/login.html";
+        })
+    }
+
+    function savePwd() {
+        layer.open({
+            type: 1,
+            title: "修改密码",
+            fix: false,
+            shadeClose: true,
+            area: ['400px', '300px'],//width,height
+            content: $('#savePwd'),
+            btn: ['确定', '关闭'],
+            yes: function (index, layero) {
+                let param = $("#savePwdForm").getData();
+
+                if (param.password == '' || param.newPassword == '' || param.rePwd == '') {
+                    layer.alert("请填写完整！", {
+                        icon: 2
+                    });
+                } else {
+                    if (param.newPassword != param.rePwd) {
+                        layer.alert("输入的两次密码不同，请重试", {
+                            icon: 2
+                        });
+                    } else {
+                        ajaxPostInvoke("/sys/user/password", param, function (res) {
+                            layer.alert("密码修改成功", {
+                                icon: 1
+                            });
+                            layer.close(index);
+                        })
+                    }
+                }
+            },
+            btn2: function () {
+                layer.closeAll();
+            },
+            end: function () {
+                $('#reset1,#reset2,#reset3').val('');
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

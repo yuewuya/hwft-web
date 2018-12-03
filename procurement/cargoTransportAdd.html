@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<body>
+<div class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <div title="运输报价单管理" style="padding:10px;">
+        <form id="form">
+            <input id="id" name="id" type="hidden" />
+            <p>
+                <span>发送对象: </span>&nbsp;
+                <input id="switch" class="easyui-switchbutton" data-options="onText:'  部 门  ',offText:'  用 户  ', width:70">
+                <input id="names" class="scinput" name="names" readonly onclick="getNames()" style="width: 475px">
+            </p>
+            <table width="95%" border="0" cellpadding="0" cellspacing="0"  align="center" style="margin-top:8px" class="tablelist">
+                <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                    <td width="100%" align="center" >
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <Td width="12%" >运输编号：</Td>
+                                <td width="39%" ><input name="transportNumber" type="text" class="dfinput" id="transportNumber"  style="width:200px" class="easyui-validatebox textbox" required="true"/></td>
+                                <Td width="10%" ></Td>
+                                <td width="39%" algin="right">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >甲方（托运人）：</Td>
+                                <td width="39%" ><input name="shipper" type="text" class="dfinput" id="shipper"  style="width:400px" value=""/></td>
+                                <Td width="10%" ></Td>
+                                <td width="39%" ></td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >乙方（托运人）：</Td>
+                                <td width="39%" ><input name="carrier" type="text" class="dfinput" id="carrier"  style="width:400px" value=""/></td>
+                                <Td width="10%" ></Td>
+                                <td width="39%" ></td>
+                            </tr>
+                            <tr>
+                                <Td  colspan="4">  经甲乙双方协商，就货物运输事宜达成如下协议：</Td>
+                            </tr>
+                            <tr>
+                                <Td  colspan="4">一、货物内容及具体要求</Td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >1.货物名称：</Td>
+                                <td width="39%" ><input name="cargoName" type="text" class="dfinput" id="cargoName"  style="width:400px" value=""/></td>
+                                <Td width="10%" ></Td>
+                                <td width="39%" ></td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >2.货运方式：</Td>
+                                <td width="39%" >
+                                    <select name="deliveryMethod" class="easyui-combobox" id="deliveryMethod" style="height:35px; width:150px;">
+                                        <option value="">--请选择--</option>
+                                        <option value="船" >船</option>
+                                        <option value="汽车" >汽车</option>
+                                        <option value="火车" >火车</option>
+                                        <option value="空运" >空运</option>
+                                    </select>
+                                </td>
+                                <Td width="10%" >承运方式： </Td>
+                                <td width="39%" >
+                                    <select name="modeCarriage" class="easyui-combobox" id="modeCarriage" style="height:35px; width:150px;">
+                                        <option value="">--请选择--</option>
+                                        <option value="专运" >专运</option>
+                                        <option value="配载" >配载</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >3.货物数量：</Td>
+                                <td colspan="3" >
+                                    共计<span >
+                  <input name="goodsPieces" type="text" class="dfinput" id="goodsPieces"  style="width:200px" value=""/>
+                  </span>枚；共重<span >
+                  <input name="goodsTon" type="text" class="dfinput" id="goodsTon"  style="width:200px" value=""/>
+                  </span>吨
+                                    （规格数量等详见送货清单）。                </td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >4.货运地址：</Td>
+                                <td colspan="3" >目的地1：
+                                    <input name="cargoAddressOne" type="text" class="dfinput" id="cargoAddressOne"  style="width:500px" value=""/></td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" rowspan="2" align="left" >（起始甲<br />
+                                    方厂区内）</Td>
+                                <td colspan="3" >目的地2：
+                                    <input name="cargoAddressTow" type="text" class="dfinput" id="cargoAddressTow"  style="width:500px" value=""/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" >目的地3：
+                                    <input name="cargoAddressThree" type="text" class="dfinput" id="cargoAddressThree"  style="width:500px" value=""/></td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >5.货运时间：</Td>
+                                <td colspan="3" >起运时间：
+                                    <input name="startTime" type="text" class="easyui-datebox" value=""/>
+
+                            </tr>
+
+                            <tr>
+                                <Td width="12%" rowspan="3" align="left" valign="top">运抵时间：</Td>
+                                <td colspan="3" >目的地1：
+                                    <input name="arrivedTimeOne" type="text"  id="arrivedTimeOne" style="width:60%" class="easyui-datebox"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" >目的地2：
+                                    <input name="arrivedTimeTow" type="text" class="easyui-datebox" value="" id="arrivedTimeTow" style="width:60%" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" >目的地3：
+                                    <input name="arrivedTimeThree" type="text" class="easyui-datebox" value="" id="arrivedTimeThree" style="width:60%" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <Td  colspan="4"><p>二、货运事项及违约责任<Br />
+                                    1、货运规定事项            	    <Br />
+                                    乙方必须保障甲方货物在运输途中完好无损，夜露或雨天时，必须做到货物不被雨露浸渍。            	   <Br />
+                                    乙方应保证按时将货物送到指定地点，因车辆及驾驶员原因（比如过账、事故、违章等）造成的时间拖延或经济损失均由乙方自行担责。     <Br />
+                                    起点吊装，卸货点吊卸不在承运范围，若乙方自主参与装卸的，安全责任自负，若收货人卸货有困难，必须书面委托乙方并提供可靠的安全责任保障后方可进行。 <Br />
+                                    2、违约责任    <Br />
+                                    因乙方未能按照承载规定操作，致使货物遭损，或引起运抵方投诉的，乙方将承担一切直接的和连带的责任。   <Br />
+                                    除不可抗拒原因外，因未按预定时间到达卸货地点而引起客户提出的赔偿也由乙方负担。</p></Td>
+                            </tr>
+                            <tr>
+                                <Td  colspan="4">三、运输的价格及结算方式</Td>
+                            </tr>
+                            <tr>
+                                <Td  colspan="4">1.运输价格总计：<span >
+            	  <input name="priceTotal" type="text" class="dfinput" id="priceTotal"  style="width:200px" value=""/>
+            	</span>元，RMB大写         <span >
+            	<input name="priceCapital" type="text" class="dfinput" id="priceCapital"  style="width:200px" value=""/>
+            	</span>整。（此价格为含税增值税票价）</Td>
+                            </tr>
+                            <tr>
+                                <Td  colspan="4">2.结算方法：货物运抵并卸货验收后，乙方应向运抵方索要签印，凭送货单回单并带运输发票与甲方结算运费。</Td>
+                            </tr>
+                            <tr>
+                                <Td  colspan="4">四、其他<Br />
+                                    1. 未尽事宜，友好协商解决。<Br />
+                                    2. 本协议经双方签字盖章生效，传真件具有同样效力。</Td>
+                            </tr>
+                            <tr>
+                                <Td colspan="4" >&nbsp;</Td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" ><p >甲方：</p></Td>
+                                <td width="39%" >
+                                    <input name="partyJf" type="text" class="dfinput" id="partyJf"  style="width:300px" value=""/></td>
+                                <Td width="10%" >乙方：</Td>
+                                <td width="39%" ><span >
+                  <input name="partyYf" type="text" class="dfinput" id="partyYf"  style="width:300px" value=""/>
+                </span></td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >联系电话：</Td>
+                                <td width="39%" ><input name="telephoneJf" type="text" class="dfinput" id="telephoneJf"  style="width:300px" value=""/></td>
+                                <Td width="10%" >联系电话：</Td>
+                                <td width="39%" ><span >
+                  <input name="telephoneYf" type="text" class="dfinput" id="telephoneYf"  style="width:300px" value=""/>
+                </span></td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >联系地址：</Td>
+                                <td width="39%" ><input name="contactAddressJf" type="text" class="dfinput" id="contactAddressJf"  style="width:300px" value=""/></td>
+                                <Td width="10%" ><span >联系地址：</span></Td>
+                                <td width="39%" ><span >
+                  <input name="contactAddressYf" type="text" class="dfinput" id="contactAddressYf"  style="width:300px" value=""/>
+                </span></td>
+                            </tr>
+                            <tr>
+                                <Td width="12%" >代表人： </Td>
+                                <td width="39%" ><input name="representativePersonJf" type="text" class="dfinput" id="representativePersonJf"  style="width:300px" value=""/></td>
+                                <Td width="10%" ><span >代表人： </span></Td>
+                                <td width="39%" ><span >
+                  <input name="representativePersonYf" type="text" class="dfinput" id="representativePersonYf"  style="width:300px" value=""/>
+                </span></td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</div>
+<script src="/assembly/layer/layer.js"></script>
+<script>
+    var departIds = '';
+    var userIds = '';
+    function getNames() {
+        let status =  $("#switch").switchbutton("options").checked;
+        if (status){
+            selectRowsOtherPage("选择发送部门", "/sys/department.html", {}, function (res) {
+                let ids = [];
+                for(let i in res){
+                    ids.push(res[i].depName)
+                }
+                departIds = ids.join(",");
+                $("#names").val(departIds);
+            })
+        }else {
+            selectRowsOtherPage("选择发送人员", "/sys/sysUser.html", {}, function (res) {
+                let ids = [];
+                for(let i in res){
+                    ids.push(res[i].username)
+                }
+                userIds = ids.join(",");
+                $("#names").val(userIds);
+            })
+        }
+    }
+
+    $('#switch').switchbutton({
+        onChange: function(checked){
+            checked ? $("#names").val(departIds) : $("#names").val(userIds);
+        }
+    })
+    function getFormData() {
+        if(!$("#form").form('validate')){
+            layer.alert("请完善表单数据！",{icon: 2});
+            return null;
+        }else{
+            let data = $('#form').getData();
+            if(!data.names || data.names == ''){
+                layer.alert("发送对象不能为空！",{icon: 2});
+                return null;
+            }else{
+                let flag = $("#switch").switchbutton("options").checked;
+                if(flag){
+                    data.departIds = data.names;
+                    data.userIds = '';
+                }else {
+                    data.userIds = data.names;
+                    data.departIds = '';
+                }
+                return data;
+            }
+        }
+    }
+
+    function initData(data) {
+        $('#form').form('load', data);
+        if(data.departIds != null && data.departIds != ''){
+            $('#switch').switchbutton('check');
+            $("#names").val(data.departIds);
+            departIds = data.departIds;
+        }else {
+            userIds = data.userIds;
+            $("#names").val(data.userIds)
+        }
+    }
+</script>
+</body>
+</html>
+
+

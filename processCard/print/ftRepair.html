@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>焊缝返修打印</title>
+    <script src="/js/utils.js"></script>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/js/easy_common.js"></script>
+
+    <style type="text/css">
+        *{font-size:9pt;border:0;margin:0;padding:0;}
+        body{
+            font-family: '微软雅黑';
+            margin: 0 auto;
+            min-width: 980px;
+
+        }
+        .font-title-back {
+            font-size: 20px;
+            line-height: 40px;
+            font-weight: bold;
+            border-bottom-width: 2px;
+            border-bottom-style: double;
+            border-bottom-color: #000;
+        }
+
+        .line3 {
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-right-color: #000;
+            border-bottom-color: #000;
+            border-left-color: #000;
+        }
+        .line2 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #000;
+            font-size: 14px;
+        }
+        .linleft {
+            border-top-width: 1px;
+            border-left-width: 1px;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-top-color: #000;
+            border-left-color: #000;
+        }
+        .forminfo{padding-left:23px;}
+    </style>
+
+</head>
+<body>
+<div id="print1" class="formbody">
+    <div style="height:20px;" align="right">表H-04</div>
+    <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" class="linleft" style="margin-top:8px; margin-left: 20px;" gcolor="#000">
+        <tr>
+            <Td height="25"  valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="27%" rowspan="2" align="center" class="line2" style=" font-size:20px; line-height:20px; font-weight:bold">宜兴华威封头有限公司</td>
+                    <td width="47%" rowspan="2" align="center" class="line2" style=" font-size:20px; line-height:20px; font-weight:bold">封头返工通知及返工工艺流转卡</td>
+                    <td width="12%" height="20" align="center" class="line2">流转卡编号</td>
+                    <td width="14%" class="line2" align="center" field="numbers"></td>
+                </tr>
+                <tr>
+                    <td height="20" align="center" class="line2">下达日期</td>
+                    <td class="line2" align="center" field="arrivalDate"></td>
+                </tr>
+            </table></Td>
+        </tr>
+        <tr>
+            <Td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="15%" height="20" align="center" class="line2">指令号</td>
+                    <td width="25%" class="line2" align="center" field="code"></td>
+                    <td width="14%" align="center" class="line2"> 封头规格</td>
+                    <td width="20%" class="line2" align="center" field="ftSpecification"></td>
+                    <td width="14%" rowspan="2" align="center" valign="middle" class="line2">签发人</td>
+                    <td width="14%" rowspan="2" class="line2" align="center" field="signMan"></td>
+                </tr>
+                <tr>
+                    <td height="20" align="center" class="line2">单件号</td>
+                    <td class="line2" align="center" field="singleNum"></td>
+                    <td align="center" class="line2"> 材 质</td>
+                    <td class="line2" align="center" field="material"></td>
+                </tr>
+            </table></Td>
+        </tr>
+        <tr>
+            <Td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="7%" rowspan="8" align="center" class="line2" style=" font-weight:bold"><p >焊<Br />缝<Br />返<Br />工<Br />部<Br />位<Br />及<Br />性<Br />质</p></td>
+                    <td width="25%" height="20" align="center" class="line2">返修部位</td>
+                    <td width="22%" align="center" class="line2">缺陷类型</td>
+                    <td width="25%" align="center" class="line2">缺陷部位及长度</td>
+                    <td width="21%" align="center" class="line2">示意图</td>
+                </tr>
+
+                <tr>
+                    <td height="20" class="line2" align="center" field="partList_part"></td>
+                    <td class="line2" align="center" field="partList_type"></td>
+                    <td class="line2" align="center" field="partList_remark"></td>
+                    <td rowspan="7" align="center" class="line2"><span><img src="/images/222.jpg" alt="" width="98%"/></span></td>
+                </tr>
+
+                <tr>
+                    <td height="20" class="line2" align="center" field="partList_part"></td>
+                    <td class="line2" align="center" field="partList_type"></td>
+                    <td class="line2" align="center" field="partList_remark"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2" align="center" field="partList_part"></td>
+                    <td class="line2" align="center" field="partList_type"></td>
+                    <td class="line2" align="center" field="partList_remark"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2" align="center" field="partList_part"></td>
+                    <td class="line2" align="center" field="partList_type"></td>
+                    <td class="line2" align="center" field="partList_remark"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2" align="center" field="partList_part"></td>
+                    <td class="line2" align="center" field="partList_type"></td>
+                    <td class="line2" align="center" field="partList_remark"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2" align="center" field="partList_part"></td>
+                    <td class="line2" align="center" field="partList_type"></td>
+                    <td class="line2" align="center" field="partList_remark"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2" align="center" field="partList_part"></td>
+                    <td class="line2" align="center" field="partList_type"></td>
+                    <td class="line2" align="center" field="partList_remark"></td>
+                </tr>
+            </table></Td>
+        </tr>
+        <tr>
+            <Td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="7%" height="90" align="center" class="line2" style=" font-weight:bold"><p>原因</p>
+                        <p>分析</p></td>
+                    <td width="93%" class="line2" align="center" field="repairReason"></td>
+                </tr>
+            </table></Td>
+        </tr>
+        <tr>
+            <Td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="7%" align="center" class="line2" style=" font-weight:bold">封<br />
+                        头<br />
+                        返<br />
+                        工<br />
+                        工<br />
+                        艺</td>
+                    <td width="93%" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td height="20" colspan="9" align="center" class="line2">返 工 工 艺 参 数</td>
+                        </tr>
+                        <tr>
+                            <td width="11%" height="20" align="center" class="line2">焊接方法</td>
+                            <td width="12%" align="center" class="line2">焊接材料</td>
+                            <td width="12%" align="center" class="line2">规格</td>
+                            <td width="12%" align="center" class="line2">预热温度℃</td>
+                            <td width="12%" align="center" class="line2">层间温度℃</td>
+                            <td width="12%" align="center" class="line2">焊接电流</td>
+                            <td width="10%" align="center" class="line2">焊接电压</td>
+                            <td width="11%" align="center" class="line2">焊工资格</td>
+                            <td width="8%" align="center" class="line2">PQR No.</td>
+                        </tr>
+                        <tr>
+                            <td height="20" class="line2" align="center" field="hjMethod"></td>
+                            <td class="line2" align="center" field="hjMaterial"></td>
+                            <td class="line2" align="center" field="hjSpecification"></td>
+                            <td class="line2" align="center" field="yrTemperature"></td>
+                            <td class="line2" align="center" field="cjTemperature"></td>
+                            <td class="line2" align="center" field="hjI"></td>
+                            <td class="line2" align="center" field="hjU"></td>
+                            <td class="line2" align="center" field="hgAbility"></td>
+                            <td class="line2" align="center" field="pqrNo"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="line2" style="line-height:15px; padding:5px;">
+                                <p>
+                                    &nbsp;&nbsp;<input type="checkbox"  align="center" field="utTest"> 采用UT确定缺陷部位。UT定位后由RT班标出缺陷部位和深度（标定侧须为缺陷深度≤1/2T侧）。<br />
+                                    &nbsp;&nbsp;1．<input type="checkbox"  align="center" field="thClear">用碳弧气刨清除缺陷 <input type="checkbox"  align="center" field="slClear"/>用砂轮打磨清除缺陷。<br />
+                                    &nbsp;&nbsp;2．缺陷清除后PT确认。<br />
+                                    &nbsp;&nbsp;3．砂轮打磨并修整成适合于焊接的坡口，见右图。<br />
+                                    &nbsp;&nbsp;4．焊接过程中不得有粘弧、气孔等缺陷。<br />
+                                    &nbsp;&nbsp;5．层间清理要彻底，不得有熔渣等缺陷存在。<br />
+                                    &nbsp;&nbsp;6．焊接完成后直边、r部及内面去除焊缝余高，并清理焊接及两侧飞溅、药皮等杂物。 <br>
+                                    &nbsp;&nbsp;7． <span  align="center" align="center" field="gyOther"></span></p></td>
+                            <td colspan="3" class="line2" style="line-height:15px; padding:5px;"><img src="/images/333.jpg" alt="" /></td>
+                        </tr>
+                    </table></td>
+                </tr>
+            </table></Td>
+        </tr>
+        <tr>
+            <Td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="7%" rowspan="2" align="center" class="line2" style=" font-weight:bold">焊接<br />
+                        材料</td>
+                    <td width="20%" height="20" align="center" class="line2">焊 材 牌 号</td>
+                    <td width="19%" align="center" class="line2">规 格</td>
+                    <td width="21%" align="center" class="line2">入 库 号</td>
+                    <td width="15%" align="center" class="line2">库管员签字</td>
+                    <td width="18%" align="center" class="line2">领用人签字</td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2" align="center" field="hcNumber"></td>
+                    <td class="line2" align="center" align="center" field="hcSpecification"><p >&#934;<span field="hcSpecification"></span></p></td>
+                    <td class="line2" align="center" field="hcInNumber"></td>
+                    <td class="line2" align="center" field="wareHouseSign"></td>
+                    <td class="line2" align="center" field="userSign"></td>
+                </tr>
+            </table></Td>
+        </tr>
+        <tr>
+            <Td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" class="line">
+                <tr>
+                    <td width="7%" rowspan="8" align="center" class="line2" style=" font-weight:bold"><p >焊<Br />缝<Br />返<Br />
+                        修<Br />
+                        记<Br />
+                        录</p></td>
+                    <td width="8%" height="20" align="center" class="line2">返修部位</td>
+                    <td width="13%" align="center" class="line2">返 修 长 度</td>
+                    <td width="16%" align="center" class="line2">予热温度 （℃)</td>
+                    <td width="17%" align="center" class="line2">焊接电流(A)</td>
+                    <td width="13%" align="center" class="line2">焊接电压(V)</td>
+                    <td width="14%" align="center" class="line2">返修人</td>
+                    <td width="12%" align="center" class="line2">检验员</td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2"  align="center" align="center" field="recordList_part"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_length"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_yrTemperature"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjI"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjU"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_repairMan"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_testMan"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2"  align="center" align="center" field="recordList_part"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_length"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_yrTemperature"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjI"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjU"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_repairMan"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_testMan"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2"  align="center" align="center" field="recordList_part"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_length"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_yrTemperature"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjI"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjU"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_repairMan"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_testMan"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2"  align="center" align="center" field="recordList_part"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_length"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_yrTemperature"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjI"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjU"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_repairMan"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_testMan"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2"  align="center" align="center" field="recordList_part"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_length"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_yrTemperature"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjI"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjU"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_repairMan"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_testMan"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2"  align="center" align="center" field="recordList_part"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_length"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_yrTemperature"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjI"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjU"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_repairMan"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_testMan"></td>
+                </tr>
+                <tr>
+                    <td height="20" class="line2"  align="center" align="center" field="recordList_part"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_length"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_yrTemperature"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjI"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_hjU"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_repairMan"></td>
+                    <td class="line2"  align="center" align="center" field="recordList_testMan"></td>
+                </tr>
+            </table></Td>
+        </tr>
+        <tr>
+            <Td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="12%" align="center" class="line2" height="25">编制</td>
+                    <td width="20%" class="line2"  align="center" align="center" field="createName"></td>
+                    <td width="13%" align="center" class="line2">审核</td>
+                    <td width="21%" class="line2"  align="center" align="center" field="auditName"></td>
+                    <td width="13%" align="center" class="line2">批准</td>
+                    <td width="21%" class="line2"  align="center" align="center" field="approveName"></td>
+                </tr>
+            </table></Td>
+        </tr>
+
+
+
+    </table>
+    <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center" style="margin-top:10px;">
+        <tr>
+            <td height="30" align="left" style="font-size:12px; line-height:15px"><p ><strong>《焊缝返工通知及焊缝返工工艺流转卡》流转程序：</strong><br />
+                一、二次返修：探伤班开出《焊缝返工通知及焊缝返工工艺流转卡》&#8594;焊接技术员编制&#8594;焊接责任工程师审核&#8594;返修&#8594;RT检查&#8594;随工艺流转卡入库。 <br />
+                三次返修    ：探伤班开出《焊缝返工通知及焊缝返工工艺流转卡》&#8594;焊接责任工程师编制&#8594;质保工程师审批&#8594;返修&#8594;RT检查&#8594;随工艺流转卡入库。 </p></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+
+<script>
+
+    function initData(data) {
+        ajaxPostInvoke("/processCard/repair/findPrint", {id: data.id}, function (res) {
+            res.arrivalDate = res.arrivalDate.split(" ")[0];
+            setData2Text(res)
+        })
+    }
+</script>
+
+</html>

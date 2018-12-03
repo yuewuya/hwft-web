@@ -1,0 +1,29 @@
+#searchForm p{
+    display: inline-block;
+    margin: 5px;
+}
+.ccbtn{
+    width: 65px;
+    height: 28px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    font-size: initial;
+    border-radius: 5px;
+    line-height: 28px;
+    margin-right: 10px;
+}
+.ccSearchBtn{
+    background-color: #1d98f1c7;
+}
+.ccSearchBtn:hover{
+    cursor: pointer;
+    background-color: #037dd6c7;
+}
+.ccClearBtn{
+    background-color: #a5a5a5c7;;
+}
+.ccClearBtn:hover{
+    cursor: pointer;
+    background-color: #928c8ceb;
+}

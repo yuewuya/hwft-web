@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+    <script src="/js/easy_common.js"></script>
+</head>
+<body>
+<div id="tabs" class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <div id="tabs1" title="数据添加" style="padding:10px;">
+        <form id="form">
+            <!-- 质保书资料 -->
+            <input type="hidden" name="id">
+            <input type="hidden" name="qualityBookDataId">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="ftgyk_table3">
+
+                <tr>
+                    <td>入库号</td>
+                    <td><input class="easyui-validatebox textbox" required="true" name="storage" type="text"
+                               style="height:35px; width:160px;"/></td>
+                    <td>质量</td>
+                    <td>
+                        <select id="qualityWeight" class="easyui-combobox" name="qualityWeight"
+                                style="width:160px;height:35px">
+                            <option value="合格">合格</option>
+                            <option value="不合格">不合格</option>
+                        </select>
+                    </td>
+
+                    <td>外圆周长</td>
+                    <td><input class="easyui-validatebox textbox" required="true" name="circumference" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td></td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>d1</td>
+                    <td><input class="easyui-validatebox textbox" required="true" name="d1" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td>d2</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="d2" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+
+                    <td>d3</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="d3" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td>d4</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="d4" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>平均</td>
+                    <td><input class="easyui-validatebox textbox" required="true" name="average" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td>椭圆</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="ellipse" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+
+                    <td>T1Mi</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="tMin" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td>t1Ma</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="tMax" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>TiMi</td>
+                    <td><input class="easyui-validatebox textbox" required="true" name="timi" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td>总高</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="allHeight" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+
+                    <td>形状A</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="shapeA" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td>形状B</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="shapeB" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>直边斜</td>
+                    <td><input class="easyui-validatebox textbox" required="true" name="straightEdge" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td>焊缝</td>
+                    <td>
+                        <input class="easyui-validatebox textbox" required="true" name="weldLine" type="text"
+                               style="height:35px; width:160px;"/>
+                    </td>
+                    <td></td>
+                    <td>
+                    </td>
+                    <td></td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function init(data) {
+
+    }
+
+    function getFormData() {
+        return $("#form").getData();
+    }
+</script>

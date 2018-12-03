@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <style type="text/css">
+        *{font-size:9pt;border:0;margin:0;padding:0;}
+        body{
+            font-family: '微软雅黑';
+            margin: 0 auto;
+            min-width: 980px;
+
+        }
+        .font-title-back {
+            font-size: 20px;
+            line-height: 40px;
+            font-weight: bold;
+            border-bottom-width: 2px;
+            border-bottom-style: double;
+            border-bottom-color: #000;
+        }
+
+        .line3 {
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-right-color: #000;
+            border-bottom-color: #000;
+            border-left-color: #000;
+        }
+        .line2 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #000;
+            font-size: 14px;
+        }
+        .linleft {
+            border-top-width: 1px;
+            border-left-width: 1px;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-top-color: #000;
+            border-left-color: #000;
+        }
+        .formbody{padding:10px 18px;}
+        .forminfo{padding-left:23px;}
+        .toolbar{float:left;}
+        .toolbar li{background:url(/images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-right:5px;border-radius: 3px; cursor:pointer;}
+        .toolbar li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
+    </style>
+</head>
+<body>
+<div class="formbody" style="padding-bottom:5px; " id="print1">
+    <ul class="forminfo">
+        <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+                <td height="40" align="center"><span class="font-title-back">运输报价单</span></td>
+            </tr>
+        </table>
+        <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" class="linleft" style="margin-top:8px;" gcolor="#000">
+            <tr align='center'  >
+                <td width="12%" height="35" align="center" class="line2" >运输地点</td>
+                <td colspan="2" align="center" class="line2" field="transportSite"></td>
+                <td width="21%" align="center" class="line2" >运输吨位</td>
+                <td colspan="2" align="center" valign="middle" class="line2" field="transportTonnage"></td>
+
+            </tr>
+            <tr align='center'  >
+                <td height="35" align="center" class="line2" >运输时间</td>
+                <td colspan="6" align="center" class="line2" field="transportTime"></td>
+            </tr>
+            <tr align='center'  >
+                <td height="80" align="center" class="line2" >规格尺寸</td>
+                <td colspan="6" align="center" valign="middle" class="line2" field="maxSize"></td>
+
+            </tr>
+            <tr align='center'  >
+                <td height="35" align="center" class="line2" >含税报价</td>
+                <td height="80" colspan="5" align="center" class="line2" field="taxQuote"></td>
+            </tr>
+
+        </table>
+    </ul>
+</div>
+</body>
+<script>
+
+    function initData(data) {
+        setData2Text(data)
+    }
+</script>
+</html>

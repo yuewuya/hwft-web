@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="physicochemicalPrint.css"/>
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+</head>
+<body>
+<div style="padding:0px;height:100%;" id="print1">
+    <table width="100%" cellpadding="0" cellspacing="0" class="table_yl11">
+        <tr>
+            <td width="49" rowspan="2" align="center" style=" border:0"><img src="/images/huawei_logo.jpg" width="40"
+                                                                             height="32"></td>
+            <td width="697" align="left" style=" border-bottom:0; text-align:left; padding:0">
+                <strong>宜兴华威封头有限公司</strong></td>
+            <td width="253" rowspan="2" align="center" valign="top" style=" border:0"><span
+                    style="font-size:20px; font-weight:600">理化试验报告</span><br/>
+                <span style="font-size:14px">Heat Report</span></td>
+            <td width="177" rowspan="2" align="left" valign="middle" style=" border:0">（<span id="type"></span>）</td>
+        </tr>
+        <tr>
+            <td align="left" style=" border-bottom:0; text-align:left; padding:0"><strong>YIXING HUAWEI HEAD PLATE CO.,
+                LTD</strong></td>
+        </tr>
+    </table>
+
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" id="head">
+    </table>
+
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px" id="tb1">
+    </table>
+
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px" id="tb2">
+    </table>
+
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px" id="tb3">
+    </table>
+
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px" id="tb4">
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px">
+        <tr>
+            <td width="100%"><span>金相试验：<strong>M</strong>etallographic test</span>
+                &nbsp;&nbsp;<span id="metallography"></span></td>
+        </tr>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px">
+        <tr>
+            <td width="100%"><span>硬度试验：<strong>Hardness test</strong></span>&nbsp;&nbsp;<span id="hardness"></span></td>
+        </tr>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px">
+        <tr>
+            <td width="100%"><span>晶间腐蚀试验：Huey test</span>
+                &nbsp;&nbsp;<span id="crystaRot"></span></td>
+        </tr>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px">
+        <tr>
+            <td width="100%" height="40"><span>执行标准 Standard</span></td>
+        </tr>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" class="table_yl11" style="border-top:0px">
+
+        <tr>
+            <td width="12%" align="center"><p>试样员</p>
+                <p>Tested By</p></td>
+            <td width="12%" align="center"><p>&nbsp;</p></td>
+            <td width="12%" align="center"><p>日期</p>
+                <p>Date</p></td>
+            <td width="13%" align="center"><p>&nbsp;</p></td>
+            <td width="13%" align="center"><p>审核</p>
+                <p>Reviewde By</p></td>
+            <td width="12%" align="center"><p>&nbsp;</p></td>
+            <td width="13%" align="center"><p>日期</p>
+                <p>Date</p></td>
+            <td width="13%" align="center">&nbsp;</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+<script>
+    function initData(data) {
+        ajaxPostInvoke('/quality/physicochemical/queryOne', {id: data.id}, function (obj) {
+            createHead(obj);
+            for (let key in obj) {
+                $("#" + key).text(obj[key]);
+            }
+            createTbl1(obj);
+            createTbl2(obj);
+            createTbl3(obj);
+            createComposition(obj);
+        })
+    }
+
+    function createTbl1(obj) {
+        //焊接试板
+        let str = '';
+        let arr = obj.tb1;
+        if (obj.type == '焊接试板') {
+            str = '<tr><td colspan="5">拉伸试验 <strong>Tension Test</strong></td></tr><tr><td width="20%" align="center"><p>试样号</p>' +
+                '<p>Specimen No</p></td>' +
+                '<td width="20%" align="center"><p>截面积</p>' +
+                '<p>Cross sectional area</p></td>' +
+                '<td width="20%" align="center"><p>断裂载荷(KN)</p>' +
+                '<p>Breaking load</p></td>' +
+                '<td width="20%" align="center"><p>抗拉强度Rm(MPa)</p>' +
+                '<p>Tensile Strength</p></td>' +
+                '<td width="20%" align="center"><p>断裂位置</p>' +
+                '<p>Fracture location</p></td></tr>';
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];
+                str = str + '<tr><td align="center">' + item.sampleNo + '</td>' +
+                    '<td align="center">' + item.sectionalArea + '</td>' +
+                    '<td align="center">' + item.fractureLoad + '</td>' +
+                    '<td align="center">' + item.tensileStrength + '</td>' +
+                    '<td align="center">' + item.fracturePosition + '</td></tr>';
+
+            }
+        } else if (obj.type == '材料复验') {
+            str = '<tr><td colspan="8">拉伸试验 <strong>Tension Test</strong></td></tr>' +
+                '<tr><td width="12%" align="center"><p>试样号</p>' +
+                '<p>Specimen No</p></td>' +
+                '<td width="12%" align="center"><p>Rp0.2</p>' +
+                '<p>(Mpa)</p></td>' +
+                '<td width="12%" align="center"><p>RP1.0</p>' +
+                '<p>(Mpa)</p></td>' +
+                '<td width="12%" align="center"><p>屈服强度</p>' +
+                '<p>Rm(MPa)</p></td>' +
+                '<td width="12%" align="center"><p>抗拉强度</p>' +
+                '<p>Rm(MPa)</p><p>Tensile Strength</p></td>' +
+                '<td width="12%" align="center"><p>伸长率A(%)</p>' +
+                '<p>Elongation</p></td>' +
+                '<td width="12%" align="center"><p>断裂位置</p>' +
+                '<p>Break Location</p></td>' +
+                '<td width="12%" align="center"><p>断面性质</p></td></tr>';
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];
+                str = str + '<tr><td align="center">' + item.sampleNo + '</td>' +
+                    '<td align="center">' + item.rp1 + '</td>' +
+                    '<td align="center">' + item.rp2 + '</td>' +
+                    '<td align="center">' + item.rel + '</td>' +
+                    '<td align="center">' + item.tensileStrength + '</td>' +
+                    '<td align="center">' + item.extensionLength + '</td>' +
+                    '<td align="center">' + item.fracturePosition + '</td>' +
+                    '<td align="center">' + item.fractureProperties + '</td></tr>';
+
+            }
+
+        } else if (obj.type == '应变强化') {
+            str = '<tr><td colspan="6">拉伸试验 <strong>Tension Test</strong></td></tr>' +
+                '<tr><td width="16%" align="center"><p>试样号</p><p>Specimen No</p></td>' +
+                '<td width="16%" align="center"><p>厚*宽</p></td>' +
+                '<td width="16%" align="center"><p>截面积</p></td>' +
+                '<td width="16%" align="center"><p>断裂载荷(KN)</p></td>' +
+                '<td width="16%" align="center"><p>抗拉强度</p><p>Rm(MPa)</p><p>Tensile Strength</p></td>' +
+                '<td width="16%" align="center"><p>断裂位置</p><p>Break Location</p></td></tr>';
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];
+                str = str + '<tr><td align="center">' + item.sampleNo + '</td>' +
+                    '<td align="center">' + item.hw + '</td>' +
+                    '<td align="center">' + item.sectionalArea + '</td>' +
+                    '<td align="center">' + item.fractureLoad + '</td>' +
+                    '<td align="center">' + item.tensileStrength + '</td>' +
+                    '<td align="center">' + item.fracturePosition + '</td></tr>';
+            }
+        } else if (obj.type == '工艺评定') {
+            str = '<tr><td colspan="8">拉伸试验 <strong>Tension Test</strong></td></tr>' +
+                '<tr><td width="12%" align="center"><p>试样号</p>' +
+                '<p>Specimen No</p></td>' +
+                '<td width="12%" align="center"><p>Rp0.2</p>' +
+                '<p>(Mpa)</p></td>' +
+                '<td width="12%" align="center"><p>RP1.0</p>' +
+                '<p>(Mpa)</p></td>' +
+                '<td width="12%" align="center"><p>屈服强度</p>' +
+                '<p>Rm(MPa)</p></td>' +
+                '<td width="12%" align="center"><p>抗拉强度</p>' +
+                '<p>Rm(MPa)</p><p>Tensile Strength</p></td>' +
+                '<td width="12%" align="center"><p>伸长率A(%)</p>' +
+                '<p>Elongation</p></td>' +
+                '<td width="12%" align="center"><p>断裂位置</p>' +
+                '<p>Break Location</p></td>' +
+                '<td width="12%" align="center"><p>断面性质</p></td></tr>';
+            for (let i = 0; i < arr.length; i++) {
+                let item = arr[i];
+                str = str + '<tr><td align="center">' + item.sampleNo + '</td>' +
+                    '<td align="center">' + item.rp1 + '</td>' +
+                    '<td align="center">' + item.rp2 + '</td>' +
+                    '<td align="center">' + item.rel + '</td>' +
+                    '<td align="center">' + item.tensileStrength + '</td>' +
+                    '<td align="center">' + item.extensionLength + '</td>' +
+                    '<td align="center">' + item.fracturePosition + '</td>' +
+                    '<td align="center">' + item.fractureProperties + '</td></tr>';
+
+            }
+        }
+        $("#tb1").html(str);
+    }
+
+    function createTbl2(obj) {
+        let arr = obj.tb2;
+        let str = '<tr><td colspan="5">弯曲试验 <strong>Bend Test</strong></td></tr>' +
+            '<tr><td width="20%" align="center"><p>试样号</p>' +
+            '<p>Specimen No</p></td><td width="20%" align="center"><p>试样类型</p>' +
+            '<p>Specimen Type</p></td>' +
+            '<td width="20%" align="center"><p>弯曲直径/试样厚度</p>' +
+            '<p>Bend Dia./Thickness</p>' +
+            '<p>D=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a</p></td>' +
+            '<td width="20%" align="center"><p>弯曲角度（a°）</p>' +
+            '<p>Angle</p></td>' +
+            '<td width="20%" align="center"><p>试验结果</p>' +
+            '<p>Result</p></td></tr>';
+        for (let i = 0; i < arr.length; i++) {
+            str = str + '<tr><td align="center">' + arr[i].sampleNo + '</td>' +
+                '<td align="center">' + arr[i].sampleType + '</td>' +
+                '<td align="center">' + arr[i].bendingDiameter + '</td>' +
+                '<td align="center">' + arr[i].bendingBending + '</td>' +
+                '<td align="center">' + arr[i].result + '</td></tr>';
+        }
+        $("#tb2").html(str);
+    }
+
+    function createTbl3(obj) {
+        let arr = obj.tb3;
+        let str = '<tr><td colspan="7">冲击试验 <strong>Impact Test</strong></td></tr><tr>' +
+            '<td width="14%" align="center"><p>试样号</p>' +
+            '<p>Specimen No</p></td><td width="14%" align="center"><p>试样尺寸</p><p>Specimen Size</p></td>' +
+            '<td width="14%" align="center"><p>缺口形式</p><p>Notch</p></td>' +
+            '<td width="14%" align="center"><p>缺口位置</p><p>The gap position</p></td>' +
+            '<td width="14%" align="center"><p>试验温度（℃）</p><p>Test Temp</p></td>' +
+            '<td width="14%" align="center"><p>冲击功（J）</p><p>Value</p></td>' +
+            '<td width="16%" align="center"><p>侧膨胀值</p><p>Lateral Expansion</p></td>' +
+            '</tr>';
+        for (let i = 0; i < arr.length; i++) {
+            str = str + '<tr>' +
+                '<td align="center">' + arr[i].sampleNo + '</td>' +
+                '<td align="center">' + arr[i].sampleSize + '</td>' +
+                '<td align="center">' + arr[i].gapSituation + '</td>' +
+                '<td align="center">' + arr[i].notchPosition + '</td>' +
+                '<td align="center">' + arr[i].temperature + '</td>' +
+                '<td align="center">' + arr[i].impact + '</td>' +
+                '<td align="center">' + arr[i].expand + '</td></tr>';
+        }
+        $("#tb3").html(str);
+    }
+
+    function createHead(obj) {
+        let str = '';
+        if (obj.type == '焊接试板') {
+            str = '<tr><td width="15%" align="center"><p>指令号</p><p>Job No</p></td>' +
+                '<td width="25%" align="center" id="code"></td>' +
+                '<td width="15%" align="center"><p>材质</p><p>Material</p></td>' +
+                '<td width="20%" align="center" id="material"></td>' +
+                '<td width="25%" align="center"><p>焊接方法</p><p>Method</p></td></tr>' +
+                '<tr><td align="center"><p>试板号</p><p>T.P.No</p></td>' +
+                '<td align="center" id="bordNo"></td>' +
+                '<td align="center"><p>规格</p><p>Size</p></td>' +
+                '<td align="center" id="specifications"></td>' +
+                '<td align="center" id="baseProcessingMethod"></td></tr>';
+        } else {
+            str = '<tr><td width="15%" align="center"><p>报告编号</p><p>Report No</p></td>' +
+                '<td width="15%" align="center"><p>材质</p><p>Material</p></td>' +
+                '<td width="20%" align="center" id="material"></td>' +
+                '<td width="25%" align="center"><p>入库号</p><p>Check No</p></td>' +
+                '<td width="25%" align="center" id="storage"></td>' +
+                '</tr><tr><td align="center" id="no"></td>' +
+                '<td align="center"><p>规格</p><p>Size</p></td>' +
+                '<td align="center" id="specifications"></td>' +
+                '<td align="center"><p>炉批号</p><p>Heat No</p></td>' +
+                '<td align="center" id="furnaceNo"></td></tr>';
+        }
+        $("#head").html(str);
+    }
+
+    function createComposition(obj) {
+        let dictArr = [{typeCode: 'CHEMICAL_TYPE_KIND'}];
+        ajaxDictQuery(dictArr, function (dict) {
+            let str1 = '';
+            let i = Object.keys(dict.CHEMICAL_TYPE_KIND).length;
+            let w = (100 / i).toFixed(0);
+            for (let item in dict.CHEMICAL_TYPE_KIND) {
+                str1 = str1 + '<td width="' + w + '%" align="center"><p>' + item + '</p></td>'
+            }
+            str1 = '<tr>' + str1 + '</tr>';
+            let str = '<tr><td height="150" colspan="' + i + '" valign="bottom">化学成分 <strong>Chemical Analysis</strong></td></tr>';
+            let item = JSON.parse(obj.chemicalComposition);
+            str = str + str1 + '<tr>';
+            for (let item in dict.CHEMICAL_TYPE_KIND) {
+                str = str + '<td align="center" id="' + item + '">/</td>'
+            }
+            str = str + '</tr>';
+            $("#tb4").html(str);
+            for (let ss in item) {
+                $("#" + ss).text(item[ss]);
+            }
+        });
+    }
+
+</script>

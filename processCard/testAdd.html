@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <script src="/js/cookieUtil.js"></script>
+
+    <style type="text/css">
+        .line {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+            width: 100%;
+        }
+        .bk {
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: #DEEFFF;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+            border-left-width: 1px;
+            border-left-style: solid;
+            border-left-color: #DEEFFF;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #DEEFFF;
+        }
+        .bk0 {border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #DEEFFF;
+            border-left-width: 1px;
+            border-left-style: solid;
+            border-left-color: #DEEFFF;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #DEEFFF;
+        }
+
+        .ccHide{
+            position: absolute;
+            background: #cac5c559;
+            width: 100%;
+            height: 100%;
+            z-index: 200000;
+        }
+    </style>
+</head>
+<body>
+<div class="easyui-tabs" data-options="fit:true,plain:true" style="padding:10px;">
+    <div title="理化试验委托单" style="padding:10px;">
+        <form id="saveForm">
+            <ul class="forminfo" style="line-height:40px; font-size:14px;">
+                <div style="position: relative"><div id="hide1"></div>
+                    <input name="id" id="id" type="hidden"/>
+                    <span>发送对象: </span>&nbsp;
+                    <input id="switch" class="easyui-switchbutton" data-options="onText:'  部 门  ',offText:'  用 户  ', width:70">
+                    <input id="names" class="scinput" name="names" readonly onclick="getNames()" style="width: 475px">
+                </div>
+                <div style="position: relative">
+                    <div id="ckHide"></div>
+                    <p id="storageNumber">
+                            <strong style="display: inline-block; width: 98px;">入库号：</strong>
+                            <input id="ck" name="storageNumber" type="text" class="dfinput" style="width:80%"/>
+                    </p>
+                </div>
+                <div style="position: relative">
+                    <div id="lhHide"></div>
+                    <p id="rationalizeNumber">
+                        <strong>系统理化编号：</strong>
+                        <input id="lh" name="rationalizeNumber" type="text" class="dfinput" style="width:80%"/>
+                    </p>
+                </div>
+                <div style="position: relative"><div id="hide2"></div>
+                    <table width="98%" border="0" cellpadding="0" cellspacing="0"  align="center" >
+                        <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                            <td width="12%" align="right"><font color="#FF0000">*</font><strong>委托单位</strong>：</td>
+                            <td width="21%" align="left"><input name="commUnit" type="text" class="easyui-textbox" required="true" style="width:80%"/></td>
+                            <td width="12%" align="right"><strong><font color="#FF0000">*</font>委托人</strong>：</td>
+                            <td width="22%" align="left"><input name="clientPerson" type="text" class="easyui-textbox" required="true" style="width:80%"/></td>
+                            <td width="13%" align="right"><font color="#FF0000">*</font><strong>委托时间</strong>：</td>
+                            <td width="20%" align="left">
+                                <input name="commTime" type="text" class="easyui-datebox" required="true" style="width:80%" />
+                            </td>
+
+                        </tr>
+
+                        <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                            <td width="12%" align="right"><font color="#FF0000">*</font><strong>形状</strong>：</td>
+                            <td width="21%" align="left"><input name="shape" type="text" class="easyui-textbox" required="true" style="width:80%" /></td>
+                            <td width="12%" rowspan="2" align="right"><strong>试样编号</strong>：</td>
+                            <td width="22%" rowspan="2" align="left"><input name="sampleNumber" type="text" class="dfinput" style="width:80%"/></td>
+                            <td width="13%" rowspan="2" align="right"><font color="#FF0000">*</font><strong>产品编号</strong>：</td>
+                            <td width="20%" rowspan="2" align="left"><input name="productNumber" type="text" class="easyui-textbox" required="true" style="width:80%"/></td>
+
+                        </tr>
+                        <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                            <td width="12%" align="right"><strong>规格</strong>：</td>
+                            <td align="left"><input name="specification" type="text" class="dfinput" style="width:80%"/></td>
+                        </tr>
+                        <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                            <td width="12%" align="right"><strong>材料牌号</strong>：</td>
+                            <td width="21%" align="left"><input name="materialGrade" type="text" class="dfinput" style="width:80%"/></td>
+                            <td width="12%" align="right"><strong>焊工钢印</strong>：</td>
+                            <td width="22%" align="left"><input name="welder" type="text" class="dfinput" style="width:80%"/></td>
+                            <td width="13%" align="right"><strong>焊接材料</strong>：</td>
+                            <td width="20%" align="left"><input name="weldingMaterial" type="text" class="dfinput" style="width:80%"/></td>
+
+                        </tr>
+                        <tr align='center' bgcolor="#FFFFFF" height="22" >
+                            <td width="12%" align="right"><strong>材料代号</strong>：</td>
+                            <td width="21%" align="left"><input name="materialCode" type="text" class="dfinput" style="width:80%"/></td>
+                            <td width="12%" align="right"><strong>坡口型式</strong>：</td>
+                            <td width="22%" align="left"><input name="grooveType" type="text" class="dfinput" style="width:80%"/></td>
+                            <td width="13%" align="right"><strong>焊接方法及位置</strong>：</td>
+                            <td width="20%" align="left"><input name="weldingMethod" type="text" class="dfinput" style="width:80%"/></td>
+
+                        </tr>
+                        <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                            <td width="12%" align="right"><strong>热处理状态</strong>：</td>
+                            <td width="21%" align="left"><input name="heatTreatment" type="text" class="dfinput" style="width:80%"/></td>
+                            <td width="12%" align="right"><strong>炉批号</strong>：</td>
+                            <td width="22%" align="left"><input name="batchNumber" type="text" class="dfinput" style="width:80%"/></td>
+                            <td width="13%" align="right"><strong>代表部位</strong>：</td>
+                            <td width="20%" align="left"><input name="representPosition" type="text" class="dfinput" style="width:80%"/></td>
+
+                        </tr>
+
+                        <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                            <td align="right">&nbsp;</td>
+                            <td align="left">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                            <td align="left">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                            <td align="left">&nbsp;</td>
+                        </tr>
+                        <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                            <td colspan="6" align="right"><table width="100%" border="0" cellpadding="1" cellspacing="1" align="center">
+                                <tr>
+                                    <td colspan="2" align="center" bgcolor="#FFFFFF"  class="bk">项目</td>
+                                    <td align="center" class="bk"></td>
+                                    <td colspan="2" align="center" class="bk">项目</td>
+                                    <td align="center" class="bk">数量</td>
+                                    <td colspan="3" align="center" class="bk">项目</td>
+                                    <td align="center" class="bk">数量</td>
+                                    <td colspan="2" align="center"  class="bk">项目</td>
+                                    <td align="center" class="bk">数量</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" rowspan="2" align="center"  class="bk0">拉伸</td>
+                                    <td rowspan="2" align="center"  class="bk0"><input type="checkbox" name="stretching" value="1" style="width:15px;height:15px;"/></td>
+                                    <td rowspan="2"  class="bk0">冲击</td>
+                                    <td align="center"  class="bk0">温度<select name="lashTemperature" class="dfinput" style="width: 88px">
+                                        <option value="">-请选择-</option>
+                                        <option value="-196℃">-196℃</option>
+                                        <option value="-20℃">-20℃</option>
+                                        <option value="-40℃">-40℃</option>
+                                        <option value="-10℃">-10℃</option>
+                                        <option value="0℃">0℃</option>
+                                    </select></td>
+                                    <td rowspan="2" align="center"  class="bk0"><input name="lashCount" type="text" class="dfinput" size="10" style="width: 100px"/></td>
+                                    <td rowspan="5" align="center"  class="bk0">金相<br />
+                                        检验</td>
+                                    <td rowspan="2"  class="bk0">晶间腐蚀</td>
+                                    <td rowspan="2" valign="top"  class="bk0">方法：<br />
+                                        <select name="corrosionMethod" class="dfinput" style="width: 88px">
+                                            <option value="">-请选择-</option>
+                                            <option value="E法">E法</option>
+                                            <option value="D法">D法</option>
+                                        </select></td>
+                                    <td align="center" class="bk0"><input name="corrosionInt" type="text" class="dfinput" size="10" style="width: 100px"/></td>
+                                    <td width="50" rowspan="6" align="center"  class="bk0">化<br />
+                                        学<br />
+                                        分<br />
+                                        析<br />
+                                        及<br />
+                                        其<br />
+                                        它</td>
+                                    <td rowspan="6" align="center" valign="top"  class="bk0">分析成分：<br />
+                                        <select class="easyui-combobox" id="compositionAnalysis" name="compositionAnalysis" style="width:150px;height:200px" data-options="multiple:true,multiline:true">
+                                            <option value="C Si Mn P S Cr Ni N">C Si Mn P S Cr Ni N</option>
+                                            <option value="C  Si  Mn  P  S  Cr  Ni  N  Mo">C  Si  Mn  P  S  Cr  Ni  N  Mo</option>
+                                            <option value="C Si Mn Cu Ni Cr Mo Nb V Ti ALt P S">C Si Mn Cu Ni Cr Mo Nb V Ti ALt P S</option>
+                                            <option value="MnDR:C Si Mn ALt Ni P S">MnDR:C Si Mn ALt Ni P S</option>
+                                        </select>
+                                    </td>
+                                    <td rowspan="6" align="center"  class="bk0"><input name="compositionInt" type="text" class="dfinput" style="width: 100px" size="10"/></td>
+                                </tr>
+                                <tr>
+                                    <td align="center"  class="bk0"><input type="checkbox" name="lashTypeV" value="1"  style="width:15px;height:15px;"/>
+                                        缺口型式V形</td>
+                                    <td align="center"  class="bk0"><input name="corrosionInt2" type="text" class="dfinput" size="10"  style="width: 100px"/></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3" align="center"  class="bk0">弯曲</td>
+                                    <td class="bk0">面弯</td>
+                                    <td align="center" class="bk0"><input type="checkbox" name="curvedSurface" value="1"  style="width:15px;height:15px;"/></td>
+                                    <td colspan="2" align="center"  class="bk0">硬度</td>
+                                    <td align="center" class="bk0"><input type="checkbox" name="hardness"  value="1"  style="width:15px;height:15px;"/></td>
+                                    <td colspan="2" align="center"  class="bk0">宏观</td>
+                                    <td align="center"  class="bk0"><input name="macroscopic" type="text" class="dfinput" size="10" style="width: 100px"/></td>
+                                </tr>
+                                <tr>
+                                    <td  class="bk0">背弯</td>
+                                    <td align="center"  class="bk0"><input type="checkbox" name="carryCurved" value="1" style="width:15px;height:15px;"/></td>
+                                    <td colspan="2" align="center"  class="bk0">断口</td>
+                                    <td align="center"  class="bk0"><input type="checkbox" name="fracture" value="1" style="width:15px;height:15px;"/></td>
+                                    <td colspan="2" align="center"  class="bk0">微观</td>
+                                    <td align="center"  class="bk0"><input name="microcosmic" type="text" class="dfinput" size="10" style="width: 100px"/></td>
+                                </tr>
+                                <tr>
+                                    <td  class="bk0">侧弯</td>
+                                    <td align="center"  class="bk0"><input type="checkbox" name="lateralBending" value="1" style="width:15px;height:15px;"/></td>
+                                    <td colspan="2"  class="bk0">&nbsp;</td>
+                                    <td  class="bk0">&nbsp;</td>
+                                    <td colspan="2" align="center"  class="bk0">&nbsp;</td>
+                                    <td align="center"  class="bk0">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center"  class="bk0">压扁</td>
+                                    <td align="center"  class="bk0"><input type="checkbox" name="squash" value="1" style="width:15px;height:15px;"/></td>
+                                    <td colspan="2"  class="bk0">&nbsp;</td>
+                                    <td  class="bk0">&nbsp;</td>
+                                    <td align="center"  class="bk0">&nbsp;</td>
+                                    <td colspan="2" align="center"  class="bk0">应变强化</td>
+                                    <td  class="bk0"><input type="checkbox" name="strainStrengthen" value="1" style="width:15px;height:15px;"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" align="center"  class="bk0">备注：</td>
+                                    <td colspan="8"  class="bk0"><table width="100%" border="0">
+                                        <tr>
+                                            <td>拉伸试验
+
+                                                GB/T228.1-2010标准执行
+                                                <input type="checkbox" name="tensileTest" value="1" style="width:15px;height:15px;"/></td>
+                                            <td rowspan="3" align="center"><textarea name="note" cols="50" rows="6" id="note" style="border: 1px solid #ccc;"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td>弯曲试验
+                                                GB/T232-2010标准执行
+                                                <input type="checkbox" name="bendTest" value="1" style="width:15px;height:15px;"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>冲击试验
+                                                GB/T229-2007标准执行
+                                                <input type="checkbox" name="impactTest" value="1" style="width:15px;height:15px;"/></td>
+                                        </tr>
+                                    </table></td>
+                                    <td colspan="2"  class="bk0">要求完成时间</td>
+                                    <td class="bk0"><input name="completedTime" type="text" class="easyui-datebox" style="width:150px;" /></td>
+                                </tr>
+                            </table></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </ul>
+        </form>
+        </div>
+</div>
+</body>
+
+<script>
+
+    var user = getUserInfo();
+    var departIds = '';
+    var userIds = '';
+    var userIdList = [];
+    var departIdList = [];
+    function getNames() {
+        let status =  $("#switch").switchbutton("options").checked;
+        if (status){
+            selectRowsOtherPage("选择发送部门", "/sys/department.html", {}, function (res) {
+                let ids = [];
+                departIdList = [];
+                for(let i in res){
+                    ids.push(res[i].depName);
+                    departIdList.push(res[i].id);
+                }
+                departIds = ids.join(",");
+                $("#names").val(departIds);
+            })
+        }else {
+            selectRowsOtherPage("选择发送人员", "/sys/sysUser.html", {}, function (res) {
+                let ids = [];
+                userIdList = [];
+                for(let i in res){
+                    ids.push(res[i].username);
+                    userIdList.push(res[i].userId);
+                }
+                userIds = ids.join(",");
+                $("#names").val(userIds);
+            })
+        }
+    }
+
+    $('#switch').switchbutton({
+        onChange: function(checked){
+            checked ? $("#names").val(departIds) : $("#names").val(userIds);
+        }
+    })
+
+    function getFormData() {
+        if (!$("#saveForm").form('validate')) {
+            layer.alert("请完善表单数据！", {icon: 2});
+            return null;
+        }else{
+
+                let data = $("#saveForm").getData();
+                data.compositionAnalysis = $('#compositionAnalysis').combobox('getValues').join(",");
+                let flag = $("#switch").switchbutton("options").checked;
+                if(flag){
+                    data.departIds = data.names;
+                    data.userIds = '';
+                    data.departIdList = departIdList;
+                }else {
+                    data.userIds = data.names;
+                    data.departIds = '';
+                    data.userIdList = userIdList;
+                }
+                return data;
+
+        }
+
+    }
+
+    function initData(data) {
+        $("#compositionAnalysis").combobox('clear');
+        let role = user.roleIdList[0];
+        if(role == 11){
+            $("#hide1,#hide2,#ckHide").addClass("ccHide")
+        }else if (role == 12){
+            $("#rationalizeNumber").hide();
+            $("#hide1,#hide2").addClass("ccHide")
+        }else {
+            $("#storageNumber").hide();
+            $("#rationalizeNumber").hide();
+        }
+
+        if(data && data != null){
+            if(data.departIds && data.departIds != ''){
+                $('#switch').switchbutton('check');
+                $("#names").val(data.departIds);
+                departIds = data.departIds;
+                departIdList = data.departIdList;
+            }else {
+                userIds = data.userIds;
+                userIdList = data.userIdList;
+                $("#names").val(data.userIds)
+            }
+        }else {
+            data = {};
+            data.clientPerson = user.username;
+        }
+        $("#saveForm").form("load",data);
+    }
+</script>
+
+</html>
+ 
+ 
+ 

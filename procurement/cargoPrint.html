@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <style type="text/css">
+        body{
+            font-family: '微软雅黑';
+            margin: 0 auto;
+            min-width: 980px;
+
+        }
+        .linedown{
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000000;
+        }
+        .font-title-back {
+            font-size: 26px;
+            line-height: 40px;
+            font-weight: bold;
+
+        }
+    </style>
+</head>
+<body>
+<div class="formbody" id="print1">
+    <ul class="forminfo">
+        <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
+            <tr>
+                <td height="40" align="center"><span style="font-size: 26px;line-height: 40px;font-weight: bold;">货物运输协议</span></td>
+            </tr>
+        </table>
+        <table width="95%" cellpadding="0" cellspacing="0"  align="center" style="margin-top:8px;font-size: 14px;">
+            <tr align='center' bgcolor="#FFFFFF"  height="22" >
+                <td width="100%" align="center" >
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <Td width="16%" ></Td>
+                            <td width="34%" ></td>
+                            <Td colspan="2" >
+                              <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="right">
+                                <tr>
+                                  <Td width="40%" align="right">运输编号：</Td>
+                                  <Td width="60%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="transportNumber"></Td>
+                                  </tr>
+                                </table>                            </Td>
+                        </tr>
+                        <tr>
+                            <Td  colspan="4" valign="top">
+                                <table width="80%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="25%">甲方（托运人）：</Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="shipper"></Td>
+                                    </tr>
+                                </table>
+                            </Td>
+                        </tr>
+                        <tr>
+                            <Td  colspan="4" valign="top">
+                                <table width="80%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="25%">乙方（托运人）：</Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="carrier"></Td>
+                                    </tr>
+                                </table>
+                            </Td>
+                        </tr>
+
+                        <tr>
+                            <Td  colspan="4">  经甲乙双方协商，就货物运输事宜达成如下协议：</Td>
+                        </tr>
+                        <tr>
+                            <Td  colspan="4">一、货物内容及具体要求</Td>
+                        </tr>
+                        <tr>
+                            <Td width="16%" >1.货物名称：</Td>
+                            <td colspan="3">
+                                <table width="60%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td  style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="cargoName"></Td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <Td width="16%" >2.货运方式：</Td>
+                            <td colspan="3"><span style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;padding-left: 20px;padding-right: 20px;" field="deliveryMethod"></span> 承运方式：<span style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;padding-left: 20px;padding-right: 20px;" field="modeCarriage"></span> </td>
+
+                        </tr>
+                        <tr>
+                            <Td width="16%" >3.货物数量：</Td>
+                            <td colspan="3" >
+                                共计<span style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;padding-left: 20px;padding-right: 20px;" field="goodsPieces"></span>枚；共重<span style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;padding-left: 20px;padding-right: 20px;" field="goodsTon"></span>吨（规格数量等详见送货清单）。                </td>
+                        </tr>
+                        <tr>
+                            <Td width="16%" >4.货运地址：</Td>
+                            <td colspan="3" valign="top">
+                                <table width="60%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="23%"> 目的地1：</Td>
+                                        <Td width="2%" class="linedown"></Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="cargoAddressOne"></Td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <Td width="16%" rowspan="2" align="left" >（起始甲<br />
+                                方厂区内）</Td>
+                            <td colspan="3" valign="top">
+                                <table width="60%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="23%">  目的地2：</Td>
+                                        <Td width="2%" class="linedown"></Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="cargoAddressTow"></Td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" valign="top">
+                                <table width="60%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="23%">  目的地3：</Td>
+                                        <Td width="2%" class="linedown"></Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="cargoAddressThree"></Td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <Td width="16%" >5.货运时间：</Td>
+                            <td colspan="3"  valign="top">
+                                <table width="60%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="23%">起运时间：</Td>
+                                        <Td width="2%" class="linedown"></Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="startTime"></Td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <Td width="16%" rowspan="3" align="left" valign="top">运抵时间：</Td>
+                            <td colspan="3" valign="top">
+                                <table width="60%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="23%">  目的地1：</Td>
+                                        <Td width="2%" class="linedown"></Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="arrivedTimeOne"></Td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"  valign="top">
+                                <table width="60%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="23%">  目的地2：</Td>
+                                        <Td width="2%" class="linedown"></Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="arrivedTimeTow"></Td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"  valign="top">
+                                <table width="60%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <Td width="23%">  目的地3：</Td>
+                                        <Td width="2%" class="linedown"></Td>
+                                        <Td width="75%" style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="arrivedTimeThree"></Td>
+                                    </tr>
+                                </table>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <Td  colspan="4"><p>二、货运事项及违约责任<Br />
+                                1、货运规定事项            	    <Br />
+                                乙方必须保障甲方货物在运输途中完好无损，夜露或雨天时，必须做到货物不被雨露浸渍。            	   <Br />
+                                乙方应保证按时将货物送到指定地点，因车辆及驾驶员原因（比如过账、事故、违章等）造成的时间拖延或经济损失均由乙方自行担责。     <Br />
+                                起点吊装，卸货点吊卸不在承运范围，若乙方自主参与装卸的，安全责任自负，若收货人卸货有困难，必须书面委托乙方并提供可靠的安全责任保障后方可进行。 <Br />
+                                2、违约责任    <Br />
+                                因乙方未能按照承载规定操作，致使货物遭损，或引起运抵方投诉的，乙方将承担一切直接的和连带的责任。   <Br />
+                                除不可抗拒原因外，因未按预定时间到达卸货地点而引起客户提出的赔偿也由乙方负担。</p></Td>
+                        </tr>
+                        <tr>
+                            <Td  colspan="4">三、运输的价格及结算方式</Td>
+                        </tr>
+                        <tr>
+                            <Td  colspan="4">1.运输价格总计：<span style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;padding-left: 20px;padding-right: 20px;" field="priceTotal"></span>
+                                元，RMB大写         <span style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;padding-left: 20px;padding-right: 20px;" field="priceCapital"></span>整。（此价格为含税增值税票价）</Td>
+                        </tr>
+                        <tr>
+                            <Td  colspan="4">2.结算方法：货物运抵并卸货验收后，乙方应向运抵方索要签印，凭送货单回单并带运输发票与甲方结算运费。</Td>
+                        </tr>
+                        <tr>
+                            <Td  colspan="4">四、其他<Br />
+                                1. 未尽事宜，友好协商解决。<Br />
+                                2. 本协议经双方签字盖章生效，传真件具有同样效力。</Td>
+                        </tr>
+                        <tr>
+                            <Td colspan="4" >&nbsp;</Td>
+                        </tr>
+                        <tr>
+                            <Td width="16%" >甲方：</Td>
+                            <td width="34%"   valign="top">
+                                <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <td style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="partyJf"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <Td width="16%" >乙方：</Td>
+                            <td width="34%"   valign="top">
+                                <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <td style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="partyYf"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <Td width="16%" >联系电话：</Td>
+                            <td width="34%"   valign="top">
+                                <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <td style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="telephoneJf"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <Td width="16%" >联系电话：</Td>
+                            <td width="34%"   valign="top">
+                                <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <td style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="telephoneYf"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <Td width="16%" >联系地址：</Td>
+                            <td width="34%"   valign="top">
+                                <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <td style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="contactAddressJf"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <Td width="16%" ><span >联系地址：</span></Td>
+                            <td width="34%"  valign="top">
+                                <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <td style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="contactAddressYf"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <Td width="16%" >代表人： </Td>
+                            <td width="34%" valign="top">
+                                <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <td style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="representativePersonJf"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <Td width="16%" ><span >代表人： </span></Td>
+                            <td width="34%"  valign="top">
+                                <table width="90%" border="0" cellpadding="0" cellspacing="0"  align="left">
+                                    <tr>
+                                        <td style="border-bottom-width: 1px;border-bottom-style: solid;border-bottom-color: #000000;" field="representativePersonYf"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+
+    </ul>
+</body>
+<script>
+
+    function initData(data) {
+        setData2Text(data);
+        var startTime = $("[field='startTime']").text();
+        var arrivedTimeOne = $("[field='arrivedTimeOne']").text();
+        var arrivedTimeTow = $("[field='arrivedTimeTow']").text();
+        var arrivedTimeThree = $("[field='arrivedTimeThree']").text();
+        $("[field='startTime']").text(moment(startTime).format("YYYY年MM月DD日"))
+        $("[field='arrivedTimeOne']").text(moment(arrivedTimeOne).format("YYYY年MM月DD日"))
+        $("[field='arrivedTimeTow']").text(moment(arrivedTimeTow).format("YYYY年MM月DD日"))
+        $("[field='arrivedTimeThree']").text(moment(arrivedTimeThree).format("YYYY年MM月DD日"))
+    }
+
+</script>
+</html>

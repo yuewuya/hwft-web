@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>部门管理</title>
+    <link rel="stylesheet" href="/plugins/ztree/css/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/ztree/jquery.ztree.all.min.js"></script>
+    <style>
+        /*按钮*/
+        .icon_div {
+            display: inline-block;
+            height: 25px;
+            width: 35px;
+        }
+
+        .icon_div a {
+            display: inline-block;
+            width: 27px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /*end--按钮*/
+
+        /*ztree表格*/
+        .ztree {
+            padding: 0;
+            border: 2px solid #CDD6D5;
+        }
+
+        .ztree li a {
+            vertical-align: middle;
+            height: 30px;
+        }
+
+        .ztree li > a {
+            width: 100%;
+        }
+
+        .ztree li > a,
+        .ztree li a.curSelectedNode {
+            padding-top: 0px;
+            background: none;
+            height: auto;
+            border: none;
+            cursor: default;
+            opacity: 1;
+        }
+
+        .ztree li ul {
+            padding-left: 0px
+        }
+
+        .ztree div.diy span {
+            line-height: 30px;
+            vertical-align: middle;
+        }
+
+        .ztree div.diy {
+            height: 100%;
+            width: 20%;
+            line-height: 30px;
+            border-top: 1px dotted #ccc;
+            border-left: 1px solid #eeeeee;
+            text-align: center;
+            display: inline-block;
+            box-sizing: border-box;
+            color: #6c6c6c;
+            font-family: "SimSun";
+            font-size: 12px;
+            overflow: hidden;
+        }
+
+        .ztree div.diy:first-child {
+            text-align: left;
+            text-indent: 10px;
+            border-left: none;
+        }
+
+        .ztree .head {
+            background: #5787EB;
+        }
+
+        .ztree .head div.diy {
+            border-top: none;
+            border-right: 1px solid #CDD2D4;
+            color: #fff;
+            font-family: "Microsoft YaHei";
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="layer">
+    <div id="tableMain">
+        <ul id="dataTree" class="ztree">
+        </ul>
+    </div>
+</div>
+<div id="chooseButton" title="选择按钮属性" style="padding:10px;display:none" hidden="hidden">
+    <select id="chooseSelect"  style="height:25px; width:100px;">
+        <option value="1">查看</option>
+        <option value="2">新增</option>
+        <option value="3">修改</option>
+        <option value="4">删除</option>
+        <option value="5">打印</option>
+        <option value="6">审核</option>
+        <option value="7">其它</option>
+    </select>
+</div>
+</body>
+
+<div id="menuSave" title="菜单" style="padding:10px;display:none;    margin: 20px 0 0 80px;">
+    <form id="form">
+        <input name="menuId" id="menuId" type="hidden" class="easyui-validatebox textbox"/>
+        <div class="ccForm">名称: &nbsp;<input name="name" id="name" type="text" class="easyui-validatebox textbox"
+                                             required="true"/></div>
+        <br/>
+        <div class="ccForm">链接: &nbsp;<input name="url" id="url" type="text" class="easyui-validatebox textbox"
+                                             required="true"/></div>
+        <br/>
+        <div class="ccForm">图标: &nbsp;<input name="icon" id="icon" type="text" class="easyui-validatebox textbox"
+                                             required="true"/></div>
+        <br/>
+        <div class="ccForm">排序: &nbsp;<input name="orderNum" id="orderNum" type="text"
+                                             class="easyui-validatebox textbox"
+                                             required="true"/></div>
+        <br/>
+        <div class="ccForm" id="methodNameTr">方法: &nbsp;<input name="methodName" id="methodName" type="text"
+                                                               class="easyui-validatebox textbox"
+                                                               required="true"/></div>
+        <div class="ccForm" id="isChildrenMenuTr">是否子菜单: &nbsp;
+            <select id="isChildrenMenu"  name="isChildrenMenu" style="height:25px; width:100px;">
+                <option value="2">否</option>
+                <option value="1">是</option>
+            </select>
+        </div>
+        <br/>
+    </form>
+</div>
+<script src="/assembly/layer/layer.js"></script>
+<script src="/js/sys/menu.js"></script>
+</html>
+
+

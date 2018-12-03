@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <style type="text/css">
+        *{font-size:9pt;border:0;margin:0;padding:0;}
+        body{
+            font-family: '微软雅黑';
+            margin: 0 auto;
+            min-width: 980px;
+
+        }
+        .font-title-back {
+            font-size: 20px;
+            line-height: 40px;
+            font-weight: bold;
+        }
+
+        .line3 {
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-right-color: #000;
+            border-bottom-color: #000;
+            border-left-color: #000;
+        }
+        .line2 {
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: #000;
+            border-right-width: 1px;
+            border-right-style: solid;
+            border-right-color: #000;
+            font-size: 14px;
+        }
+        .linleft {
+            border-top-width: 1px;
+            border-left-width: 1px;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-top-color: #000;
+            border-left-color: #000;
+        }
+        .formbody{padding:10px 18px;}
+        .forminfo{padding-left:23px;}
+        .toolbar{
+            float: left;
+        }
+        .toolbar li{background:url(/images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-right:5px;border-radius: 3px; cursor:pointer;}
+        .toolbar li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
+
+
+    </style>
+</head>
+<body>
+<div id="print1" class="formbody" style="padding-bottom:5px;">
+    <ul class="forminfo">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="">
+            <tr>
+                <td height="40" align="center"><span class="font-title-back">销售发货表</span></td>
+            </tr>
+
+        </table>
+
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="linleft" style="margin-top:8px">
+            <tbody>
+            <tr  >
+                <td width="100%" valign="top"><table width="100%" border="1" cellpadding="0" cellspacing="0" >
+                    <tr>
+                        <td height="40" colspan="4" align="left" class="line2">&nbsp;客户号：<span field="costomerNumber"></span></td>
+                        <td colspan="3" align="left" class="line2">&nbsp;交货时间：<span field="deliveryTime" id="deliveryTime"></span></td>
+                    </tr>
+                    <tr>
+                        <td width="10%" height="40" align="center" class="line2">序号</td>
+                        <td width="13%" align="center" class="line2">材质</td>
+                        <td width="13%" align="center" class="line2">形状</td>
+                        <td width="13%" align="center" class="line2">规格</td>
+                        <td width="10%" align="center" class="line2">个数</td>
+                        <td width="10%" align="center" class="line2">单价</td>
+                        <td width="20%" align="center" class="line2">备注</td>
+
+                    </tr>
+
+                        <tr>
+                            <td height="40" align="center" class="line2">1</td>
+                            <td height="40" align="center" class="line2" field="partList_materials"></td>
+                            <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                            <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                            <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                            <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                            <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                        </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">2</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">3</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">4</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">5</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">6</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">7</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">8</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">9</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">10</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">11</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">12</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="center" class="line2">13</td>
+                        <td height="40" align="center" class="line2" field="partList_materials"></td>
+                        <td height="40" align="center" class="line2" field="partList_shapes"></td>
+                        <td height="40" align="center" class="line2" field="partList_specifications"></td>
+                        <td height="40" align="center" class="line2" field="partList_numbers"></td>
+                        <td height="40" align="center" class="line2" field="partList_unitPrices"></td>
+                        <td height="40" align="center" class="line2" field="partList_notes"></td>
+
+                    </tr>
+
+                </table></td>
+            </tr>
+            </tbody>
+        </table>
+    </ul>
+</div>
+<script>
+
+    function initData(data) {
+        ajaxPostInvoke("/delivery/findPrint", {id: data.id}, function (res) {
+           res.deliveryTime = res.deliveryTime.split(" ")[0];
+            setData2Text(res);
+
+        })
+    }
+</script>
+</body>
+</html>

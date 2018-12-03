@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>台账打印</title>
+    <link rel="stylesheet" href="/assembly/css/css.css"/>
+    <link href="/assembly/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/searchForm.css" rel="stylesheet" type="text/css">
+    <script src="/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assembly/css/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/assembly/css/icon.css">
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/moreElement.js"></script>
+</head>
+<body>
+    <div>
+        <h1 style="text-align: center; font-size: xx-large;" id="year">宜兴华威封头有限公司2018年合同管理台账</h1>
+        <h3 style="text-align: center; font-size: x-large;" id="time">2018年11月21日</h3>
+        <div style="width: 1200px;margin: 0">
+            <table id="dg" style="width:1200px"></table>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    let time = moment().format("YYYY年MM月DD日");
+    let loadUrl = '/sale/order/queryPageLedger1';
+    $("#year").text("宜兴华威封头有限公司"+ GetRequestParam().year +"年合同管理台账")
+    $("#time").text(time);
+        $("#dg").datagrid({
+            width: '1250',
+            singleSelect: true,
+            autoRowHeight: false,
+            showFooter: true,
+            fitColumns: false,
+            toolbar: '#toolbar',
+            url: getRootPath() + loadUrl,
+            queryParams: GetRequestParam(),
+            columns: [[{
+                field: 'time',
+                title: '月份',
+                width: 80,
+                align: 'center',
+                formatter: function (value, row) {
+                    return value == null ? "全年合计" : "<a onclick=\"setPage2('"+value+"')\">"+moment(value).format('MM月')+"</a>";
+                }
+            }, {
+                field: 'count',
+                title: '订货数量',
+                width: 100,
+                align: 'center'
+            }, {
+                field: 'amount',
+                title: '合同金额',
+                width: 100,
+                align: 'center'
+            },{
+                field: 'yfCount',
+                title: '已发数量',
+                width: 100,
+                align: 'center'
+            },{
+                field: 'yfAmount',
+                title: '已发金额',
+                width: 100,
+                align: 'center'
+            }, {
+                field: 'wfCount',
+                title: '未发数量',
+                width: 100,
+                align: 'center',
+                formatter: function (value, row) {
+                    return row.count - row.yfCount == 0 ? "" : row.count - row.yfCount;
+                }
+            }, {
+                field: 'wfAmount',
+                title: '未发金额',
+                width: 100,
+                align: 'center'
+            }, {
+                field: 'ykfpCount',
+                title: '已开发票数量',
+                width: 120,
+                align: 'center'
+            }, {
+                field: 'ykfpAmount',
+                title: '已开发票金额',
+                width: 120,
+                align: 'center'
+            }, {
+                field: 'wkfpCount',
+                title: '未开发票数量',
+                width: 120,
+                align: 'center'
+            }, {
+                field: 'wkfpAmount',
+                title: '未开发票金额',
+                width: 120,
+                align: 'center'
+            }
+            ]],
+            onLoadError: function (XMLHttpRequest) {
+
+            }
+        });
+</script>
+
+</html>

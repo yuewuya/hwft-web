@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设备采购清单打印</title>
+    <script src="/plugins/easyui-1.5.5.7/jquery.min.js"></script>
+    <script src="/plugins/jquery/jquery.json.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/jquery.easyui.min.js"></script>
+    <script src="/plugins/easyui-1.5.5.7/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/plugins/moment.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/easy_common.js"></script>
+    <script src="/assembly/layer/layer.js"></script>
+    <script src="/js/moreElement.js"></script>
+    <style type="text/css">
+        .printTable{
+            border-top: 1px solid black;
+            border-right: 1px solid black;
+        }
+
+        .printTable td{
+            border-bottom: 1px solid black;
+            border-left: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div style="padding-bottom:5px; " id="print1">
+    <ul class="forminfo">
+        <h2 style="text-align: center">设备采购请购单</h2>
+        <table width="95%" class="printTable"  align="center" cellpadding="0" cellspacing="0" class="linleft" style="margin-top:8px;" gcolor="#000">
+            <tr align='center'  >
+                <td width="12%" height="35" align="center" class="line2" >申请人</td>
+                <td colspan="2" width="33%" align="center" field="applyMan"></td>
+                <td width="21%" align="center" class="line2" >设备名称</td>
+                <td colspan="2" width="33%" align="center" valign="middle" field="name"></td>
+
+            </tr>
+            <tr align='center'  >
+                <td width="12%" height="35" align="center" class="line2" >设备码</td>
+                <td colspan="2" width="33%" align="center" field="code"></td>
+                <td width="21%" align="center" class="line2" >需求数量</td>
+                <td colspan="2" width="33%" align="center" valign="middle" field="num"></td>
+
+            </tr>
+            <tr align='center'  >
+                <td width="12%" height="35" align="center" class="line2" >请购时间</td>
+                <td colspan="2" width="33%" align="center" field="applyTime"></td>
+                <td width="21%" align="center" class="line2" ></td>
+                <td colspan="2" width="33%" align="center" valign="middle"></td>
+            </tr>
+            <tr align='center'  >
+                <td height="35" align="center" class="line2" >请购理由</td>
+                <td height="80" colspan="5" align="center" field="remark" ></td>
+            </tr>
+            <tr align='center'  >
+                <td height="35" align="center" class="line2" >请购要求</td>
+                <td height="80" colspan="5" align="center" field="require" ></td>
+            </tr>
+            <tr align='center'  >
+                <td height="35" align="center" class="line2" >采购员回馈</td>
+                <td height="80" colspan="5" align="center" field="feedBack"></td>
+            </tr>
+        </table>
+    </ul>
+</div>
+
+</body>
+
+<script>
+
+    function initData(data) {
+        setData2Text(data)
+    }
+</script>
+
+</html>
